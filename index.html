@@ -24,7 +24,7 @@ html {
 
 body {
   font-family: 'Inter', 'Poppins', sans-serif;
-  background: #f7f6f4;
+  background: #f5f5f7;
   color: #1c1c1e;
   overflow-x: hidden;
   letter-spacing: -0.01em;
@@ -41,66 +41,7 @@ body::before {
   bottom: 0;
   pointer-events: none;
   z-index: -2;
-  background: radial-gradient(circle at 20% 30%, rgba(200, 195, 185, 0.06) 0%, transparent 70%);
-}
-
-/* EFECTO DE SOMBRA EN MOVIMIENTO EN EL FONDO DEL HERO */
-@keyframes movingShadow {
-  0% {
-    background-position: 0% 0%;
-  }
-  25% {
-    background-position: 100% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  75% {
-    background-position: 0% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 20px 80px;
-  position: relative;
-  background: #f7f6f4;
-  overflow: hidden;
-}
-
-/* Sombra animada en movimiento en el fondo del hero */
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(circle at 30% 40%, rgba(0, 0, 0, 0.02) 0%, transparent 40%),
-              radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.015) 0%, transparent 45%),
-              radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.01) 0%, transparent 50%);
-  background-size: 200% 200%;
-  animation: movingShadow 12s ease-in-out infinite;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 0;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.02), 0 0 30px rgba(0, 0, 0, 0.01);
+  background: radial-gradient(circle at 20% 30%, rgba(180, 180, 200, 0.08) 0%, transparent 70%);
 }
 
 @keyframes fadeUp {
@@ -134,10 +75,9 @@ body::before {
 }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #e8e6e2; border-radius: 10px; }
-::-webkit-scrollbar-thumb { background: #c8c4bd; border-radius: 10px; }
+::-webkit-scrollbar-track { background: #e8e8ed; border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #b0b0b8; border-radius: 10px; }
 
-/* NAVBAR CON TONO HUESO/BLANCO CÁLIDO */
 .navbar {
   position: fixed;
   top: 20px;
@@ -149,11 +89,11 @@ body::before {
   justify-content: center;
   gap: 20px;
   padding: 8px 22px;
-  background: rgba(250, 248, 244, 0.96);
+  background: rgba(250, 250, 252, 0.96);
   backdrop-filter: blur(20px);
   border-radius: 60px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), 0 1px 0 rgba(255, 255, 250, 0.8) inset;
-  border: 1px solid rgba(255, 252, 245, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   width: auto;
   min-width: 280px;
   transition: all 0.4s ease;
@@ -161,8 +101,8 @@ body::before {
 }
 
 .navbar.scrolled {
-  background: rgba(250, 248, 244, 0.98);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  background: rgba(250, 250, 252, 0.98);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   top: 15px;
 }
 
@@ -172,7 +112,7 @@ body::before {
   letter-spacing: -0.5px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #2a2826 0%, #5a5854 100%);
+  background: linear-gradient(135deg, #1a1a1e 0%, #4a4a4e 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -190,10 +130,10 @@ body::before {
 .nav-links a {
   font-size: 13px;
   font-weight: 500;
-  color: #3a3835;
+  color: #1c1c1e;
   text-decoration: none;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.65;
   transition: all 0.25s ease;
   padding: 4px 0;
   position: relative;
@@ -206,7 +146,7 @@ body::before {
   left: 50%;
   width: 0;
   height: 2px;
-  background: #3a3835;
+  background: #1c1c1e;
   transition: all 0.3s ease;
   border-radius: 2px;
   transform: translateX(-50%);
@@ -227,17 +167,16 @@ body::before {
   background: none;
   border: none;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.65;
   padding: 6px 10px;
   border-radius: 40px;
-  color: #3a3835;
 }
 
 .nav-dashboard:hover { opacity: 1; background: rgba(0, 0, 0, 0.04); }
 
 .nav-cta {
-  background: #2a2826;
-  color: #faf8f4;
+  background: #1c1c1e;
+  color: white;
   border: none;
   border-radius: 40px;
   padding: 7px 18px;
@@ -245,13 +184,13 @@ body::before {
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-  background: #3a3835;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  background: #2c2c2e;
 }
 
 .nav-user {
@@ -263,7 +202,7 @@ body::before {
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .nav-user:hover {
@@ -274,12 +213,12 @@ body::before {
 .nav-user-avatar {
   width: 24px;
   height: 24px;
-  background: #2a2826;
+  background: #1c1c1e;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #faf8f4;
+  color: white;
   font-size: 11px;
   font-weight: 700;
 }
@@ -287,7 +226,6 @@ body::before {
 .nav-user-name {
   font-size: 12px;
   font-weight: 500;
-  color: #3a3835;
 }
 
 .menu-btn {
@@ -304,7 +242,7 @@ body::before {
   display: block;
   width: 20px;
   height: 2px;
-  background: #3a3835;
+  background: #1c1c1e;
   margin: 4px 0;
   transition: 0.3s;
   border-radius: 2px;
@@ -321,12 +259,12 @@ body::before {
   width: 80%;
   max-width: 300px;
   height: 100vh;
-  background: rgba(250, 248, 244, 0.98);
+  background: rgba(250, 250, 252, 0.98);
   backdrop-filter: blur(20px);
   z-index: 1099;
   padding: 80px 28px 40px;
   transition: left 0.3s ease;
-  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.08);
 }
 
 .mobile-nav.open { left: 0; }
@@ -341,7 +279,7 @@ body::before {
 .mobile-nav-links a {
   font-size: 16px;
   font-weight: 500;
-  color: #3a3835;
+  color: #1c1c1e;
   text-decoration: none;
   cursor: pointer;
   opacity: 0.7;
@@ -352,26 +290,111 @@ body::before {
 .page { display: none; }
 .page.active { display: block; animation: scaleIn 0.5s ease; }
 
-.hero-center {
-  text-align: center;
-  max-width: 800px;
-  width: 100%;
-  z-index: 2;
+/* HERO CON ESTADÍSTICAS A LOS LADOS - CUADROS MÁS PEQUEÑOS */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 80px;
   position: relative;
+  background: #f5f5f7;
+}
+
+.hero-container {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* Desktop: estadísticas a los lados - CUADROS MÁS ANGOSTOS Y BAJOS */
+.hero-stats-left, .hero-stats-right {
+  flex: 0.6;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-stats-left {
+  align-items: flex-end;
+}
+
+.hero-stats-right {
+  align-items: flex-start;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 12px 20px;
+  text-align: center;
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.04), -5px -5px 12px rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  min-width: 110px;
+}
+
+.stat-card.dark {
+  background: #1c1c1e;
+  color: white;
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.15), -3px -3px 10px rgba(255, 255, 255, 0.05);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-size: 26px;
+  font-weight: 800;
+  font-family: 'Courier New', monospace;
+}
+
+.stat-label {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+.hero-center {
+  flex: 2;
+  text-align: center;
+  max-width: 550px;
+}
+
+/* Mobile: ocultar estadísticas completamente */
+.hero-stats-mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .hero-stats-left, .hero-stats-right {
+    display: none;
+  }
+  .hero-container {
+    flex-direction: column;
+  }
+  .hero-center {
+    max-width: 100%;
+  }
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(250, 248, 244, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(230, 225, 215, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 100px;
   padding: 6px 18px;
   font-size: 11px;
   font-weight: 500;
-  color: #8a8782;
+  color: #666;
   margin-bottom: 28px;
   animation: fadeUp 0.6s ease-out;
 }
@@ -389,7 +412,7 @@ body::before {
   font-size: clamp(48px, 12vw, 120px);
   letter-spacing: -0.03em;
   line-height: 0.88;
-  background: linear-gradient(135deg, #2a2826 0%, #6a6660 100%);
+  background: linear-gradient(135deg, #1a1a1e 0%, #5a5a5e 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -400,7 +423,7 @@ body::before {
   font-size: clamp(9px, 3vw, 12px);
   letter-spacing: 0.3em;
   font-weight: 500;
-  color: #b0aca5;
+  color: #aaa;
   margin-top: 12px;
 }
 
@@ -408,7 +431,7 @@ body::before {
   margin-top: 24px;
   font-size: clamp(16px, 4vw, 22px);
   font-weight: 500;
-  color: #8a8782;
+  color: #555;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -418,7 +441,7 @@ body::before {
 
 .typing-prefix {
   font-weight: 500;
-  color: #b0aca5;
+  color: #888;
   font-family: 'Inter', sans-serif;
 }
 
@@ -430,7 +453,7 @@ body::before {
 .typing-text {
   font-weight: 600;
   font-family: 'Courier New', 'SF Mono', 'Fira Code', monospace;
-  background: linear-gradient(135deg, #2a2826, #6a6660);
+  background: linear-gradient(135deg, #1c1c1e, #5a5a5e);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -441,7 +464,7 @@ body::before {
   display: inline-block;
   width: 3px;
   height: 1.1em;
-  background: #3a3835;
+  background: #1c1c1e;
   margin-left: 4px;
   animation: cursorBlink 1s infinite;
   vertical-align: middle;
@@ -449,7 +472,7 @@ body::before {
 
 .hero-desc {
   font-size: clamp(14px, 4vw, 16px);
-  color: #8a8782;
+  color: #666;
   max-width: 520px;
   margin: 24px auto 0;
   line-height: 1.6;
@@ -478,29 +501,28 @@ body::before {
 }
 
 .btn-primary {
-  background: #2a2826;
-  color: #faf8f4;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  background: #1c1c1e;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-  background: #3a3835;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  background: #2c2c2e;
 }
 
 .btn-secondary {
-  background: rgba(250, 248, 244, 0.95);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
-  color: #3a3835;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  color: #1c1c1e;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .btn-secondary:hover {
   transform: translateY(-3px);
   background: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .hero-pills {
@@ -513,21 +535,21 @@ body::before {
 }
 
 .hero-pill {
-  background: rgba(250, 248, 244, 0.85);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   padding: 5px 14px;
   border-radius: 80px;
   font-size: 11px;
   font-weight: 500;
-  color: #6a6660;
+  color: #444;
   transition: all 0.2s ease;
   font-family: 'Courier New', monospace;
 }
 
 .hero-pill:hover {
   transform: translateY(-2px);
-  background: rgba(250, 248, 244, 0.95);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .text-select-effect {
@@ -537,7 +559,7 @@ body::before {
 }
 
 .text-select-effect.selected {
-  background: rgba(100, 100, 95, 0.12);
+  background: rgba(100, 100, 120, 0.15);
   border-radius: 8px;
   padding: 0 4px;
   margin: 0 -4px;
@@ -545,14 +567,14 @@ body::before {
 
 .about-section {
   padding: 60px 0;
-  background: #f7f6f4;
+  background: #f5f5f7;
 }
 
 .about-card {
-  background: #2a2826;
+  background: #1c1c1e;
   border-radius: 48px;
   padding: 48px;
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.08), -8px -8px 20px rgba(255, 252, 245, 0.6);
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.1), -8px -8px 20px rgba(255, 255, 255, 0.05);
   transition: all 0.4s ease;
 }
 
@@ -584,19 +606,19 @@ body::before {
 .avatar-circle {
   width: 180px;
   height: 180px;
-  background: #1a1816;
+  background: #0d0d0f;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
-  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.2), -6px -6px 16px rgba(255, 252, 245, 0.08);
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.2), -6px -6px 16px rgba(255, 255, 255, 0.03);
 }
 
 .avatar-initial {
   font-size: 68px;
   font-weight: 800;
-  color: #faf8f4;
+  color: white;
   font-family: 'Inter', sans-serif;
 }
 
@@ -604,12 +626,12 @@ body::before {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #faf8f4;
+  color: white;
 }
 
 .about-title {
   font-size: 13px;
-  color: #b0aca5;
+  color: #aaa;
   font-family: 'Courier New', monospace;
 }
 
@@ -627,19 +649,19 @@ body::before {
 .about-stat-number-mini {
   font-size: 22px;
   font-weight: 800;
-  color: #faf8f4;
+  color: white;
   font-family: 'Courier New', monospace;
 }
 
 .about-stat-label-mini {
   font-size: 10px;
-  color: #b0aca5;
+  color: #888;
 }
 
 .about-bio {
   margin-bottom: 24px;
   line-height: 1.6;
-  color: #d0ccc5;
+  color: #ccc;
   font-size: 15px;
 }
 
@@ -651,18 +673,18 @@ body::before {
 }
 
 .skill-tag {
-  background: rgba(255, 252, 245, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   padding: 5px 14px;
   border-radius: 40px;
   font-size: 11px;
   font-weight: 500;
   font-family: 'Courier New', monospace;
-  color: #d0ccc5;
+  color: #ddd;
   transition: all 0.2s ease;
 }
 
 .skill-tag:hover {
-  background: rgba(255, 252, 245, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
@@ -670,18 +692,18 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #faf8f4;
+  color: white;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   padding: 8px 18px;
-  background: rgba(255, 252, 245, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 40px;
   transition: all 0.2s ease;
 }
 
 .about-contact:hover {
-  background: rgba(255, 252, 245, 0.2);
+  background: rgba(255, 255, 255, 0.2);
   transform: translateX(4px);
 }
 
@@ -705,7 +727,7 @@ section {
   font-size: 11px;
   letter-spacing: 4px;
   font-weight: 600;
-  color: #b0aca5;
+  color: #999;
   text-align: center;
   margin-bottom: 14px;
   font-family: 'Courier New', monospace;
@@ -718,13 +740,13 @@ section {
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 14px;
-  color: #2a2826;
+  color: #1c1c1e;
 }
 
 .sec-desc {
   text-align: center;
   font-size: 15px;
-  color: #8a8782;
+  color: #777;
   max-width: 600px;
   margin: 0 auto 40px;
   padding: 0 16px;
@@ -741,30 +763,30 @@ section {
 }
 
 .svc-card {
-  background: #faf8f4;
+  background: #fff;
   border-radius: 28px;
   padding: 36px 28px;
   border: none;
   cursor: pointer;
   transition: all 0.4s ease;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.03), -5px -5px 14px rgba(255, 252, 245, 0.9);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.04), -5px -5px 14px rgba(255, 255, 255, 0.8);
 }
 
 .svc-card:hover {
   transform: translateY(-6px);
-  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.05), -7px -7px 18px rgba(255, 252, 245, 1);
+  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.06), -7px -7px 18px rgba(255, 255, 255, 0.9);
 }
 
 .svc-card.dark-card {
-  background: #2a2826;
-  color: #faf8f4;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.12), -3px -3px 10px rgba(255, 252, 245, 0.08);
+  background: #1c1c1e;
+  color: white;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15), -3px -3px 10px rgba(255, 255, 255, 0.05);
 }
 
 .svc-icon {
   width: 52px;
   height: 52px;
-  background: #2a2826;
+  background: #1c1c1e;
   border-radius: 18px;
   display: flex;
   align-items: center;
@@ -777,9 +799,9 @@ section {
   transform: rotate(5deg) scale(1.03);
 }
 
-.svc-card.dark-card .svc-icon { background: #faf8f4; }
-.svc-icon svg { width: 22px; height: 22px; color: #faf8f4; }
-.svc-card.dark-card .svc-icon svg { color: #2a2826; }
+.svc-card.dark-card .svc-icon { background: #fff; }
+.svc-icon svg { width: 22px; height: 22px; color: #fff; }
+.svc-card.dark-card .svc-icon svg { color: #1c1c1e; }
 
 .svc-name {
   font-weight: 700;
@@ -790,10 +812,10 @@ section {
 .svc-text {
   font-size: 13px;
   line-height: 1.6;
-  color: #8a8782;
+  color: #666;
 }
 
-.svc-card.dark-card .svc-text { color: #d0ccc5; }
+.svc-card.dark-card .svc-text { color: rgba(255, 255, 255, 0.7); }
 
 .port-header {
   display: flex;
@@ -809,12 +831,11 @@ section {
   font-size: clamp(32px, 7vw, 72px);
   line-height: 0.96;
   letter-spacing: -0.02em;
-  color: #2a2826;
 }
 
 .port-sub {
   font-size: 13px;
-  color: #b0aca5;
+  color: #999;
   max-width: 240px;
   text-align: right;
 }
@@ -826,7 +847,7 @@ section {
 
 .port-divider {
   height: 1px;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.08);
   margin-bottom: 40px;
 }
 
@@ -844,18 +865,18 @@ section {
 }
 
 .port-card {
-  background: #faf8f4;
+  background: #fff;
   border-radius: 28px;
   overflow: hidden;
   border: none;
   cursor: pointer;
   transition: all 0.4s ease;
-  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.03), -4px -4px 10px rgba(255, 252, 245, 0.8);
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.04), -4px -4px 10px rgba(255, 255, 255, 0.6);
 }
 
 .port-card:hover {
   transform: translateY(-8px);
-  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.06), -7px -7px 18px rgba(255, 252, 245, 1);
+  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.08), -7px -7px 18px rgba(255, 255, 255, 0.8);
 }
 
 .port-img {
@@ -873,9 +894,9 @@ section {
   transform: scale(1.02);
 }
 
-.port-img-1 { background: linear-gradient(135deg, #2a2826, #1a1816); color: #faf8f4; }
-.port-img-2 { background: linear-gradient(135deg, #f0ede8, #e4e0da); color: #2a2826; }
-.port-img-3 { background: linear-gradient(135deg, #faf8f4, #f0ede8); color: #2a2826; }
+.port-img-1 { background: linear-gradient(135deg, #1a1a1e, #0d0d0f); color: white; }
+.port-img-2 { background: linear-gradient(135deg, #f0f0f2, #e4e4e8); color: #1c1c1e; }
+.port-img-3 { background: linear-gradient(135deg, #fafafc, #f0f0f4); color: #1c1c1e; }
 
 .imac-title, .tatau-title, .kove-title {
   font-size: clamp(22px, 4.5vw, 32px);
@@ -891,21 +912,20 @@ section {
   font-weight: 700;
   font-size: 17px;
   margin-bottom: 6px;
-  color: #2a2826;
 }
 
 .port-desc {
   font-size: 12px;
-  color: #8a8782;
+  color: #888;
   line-height: 1.5;
 }
 
 .kove-ai-section {
-  background: #2a2826;
+  background: #1c1c1e;
   border-radius: 36px;
   margin: 0 24px 50px;
   padding: 40px 36px;
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.12), -6px -6px 16px rgba(255, 252, 245, 0.06);
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.15), -6px -6px 16px rgba(255, 255, 255, 0.03);
 }
 
 @media (max-width: 768px) {
@@ -923,12 +943,12 @@ section {
 
 .kove-ai-badge {
   display: inline-block;
-  background: rgba(255, 252, 245, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 4px 12px;
   border-radius: 40px;
   font-size: 10px;
   font-family: 'Courier New', monospace;
-  color: #d0ccc5;
+  color: #aaa;
   letter-spacing: 1px;
   margin-bottom: 14px;
 }
@@ -936,18 +956,18 @@ section {
 .kove-ai-title {
   font-size: clamp(20px, 4.5vw, 32px);
   font-weight: 700;
-  color: #faf8f4;
+  color: white;
   margin-bottom: 6px;
 }
 
 .terminal-window {
-  background: #1a1816;
+  background: #0d0d0f;
   border-radius: 16px;
   overflow: hidden;
 }
 
 .terminal-header {
-  background: #2a2826;
+  background: #1a1a1c;
   padding: 8px 16px;
   display: flex;
   gap: 7px;
@@ -966,8 +986,8 @@ section {
   padding: 18px;
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: #7bc97b;
-  background: #1a1816;
+  color: #00ff9d;
+  background: #0d0d0f;
   min-height: 130px;
 }
 
@@ -980,9 +1000,9 @@ section {
 .terminal-line:nth-child(2) { animation-delay: 0.3s; }
 .terminal-line:nth-child(3) { animation-delay: 0.6s; }
 
-.terminal-prompt { color: #7bc97b; }
-.terminal-command { color: #faf8f4; }
-.terminal-output { color: #b0aca5; margin-left: 14px; }
+.terminal-prompt { color: #00ff9d; }
+.terminal-command { color: #fff; }
+.terminal-output { color: #aaa; margin-left: 14px; }
 
 .ai-metrics {
   display: flex;
@@ -993,7 +1013,7 @@ section {
 }
 
 .ai-metric {
-  background: rgba(255, 252, 245, 0.06);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 10px 18px;
   text-align: center;
@@ -1002,19 +1022,19 @@ section {
 
 .ai-metric:hover {
   transform: translateY(-2px);
-  background: rgba(255, 252, 245, 0.1);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .ai-metric-value {
   font-size: 18px;
   font-weight: 700;
-  color: #faf8f4;
+  color: white;
   font-family: 'Courier New', monospace;
 }
 
 .ai-metric-label {
   font-size: 9px;
-  color: #b0aca5;
+  color: rgba(255, 255, 255, 0.5);
   margin-top: 3px;
 }
 
@@ -1025,7 +1045,7 @@ section {
 }
 
 .plans-tabs {
-  background: rgba(250, 248, 244, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 100px;
   padding: 5px;
@@ -1033,7 +1053,7 @@ section {
   gap: 5px;
   flex-wrap: wrap;
   justify-content: center;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.02), -2px -2px 6px rgba(255, 252, 245, 0.8);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.04), -2px -2px 6px rgba(255, 255, 255, 0.6);
 }
 
 .plan-tab-btn {
@@ -1045,12 +1065,11 @@ section {
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #6a6660;
 }
 
 .plan-tab-btn.active {
-  background: #2a2826;
-  color: #faf8f4;
+  background: #1c1c1e;
+  color: #fff;
 }
 
 .plans-grid {
@@ -1068,36 +1087,35 @@ section {
 }
 
 .plan-card {
-  background: #faf8f4;
+  background: #fff;
   border-radius: 28px;
   padding: 32px 24px;
   transition: all 0.4s ease;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.03), -5px -5px 14px rgba(255, 252, 245, 0.9);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.04), -5px -5px 14px rgba(255, 255, 255, 0.8);
   position: relative;
 }
 
 .plan-card:hover {
   transform: translateY(-6px);
-  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.05), -7px -7px 18px rgba(255, 252, 245, 1);
+  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.06), -7px -7px 18px rgba(255, 255, 255, 0.9);
 }
 
 .plan-card.featured {
-  background: #2a2826;
-  color: #faf8f4;
-  box-shadow: 18px 18px 36px rgba(0, 0, 0, 0.12), -5px -5px 14px rgba(255, 252, 245, 0.08);
+  background: #1c1c1e;
+  color: white;
+  box-shadow: 18px 18px 36px rgba(0, 0, 0, 0.15), -5px -5px 14px rgba(255, 255, 255, 0.05);
 }
 
 .plan-popular-tag {
   position: absolute;
   top: 18px;
   right: 18px;
-  background: rgba(255, 252, 245, 0.15);
+  background: rgba(255, 255, 255, 0.15);
   padding: 3px 10px;
   border-radius: 80px;
   font-size: 10px;
   font-weight: 600;
   font-family: 'Courier New', monospace;
-  color: #d0ccc5;
 }
 
 .plan-name {
@@ -1140,15 +1158,15 @@ section {
   transition: all 0.25s ease;
 }
 
-.plan-btn-dark { background: #2a2826; color: #faf8f4; }
-.plan-btn-white { background: #faf8f4; color: #2a2826; }
+.plan-btn-dark { background: #1c1c1e; color: #fff; }
+.plan-btn-white { background: #fff; color: #1c1c1e; }
 
 .plans-content { display: none; }
 .plans-content.active { display: block; animation: fadeUp 0.4s ease; }
 
 .academy-plans-section {
   padding: 70px 0;
-  background: #f7f6f4;
+  background: #f5f5f7;
 }
 
 .academy-plans-container {
@@ -1158,13 +1176,13 @@ section {
 }
 
 .academy-plan-card {
-  background: #2a2826;
+  background: #1c1c1e;
   border-radius: 36px;
   padding: 42px 32px;
   text-align: center;
-  color: #faf8f4;
+  color: #fff;
   transition: all 0.4s ease;
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.1), -8px -8px 20px rgba(255, 252, 245, 0.08);
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.1), -8px -8px 20px rgba(255, 255, 255, 0.05);
 }
 
 .academy-plan-card:hover {
@@ -1174,7 +1192,7 @@ section {
 .academy-plan-icon {
   width: 56px;
   height: 56px;
-  background: #faf8f4;
+  background: white;
   border-radius: 20px;
   display: inline-flex;
   align-items: center;
@@ -1190,7 +1208,7 @@ section {
 .academy-plan-icon svg {
   width: 28px;
   height: 28px;
-  stroke: #2a2826;
+  stroke: #1c1c1e;
   stroke-width: 1.8;
   fill: none;
 }
@@ -1222,8 +1240,8 @@ section {
 }
 
 .academy-plan-btn {
-  background: #faf8f4;
-  color: #2a2826;
+  background: white;
+  color: #1c1c1e;
   border: none;
   padding: 14px;
   font-weight: 600;
@@ -1235,16 +1253,16 @@ section {
 
 .academy-plan-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .contact-form-outer {
-  background: #2a2826;
+  background: #1c1c1e;
   border-radius: 32px;
   padding: 40px 32px;
   max-width: 760px;
   margin: 0 auto;
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.1), -8px -8px 20px rgba(255, 252, 245, 0.08);
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.1), -8px -8px 20px rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 640px) {
@@ -1267,11 +1285,11 @@ section {
 }
 
 .cf-input, .cf-select, .cf-textarea {
-  background: rgba(255, 252, 245, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   border: none;
   border-radius: 60px;
   padding: 13px 18px;
-  color: #faf8f4;
+  color: white;
   font-size: 13px;
   outline: none;
   width: 100%;
@@ -1279,8 +1297,8 @@ section {
 }
 
 .cf-input:focus, .cf-select:focus, .cf-textarea:focus {
-  background: rgba(255, 252, 245, 0.12);
-  box-shadow: 0 0 0 2px rgba(255, 252, 245, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .cf-textarea {
@@ -1290,7 +1308,7 @@ section {
 }
 
 .cf-submit {
-  background: #faf8f4;
+  background: #fff;
   border: none;
   border-radius: 60px;
   padding: 14px;
@@ -1299,17 +1317,17 @@ section {
   margin-top: 10px;
   cursor: pointer;
   transition: all 0.25s ease;
-  color: #2a2826;
+  color: #1c1c1e;
 }
 
 .cf-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .site-footer {
-  background: #1a1816;
-  color: #faf8f4;
+  background: #0a0a0c;
+  color: #fff;
   padding: 50px 24px 28px;
 }
 
@@ -1345,7 +1363,7 @@ section {
 
 .footer-lnk {
   display: block;
-  color: rgba(250, 248, 244, 0.45);
+  color: rgba(255, 255, 255, 0.45);
   font-size: 12px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -1353,19 +1371,19 @@ section {
 }
 
 .footer-lnk:hover {
-  color: rgba(250, 248, 244, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   transform: translateX(4px);
 }
 
 .footer-hr {
   height: 1px;
-  background: rgba(250, 248, 244, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   margin: 32px 0 20px;
 }
 
 .footer-copy {
   font-size: 11px;
-  color: rgba(250, 248, 244, 0.3);
+  color: rgba(255, 255, 255, 0.3);
   text-align: center;
 }
 
@@ -1373,7 +1391,7 @@ section {
   position: fixed;
   bottom: 22px;
   right: 22px;
-  background: #2a2826;
+  background: #1c1c1e;
   border-radius: 60px;
   width: 50px;
   height: 50px;
@@ -1381,22 +1399,22 @@ section {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   z-index: 1000;
-  border: 1px solid rgba(250, 248, 244, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .whatsapp-fab:hover {
   transform: scale(1.08);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
-  background: #3a3835;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  background: #2c2c2e;
 }
 
 .whatsapp-fab svg {
   width: 24px;
   height: 24px;
-  stroke: #faf8f4;
+  stroke: white;
   fill: none;
   stroke-width: 1.8;
 }
@@ -1405,7 +1423,7 @@ section {
   position: fixed;
   bottom: 22px;
   left: 22px;
-  background: linear-gradient(135deg, #3a3835, #2a2826);
+  background: linear-gradient(135deg, #2c2c30, #1c1c1e);
   border-radius: 60px;
   width: 50px;
   height: 50px;
@@ -1413,9 +1431,9 @@ section {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   z-index: 1000;
-  border: 1px solid rgba(250, 248, 244, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -1426,7 +1444,7 @@ section {
 .ai-floating-btn svg {
   width: 24px;
   height: 24px;
-  stroke: #faf8f4;
+  stroke: white;
   fill: none;
   stroke-width: 1.8;
 }
@@ -1435,8 +1453,8 @@ section {
   position: fixed;
   bottom: 90px;
   right: 22px;
-  background: #2a2826;
-  color: #faf8f4;
+  background: #1c1c1e;
+  color: white;
   padding: 10px 20px;
   border-radius: 40px;
   z-index: 9999;
@@ -1445,7 +1463,7 @@ section {
   transition: all 0.3s ease;
   font-size: 13px;
   font-weight: 500;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .toast.show {
@@ -1456,7 +1474,7 @@ section {
 .modal-bg {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(12px);
   z-index: 2000;
   display: flex;
@@ -1473,14 +1491,14 @@ section {
 }
 
 .modal-card {
-  background: #faf8f4;
+  background: #fff;
   border-radius: 32px;
   padding: 36px 28px;
   max-width: 440px;
   width: 90%;
   transform: scale(0.96);
   transition: transform 0.3s ease;
-  box-shadow: 30px 30px 60px rgba(0, 0, 0, 0.08);
+  box-shadow: 30px 30px 60px rgba(0, 0, 0, 0.1);
 }
 
 .modal-card input {
@@ -1488,14 +1506,13 @@ section {
   padding: 12px 16px;
   margin-bottom: 12px;
   border-radius: 40px;
-  border: 1px solid #e0ddd8;
+  border: 1px solid #e0e0e0;
   font-size: 13px;
   outline: none;
-  background: #faf8f4;
 }
 
 .modal-card input:focus {
-  border-color: #2a2826;
+  border-color: #1c1c1e;
 }
 
 .admin-panel {
@@ -1504,7 +1521,7 @@ section {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(20px);
   z-index: 2000;
   display: flex;
@@ -1521,14 +1538,14 @@ section {
 }
 
 .admin-card {
-  background: rgba(42, 40, 38, 0.95);
+  background: rgba(30, 30, 35, 0.95);
   backdrop-filter: blur(20px);
   border-radius: 36px;
   padding: 36px 28px;
   max-width: 560px;
   width: 90%;
-  border: 1px solid rgba(250, 248, 244, 0.1);
-  color: #faf8f4;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .admin-card .admin-stats {
@@ -1539,7 +1556,7 @@ section {
 }
 
 .admin-stat-box {
-  background: rgba(250, 248, 244, 0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 18px;
   padding: 14px;
   text-align: center;
@@ -1551,8 +1568,8 @@ section {
 }
 
 .admin-close {
-  background: #faf8f4;
-  color: #2a2826;
+  background: white;
+  color: #1c1c1e;
   border: none;
   border-radius: 40px;
   padding: 10px 20px;
@@ -1592,9 +1609,9 @@ section {
 
 .google-login-btn {
   width: 100%;
-  background: rgba(42, 40, 38, 0.05);
-  color: #2a2826;
-  border: 1px solid #e0ddd8;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1c1c1e;
+  border: 1px solid #ddd;
   margin-top: 10px;
   display: flex;
   align-items: center;
@@ -1606,7 +1623,7 @@ section {
   text-align: center;
   margin: 14px 0;
   position: relative;
-  color: #b0aca5;
+  color: #999;
   font-size: 11px;
 }
 
@@ -1617,7 +1634,7 @@ section {
   top: 50%;
   width: 30%;
   height: 1px;
-  background: #e0ddd8;
+  background: #e0e0e0;
 }
 .auth-divider::before { left: 0; }
 .auth-divider::after { right: 0; }
@@ -1677,21 +1694,50 @@ section {
 
 <div class="page active" id="page-inicio">
   <section class="hero">
-    <div class="hero-center">
-      <div class="hero-badge"><div class="hero-badge-dot"></div><span style="font-family:'Courier New', monospace;">ECOSISTEMA DIGITAL · COLOMBIA</span></div>
-      <div class="hero-wordmark">KOVE</div>
-      <div class="hero-tagline">MAKE IT REAL</div>
-      <div class="typing-wrapper">
-        <span class="typing-prefix">Soy</span>
-        <div class="typing-container">
-          <span class="typing-text" id="typing-text">Diseñador Gráfico</span>
-          <span class="typing-cursor" id="typing-cursor"></span>
+    <div class="hero-container">
+      <!-- Estadísticas izquierda (desktop) - CUADROS MÁS PEQUEÑOS -->
+      <div class="hero-stats-left">
+        <div class="stat-card">
+          <div class="stat-number">120+</div>
+          <div class="stat-label">PROYECTOS</div>
+        </div>
+        <div class="stat-card dark">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">AÑOS</div>
         </div>
       </div>
-      <div class="hero-desc">Diseño gráfico, desarrollo web e inteligencia artificial<br>para marcas que quieren <strong>crecer y vender más</strong>.</div>
-      <div class="hero-btns"><button class="btn-primary" onclick="showPage('booking')">Agendar asesoría →</button><button class="btn-secondary" onclick="showPage('portafolio')">Ver portafolio</button></div>
-      <div class="hero-pills"><span class="hero-pill">Diseño Gráfico</span><span class="hero-pill">Desarrollo Web</span><span class="hero-pill">Automatización</span><span class="hero-pill">Branding</span><span class="hero-pill">KOVE Academy</span></div>
+
+      <!-- Centro -->
+      <div class="hero-center">
+        <div class="hero-badge"><div class="hero-badge-dot"></div><span style="font-family:'Courier New', monospace;">ECOSISTEMA DIGITAL · COLOMBIA</span></div>
+        <div class="hero-wordmark">KOVE</div>
+        <div class="hero-tagline">MAKE IT REAL</div>
+        <div class="typing-wrapper">
+          <span class="typing-prefix">Soy</span>
+          <div class="typing-container">
+            <span class="typing-text" id="typing-text">Diseñador Gráfico</span>
+            <span class="typing-cursor" id="typing-cursor"></span>
+          </div>
+        </div>
+        <div class="hero-desc">Diseño gráfico, desarrollo web e inteligencia artificial<br>para marcas que quieren <strong>crecer y vender más</strong>.</div>
+        <div class="hero-btns"><button class="btn-primary" onclick="showPage('booking')">Agendar asesoría →</button><button class="btn-secondary" onclick="showPage('portafolio')">Ver portafolio</button></div>
+        <div class="hero-pills"><span class="hero-pill">Diseño Gráfico</span><span class="hero-pill">Desarrollo Web</span><span class="hero-pill">Automatización</span><span class="hero-pill">Branding</span><span class="hero-pill">KOVE Academy</span></div>
+      </div>
+
+      <!-- Estadísticas derecha (desktop) - CUADROS MÁS PEQUEÑOS -->
+      <div class="hero-stats-right">
+        <div class="stat-card dark">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">CLIENTES</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">24h</div>
+          <div class="stat-label">SOPORTE</div>
+        </div>
+      </div>
     </div>
+
+    <!-- Mobile: sin estadísticas -->
   </section>
 
   <div class="about-section reveal">
@@ -1760,18 +1806,18 @@ section {
   <div class="plans-content" id="plans-grafico"><div class="plans-grid"><div class="plan-card"><div class="plan-name">Básico</div><div class="plan-price">$500.000<span class="cop"> COP</span></div><ul class="plan-features"><li>✅ 5 diseños</li><li>✅ 1 revisión por diseño</li><li>✅ Entrega 5 días</li></ul><button class="plan-btn plan-btn-dark" onclick="showPage('contacto')">Empezar →</button></div><div class="plan-card featured"><div class="plan-popular-tag" style="font-family:'Courier New', monospace;">Popular</div><div class="plan-name">Profesional</div><div class="plan-price">$1.000.000<span class="cop"> COP</span></div><ul class="plan-features"><li>✅ 10 diseños</li><li>✅ 10 revisiones</li><li>✅ Entrega 10 días</li></ul><button class="plan-btn plan-btn-white" onclick="showPage('contacto')">Empezar →</button></div><div class="plan-card"><div class="plan-name">Premium</div><div class="plan-price">$2.000.000<span class="cop"> COP</span></div><ul class="plan-features"><li>✅ Diseños mensuales</li><li>✅ Revisiones ilimitadas</li><li>✅ Equipo dedicado</li></ul><button class="plan-btn plan-btn-dark" onclick="showPage('contacto')">Empezar →</button></div></div></div>
   <div class="plans-content" id="plans-auto"><div class="plans-grid"><div class="plan-card"><div class="plan-name">Básico</div><div class="plan-price">$500.000<span class="cop"> COP</span></div><ul class="plan-features"><li>✅ Hasta 3 flujos</li><li>✅ Configuración inicial</li><li>✅ Soporte 15 días</li></ul><button class="plan-btn plan-btn-dark" onclick="showPage('contacto')">Empezar →</button></div><div class="plan-card featured"><div class="plan-popular-tag" style="font-family:'Courier New', monospace;">Popular</div><div class="plan-name">Profesional</div><div class="plan-price">$1.500.000<span class="cop"> COP</span></div><ul class="plan-features"><li>✅ Hasta 10 flujos</li><li>✅ Integraciones avanzadas</li><li>✅ Dashboard</li></ul><button class="plan-btn plan-btn-white" onclick="showPage('contacto')">Empezar →</button></div><div class="plan-card"><div class="plan-name">Empresarial</div><div class="plan-price">$2.500.000<span class="cop"> COP</span></div><ul class="plan-features"><li>✅ Flujos ilimitados</li><li>✅ Arquitectura completa</li><li>✅ Soporte continuo</li></ul><button class="plan-btn plan-btn-dark" onclick="showPage('contacto')">Empezar →</button></div></div></div></div></section>
 
-  <div class="academy-plans-section reveal"><div class="academy-plans-container"><div class="academy-plan-card"><div class="academy-plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3L4 9L12 15L20 9L12 3Z"/><path d="M4 13L12 19L20 13"/><path d="M4 17L12 23L20 17"/><line x1="12" y1="15" x2="12" y2="23"/></svg></div><div class="academy-plan-badge" style="font-size:10px; color:#d0ccc5; margin-bottom:10px; font-family:'Courier New', monospace;">🚀 Próximamente</div><div class="academy-plan-title">KOVE Academy Pro</div><div class="academy-plan-price" style="margin:14px 0;"><span style="text-decoration:line-through; opacity:0.5;">$50.000</span> <span style="font-size:32px; font-weight:800;">$10.000</span> <span>COP</span></div><div style="background:rgba(255,252,245,0.1); border-radius:40px; padding:5px 12px; margin-bottom:18px; display:inline-block; font-size:10px; font-family:'Courier New', monospace;">⚡ Reserva tu cupo por solo 10k</div><ul class="academy-plan-features"><li>📚 10+ módulos completos</li><li>🎓 Certificados premium</li><li>💬 Mentoría personalizada</li><li>⚡ Acceso de por vida</li></ul><button class="academy-plan-btn" onclick="window.open('https://wa.me/573152507850?text=Hola%20KOVE%2C%20quiero%20reservar%20KOVE%20Academy%20Pro','_blank')">Reservar por 10k →</button></div></div></div>
+  <div class="academy-plans-section reveal"><div class="academy-plans-container"><div class="academy-plan-card"><div class="academy-plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3L4 9L12 15L20 9L12 3Z"/><path d="M4 13L12 19L20 13"/><path d="M4 17L12 23L20 17"/><line x1="12" y1="15" x2="12" y2="23"/></svg></div><div class="academy-plan-badge" style="font-size:10px; color:#aaa; margin-bottom:10px; font-family:'Courier New', monospace;">🚀 Próximamente</div><div class="academy-plan-title">KOVE Academy Pro</div><div class="academy-plan-price" style="margin:14px 0;"><span style="text-decoration:line-through; opacity:0.5;">$50.000</span> <span style="font-size:32px; font-weight:800;">$10.000</span> <span>COP</span></div><div style="background:rgba(255,255,255,0.1); border-radius:40px; padding:5px 12px; margin-bottom:18px; display:inline-block; font-size:10px; font-family:'Courier New', monospace;">⚡ Reserva tu cupo por solo 10k</div><ul class="academy-plan-features"><li>📚 10+ módulos completos</li><li>🎓 Certificados premium</li><li>💬 Mentoría personalizada</li><li>⚡ Acceso de por vida</li></ul><button class="academy-plan-btn" onclick="window.open('https://wa.me/573152507850?text=Hola%20KOVE%2C%20quiero%20reservar%20KOVE%20Academy%20Pro','_blank')">Reservar por 10k →</button></div></div></div>
 
   <section class="reveal"><div class="container"><div class="sec-label" style="font-family:'Courier New', monospace;">CONTACTO</div><div class="sec-title">Hablemos</div><div class="sec-desc">Cuéntanos sobre tu proyecto y te responderemos en menos de 24 horas.</div><div class="contact-form-outer"><div class="cf-row"><input class="cf-input" id="contact-name" placeholder="Nombre completo"><input class="cf-input" id="contact-email" placeholder="Correo electrónico"></div><div class="cf-row"><input class="cf-input" id="contact-phone" placeholder="Teléfono / WhatsApp"><input class="cf-input" id="contact-company" placeholder="Empresa (opcional)"></div><div class="cf-row"><select class="cf-select" id="contact-service"><option value="">¿Qué servicio te interesa?</option><option>Desarrollo Web</option><option>Diseño Gráfico</option><option>Branding</option><option>Automatización</option><option>KOVE Academy</option></select><input class="cf-input" id="contact-subject" placeholder="Asunto"></div><textarea class="cf-textarea" id="contact-message" placeholder="Cuéntanos sobre tu proyecto..."></textarea><button class="cf-submit" id="contact-submit-btn">Enviar mensaje →</button></div></div></section>
 
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><div class="footer-logo">KOVE</div><div class="footer-tagline">Make it real.</div><div style="color:rgba(250,248,244,0.3); font-size:12px;">Colombia</div><div style="color:rgba(250,248,244,0.3); font-size:11px; margin-top:6px;">hola@kove.co</div></div><div><div class="footer-lnk" onclick="showPage('servicios')">Servicios</div><div class="footer-lnk" onclick="showPage('portafolio')">Portafolio</div><div class="footer-lnk" onclick="showPage('academy')">Academy</div></div><div><div class="footer-lnk" onclick="showPage('planes')">Planes</div><div class="footer-lnk" onclick="goToDash()">Dashboard</div><div class="footer-lnk" onclick="scrollToAI()">KOVE AI</div></div><div><div class="footer-lnk">Privacidad</div><div class="footer-lnk">Términos</div></div></div><div class="footer-hr"></div><div class="footer-copy">© 2026 KOVE. Todos los derechos reservados.</div></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><div class="footer-logo">KOVE</div><div class="footer-tagline">Make it real.</div><div style="color:rgba(255,255,255,0.3); font-size:12px;">Colombia</div><div style="color:rgba(255,255,255,0.3); font-size:11px; margin-top:6px;">hola@kove.co</div></div><div><div class="footer-lnk" onclick="showPage('servicios')">Servicios</div><div class="footer-lnk" onclick="showPage('portafolio')">Portafolio</div><div class="footer-lnk" onclick="showPage('academy')">Academy</div></div><div><div class="footer-lnk" onclick="showPage('planes')">Planes</div><div class="footer-lnk" onclick="goToDash()">Dashboard</div><div class="footer-lnk" onclick="scrollToAI()">KOVE AI</div></div><div><div class="footer-lnk">Privacidad</div><div class="footer-lnk">Términos</div></div></div><div class="footer-hr"></div><div class="footer-copy">© 2026 KOVE. Todos los derechos reservados.</div></div></footer>
 </div>
 
-<div class="page" id="page-booking"><div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:100px 20px;"><div style="background:#faf8f4; border-radius:40px; padding:36px 28px; max-width:480px; width:100%; box-shadow:0 20px 40px rgba(0,0,0,0.06);"><h2 style="margin-bottom:22px; color:#2a2826;">Agendar asesoría</h2><input type="text" id="booking-name" placeholder="Nombre" style="width:100%; padding:12px; margin-bottom:12px; border-radius:40px; border:1px solid #e0ddd8; background:#faf8f4;"><input type="email" id="booking-email" placeholder="Correo" style="width:100%; padding:12px; margin-bottom:12px; border-radius:40px; border:1px solid #e0ddd8; background:#faf8f4;"><input type="date" id="booking-date" style="width:100%; padding:12px; margin-bottom:12px; border-radius:40px; border:1px solid #e0ddd8; background:#faf8f4;"><button class="btn-primary" id="booking-submit-btn" style="width:100%;">Confirmar reserva</button><button class="btn-secondary" onclick="showPage('inicio')" style="margin-top:12px; width:100%;">Volver</button></div></div></div>
+<div class="page" id="page-booking"><div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:100px 20px;"><div style="background:white; border-radius:40px; padding:36px 28px; max-width:480px; width:100%; box-shadow:0 20px 40px rgba(0,0,0,0.1);"><h2 style="margin-bottom:22px;">Agendar asesoría</h2><input type="text" id="booking-name" placeholder="Nombre" style="width:100%; padding:12px; margin-bottom:12px; border-radius:40px; border:1px solid #ddd;"><input type="email" id="booking-email" placeholder="Correo" style="width:100%; padding:12px; margin-bottom:12px; border-radius:40px; border:1px solid #ddd;"><input type="date" id="booking-date" style="width:100%; padding:12px; margin-bottom:12px; border-radius:40px; border:1px solid #ddd;"><button class="btn-primary" id="booking-submit-btn" style="width:100%;">Confirmar reserva</button><button class="btn-secondary" onclick="showPage('inicio')" style="margin-top:12px; width:100%;">Volver</button></div></div></div>
 
-<div class="page" id="page-dashboard"><div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:100px 20px;"><div style="background:#faf8f4; border-radius:40px; padding:36px 28px; max-width:480px; width:100%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.06);"><h2 style="color:#2a2826;">Mi Dashboard</h2><p style="color:#8a8782; margin:16px 0;">Bienvenido a tu área personal</p><button class="btn-primary" onclick="logout()" style="margin-top:20px;">Cerrar sesión</button></div></div></div>
+<div class="page" id="page-dashboard"><div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:100px 20px;"><div style="background:white; border-radius:40px; padding:36px 28px; max-width:480px; width:100%; text-align:center;"><h2>Mi Dashboard</h2><p style="color:#666; margin:16px 0;">Bienvenido a tu área personal</p><button class="btn-primary" onclick="logout()" style="margin-top:20px;">Cerrar sesión</button></div></div></div>
 
-<div class="modal-bg" id="auth-modal" onclick="closeAuthOnBg(event)"><div class="modal-card"><div class="auth-view active" id="auth-login"><h3 style="margin-bottom:18px; text-align:center; color:#2a2826;">Iniciar sesión</h3><input type="email" id="login-email" placeholder="Correo electrónico"><input type="password" id="login-pass" placeholder="Contraseña"><button class="btn-primary" id="email-login-btn" style="width:100%;">Ingresar</button><div class="auth-divider">o</div><button class="btn-primary google-login-btn" id="google-login-btn">🌐 Continuar con Google</button><p style="margin-top:18px; text-align:center;"><a onclick="switchAuth('register')" style="cursor:pointer; color:#2a2826;">Crear cuenta nueva</a></p></div><div class="auth-view" id="auth-register" style="display:none;"><h3 style="margin-bottom:18px; text-align:center; color:#2a2826;">Crear cuenta</h3><input type="email" id="reg-email" placeholder="Correo electrónico"><input type="password" id="reg-pass" placeholder="Contraseña"><button class="btn-primary" id="email-register-btn" style="width:100%;">Registrarse</button><div class="auth-divider">o</div><button class="btn-primary google-login-btn" id="google-register-btn">🌐 Registrarse con Google</button><p style="margin-top:18px; text-align:center;"><a onclick="switchAuth('login')" style="cursor:pointer; color:#2a2826;">Ya tengo cuenta</a></p></div></div></div>
+<div class="modal-bg" id="auth-modal" onclick="closeAuthOnBg(event)"><div class="modal-card"><div class="auth-view active" id="auth-login"><h3 style="margin-bottom:18px; text-align:center;">Iniciar sesión</h3><input type="email" id="login-email" placeholder="Correo electrónico"><input type="password" id="login-pass" placeholder="Contraseña"><button class="btn-primary" id="email-login-btn" style="width:100%;">Ingresar</button><div class="auth-divider">o</div><button class="btn-primary google-login-btn" id="google-login-btn">🌐 Continuar con Google</button><p style="margin-top:18px; text-align:center;"><a onclick="switchAuth('register')" style="cursor:pointer; color:#1c1c1e;">Crear cuenta nueva</a></p></div><div class="auth-view" id="auth-register" style="display:none;"><h3 style="margin-bottom:18px; text-align:center;">Crear cuenta</h3><input type="email" id="reg-email" placeholder="Correo electrónico"><input type="password" id="reg-pass" placeholder="Contraseña"><button class="btn-primary" id="email-register-btn" style="width:100%;">Registrarse</button><div class="auth-divider">o</div><button class="btn-primary google-login-btn" id="google-register-btn">🌐 Registrarse con Google</button><p style="margin-top:18px; text-align:center;"><a onclick="switchAuth('login')" style="cursor:pointer; color:#1c1c1e;">Ya tengo cuenta</a></p></div></div></div>
 
 <button class="whatsapp-fab" id="whatsapp-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
 <button class="ai-floating-btn" id="ai-floating-btn" onclick="scrollToAI()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></button>
@@ -1842,9 +1888,9 @@ function scrollToAI() {
 function showToast(msg, isError = false) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.style.background = isError ? '#c0392b' : '#2a2826';
+  t.style.background = isError ? '#dc2626' : '#1c1c1e';
   t.classList.add('show');
-  setTimeout(() => { t.classList.remove('show'); t.style.background = '#2a2826'; }, 3000);
+  setTimeout(() => { t.classList.remove('show'); t.style.background = '#1c1c1e'; }, 3000);
 }
 
 function showPage(id) {
