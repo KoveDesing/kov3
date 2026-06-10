@@ -44,6 +44,65 @@ body::before {
   background: radial-gradient(circle at 20% 30%, rgba(180, 180, 200, 0.08) 0%, transparent 70%);
 }
 
+/* EFECTO DE SOMBRA EN MOVIMIENTO EN EL FONDO DEL HERO */
+@keyframes movingShadow {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 80px;
+  position: relative;
+  background: #f5f5f7;
+  overflow: hidden;
+}
+
+/* Sombra animada en movimiento en el fondo del hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(0, 0, 0, 0.02) 0%, transparent 40%),
+              radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.015) 0%, transparent 45%),
+              radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.01) 0%, transparent 50%);
+  background-size: 200% 200%;
+  animation: movingShadow 12s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.02), 0 0 30px rgba(0, 0, 0, 0.01);
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -290,97 +349,12 @@ body::before {
 .page { display: none; }
 .page.active { display: block; animation: scaleIn 0.5s ease; }
 
-/* HERO CON ESTADÍSTICAS A LOS LADOS - CUADROS MÁS PEQUEÑOS */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 20px 80px;
-  position: relative;
-  background: #f5f5f7;
-}
-
-.hero-container {
-  max-width: 1300px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-}
-
-/* Desktop: estadísticas a los lados - CUADROS MÁS ANGOSTOS Y BAJOS */
-.hero-stats-left, .hero-stats-right {
-  flex: 0.6;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.hero-stats-left {
-  align-items: flex-end;
-}
-
-.hero-stats-right {
-  align-items: flex-start;
-}
-
-.stat-card {
-  background: white;
-  border-radius: 20px;
-  padding: 12px 20px;
-  text-align: center;
-  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.04), -5px -5px 12px rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-  min-width: 110px;
-}
-
-.stat-card.dark {
-  background: #1c1c1e;
-  color: white;
-  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.15), -3px -3px 10px rgba(255, 255, 255, 0.05);
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-}
-
-.stat-number {
-  font-size: 26px;
-  font-weight: 800;
-  font-family: 'Courier New', monospace;
-}
-
-.stat-label {
-  font-size: 10px;
-  opacity: 0.7;
-  margin-top: 4px;
-  letter-spacing: 1px;
-}
-
 .hero-center {
-  flex: 2;
   text-align: center;
-  max-width: 550px;
-}
-
-/* Mobile: ocultar estadísticas completamente */
-.hero-stats-mobile {
-  display: none;
-}
-
-@media (max-width: 1024px) {
-  .hero-stats-left, .hero-stats-right {
-    display: none;
-  }
-  .hero-container {
-    flex-direction: column;
-  }
-  .hero-center {
-    max-width: 100%;
-  }
+  max-width: 800px;
+  width: 100%;
+  z-index: 2;
+  position: relative;
 }
 
 .hero-badge {
@@ -1694,50 +1668,21 @@ section {
 
 <div class="page active" id="page-inicio">
   <section class="hero">
-    <div class="hero-container">
-      <!-- Estadísticas izquierda (desktop) - CUADROS MÁS PEQUEÑOS -->
-      <div class="hero-stats-left">
-        <div class="stat-card">
-          <div class="stat-number">120+</div>
-          <div class="stat-label">PROYECTOS</div>
-        </div>
-        <div class="stat-card dark">
-          <div class="stat-number">5+</div>
-          <div class="stat-label">AÑOS</div>
-        </div>
-      </div>
-
-      <!-- Centro -->
-      <div class="hero-center">
-        <div class="hero-badge"><div class="hero-badge-dot"></div><span style="font-family:'Courier New', monospace;">ECOSISTEMA DIGITAL · COLOMBIA</span></div>
-        <div class="hero-wordmark">KOVE</div>
-        <div class="hero-tagline">MAKE IT REAL</div>
-        <div class="typing-wrapper">
-          <span class="typing-prefix">Soy</span>
-          <div class="typing-container">
-            <span class="typing-text" id="typing-text">Diseñador Gráfico</span>
-            <span class="typing-cursor" id="typing-cursor"></span>
-          </div>
-        </div>
-        <div class="hero-desc">Diseño gráfico, desarrollo web e inteligencia artificial<br>para marcas que quieren <strong>crecer y vender más</strong>.</div>
-        <div class="hero-btns"><button class="btn-primary" onclick="showPage('booking')">Agendar asesoría →</button><button class="btn-secondary" onclick="showPage('portafolio')">Ver portafolio</button></div>
-        <div class="hero-pills"><span class="hero-pill">Diseño Gráfico</span><span class="hero-pill">Desarrollo Web</span><span class="hero-pill">Automatización</span><span class="hero-pill">Branding</span><span class="hero-pill">KOVE Academy</span></div>
-      </div>
-
-      <!-- Estadísticas derecha (desktop) - CUADROS MÁS PEQUEÑOS -->
-      <div class="hero-stats-right">
-        <div class="stat-card dark">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">CLIENTES</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">24h</div>
-          <div class="stat-label">SOPORTE</div>
+    <div class="hero-center">
+      <div class="hero-badge"><div class="hero-badge-dot"></div><span style="font-family:'Courier New', monospace;">ECOSISTEMA DIGITAL · COLOMBIA</span></div>
+      <div class="hero-wordmark">KOVE</div>
+      <div class="hero-tagline">MAKE IT REAL</div>
+      <div class="typing-wrapper">
+        <span class="typing-prefix">Soy</span>
+        <div class="typing-container">
+          <span class="typing-text" id="typing-text">Diseñador Gráfico</span>
+          <span class="typing-cursor" id="typing-cursor"></span>
         </div>
       </div>
+      <div class="hero-desc">Diseño gráfico, desarrollo web e inteligencia artificial<br>para marcas que quieren <strong>crecer y vender más</strong>.</div>
+      <div class="hero-btns"><button class="btn-primary" onclick="showPage('booking')">Agendar asesoría →</button><button class="btn-secondary" onclick="showPage('portafolio')">Ver portafolio</button></div>
+      <div class="hero-pills"><span class="hero-pill">Diseño Gráfico</span><span class="hero-pill">Desarrollo Web</span><span class="hero-pill">Automatización</span><span class="hero-pill">Branding</span><span class="hero-pill">KOVE Academy</span></div>
     </div>
-
-    <!-- Mobile: sin estadísticas -->
   </section>
 
   <div class="about-section reveal">
