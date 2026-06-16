@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO META TAGS -->
-  <title>KOVE — Make It Real</title>
+  <title>KOVE — Ecosistema Digital · Diseño Web, Branding & IA en Colombia</title>
   <meta name="description" content="KOVE es un ecosistema digital premium en Colombia especializado en diseño web, branding, automatización con inteligencia artificial y experiencias digitales de alto valor.">
   <meta name="keywords" content="diseño web Colombia, branding, automatización IA, desarrollo web, agencia digital, KOVE">
   <meta name="author" content="KOVE Studio">
@@ -32,6 +32,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
+  <script>(function(){var w=console.warn;console.warn=function(){if(arguments[0]&&String(arguments[0]).indexOf('cdn.tailwindcss.com')!==-1)return;w.apply(console,arguments);};})();</script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -82,9 +83,177 @@
       to   { opacity:1; transform:scale(1); }
     }
 
-    /* ─── REVEAL ─── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+    /* ─── MOTION GRAPHICS KEYFRAMES ─── */
+    @keyframes letterIn {
+      0%   { opacity:0; transform: translateY(38px) scale(.9); filter: blur(10px); }
+      60%  { filter: blur(0); }
+      100% { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    @keyframes floatSoft {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%     { transform: translateY(-14px) rotate(1.2deg); }
+    }
+    @keyframes floatSoftAlt {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%     { transform: translateY(12px) rotate(-1deg); }
+    }
+    @keyframes leafSway {
+      0%,100% { transform: rotate(-2deg) translateY(0); }
+      50%     { transform: rotate(2deg) translateY(-6px); }
+    }
+    @keyframes leafSwayBig {
+      0%   { transform: rotate(-6deg) translateY(0) translateX(0); }
+      35%  { transform: rotate(4deg) translateY(-10px) translateX(6px); }
+      65%  { transform: rotate(-3deg) translateY(-4px) translateX(-4px); }
+      100% { transform: rotate(-6deg) translateY(0) translateX(0); }
+    }
+    @keyframes glowPulse {
+      0%,100% { opacity:.45; }
+      50%     { opacity:.85; }
+    }
+    @keyframes ringPulse {
+      0%   { transform: scale(1); opacity:.9; }
+      70%  { transform: scale(1.8); opacity:0; }
+      100% { transform: scale(1.8); opacity:0; }
+    }
+    @keyframes particleDrift {
+      0%   { transform: translate(0,0); opacity:0; }
+      10%  { opacity:.6; }
+      90%  { opacity:.4; }
+      100% { transform: translate(var(--dx,30px), var(--dy,-60px)); opacity:0; }
+    }
+    @keyframes kpiBob {
+      0%,100% { transform: translateY(0) rotate(var(--r,0deg)); }
+      50%     { transform: translateY(-10px) rotate(var(--r,0deg)); }
+    }
+    @keyframes orbit3d {
+      0%   { transform: perspective(800px) rotateX(60deg) rotateZ(0deg); }
+      100% { transform: perspective(800px) rotateX(60deg) rotateZ(360deg); }
+    }
+
+    /* ─── REVEAL (CINEMATIC) ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px) scale(.975);
+      filter: blur(7px);
+      transition: opacity .95s cubic-bezier(.16,1,.3,1), transform .95s cubic-bezier(.16,1,.3,1), filter .95s cubic-bezier(.16,1,.3,1);
+      will-change: transform, opacity, filter;
+    }
+    .reveal.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+
+    /* ─── CINEMATIC BLOCK REVEAL (3D, safe — does not split or alter text) ─── */
+    .cine-in {
+      opacity: 0;
+      transform: perspective(700px) rotateX(35deg) translateY(30px) scale(.96);
+      filter: blur(14px);
+      transform-origin: bottom center;
+      animation: cineReveal3d 1s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    @keyframes cineReveal3d { to { opacity:1; filter: blur(0); transform: perspective(700px) rotateX(0) translateY(0) scale(1); } }
+
+    /* ─── WORD-BY-WORD 3D REVEAL (one word, then the next) ─── */
+    .word-wrap {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(11px);
+      transform: perspective(600px) rotateX(40deg) translateY(20px) scale(.95);
+      transform-origin: bottom center;
+      animation: cineReveal3d .85s cubic-bezier(.16,1,.3,1) forwards;
+    }
+
+    /* ─── CUSTOM CURSOR ─── */
+    .cursor-dot, .cursor-ring { position: fixed; top:0; left:0; pointer-events:none; z-index: 9998; border-radius:50%; transform: translate(-50%,-50%); }
+    .cursor-dot { width:6px; height:6px; background:#1a1a1a; transition: opacity .2s ease, background .25s ease; }
+    .cursor-ring {
+      width:34px; height:34px;
+      border: 1.4px solid rgba(26,26,26,.45);
+      transition: width .35s cubic-bezier(.16,1,.3,1), height .35s cubic-bezier(.16,1,.3,1), border-color .3s ease, background .3s ease, opacity .2s ease;
+    }
+    .cursor-ring.hovering { width:60px; height:60px; border-color: rgba(26,26,26,.18); background: rgba(26,26,26,.05); backdrop-filter: blur(2px); }
+    .cursor-ring.pressing { width:26px; height:26px; }
+    body.has-fine-pointer, body.has-fine-pointer * { cursor: none !important; }
+    @media (hover:none), (pointer:coarse) { .cursor-dot, .cursor-ring { display:none !important; } }
+
+    /* ─── MAGNETIC ELEMENTS ─── */
+    .magnetic { will-change: transform; }
+
+    /* ─── PALM CORNER (DECORATIVE, LEAVES ONLY) ─── */
+    .palm-corner {
+      position: fixed;
+      top: -90px; left: -90px;
+      width: 520px; height: 520px;
+      z-index: 5;
+      pointer-events: none;
+      opacity: .92;
+      mix-blend-mode: normal;
+    }
+    .palm-leaf-back {
+      position:absolute; inset:0;
+      filter: blur(9px);
+      opacity:.55;
+      animation: leafSwayBig 6.5s ease-in-out infinite;
+      transform-origin: 15% 10%;
+    }
+    .palm-leaf-front {
+      position:absolute; inset:0;
+      filter: blur(3px);
+      opacity:.92;
+      animation: leafSwayBig 5s ease-in-out infinite reverse;
+      transform-origin: 12% 8%;
+    }
+    @media (max-width: 768px) {
+      .palm-corner { width: 300px; height: 300px; top:-55px; left:-55px; opacity:.75; }
+    }
+
+    /* ─── FLOATING KPI WIDGETS (DATA MOTION GRAPHICS, EXISTING STATS ONLY) ─── */
+    .floating-kpi {
+      position: absolute;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 20px;
+      padding: 9px 15px;
+      box-shadow: 10px 10px 24px rgba(0,0,0,.06), -4px -4px 12px rgba(255,255,255,.8), 0 0 24px rgba(0,0,0,.02);
+      display: flex; align-items: center; gap: 9px;
+      z-index: 1;
+      pointer-events: none;
+      animation: kpiBob 6s ease-in-out infinite;
+      transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease;
+    }
+    .floating-kpi:hover { box-shadow: 14px 14px 30px rgba(0,0,0,.09), -4px -4px 12px rgba(255,255,255,.9); }
+    .floating-kpi .fk-num { font-family:'Poppins',sans-serif; font-weight:800; font-size:16px; color:#1a1a1a; line-height:1; }
+    .floating-kpi .fk-lbl { font-size:9px; color:#999; font-family:'Courier New',monospace; letter-spacing:.06em; text-transform:uppercase; }
+    .floating-kpi .fk-dot { width:6px; height:6px; border-radius:50%; background:#22c55e; box-shadow:0 0 8px rgba(34,197,94,.6); animation: glowPulse 2.4s infinite; flex-shrink:0; }
+    .fk-1 { top: 6%;    left: 2%;  --r:-3deg; animation-delay:0s; }
+    .fk-2 { top: 6%;    right: 2%; --r:2deg;  animation-delay:1.2s; }
+    .fk-3 { bottom: 7%; left: 2%;  --r:-1.5deg; animation-delay:2.1s; }
+    @media (max-width: 1320px) { .floating-kpi { display:none; } }
+
+    /* ─── SUBTLE PARTICLES ─── */
+    .particle-field { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
+    .particle {
+      position:absolute;
+      width:4px; height:4px;
+      border-radius:50%;
+      background: rgba(26,26,26,.18);
+      animation: particleDrift linear infinite;
+    }
+
+    /* ─── 3D TILT WRAPPER (perspective context) ─── */
+    .tilt-card { transform-style: preserve-3d; will-change: transform; }
+
+    /* ─── 3D ORBIT RINGS (depth layer, hero) ─── */
+    .orbit-3d {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(26,26,26,.12);
+      pointer-events: none;
+      z-index: 1;
+      animation: orbit3d linear infinite;
+    }
+    .orbit-1 { width: 220px; height: 220px; top: 8%; left: 50%; margin-left: -340px; animation-duration: 22s; }
+    .orbit-2 { width: 160px; height: 160px; bottom: 6%; left: 50%; margin-left: 260px; border-color: rgba(26,26,26,.09); animation-duration: 16s; animation-direction: reverse; }
+    @media (max-width: 1100px) { .orbit-3d { display:none; } }
 
     /* ─── NAVBAR ─── */
     .navbar {
@@ -98,15 +267,17 @@
       justify-content: space-between;
       gap: 20px;
       padding: 9px 24px;
-      background: rgba(255,255,255,.97);
-      backdrop-filter: blur(24px);
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
       border-radius: 60px;
-      box-shadow: 0 6px 24px rgba(0,0,0,.07), 0 1px 0 rgba(255,255,255,.9) inset;
-      border: 1px solid rgba(255,255,255,.8);
+      box-shadow: 0 6px 24px rgba(0,0,0,.07), 0 1px 0 rgba(255,255,255,.6) inset;
+      border: 1px solid rgba(255,255,255,.5);
       width: clamp(280px, 92%, 860px);
       transition: all .4s ease;
       animation: floatNav 5s ease-in-out infinite;
     }
+    .navbar.scrolled { background: rgba(255,255,255,.72); }
     .navbar.scrolled { box-shadow: 0 8px 28px rgba(0,0,0,.1); top: 12px; }
 
     .nav-logo {
@@ -290,6 +461,21 @@
       box-shadow: 8px 8px 20px rgba(0,0,0,.07), -4px -4px 12px rgba(255,255,255,.8);
     }
     .btn-secondary:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 14px 32px rgba(0,0,0,.13); }
+
+    /* premium glow layer added on top of existing buttons (no color changes) */
+    .btn-primary, .btn-secondary, .nav-cta, .cf-submit, .plan-btn { position: relative; isolation: isolate; overflow: hidden; }
+    .btn-primary::before, .nav-cta::before, .plan-btn-dark::before {
+      content:''; position:absolute; inset:-40%; z-index:-1;
+      background: radial-gradient(circle, rgba(255,255,255,.18), transparent 60%);
+      opacity:0; transition: opacity .4s ease; pointer-events:none;
+    }
+    .btn-primary:hover::before, .nav-cta:hover::before, .plan-btn-dark:hover::before { opacity:1; }
+    .btn-secondary::before, .plan-btn-white::before, .cf-submit::before {
+      content:''; position:absolute; inset:-40%; z-index:-1;
+      background: radial-gradient(circle, rgba(0,0,0,.05), transparent 60%);
+      opacity:0; transition: opacity .4s ease; pointer-events:none;
+    }
+    .btn-secondary:hover::before, .plan-btn-white:hover::before, .cf-submit:hover::before { opacity:1; }
 
     .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 40px; }
     .hero-pill {
@@ -736,6 +922,31 @@
 </head>
 <body class="font-sans antialiased selection:bg-neutral-200 selection:text-neutral-900 overflow-x-hidden">
 
+<!-- ═══ CUSTOM CURSOR (decorative, desktop only) ═══ -->
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+<!-- ═══ PALM CORNER — ART DIRECTION, LEAVES ONLY, NO TRUNK ═══ -->
+<div class="palm-corner" id="palm-corner" aria-hidden="true">
+  <svg class="palm-leaf-back" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#1c1c1e" opacity="0.10">
+      <path d="M10 30 C70 10, 150 20, 190 70 C150 60, 90 55, 40 75 C70 55, 90 40, 10 30 Z"/>
+      <path d="M0 70 C80 50, 170 60, 220 110 C170 95, 100 90, 30 105 C70 90, 100 75, 0 70 Z"/>
+      <path d="M-10 120 C90 95, 190 110, 250 165 C190 145, 110 140, 20 150 C70 135, 110 120, -10 120 Z"/>
+      <path d="M-20 5 C40 0, 100 15, 130 45 C90 35, 50 30, 0 40 C30 28, 50 18, -20 5 Z"/>
+    </g>
+  </svg>
+  <svg class="palm-leaf-front" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#1c1c1e" opacity="0.22">
+      <path d="M0 0 C90 5, 180 30, 230 90 C175 65, 100 50, 25 55 C70 40, 100 25, 0 0 Z"/>
+      <path d="M-10 50 C85 45, 175 75, 215 135 C165 105, 95 95, 15 100 C60 80, 90 65, -10 50 Z"/>
+      <path d="M0 95 C95 95, 180 130, 210 185 C160 150, 95 140, 10 145 C55 125, 80 110, 0 95 Z"/>
+      <path d="M5 -10 C55 -10, 105 5, 130 30 C95 18, 60 12, 15 22 C35 10, 45 2, 5 -10 Z"/>
+    </g>
+  </svg>
+</div>
+
+
 <!-- ═══ NAVBAR ═══ -->
 <nav class="navbar" id="navbar">
   <div class="nav-logo" id="logo-double-click" onclick="handleLogoDblClick()">KOVE</div>
@@ -748,7 +959,7 @@
     <li><a onclick="scrollToSection('contacto')">Contacto</a></li>
   </ul>
   <div class="flex gap-2 items-center">
-    <button class="nav-cta" onclick="openWhatsAppChat('Consulta general desde navbar')">Contacto</button>
+    <button class="nav-cta magnetic" onclick="openWhatsAppChat('Consulta general desde navbar')">Contacto</button>
     <button class="menu-btn" id="menu-btn" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
@@ -769,6 +980,23 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="inicio">
+  <div class="particle-field" id="particle-field" aria-hidden="true"></div>
+  <div class="orbit-3d orbit-1" aria-hidden="true"></div>
+  <div class="orbit-3d orbit-2" aria-hidden="true"></div>
+
+  <div class="floating-kpi fk-1" aria-hidden="true">
+    <span class="fk-dot"></span>
+    <div><div class="fk-num">120+</div><div class="fk-lbl">Trabajos</div></div>
+  </div>
+  <div class="floating-kpi fk-2" aria-hidden="true">
+    <span class="fk-dot"></span>
+    <div><div class="fk-num">50+</div><div class="fk-lbl">Clientes</div></div>
+  </div>
+  <div class="floating-kpi fk-3" aria-hidden="true">
+    <span class="fk-dot"></span>
+    <div><div class="fk-num">5+</div><div class="fk-lbl">Años</div></div>
+  </div>
+
   <div class="hero-center">
     <div class="hero-badge" id="hero-badge">
       <div class="hero-badge-dot"></div>
@@ -790,8 +1018,8 @@
     </div>
 
     <div class="hero-btns" id="hero-btns">
-      <button class="btn-primary" onclick="openWhatsAppChat('Consulta general')">Contacto →</button>
-      <button class="btn-secondary" onclick="scrollToSection('portafolio')">Ver portafolio</button>
+      <button class="btn-primary magnetic" onclick="openWhatsAppChat('Consulta general')">Contacto →</button>
+      <button class="btn-secondary magnetic" onclick="scrollToSection('portafolio')">Ver portafolio</button>
     </div>
 
     <div class="hero-pills">
@@ -807,7 +1035,7 @@
 <!-- ═══ QUIÉN SOY ═══ -->
 <div class="about-section reveal" id="quien-soy">
   <div class="container">
-    <div class="about-card">
+    <div class="about-card tilt-card">
       <div class="about-grid">
         <div class="about-avatar text-center">
           <div class="avatar-circle">
@@ -847,28 +1075,28 @@
     <div class="sec-title">Lo que hacemos</div>
     <div class="sec-desc">Soluciones digitales integrales para llevar tu negocio al siguiente nivel de conversión y prestigio.</div>
     <div class="services-grid">
-      <div class="svc-card dark-card" onclick="openWhatsAppChat('Servicio de Desarrollo Web')">
+      <div class="svc-card tilt-card dark-card" onclick="openWhatsAppChat('Servicio de Desarrollo Web')">
         <div class="svc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </div>
         <div class="svc-name">Desarrollo Web</div>
         <div class="svc-text">Sitios web modernos, rápidos y optimizados para Google (SEO). Desde landing pages hasta plataformas complejas adaptadas a tus objetivos comerciales.</div>
       </div>
-      <div class="svc-card" onclick="openWhatsAppChat('Servicio de Diseño Gráfico')">
+      <div class="svc-card tilt-card" onclick="openWhatsAppChat('Servicio de Diseño Gráfico')">
         <div class="svc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
         </div>
         <div class="svc-name">Diseño Gráfico</div>
         <div class="svc-text">Identidad visual elegante que captura y comunica con consistencia. Diseños refinados para redes sociales, anuncios, portafolios y presentaciones premium.</div>
       </div>
-      <div class="svc-card" onclick="openWhatsAppChat('Servicio de Branding')">
+      <div class="svc-card tilt-card" onclick="openWhatsAppChat('Servicio de Branding')">
         <div class="svc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-3.3 2.7-6 6-6 2.1 0 3.9 1.1 5 2.7"/><path d="M10 22c.3-1.4.7-2.8 1-4.2.3-1.4.6-2.8.8-4.2"/><path d="M14 21.9c.3-1.5.5-3 .5-4.5 0-1-.1-2-.2-3"/><path d="M19.5 19c-.3-1.5-.6-3.1-.9-4.6"/><path d="M22 12c-.4 2-.8 4-1.2 6"/></svg>
         </div>
         <div class="svc-name">Branding</div>
         <div class="svc-text">Construimos marcas con un firme propósito de crecimiento. Logotipos icónicos, manuales corporativos, tipografías personalizadas y dirección artística única.</div>
       </div>
-      <div class="svc-card dark-card" onclick="openWhatsAppChat('Servicio de Automatización de Procesos')">
+      <div class="svc-card tilt-card dark-card" onclick="openWhatsAppChat('Servicio de Automatización de Procesos')">
         <div class="svc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
@@ -914,7 +1142,7 @@
       <div class="port-sub">Nuestros trabajos oficiales</div>
     </div>
     <div class="port-grid">
-      <div class="port-card" onclick="window.open('https://imacbarberia.vercel.app','_blank')">
+      <div class="port-card tilt-card" onclick="window.open('https://imacbarberia.vercel.app','_blank')">
         <div class="port-img port-img-1">
           <span style="font-family:'Courier New',monospace;font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;">Desarrollo Web</span>
           <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(20px,4vw,28px);color:white;letter-spacing:-.02em;text-align:center;">IMAC BARBER<br>STUDIO</div>
@@ -925,7 +1153,7 @@
           <div class="port-desc">Sitio web premium con pasarela y gestor interactivo de reservas de citas.</div>
         </div>
       </div>
-      <div class="port-card" onclick="window.open('https://tatau.vercel.app','_blank')">
+      <div class="port-card tilt-card" onclick="window.open('https://tatau.vercel.app','_blank')">
         <div class="port-img port-img-2">
           <span style="font-family:'Courier New',monospace;font-size:10px;color:#888;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;">E-Commerce Directo</span>
           <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(20px,4vw,28px);color:#1c1c1e;letter-spacing:-.02em;text-align:center;">TÁTAU<br>SUPPLY</div>
@@ -936,7 +1164,7 @@
           <div class="port-desc">Plataforma de compras de insumos corporativos con catálogo y checkout.</div>
         </div>
       </div>
-      <div class="port-card" style="border:2px solid rgba(0,0,0,.06);" onclick="window.open('https://kov3.vercel.app','_blank')">
+      <div class="port-card tilt-card" style="border:2px solid rgba(0,0,0,.06);" onclick="window.open('https://kov3.vercel.app','_blank')">
         <div class="port-img port-img-3">
           <span style="font-family:'Courier New',monospace;font-size:10px;color:#aaa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;">Ecosistema Propulsor</span>
           <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(20px,4vw,28px);color:#1a1a1a;letter-spacing:-.02em;text-align:center;">KOVE<br>AGENCY</div>
@@ -949,7 +1177,7 @@
       </div>
     </div>
     <div class="text-center mt-12">
-      <button class="btn-primary inline-flex items-center gap-2" onclick="openWhatsAppChat('Lanzamiento de mi marca')">¿Tu marca lista para el mundo? Hablemos →</button>
+      <button class="btn-primary magnetic inline-flex items-center gap-2" onclick="openWhatsAppChat('Lanzamiento de mi marca')">¿Tu marca lista para el mundo? Hablemos →</button>
     </div>
   </div>
 </section>
@@ -972,7 +1200,7 @@
     <!-- WEB -->
     <div class="plans-content active" id="plans-web-grid">
       <div class="plans-grid">
-        <div class="plan-card text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card text-left flex flex-col justify-between">
           <div>
             <div class="plan-name">Starter</div>
             <div class="plan-price text-neutral-900">$250.000 <span style="font-family:'Courier New',monospace;font-size:11px;color:#aaa;font-weight:400;">COP</span></div>
@@ -984,9 +1212,9 @@
               <li class="plan-feature">✅ Entrega en 5 días hábiles</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Starter Web $250.000 COP')">Adquirir Starter →</button>
+          <button class="plan-btn magnetic plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Starter Web $250.000 COP')">Adquirir Starter →</button>
         </div>
-        <div class="plan-card featured text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card featured text-left flex flex-col justify-between">
           <span class="plan-popular-tag">RECOMENDADO</span>
           <div>
             <div class="plan-name text-white">Profesional</div>
@@ -999,9 +1227,9 @@
               <li class="plan-feature">✅ 1 mes soporte posterior</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-white mt-6" onclick="openWhatsAppChat('Plan Profesional Web $600.000 COP')">Adquirir Profesional →</button>
+          <button class="plan-btn magnetic plan-btn-white mt-6" onclick="openWhatsAppChat('Plan Profesional Web $600.000 COP')">Adquirir Profesional →</button>
         </div>
-        <div class="plan-card text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card text-left flex flex-col justify-between">
           <div>
             <div class="plan-name">Enterprise</div>
             <div class="plan-price text-neutral-900">$1.000.000 <span style="font-family:'Courier New',monospace;font-size:11px;color:#aaa;font-weight:400;">COP</span></div>
@@ -1013,7 +1241,7 @@
               <li class="plan-feature">✅ Soporte premium continuado</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Enterprise Web $1.000.000 COP')">Lanzar Enterprise →</button>
+          <button class="plan-btn magnetic plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Enterprise Web $1.000.000 COP')">Lanzar Enterprise →</button>
         </div>
       </div>
     </div>
@@ -1021,7 +1249,7 @@
     <!-- GRÁFICO -->
     <div class="plans-content" id="plans-grafico-grid">
       <div class="plans-grid">
-        <div class="plan-card text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card text-left flex flex-col justify-between">
           <div>
             <div class="plan-name">Básico</div>
             <div class="plan-price text-neutral-900">$500.000 <span style="font-family:'Courier New',monospace;font-size:11px;color:#aaa;font-weight:400;">COP</span></div>
@@ -1033,9 +1261,9 @@
               <li class="plan-feature">✅ Entrega en 5 días hábiles</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Básico Diseño $500.000 COP')">Adquirir Básico →</button>
+          <button class="plan-btn magnetic plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Básico Diseño $500.000 COP')">Adquirir Básico →</button>
         </div>
-        <div class="plan-card featured text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card featured text-left flex flex-col justify-between">
           <span class="plan-popular-tag">RECOMENDADO</span>
           <div>
             <div class="plan-name text-white">Profesional</div>
@@ -1048,9 +1276,9 @@
               <li class="plan-feature">✅ Entrega en 10 días hábiles</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-white mt-6" onclick="openWhatsAppChat('Plan Profesional Diseño $1.000.000 COP')">Adquirir Profesional →</button>
+          <button class="plan-btn magnetic plan-btn-white mt-6" onclick="openWhatsAppChat('Plan Profesional Diseño $1.000.000 COP')">Adquirir Profesional →</button>
         </div>
-        <div class="plan-card text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card text-left flex flex-col justify-between">
           <div>
             <div class="plan-name">Premium</div>
             <div class="plan-price text-neutral-900">$2.000.000 <span style="font-family:'Courier New',monospace;font-size:11px;color:#aaa;font-weight:400;">COP</span></div>
@@ -1062,7 +1290,7 @@
               <li class="plan-feature">✅ Diseñador dedicado en línea</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Premium Diseño $2.000.000 COP')">Adquirir Premium →</button>
+          <button class="plan-btn magnetic plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Premium Diseño $2.000.000 COP')">Adquirir Premium →</button>
         </div>
       </div>
     </div>
@@ -1070,7 +1298,7 @@
     <!-- AUTOMATIZACIÓN -->
     <div class="plans-content" id="plans-auto-grid">
       <div class="plans-grid">
-        <div class="plan-card text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card text-left flex flex-col justify-between">
           <div>
             <div class="plan-name">Básico</div>
             <div class="plan-price text-neutral-900">$500.000 <span style="font-family:'Courier New',monospace;font-size:11px;color:#aaa;font-weight:400;">COP</span></div>
@@ -1081,9 +1309,9 @@
               <li class="plan-feature">✅ Soporte prioritario 15 días</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Básico Automatización $500.000 COP')">Adquirir Básico →</button>
+          <button class="plan-btn magnetic plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Básico Automatización $500.000 COP')">Adquirir Básico →</button>
         </div>
-        <div class="plan-card featured text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card featured text-left flex flex-col justify-between">
           <span class="plan-popular-tag">OMNICHANNEL</span>
           <div>
             <div class="plan-name text-white">Profesional</div>
@@ -1095,9 +1323,9 @@
               <li class="plan-feature">✅ Soporte extendido 45 días</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-white mt-6" onclick="openWhatsAppChat('Plan Profesional Automatización $1.500.000 COP')">Adquirir Profesional →</button>
+          <button class="plan-btn magnetic plan-btn-white mt-6" onclick="openWhatsAppChat('Plan Profesional Automatización $1.500.000 COP')">Adquirir Profesional →</button>
         </div>
-        <div class="plan-card text-left flex flex-col justify-between">
+        <div class="plan-card tilt-card text-left flex flex-col justify-between">
           <div>
             <div class="plan-name">Empresarial</div>
             <div class="plan-price text-neutral-900">$2.500.000 <span style="font-family:'Courier New',monospace;font-size:11px;color:#aaa;font-weight:400;">COP</span></div>
@@ -1108,7 +1336,7 @@
               <li class="plan-feature">✅ Consultoría de procesos continua</li>
             </ul>
           </div>
-          <button class="plan-btn plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Empresarial Automatización $2.500.000 COP')">Adquirir Empresarial →</button>
+          <button class="plan-btn magnetic plan-btn-dark mt-6" onclick="openWhatsAppChat('Plan Empresarial Automatización $2.500.000 COP')">Adquirir Empresarial →</button>
         </div>
       </div>
     </div>
@@ -1143,7 +1371,7 @@
         <input type="text" class="cf-input" id="contact-subject" placeholder="Asunto *" required>
       </div>
       <textarea class="cf-textarea" id="contact-message" placeholder="Cuéntanos brevemente sobre tu proyecto..." required></textarea>
-      <button type="submit" class="cf-submit" id="contact-submit-btn">Enviar mensaje →</button>
+      <button type="submit" class="cf-submit magnetic" id="contact-submit-btn" >Enviar mensaje →</button>
 
       <!-- Success state -->
       <div class="form-success" id="form-success">
@@ -1190,13 +1418,13 @@
 </footer>
 
 <!-- ═══ FLOATING BUTTONS ═══ -->
-<button class="whatsapp-fab" onclick="openWhatsAppChat('Asunto: Cliente Web')">
+<button class="whatsapp-fab magnetic" onclick="openWhatsAppChat('Asunto: Cliente Web')">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
   </svg>
 </button>
 
-<button class="ai-floating-btn" onclick="scrollToSection('kove-ai-section')">
+<button class="ai-floating-btn magnetic" onclick="scrollToSection('kove-ai-section')">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
   </svg>
@@ -1454,12 +1682,12 @@
     revealEls.forEach(el => obs.observe(el));
 
     // Hero entrance animations
-    const heroEls = ['hero-badge','hero-wordmark','hero-tagline','hero-typing','hero-desc','hero-btns'];
+    const heroEls = ['hero-badge','hero-typing','hero-desc','hero-btns'];
     heroEls.forEach((id, i) => {
       const el = document.getElementById(id);
       if (!el) return;
       el.style.opacity = '0';
-      el.style.animation = `fadeUp .85s cubic-bezier(.175,.885,.32,1.25) ${.08 + i*.1}s forwards`;
+      el.style.animation = `fadeUp .85s cubic-bezier(.175,.885,.32,1.25) ${.4 + i*.12}s forwards`;
     });
     document.querySelectorAll('.hero-pill').forEach((p, i) => {
       p.style.opacity = '0';
@@ -1474,6 +1702,187 @@
       sel.style.color = sel.value ? 'white' : 'rgba(255,255,255,.45)';
     });
   });
+
+  /* ════════════════════════════════════════════════════
+     MOTION GRAPHICS ENGINE
+     Cinematic typography, magnetic cursor, 3D tilt, parallax
+  ════════════════════════════════════════════════════ */
+  (function () {
+
+    const isFinePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+    /* ── WORD-BY-WORD 3D CINEMATIC REVEAL ── */
+    function revealWords(el, baseDelay, step) {
+      const text = el.textContent;
+      el.textContent = '';
+      let i = 0;
+      text.split(/(\s+)/).forEach(token => {
+        if (token === '') return;
+        if (/^\s+$/.test(token)) { el.appendChild(document.createTextNode(token)); return; }
+        const span = document.createElement('span');
+        span.className = 'word-wrap';
+        span.style.animationDelay = (baseDelay + i * step) + 's';
+        span.textContent = token;
+        el.appendChild(span);
+        i++;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // KOVE wordmark uses gradient text-clip → animated as a whole block (splitting it into
+      // spans breaks the gradient mask), so it gets its own 3D cinematic entrance instead.
+      const wordmark = document.getElementById('hero-wordmark');
+      if (wordmark) { wordmark.style.animationDelay = '.15s'; wordmark.classList.add('cine-in'); }
+
+      const tagline = document.getElementById('hero-tagline');
+      if (tagline) revealWords(tagline, .75, .14);
+
+      const titleObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.cine) {
+            entry.target.dataset.cine = '1';
+            revealWords(entry.target, 0, .1);
+          }
+        });
+      }, { threshold: .15, rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.sec-title').forEach(t => titleObs.observe(t));
+
+      // Safety net: guarantee every cinematic text is visible even in edge cases
+      setTimeout(() => {
+        document.querySelectorAll('.cine-in, .word-wrap').forEach(el => {
+          el.style.opacity = '1';
+          el.style.filter = 'blur(0)';
+          el.style.transform = 'none';
+        });
+      }, 2600);
+    });
+
+    /* ── CUSTOM MAGNETIC CURSOR ── */
+    if (isFinePointer) {
+      document.body.classList.add('has-fine-pointer');
+      const dot  = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+
+      window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+      window.addEventListener('mousedown', () => ring && ring.classList.add('pressing'));
+      window.addEventListener('mouseup',   () => ring && ring.classList.remove('pressing'));
+
+      function tick() {
+        rx += (mx - rx) * 0.18;
+        ry += (my - ry) * 0.18;
+        if (dot)  { dot.style.left = mx + 'px';  dot.style.top = my + 'px'; }
+        if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      const hoverTargets = 'a, button, input, select, textarea, .svc-card, .port-card, .plan-card, .hero-pill, .floating-kpi, .skill-tag, .footer-lnk, .nav-logo';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(hoverTargets) && ring) ring.classList.add('hovering');
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(hoverTargets) && ring) ring.classList.remove('hovering');
+      });
+    }
+
+    /* ── MAGNETIC BUTTONS ── */
+    if (isFinePointer) {
+      document.querySelectorAll('.magnetic').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const r = btn.getBoundingClientRect();
+          const px = (e.clientX - r.left - r.width/2) * 0.28;
+          const py = (e.clientY - r.top - r.height/2) * 0.32;
+          btn.style.transition = 'transform .08s linear';
+          btn.style.transform = `translate(${px}px, ${py}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transition = 'transform .55s cubic-bezier(.175,.885,.32,1.4)';
+          btn.style.transform = 'translate(0,0)';
+        });
+      });
+    }
+
+    /* ── 3D TILT CARDS ── */
+    if (isFinePointer) {
+      document.querySelectorAll('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rotX = (0.5 - py) * 10;
+          const rotY = (px - 0.5) * 12;
+          card.style.transition = 'transform .12s ease-out';
+          card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px) scale(1.012)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transition = 'transform .6s cubic-bezier(.175,.885,.32,1.275)';
+          card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+        });
+      });
+    }
+
+    /* ── 3D HERO SCENE TILT (depth like an Apple Event stage) ── */
+    if (isFinePointer) {
+      const heroCenter = document.querySelector('.hero-center');
+      const hero = document.getElementById('inicio');
+      if (heroCenter && hero) {
+        hero.addEventListener('mousemove', (e) => {
+          const r = hero.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          heroCenter.style.transition = 'transform .25s ease-out';
+          heroCenter.style.transform = `perspective(1400px) rotateX(${py * -5}deg) rotateY(${px * 6}deg)`;
+        });
+        hero.addEventListener('mouseleave', () => {
+          heroCenter.style.transition = 'transform .8s cubic-bezier(.16,1,.3,1)';
+          heroCenter.style.transform = 'perspective(1400px) rotateX(0) rotateY(0)';
+        });
+      }
+    }
+
+    /* ── PALM CORNER PARALLAX (scroll + mouse depth) ── */
+    const palm = document.getElementById('palm-corner');
+    if (palm) {
+      let scrollParallax = 0;
+      window.addEventListener('scroll', () => {
+        scrollParallax = Math.min(window.scrollY * 0.06, 40);
+        applyPalm();
+      });
+      let mParX = 0, mParY = 0;
+      if (isFinePointer) {
+        window.addEventListener('mousemove', (e) => {
+          mParX = (e.clientX / innerWidth - 0.5) * 14;
+          mParY = (e.clientY / innerHeight - 0.5) * 10;
+          applyPalm();
+        });
+      }
+      function applyPalm() {
+        palm.style.transform = `translate(${mParX}px, ${mParY - scrollParallax}px)`;
+      }
+    }
+
+    /* ── SUBTLE FLOATING PARTICLES (hero hooks) ── */
+    const field = document.getElementById('particle-field');
+    if (field) {
+      const COUNT = window.innerWidth < 768 ? 9 : 16;
+      for (let i = 0; i < COUNT; i++) {
+        const p = document.createElement('span');
+        p.className = 'particle';
+        const x = Math.random() * 100, y = 40 + Math.random() * 55;
+        const dx = (Math.random() - 0.5) * 80, dy = -(60 + Math.random() * 80);
+        const dur = 7 + Math.random() * 8, delay = Math.random() * 8;
+        p.style.left = x + '%';
+        p.style.top  = y + '%';
+        p.style.setProperty('--dx', dx + 'px');
+        p.style.setProperty('--dy', dy + 'px');
+        p.style.animationDuration = dur + 's';
+        p.style.animationDelay = '-' + delay + 's';
+        field.appendChild(p);
+      }
+    }
+
+  })();
 </script>
 
 </body>
