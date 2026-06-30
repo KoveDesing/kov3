@@ -572,20 +572,358 @@
       color: #fff;
     }
 
-    /* === Ajustes responsive === */
-    @media (max-width: 480px) {
+    /* === Media Queries para Responsive === */
+
+    /* Tablets y pantallas medianas */
+    @media (max-width: 1024px) {
+      .plans-filter-container {
+        gap: 4px;
+        padding: 4px;
+        border-radius: 999px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .plans-cat-btn {
+        padding: 8px 14px;
+        font-size: 10px;
+        gap: 4px;
+      }
       .plan-card {
         padding: 24px;
         min-height: 360px;
       }
-      .plan-name {
+      .neo-card-dark.p-8.md\:p-14 {
+        padding: 30px;
+      }
+      .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-8 {
+        gap: 20px;
+      }
+      #navbar {
+        padding: 8px 10px;
+        gap: 6px;
+      }
+      .kove-nav-btn {
+        padding: 8px 10px;
+        min-width: 46px;
+      }
+    }
+
+    /* Móviles */
+    @media (max-width: 767px) {
+      #navbar {
+        bottom: 10px;
+        padding: 6px 8px;
+        gap: 3px;
+        border-radius: 20px;
+        width: calc(100% - 20px);
+        max-width: 400px;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .kove-nav-btn {
+        padding: 5px 6px;
+        min-width: 36px;
+        gap: 1px;
+        border-radius: 12px;
+      }
+      .kove-nav-btn span {
+        font-size: 6.5px;
+      }
+      .kove-nav-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+      .kove-nav-cta {
+        padding: 5px 10px;
+        font-size: 8px;
+        gap: 3px;
+        border-radius: 12px;
+      }
+      .kove-nav-cta svg {
+        width: 9px;
+        height: 9px;
+      }
+
+      /* Hero - Título KOVE mucho más grande */
+      #inicio .font-display.font-black {
+        font-size: clamp(72px, 20vw, 120px) !important;
+        line-height: 0.85 !important;
+        letter-spacing: -0.03em !important;
+      }
+      
+      #inicio .text-neutral-400.font-medium.text-lg.sm\:text-xl {
+        font-size: 14px;
+      }
+      #inicio .relative.inline-flex.items-center {
+        min-width: 140px;
+        padding: 6px 12px;
+      }
+      #inicio #hero-typewriter-text {
+        font-size: 10px !important;
+      }
+      #inicio .max-w-\[540px\].mx-auto.mt-6 {
+        font-size: 13px;
+        padding: 0 10px;
+      }
+
+      /* Servicios */
+      #servicios .grid.grid-cols-1.md\:grid-cols-2.gap-8 {
+        gap: 16px;
+      }
+      #servicios .neo-card-dark.p-8.md\:p-10,
+      #servicios .neo-card.p-8.md\:p-10 {
+        padding: 20px;
+      }
+      #servicios .font-display.font-bold.text-xl {
         font-size: 17px;
       }
+
+      /* Planes */
+      .plans-filter-container {
+        padding: 4px;
+        gap: 3px;
+        border-radius: 999px;
+        width: 100%;
+        max-width: 100%;
+      }
+      .plans-cat-btn {
+        padding: 6px 10px;
+        font-size: 8.5px;
+        gap: 3px;
+        border-radius: 999px;
+      }
+      .plans-cat-btn svg {
+        width: 11px;
+        height: 11px;
+      }
+      .planes-grid-container {
+        gap: 16px;
+        padding: 0 4px;
+      }
+      .plan-card {
+        padding: 20px;
+        min-height: 300px;
+        border-radius: 24px;
+      }
+      .plan-name {
+        font-size: 16px;
+      }
       .plan-price {
-        font-size: 26px;
+        font-size: 24px;
+        margin: 10px 0;
+        padding-bottom: 10px;
       }
       .plan-features li {
+        font-size: 10.5px;
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+      .plan-btn {
+        padding: 10px 0;
+        font-size: 10.5px;
+      }
+      .plan-badge {
+        font-size: 7px;
+        padding: 2px 10px;
+        top: 10px;
+        right: 10px;
+      }
+
+      /* Edición de Video */
+      #edicion-video .grid.grid-cols-1.md\:grid-cols-3.gap-6.lg\:gap-8 {
+        gap: 16px;
+      }
+      #edicion-video .neo-card.p-8 {
+        padding: 20px;
+      }
+      #edicion-video .font-display.font-bold.text-xl {
+        font-size: 17px;
+      }
+      #edicion-video .text-3xl.font-sans.font-black {
+        font-size: 24px;
+      }
+      #edicion-video .absolute.-top-3 {
+        font-size: 7px;
+        padding: 1px 12px;
+        top: -8px;
+      }
+
+      /* Paquetes Combinados */
+      .grid.grid-cols-1.lg\:grid-cols-3.gap-8.items-stretch {
+        gap: 16px;
+      }
+      .neo-card-dark.p-8.md\:p-10,
+      .neo-card.p-8.md\:p-10 {
+        padding: 20px;
+      }
+      .text-3xl.sm\:text-4xl.font-sans.font-black {
+        font-size: 24px;
+      }
+
+      /* Quien Soy */
+      #quien-soy .neo-card-dark.p-8.md\:p-14 {
+        padding: 20px;
+      }
+      #quien-soy .grid.grid-cols-1.md\:grid-cols-\[240px_1fr\].gap-12 {
+        gap: 24px;
+      }
+      #quien-soy .w-36.h-36 {
+        width: 80px;
+        height: 80px;
+      }
+      #quien-soy .font-display.font-black.text-5xl {
+        font-size: 32px;
+      }
+      #quien-soy .grid.grid-cols-3.gap-3 {
+        gap: 6px;
+        padding: 10px;
+      }
+
+      /* Portafolio */
+      #portafolio .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-8 {
+        gap: 16px;
+      }
+      #portafolio .h-\[240px\] {
+        height: 160px;
+        padding: 16px 12px;
+      }
+      #portafolio .font-display.font-black.text-2xl.sm\:text-3xl {
+        font-size: 18px;
+      }
+      #portafolio .p-6.md\:p-8 {
+        padding: 16px;
+      }
+
+      /* Servicios Detallados */
+      #servicios-detalle .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-6 {
+        gap: 14px;
+      }
+      #servicios-detalle .neo-card-dark.p-8,
+      #servicios-detalle .neo-card.p-8 {
+        padding: 18px;
+      }
+      #servicios-detalle .font-display.font-bold.text-xl {
+        font-size: 16px;
+      }
+      #servicios-detalle .grid.grid-cols-1.sm\:grid-cols-2.gap-2.mb-6 {
+        gap: 4px;
+      }
+
+      /* Contacto */
+      #contacto .neo-card-dark.p-6.sm\:p-10 {
+        padding: 16px;
+      }
+      #contacto .grid.grid-cols-1.sm\:grid-cols-2.gap-4 {
+        gap: 10px;
+      }
+      #contacto input,
+      #contacto select,
+      #contacto textarea {
+        padding: 10px 14px;
         font-size: 11px;
+        border-radius: 16px;
+      }
+      #contacto textarea {
+        min-height: 100px;
+      }
+      #contacto button {
+        padding: 12px 0;
+        font-size: 11px;
+      }
+
+      /* Estadísticas */
+      .grid.grid-cols-1.lg\:grid-cols-\[1fr_320px\].gap-12 {
+        gap: 24px;
+      }
+      .grid.grid-cols-1.sm\:grid-cols-2.gap-6 {
+        gap: 12px;
+      }
+      .neo-card.p-6 {
+        padding: 14px;
+      }
+      .neo-card.p-6 .text-2xl.sm\:text-3xl {
+        font-size: 20px;
+      }
+
+      /* Proceso KOVE */
+      .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-5.gap-6 {
+        gap: 12px;
+      }
+      .neo-card.p-6 {
+        padding: 14px;
+      }
+
+      /* ¿Por qué KOVE? */
+      .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4.gap-6 {
+        gap: 12px;
+      }
+      .bg-white\/\[0\.04\].rounded-\[28px\].p-7 {
+        padding: 16px;
+      }
+
+      /* Footer */
+      .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4.gap-10 {
+        gap: 24px;
+      }
+
+      /* Botones flotantes */
+      .fixed.bottom-6.right-6.w-14.h-14,
+      .fixed.bottom-6.left-6.w-14.h-14 {
+        width: 44px;
+        height: 44px;
+      }
+      .fixed.bottom-6.right-6.w-14.h-14 svg,
+      .fixed.bottom-6.left-6.w-14.h-14 svg {
+        width: 20px;
+        height: 20px;
+      }
+      .fixed.bottom-6.right-6 {
+        bottom: 80px;
+        right: 12px;
+      }
+      .fixed.bottom-6.left-6 {
+        bottom: 80px;
+        left: 12px;
+      }
+
+      /* Panel de seguridad */
+      .panel-box {
+        padding: 16px;
+      }
+    }
+
+    /* Móviles muy pequeños */
+    @media (max-width: 400px) {
+      .kove-nav-btn {
+        padding: 4px 4px;
+        min-width: 30px;
+      }
+      .kove-nav-btn span {
+        font-size: 5.5px;
+      }
+      .kove-nav-btn svg {
+        width: 12px;
+        height: 12px;
+      }
+      .kove-nav-cta {
+        padding: 4px 8px;
+        font-size: 7px;
+      }
+      .plans-cat-btn {
+        padding: 4px 8px;
+        font-size: 7.5px;
+      }
+      .plans-cat-btn svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      /* Hero - aún más grande en pantallas muy pequeñas */
+      #inicio .font-display.font-black {
+        font-size: clamp(60px, 18vw, 100px) !important;
       }
     }
   </style>
@@ -715,7 +1053,7 @@
               <span class="font-sans font-bold text-[10px] tracking-wide text-neutral-800">ECOSISTEMA DIGITAL · COLOMBIA</span>
             </div>
             <div class="flex flex-col items-center kove-reveal">
-              <h1 class="font-display font-black text-[clamp(52px,12vw,124px)] tracking-tight leading-[0.9] text-neutral-900 select-none">KOVE</h1>
+              <h1 class="font-display font-black text-[clamp(72px,12vw,124px)] tracking-tight leading-[0.9] text-neutral-900 select-none">KOVE</h1>
             </div>
             <div class="mt-8 flex items-center justify-center gap-2 flex-wrap min-h-[40px] kove-reveal">
               <span class="text-neutral-400 font-medium text-lg sm:text-xl">Soy</span>
@@ -756,7 +1094,7 @@
           </div>
         </section>
 
-        <!-- ===== CTA FINAL ===== -->
+        <!-- ===== CTA FINAL (AHORA EN 2DA POSICIÓN) ===== -->
         <section id="cta-final" class="py-28 bg-[#f4f4f7] relative overflow-hidden">
           <div class="absolute top-[15%] left-[5%] w-96 h-96 bg-neutral-200/50 rounded-full blur-3xl pointer-events-none kove-orb"></div>
           <div class="absolute bottom-[10%] right-[5%] w-80 h-80 bg-neutral-300/30 rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
@@ -806,90 +1144,6 @@
               <span class="flex items-center gap-2 text-[10px] font-bold text-neutral-500"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Respuesta en menos de 24h</span>
               <span class="w-px h-3 bg-neutral-300"></span>
               <span class="flex items-center gap-2 text-[10px] font-bold text-neutral-500"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Satisfacción garantizada</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== QUIEN SOY ===== -->
-        <section id="quien-soy" class="py-20 bg-[#f4f4f6]">
-          <div class="max-w-5xl mx-auto px-6">
-            <div class="neo-card-dark p-8 md:p-14 text-white shadow-[0_24px_60px_rgba(0,0,0,0.18)] relative overflow-hidden section-fade">
-              <div class="absolute right-0 top-0 w-80 h-80 bg-neutral-800/10 rounded-full blur-3xl pointer-events-none"></div>
-              <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 items-center relative z-10">
-                <div class="flex flex-col items-center text-center">
-                  <div class="w-36 h-36 bg-[#111111] rounded-full flex items-center justify-center shadow-[0_12px_24px_rgba(0,0,0,0.4)] relative">
-                    <span class="font-display font-black text-5xl text-neutral-100">K</span>
-                  </div>
-                  <h3 class="font-display font-extrabold text-lg mt-5 text-white">KOVE Studio</h3>
-                  <p class="font-sans text-[9px] tracking-widest text-[#aaa] font-extrabold uppercase mt-1">Diseñador &amp; Desarrollador</p>
-                  <div class="grid grid-cols-3 gap-3 pt-4 mt-5 w-full bg-neutral-900/40 p-4 rounded-2xl">
-                    <div class="text-center"><p class="font-sans font-black text-lg text-white">5+</p><p class="text-[9px] text-[#aaa] font-bold">Años</p></div>
-                    <div class="text-center px-2"><p class="font-sans font-black text-lg text-white">120+</p><p class="text-[9px] text-[#aaa] font-bold">Trabajos</p></div>
-                    <div class="text-center"><p class="font-sans font-black text-lg text-white">50+</p><p class="text-[9px] text-[#aaa] font-bold">Clientes</p></div>
-                  </div>
-                </div>
-                <div class="flex flex-col justify-center text-left">
-                  <h4 class="font-display font-bold text-2xl text-neutral-100 mb-4 flex items-center gap-2">
-                    <span class="word-animate">Hablemos</span>
-                    <span class="word-animate">de</span>
-                    <span class="word-animate">experiencia</span>
-                    <span class="word-animate">digital</span>
-                  </h4>
-                  <p class="text-neutral-300 text-sm sm:text-base leading-relaxed font-light mb-6">
-                    <span class="word-animate">Soy</span>
-                    <span class="word-animate">creador</span>
-                    <span class="word-animate">de</span>
-                    <span class="word-animate">experiencias</span>
-                    <span class="word-animate">digitales</span>
-                    <span class="word-animate">que</span>
-                    <span class="word-animate">combinan</span>
-                    <span class="word-animate">diseño</span>
-                    <span class="word-animate">gráfico,</span>
-                    <span class="word-animate">desarrollo</span>
-                    <span class="word-animate">web,</span>
-                    <span class="word-animate">edición</span>
-                    <span class="word-animate">de</span>
-                    <span class="word-animate">video</span>
-                    <span class="word-animate">y</span>
-                    <span class="word-animate">motion</span>
-                    <span class="word-animate">graphics.</span>
-                    <span class="word-animate">Mi</span>
-                    <span class="word-animate">enfoque</span>
-                    <span class="word-animate">está</span>
-                    <span class="word-animate">en</span>
-                    <span class="word-animate">construir</span>
-                    <span class="word-animate">marcas</span>
-                    <span class="word-animate">con</span>
-                    <span class="word-animate">propósito</span>
-                    <span class="word-animate">y</span>
-                    <span class="word-animate">tecnología</span>
-                    <span class="word-animate">que</span>
-                    <span class="word-animate">realmente</span>
-                    <span class="word-animate">funciona</span>
-                    <span class="word-animate">para</span>
-                    <span class="word-animate">impulsar</span>
-                    <span class="word-animate">la</span>
-                    <span class="word-animate">presencia</span>
-                    <span class="word-animate">en</span>
-                    <span class="word-animate">el</span>
-                    <span class="word-animate">mercado</span>
-                    <span class="word-animate">colombiano</span>
-                    <span class="word-animate">con</span>
-                    <span class="word-animate">estándares</span>
-                    <span class="word-animate">globales.</span>
-                  </p>
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">UI/UX Design</span>
-                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Web Development</span>
-                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Branding</span>
-                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Motion Graphics</span>
-                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Video Editing</span>
-                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">AI Automation</span>
-                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Figma</span>
-                  </div>
-                  <div><button onclick="handleWhatsAppRedirect('Contacto desde Quien Soy')" class="inline-flex items-center gap-2 text-xs font-bold text-neutral-100 bg-white/10 hover:bg-white/15 rounded-full px-6 py-3 cursor-pointer transition duration-300 shadow-xl group kove-btn">📧 hola@kove.co <span>→</span></button></div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -945,7 +1199,7 @@
           </div>
         </section>
 
-        <!-- ===== SECCIÓN PLANES - NUEVO DISEÑO ===== -->
+        <!-- ===== SECCIÓN PLANES ===== -->
         <section id="planes" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-12 section-fade">
@@ -970,7 +1224,6 @@
               </p>
             </div>
 
-            <!-- FILTRO BENTO NEOMÓRFICO HUNDIDO -->
             <div class="flex justify-center mb-12">
               <div class="plans-filter-container">
                 <button data-cat="web" class="plans-cat-btn active" onclick="selectPlanCat(this,'web')">
@@ -988,7 +1241,6 @@
               </div>
             </div>
 
-            <!-- GRID DE PLANES - MISMA PROPORCIÓN QUE EDICIÓN DE VIDEO -->
             <div id="planes-grid" class="planes-grid-container" style="opacity:1;"></div>
           </div>
         </section>
@@ -1185,100 +1437,39 @@
           </div>
         </section>
 
-        <!-- ===== KOVE IA ===== -->
-        <section id="kove-ai-section" class="py-16 bg-[#f4f4f7] relative overflow-hidden">
-          <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-10 section-fade">
-              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 tracking-tight">
-                <span class="word-animate">KOVE</span>
-                <span class="word-animate text-neutral-400">IA</span>
+        <!-- ===== PAQUETES COMBINADOS ===== -->
+        <section class="py-20 bg-neutral-900 text-white relative overflow-hidden select-none">
+          <div class="absolute top-[20%] left-[-10%] w-96 h-96 bg-neutral-800/10 rounded-full blur-3xl pointer-events-none kove-orb"></div>
+          <div class="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
+          <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 section-fade">
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight leading-[1.1] text-white">
+                <span class="word-animate">Paquetes</span>
+                <span class="word-animate">Combinados</span>
               </h2>
-              <p class="text-neutral-500 text-sm mt-3 font-light max-w-md mx-auto">
-                <span class="word-animate">Pregúntale</span>
-                <span class="word-animate">a</span>
-                <span class="word-animate">KOVE</span>
-                <span class="word-animate">IA</span>
-                <span class="word-animate">sobre</span>
-                <span class="word-animate">servicios,</span>
-                <span class="word-animate">precios</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">cómo</span>
-                <span class="word-animate">digitalizar</span>
+              <p class="text-neutral-400 text-sm max-w-[540px] mx-auto mt-4 leading-relaxed font-light">
+                <span class="word-animate">Potencia</span>
                 <span class="word-animate">tu</span>
-                <span class="word-animate">negocio.</span>
-              </p>
-            </div>
-            <div id="kove-chat-window" style="background:#141414;border-radius:28px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.35);display:flex;flex-direction:column;height:480px;">
-              <div style="background:#1e1e1e;padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.06);">
-                <div style="display:flex;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:#ff5f56;display:inline-block;"></span><span style="width:12px;height:12px;border-radius:50%;background:#ffbd2e;display:inline-block;"></span><span style="width:12px;height:12px;border-radius:50%;background:#27c93f;display:inline-block;"></span></div>
-                <div style="display:flex;align-items:center;gap:7px;margin-left:6px;"><div style="width:8px;height:8px;border-radius:50%;background:#27c93f;animation:pulse 2s infinite;"></div><span style="font-size:12px;font-weight:700;color:#e0e0e0;">KOVE IA · Asistente digital</span></div>
-              </div>
-              <div id="kove-chat-messages" style="flex:1;overflow-y:auto;padding:24px 20px;display:flex;flex-direction:column;gap:16px;">
-                <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:30px;height:30px;border-radius:10px;background:#2a2a2a;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;">🤖</div><div style="background:#1e1e1e;border-radius:4px 16px 16px 16px;padding:12px 16px;max-width:80%;"><p style="color:#e0e0e0;font-size:13px;line-height:1.6;margin:0;">¡Hola! Soy KOVE IA. Puedo ayudarte con información sobre servicios de desarrollo web, diseño gráfico, edición de video, automatización, precios y más. ¿En qué puedo ayudarte hoy?</p></div></div>
-              </div>
-              <div style="padding:12px 16px;background:#1a1a1a;border-top:1px solid rgba(255,255,255,0.06);">
-                <div style="display:flex;align-items:center;gap:10px;background:#252525;border-radius:16px;padding:8px 8px 8px 16px;">
-                  <input id="kove-chat-input" type="text" placeholder="Pregúntale a KOVE IA..." style="flex:1;background:transparent;border:none;outline:none;color:#e0e0e0;font-size:13px;" onkeydown="if(event.key==='Enter')sendKoveMsg()">
-                  <button onclick="sendKoveMsg()" style="width:36px;height:36px;border-radius:10px;border:none;background:#e0e0e0;color:#111;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='#e0e0e0'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-                </div>
-                <p style="text-align:center;font-size:10px;color:#555;margin:8px 0 0;">KOVE IA puede cometer errores. Verifica info importante.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== ESTADÍSTICAS ===== -->
-        <section class="py-20 bg-[#f4f4f7] relative overflow-hidden select-none">
-          <div class="absolute top-[10%] right-[5%] w-96 h-96 bg-neutral-200/20 rounded-full blur-3xl pointer-events-none kove-orb"></div>
-          <div class="max-w-6xl mx-auto px-6 relative">
-            <div class="text-center mb-12 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">
-                <span class="word-animate">Negocios</span>
-                <span class="word-animate">construyendo</span>
-                <span class="word-animate">su</span>
-                <span class="word-animate">presencia</span>
-                <span class="word-animate">digital</span>
-                <span class="word-animate">alrededor</span>
-                <span class="word-animate">del</span>
-                <span class="word-animate">mundo.</span>
-              </h2>
-              <p class="text-neutral-500 text-xs sm:text-sm max-w-[500px] mx-auto mt-4 font-light leading-relaxed">
-                <span class="word-animate">Nuestros</span>
-                <span class="word-animate">ecosistemas</span>
-                <span class="word-animate">digitales</span>
-                <span class="word-animate">conectan</span>
-                <span class="word-animate">audiencias</span>
+                <span class="word-animate">negocio</span>
                 <span class="word-animate">con</span>
-                <span class="word-animate">velocidad</span>
-                <span class="word-animate">optimizada.</span>
+                <span class="word-animate">un</span>
+                <span class="word-animate">ecosistema</span>
+                <span class="word-animate">completo</span>
+                <span class="word-animate">y</span>
+                <span class="word-animate">optimiza</span>
+                <span class="word-animate">tu</span>
+                <span class="word-animate">inversión.</span>
               </p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-center">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="neo-card p-6 kove-card">
-                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg></div>
-                  <p id="stat-proyectos" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0+</p>
-                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Proyectos Lanzados</p>
-                </div>
-                <div class="neo-card p-6 kove-card">
-                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></div>
-                  <p id="stat-clientes" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0+</p>
-                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Clientes Satisfechos</p>
-                </div>
-                <div class="neo-card p-6 kove-card">
-                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
-                  <p id="stat-visitas" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0+</p>
-                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Visitas Mensuales</p>
-                </div>
-                <div class="neo-card p-6 kove-card">
-                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></div>
-                  <p id="stat-conversion" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0%</p>
-                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Tasa de Conversión</p>
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+              <div class="neo-card-dark p-8 md:p-10 flex flex-col justify-between transition-all duration-500 kove-card-dark">
+                <div><p class="font-sans text-[9.5px] tracking-widest font-extrabold uppercase text-[#aaa]">SOPORTE PREMIUM</p><h3 class="font-display font-black text-xl sm:text-2xl mt-1">PAQUETE WEB</h3><p class="text-[11.5px] mt-3 font-light leading-relaxed text-neutral-400">Ideal para establecer tu presencia en línea.</p><div class="mt-6 py-5 px-4 rounded-2xl bg-neutral-900/40"><div class="flex items-baseline gap-1.5"><span class="text-3xl sm:text-4xl font-sans font-black tracking-tight text-white">$800.000</span><span class="text-[10px] font-sans font-bold opacity-60 text-white">COP</span></div></div><ul class="space-y-3.5 mt-6"><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Diseño UX/UI a la Medida</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Desarrollo Frontend Óptimo</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Responsive Mobile-First</span></li></ul></div><button onclick="handleWhatsAppRedirect('Paquete Web')" class="w-full py-4 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-300 mt-8 bg-white text-neutral-950 hover:bg-neutral-100 hover:shadow-2xl kove-btn">Adquirir Unidad →</button>
               </div>
-              <div class="flex flex-col items-center justify-center neo-card p-6 overflow-hidden min-h-[340px] relative">
-                <canvas id="globe-canvas-3d" width="320" height="320" class="w-[300px] h-[300px] cursor-grab" style="border-radius:50%;"></canvas>
-                <div class="text-center mt-3"><p class="text-[9px] font-sans tracking-widest text-[#1a1a1a] font-extrabold flex items-center gap-1 justify-center animate-pulse">🟢 CONEXIONES GLOBALES EN TIEMPO REAL</p></div>
+              <div class="neo-card-dark p-8 md:p-10 flex flex-col justify-between transition-all duration-500 kove-card-dark">
+                <div><p class="font-sans text-[9.5px] tracking-widest font-extrabold uppercase text-[#aaa]">SOPORTE PREMIUM</p><h3 class="font-display font-black text-xl sm:text-2xl mt-1">PAQUETE DISEÑO GRÁFICO</h3><p class="text-[11.5px] mt-3 font-light leading-relaxed text-neutral-400">Perfecto para vestir tu marca.</p><div class="mt-6 py-5 px-4 rounded-2xl bg-neutral-900/40"><div class="flex items-baseline gap-1.5"><span class="text-3xl sm:text-4xl font-sans font-black tracking-tight text-white">$700.000</span><span class="text-[10px] font-sans font-bold opacity-60 text-white">COP</span></div></div><ul class="space-y-3.5 mt-6"><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Identidad Corporativa &amp; Branding</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Diseño de Posts para Redes</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Banners Publicitarios</span></li></ul></div><button onclick="handleWhatsAppRedirect('Paquete Diseño Gráfico')" class="w-full py-4 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-300 mt-8 bg-white text-neutral-950 hover:bg-neutral-100 hover:shadow-2xl kove-btn">Adquirir Unidad →</button>
+              </div>
+              <div class="neo-card p-8 md:p-10 flex flex-col justify-between transition-all duration-500 text-neutral-950 kove-card scale-100 lg:scale-[1.03] shadow-[0_25px_60px_rgba(255,255,255,0.12)]">
+                <div><p class="font-sans text-[9.5px] tracking-widest font-extrabold uppercase text-neutral-500">SOPORTE PREMIUM</p><h3 class="font-display font-black text-xl sm:text-2xl mt-1">PAQUETE KOVE PRO</h3><p class="text-[11.5px] mt-3 font-light leading-relaxed text-neutral-600">La suite digital definitiva.</p><div class="mt-6 py-5 px-4 rounded-2xl bg-neutral-100/80"><div class="flex items-baseline gap-1.5"><span class="text-3xl sm:text-4xl font-sans font-black tracking-tight text-neutral-950">$1.350.000</span><span class="text-[10px] font-sans font-bold opacity-60 text-neutral-500">COP</span></div></div><ul class="space-y-3.5 mt-6"><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-[#111111] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-700 font-medium">Todo lo del PAQUETE WEB</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-[#111111] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-700 font-medium">Todo lo del PAQUETE DISEÑO GRÁFICO</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-[#111111] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-700 font-medium">Asesoría de Lanzamiento Digital</span></li></ul></div><button onclick="handleWhatsAppRedirect('Paquete KOVE PRO')" class="w-full py-4 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-300 mt-8 bg-[#111111] text-white hover:bg-neutral-900 hover:shadow-2xl kove-btn">Adquirir Unidad →</button>
               </div>
             </div>
           </div>
@@ -1377,39 +1568,100 @@
           </div>
         </section>
 
-        <!-- ===== PAQUETES COMBINADOS ===== -->
-        <section class="py-20 bg-neutral-900 text-white relative overflow-hidden select-none">
-          <div class="absolute top-[20%] left-[-10%] w-96 h-96 bg-neutral-800/10 rounded-full blur-3xl pointer-events-none kove-orb"></div>
-          <div class="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
-          <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight leading-[1.1] text-white">
-                <span class="word-animate">Paquetes</span>
-                <span class="word-animate">Combinados</span>
+        <!-- ===== ESTADÍSTICAS / CONEXIONES GLOBALES (AHORA DESPUÉS DEL PORTAFOLIO) ===== -->
+        <section class="py-20 bg-[#f4f4f7] relative overflow-hidden select-none">
+          <div class="absolute top-[10%] right-[5%] w-96 h-96 bg-neutral-200/20 rounded-full blur-3xl pointer-events-none kove-orb"></div>
+          <div class="max-w-6xl mx-auto px-6 relative">
+            <div class="text-center mb-12 section-fade">
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">
+                <span class="word-animate">Negocios</span>
+                <span class="word-animate">construyendo</span>
+                <span class="word-animate">su</span>
+                <span class="word-animate">presencia</span>
+                <span class="word-animate">digital</span>
+                <span class="word-animate">alrededor</span>
+                <span class="word-animate">del</span>
+                <span class="word-animate">mundo.</span>
               </h2>
-              <p class="text-neutral-400 text-sm max-w-[540px] mx-auto mt-4 leading-relaxed font-light">
-                <span class="word-animate">Potencia</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">negocio</span>
+              <p class="text-neutral-500 text-xs sm:text-sm max-w-[500px] mx-auto mt-4 font-light leading-relaxed">
+                <span class="word-animate">Nuestros</span>
+                <span class="word-animate">ecosistemas</span>
+                <span class="word-animate">digitales</span>
+                <span class="word-animate">conectan</span>
+                <span class="word-animate">audiencias</span>
                 <span class="word-animate">con</span>
-                <span class="word-animate">un</span>
-                <span class="word-animate">ecosistema</span>
-                <span class="word-animate">completo</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">optimiza</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">inversión.</span>
+                <span class="word-animate">velocidad</span>
+                <span class="word-animate">optimizada.</span>
               </p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-              <div class="neo-card-dark p-8 md:p-10 flex flex-col justify-between transition-all duration-500 kove-card-dark">
-                <div><p class="font-sans text-[9.5px] tracking-widest font-extrabold uppercase text-[#aaa]">SOPORTE PREMIUM</p><h3 class="font-display font-black text-xl sm:text-2xl mt-1">PAQUETE WEB</h3><p class="text-[11.5px] mt-3 font-light leading-relaxed text-neutral-400">Ideal para establecer tu presencia en línea.</p><div class="mt-6 py-5 px-4 rounded-2xl bg-neutral-900/40"><div class="flex items-baseline gap-1.5"><span class="text-3xl sm:text-4xl font-sans font-black tracking-tight text-white">$800.000</span><span class="text-[10px] font-sans font-bold opacity-60 text-white">COP</span></div></div><ul class="space-y-3.5 mt-6"><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Diseño UX/UI a la Medida</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Desarrollo Frontend Óptimo</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Responsive Mobile-First</span></li></ul></div><button onclick="handleWhatsAppRedirect('Paquete Web')" class="w-full py-4 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-300 mt-8 bg-white text-neutral-950 hover:bg-neutral-100 hover:shadow-2xl kove-btn">Adquirir Unidad →</button>
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-center">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="neo-card p-6 kove-card">
+                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg></div>
+                  <p id="stat-proyectos" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0+</p>
+                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Proyectos Lanzados</p>
+                </div>
+                <div class="neo-card p-6 kove-card">
+                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></div>
+                  <p id="stat-clientes" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0+</p>
+                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Clientes Satisfechos</p>
+                </div>
+                <div class="neo-card p-6 kove-card">
+                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+                  <p id="stat-visitas" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0+</p>
+                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Visitas Mensuales</p>
+                </div>
+                <div class="neo-card p-6 kove-card">
+                  <div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></div>
+                  <p id="stat-conversion" class="text-2xl sm:text-3xl font-display font-black tracking-tight text-neutral-900">0%</p>
+                  <p class="font-display font-bold text-xs text-neutral-800 mt-1">Tasa de Conversión</p>
+                </div>
               </div>
-              <div class="neo-card-dark p-8 md:p-10 flex flex-col justify-between transition-all duration-500 kove-card-dark">
-                <div><p class="font-sans text-[9.5px] tracking-widest font-extrabold uppercase text-[#aaa]">SOPORTE PREMIUM</p><h3 class="font-display font-black text-xl sm:text-2xl mt-1">PAQUETE DISEÑO GRÁFICO</h3><p class="text-[11.5px] mt-3 font-light leading-relaxed text-neutral-400">Perfecto para vestir tu marca.</p><div class="mt-6 py-5 px-4 rounded-2xl bg-neutral-900/40"><div class="flex items-baseline gap-1.5"><span class="text-3xl sm:text-4xl font-sans font-black tracking-tight text-white">$700.000</span><span class="text-[10px] font-sans font-bold opacity-60 text-white">COP</span></div></div><ul class="space-y-3.5 mt-6"><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Identidad Corporativa &amp; Branding</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Diseño de Posts para Redes</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-neutral-800 text-neutral-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-300 font-light">Banners Publicitarios</span></li></ul></div><button onclick="handleWhatsAppRedirect('Paquete Diseño Gráfico')" class="w-full py-4 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-300 mt-8 bg-white text-neutral-950 hover:bg-neutral-100 hover:shadow-2xl kove-btn">Adquirir Unidad →</button>
+              <div class="flex flex-col items-center justify-center neo-card p-6 overflow-hidden min-h-[340px] relative">
+                <canvas id="globe-canvas-3d" width="320" height="320" class="w-[300px] h-[300px] cursor-grab" style="border-radius:50%;"></canvas>
+                <div class="text-center mt-3"><p class="text-[9px] font-sans tracking-widest text-[#1a1a1a] font-extrabold flex items-center gap-1 justify-center animate-pulse">🟢 CONEXIONES GLOBALES EN TIEMPO REAL</p></div>
               </div>
-              <div class="neo-card p-8 md:p-10 flex flex-col justify-between transition-all duration-500 text-neutral-950 kove-card scale-100 lg:scale-[1.03] shadow-[0_25px_60px_rgba(255,255,255,0.12)]">
-                <div><p class="font-sans text-[9.5px] tracking-widest font-extrabold uppercase text-neutral-500">SOPORTE PREMIUM</p><h3 class="font-display font-black text-xl sm:text-2xl mt-1">PAQUETE KOVE PRO</h3><p class="text-[11.5px] mt-3 font-light leading-relaxed text-neutral-600">La suite digital definitiva.</p><div class="mt-6 py-5 px-4 rounded-2xl bg-neutral-100/80"><div class="flex items-baseline gap-1.5"><span class="text-3xl sm:text-4xl font-sans font-black tracking-tight text-neutral-950">$1.350.000</span><span class="text-[10px] font-sans font-bold opacity-60 text-neutral-500">COP</span></div></div><ul class="space-y-3.5 mt-6"><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-[#111111] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-700 font-medium">Todo lo del PAQUETE WEB</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-[#111111] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-700 font-medium">Todo lo del PAQUETE DISEÑO GRÁFICO</span></li><li class="flex gap-3 items-center text-xs"><div class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-[#111111] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="text-neutral-700 font-medium">Asesoría de Lanzamiento Digital</span></li></ul></div><button onclick="handleWhatsAppRedirect('Paquete KOVE PRO')" class="w-full py-4 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-300 mt-8 bg-[#111111] text-white hover:bg-neutral-900 hover:shadow-2xl kove-btn">Adquirir Unidad →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== KOVE IA ===== -->
+        <section id="kove-ai-section" class="py-16 bg-[#f4f4f7] relative overflow-hidden">
+          <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-10 section-fade">
+              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 tracking-tight">
+                <span class="word-animate">KOVE</span>
+                <span class="word-animate text-neutral-400">IA</span>
+              </h2>
+              <p class="text-neutral-500 text-sm mt-3 font-light max-w-md mx-auto">
+                <span class="word-animate">Pregúntale</span>
+                <span class="word-animate">a</span>
+                <span class="word-animate">KOVE</span>
+                <span class="word-animate">IA</span>
+                <span class="word-animate">sobre</span>
+                <span class="word-animate">servicios,</span>
+                <span class="word-animate">precios</span>
+                <span class="word-animate">y</span>
+                <span class="word-animate">cómo</span>
+                <span class="word-animate">digitalizar</span>
+                <span class="word-animate">tu</span>
+                <span class="word-animate">negocio.</span>
+              </p>
+            </div>
+            <div id="kove-chat-window" style="background:#141414;border-radius:28px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.35);display:flex;flex-direction:column;height:480px;">
+              <div style="background:#1e1e1e;padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                <div style="display:flex;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:#ff5f56;display:inline-block;"></span><span style="width:12px;height:12px;border-radius:50%;background:#ffbd2e;display:inline-block;"></span><span style="width:12px;height:12px;border-radius:50%;background:#27c93f;display:inline-block;"></span></div>
+                <div style="display:flex;align-items:center;gap:7px;margin-left:6px;"><div style="width:8px;height:8px;border-radius:50%;background:#27c93f;animation:pulse 2s infinite;"></div><span style="font-size:12px;font-weight:700;color:#e0e0e0;">KOVE IA · Asistente digital</span></div>
+              </div>
+              <div id="kove-chat-messages" style="flex:1;overflow-y:auto;padding:24px 20px;display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:30px;height:30px;border-radius:10px;background:#2a2a2a;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;">🤖</div><div style="background:#1e1e1e;border-radius:4px 16px 16px 16px;padding:12px 16px;max-width:80%;"><p style="color:#e0e0e0;font-size:13px;line-height:1.6;margin:0;">¡Hola! Soy KOVE IA. Puedo ayudarte con información sobre servicios de desarrollo web, diseño gráfico, edición de video, automatización, precios y más. ¿En qué puedo ayudarte hoy?</p></div></div>
+              </div>
+              <div style="padding:12px 16px;background:#1a1a1a;border-top:1px solid rgba(255,255,255,0.06);">
+                <div style="display:flex;align-items:center;gap:10px;background:#252525;border-radius:16px;padding:8px 8px 8px 16px;">
+                  <input id="kove-chat-input" type="text" placeholder="Pregúntale a KOVE IA..." style="flex:1;background:transparent;border:none;outline:none;color:#e0e0e0;font-size:13px;" onkeydown="if(event.key==='Enter')sendKoveMsg()">
+                  <button onclick="sendKoveMsg()" style="width:36px;height:36px;border-radius:10px;border:none;background:#e0e0e0;color:#111;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='#e0e0e0'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+                </div>
+                <p style="text-align:center;font-size:10px;color:#555;margin:8px 0 0;">KOVE IA puede cometer errores. Verifica info importante.</p>
               </div>
             </div>
           </div>
@@ -1504,6 +1756,90 @@
           </div>
         </section>
 
+        <!-- ===== QUIEN SOY ===== -->
+        <section id="quien-soy" class="py-20 bg-[#f4f4f6]">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="neo-card-dark p-8 md:p-14 text-white shadow-[0_24px_60px_rgba(0,0,0,0.18)] relative overflow-hidden section-fade">
+              <div class="absolute right-0 top-0 w-80 h-80 bg-neutral-800/10 rounded-full blur-3xl pointer-events-none"></div>
+              <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 items-center relative z-10">
+                <div class="flex flex-col items-center text-center">
+                  <div class="w-36 h-36 bg-[#111111] rounded-full flex items-center justify-center shadow-[0_12px_24px_rgba(0,0,0,0.4)] relative">
+                    <span class="font-display font-black text-5xl text-neutral-100">K</span>
+                  </div>
+                  <h3 class="font-display font-extrabold text-lg mt-5 text-white">KOVE Studio</h3>
+                  <p class="font-sans text-[9px] tracking-widest text-[#aaa] font-extrabold uppercase mt-1">Diseñador &amp; Desarrollador</p>
+                  <div class="grid grid-cols-3 gap-3 pt-4 mt-5 w-full bg-neutral-900/40 p-4 rounded-2xl">
+                    <div class="text-center"><p class="font-sans font-black text-lg text-white">5+</p><p class="text-[9px] text-[#aaa] font-bold">Años</p></div>
+                    <div class="text-center px-2"><p class="font-sans font-black text-lg text-white">120+</p><p class="text-[9px] text-[#aaa] font-bold">Trabajos</p></div>
+                    <div class="text-center"><p class="font-sans font-black text-lg text-white">50+</p><p class="text-[9px] text-[#aaa] font-bold">Clientes</p></div>
+                  </div>
+                </div>
+                <div class="flex flex-col justify-center text-left">
+                  <h4 class="font-display font-bold text-2xl text-neutral-100 mb-4 flex items-center gap-2">
+                    <span class="word-animate">Hablemos</span>
+                    <span class="word-animate">de</span>
+                    <span class="word-animate">experiencia</span>
+                    <span class="word-animate">digital</span>
+                  </h4>
+                  <p class="text-neutral-300 text-sm sm:text-base leading-relaxed font-light mb-6">
+                    <span class="word-animate">Soy</span>
+                    <span class="word-animate">creador</span>
+                    <span class="word-animate">de</span>
+                    <span class="word-animate">experiencias</span>
+                    <span class="word-animate">digitales</span>
+                    <span class="word-animate">que</span>
+                    <span class="word-animate">combinan</span>
+                    <span class="word-animate">diseño</span>
+                    <span class="word-animate">gráfico,</span>
+                    <span class="word-animate">desarrollo</span>
+                    <span class="word-animate">web,</span>
+                    <span class="word-animate">edición</span>
+                    <span class="word-animate">de</span>
+                    <span class="word-animate">video</span>
+                    <span class="word-animate">y</span>
+                    <span class="word-animate">motion</span>
+                    <span class="word-animate">graphics.</span>
+                    <span class="word-animate">Mi</span>
+                    <span class="word-animate">enfoque</span>
+                    <span class="word-animate">está</span>
+                    <span class="word-animate">en</span>
+                    <span class="word-animate">construir</span>
+                    <span class="word-animate">marcas</span>
+                    <span class="word-animate">con</span>
+                    <span class="word-animate">propósito</span>
+                    <span class="word-animate">y</span>
+                    <span class="word-animate">tecnología</span>
+                    <span class="word-animate">que</span>
+                    <span class="word-animate">realmente</span>
+                    <span class="word-animate">funciona</span>
+                    <span class="word-animate">para</span>
+                    <span class="word-animate">impulsar</span>
+                    <span class="word-animate">la</span>
+                    <span class="word-animate">presencia</span>
+                    <span class="word-animate">en</span>
+                    <span class="word-animate">el</span>
+                    <span class="word-animate">mercado</span>
+                    <span class="word-animate">colombiano</span>
+                    <span class="word-animate">con</span>
+                    <span class="word-animate">estándares</span>
+                    <span class="word-animate">globales.</span>
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">UI/UX Design</span>
+                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Web Development</span>
+                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Branding</span>
+                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Motion Graphics</span>
+                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Video Editing</span>
+                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">AI Automation</span>
+                    <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Figma</span>
+                  </div>
+                  <div><button onclick="handleWhatsAppRedirect('Contacto desde Quien Soy')" class="inline-flex items-center gap-2 text-xs font-bold text-neutral-100 bg-white/10 hover:bg-white/15 rounded-full px-6 py-3 cursor-pointer transition duration-300 shadow-xl group kove-btn">📧 hola@kove.co <span>→</span></button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- ===== SERVICIOS DETALLADOS ===== -->
         <section id="servicios-detalle" class="py-24 bg-[#f4f4f7] relative overflow-hidden">
           <div class="max-w-6xl mx-auto px-6 relative z-10">
@@ -1586,7 +1922,7 @@
           </div>
         </section>
 
-        <!-- ===== CONTACTO ===== -->
+        <!-- ===== CONTACTO (ÚLTIMA SECCIÓN) ===== -->
         <section id="contacto" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-4xl mx-auto px-6 text-center">
             <div class="mb-12 section-fade">
@@ -1664,7 +2000,7 @@
   </div>
 
   <!-- ================================================================ -->
-  <!-- ===== SCRIPTS ===== -->
+  <!-- ===== SCRIPTS (sin cambios) ===== -->
   <!-- ================================================================ -->
 
   <!-- EmailJS SDK -->
@@ -2174,17 +2510,14 @@
       function getKoveAIReply(msg) {
         const m = msg.toLowerCase();
         
-        // NEGAR CUALQUIER PREGUNTA SOBRE SEGURIDAD, CONTRASEÑAS O DATOS SENSIBLES
         if (m.match(/contraseña|password|seguridad|panel|admin|dashboard|clave|pin|acceso|privado|confidencial|secreto|protegido|sensible|datos personales|información privada/)) {
           return '🔒 Lo siento, no tengo acceso a información de seguridad, contraseñas o datos privados. Soy un asistente para información pública sobre servicios de KOVE. ¿Te puedo ayudar con información sobre nuestros servicios o precios?';
         }
         
-        // NEGAR PREGUNTAS SOBRE EL CÓDIGO FUENTE O ESTRUCTURA INTERNA
         if (m.match(/código|code|fuente|source|backend|base de datos|database|firebase|estructura|archivo|html|javascript|script|programación/)) {
           return '🔒 No puedo proporcionar información sobre el código fuente, la estructura interna o la arquitectura técnica de la web. Soy un asistente de atención al cliente. ¿Te puedo ayudar con información sobre nuestros servicios?';
         }
 
-        // RESPUESTAS SOBRE SERVICIOS PÚBLICOS
         if (m.match(/hola|buenas|hey|saludo/)) return '¡Hola! 👋 Bienvenido a KOVE Studio. Soy tu asistente digital. ¿Te ayudo con información sobre alguno de nuestros servicios o precios?';
         if (m.match(/precio|costo|cuanto|valor|cuánto/)) return '💰 Nuestros precios:\n• Web desde $250.000 COP\n• Diseño Gráfico desde $500.000 COP\n• Edición de Video desde $100.000 COP\n• Automatización desde $1.000.000 COP\n• WhatsApp Business desde $50.000 COP\n• Google Maps desde $80.000 COP\n• Menú QR desde $70.000 COP\n• Reels/Shorts desde $30.000 COP\n\n¿Te interesa alguno en particular?';
         if (m.match(/web|página|pagina|sitio/)) return '🌐 Desarrollo Web Profesional:\n• Landing page: $250.000 COP\n• Sitio 5 páginas: $600.000 COP\n• Enterprise: $1.200.000 COP\n\nIncluye diseño adaptativo, SEO básico y WhatsApp integrado.';
