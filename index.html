@@ -136,8 +136,8 @@
     .btn-panel { background: rgba(255,255,255,0.1); border: none; color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
     .btn-panel:hover { background: rgba(255,255,255,0.2); }
 
-    input, select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 14px; color: #fff; font-size: 13px; width: 100%; outline: none; transition: 0.2s; }
-    input:focus, select:focus { border-color: #fff; background: rgba(255,255,255,0.08); }
+    input, select { background: rgba(255,255,255,0.05); border: none; border-radius: 12px; padding: 10px 14px; color: #fff; font-size: 13px; width: 100%; outline: none; transition: 0.2s; }
+    input:focus, select:focus { background: rgba(255,255,255,0.08); }
 
     .kove-reveal { opacity: 0; will-change: transform, opacity, filter; }
     .kove-reveal.revealed { animation: revealUp 0.95s cubic-bezier(0.16,1,0.3,1) forwards; }
@@ -170,22 +170,6 @@
     @keyframes revealFade {
       0%   { opacity:0; filter:blur(8px); }
       100% { opacity:1; filter:blur(0); }
-    }
-
-    .word-animate {
-      opacity: 0;
-      display: inline-block;
-      will-change: transform, opacity, filter;
-      backface-visibility: hidden;
-    }
-    .word-animate.revealed {
-      animation: wordReveal 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    @keyframes wordReveal {
-      0%   { opacity:0; transform:translateY(18px) scale(0.88); filter:blur(10px); }
-      55%  { opacity:0.9; transform:translateY(-3px) scale(1.03); filter:blur(2px); }
-      75%  { transform:translateY(1px) scale(0.998); }
-      100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0px); }
     }
 
     .kove-card {
@@ -319,7 +303,7 @@
     }
 
     /* ===== PERFORMANCE: REDUCIR REPAINT ===== */
-    .kove-reveal, .section-fade, .word-animate {
+    .kove-reveal, .section-fade {
       will-change: transform, opacity, filter;
       backface-visibility: hidden;
     }
@@ -385,7 +369,6 @@
       transform: translateY(-1px);
     }
 
-    /* Botón seleccionado - estilo "relieve" (elevado) */
     .plans-cat-btn.active {
       background: #1a1a1a;
       color: #fff;
@@ -409,7 +392,6 @@
       stroke: #999;
     }
 
-    /* ===== PLANES GRID - MISMA PROPORCIÓN QUE EDICIÓN DE VIDEO ===== */
     .planes-grid-container {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
@@ -572,9 +554,49 @@
       color: #fff;
     }
 
+    /* ===== TEXTOS MÁS GRANDES EN SOLUCIONES DIGITALES ===== */
+    #servicios-detalle .font-display.font-black.text-4xl.sm\:text-5xl.lg\:text-6xl {
+      font-size: clamp(2.5rem, 6vw, 4.5rem) !important;
+    }
+    #servicios-detalle .text-neutral-500.text-base {
+      font-size: 1.1rem !important;
+    }
+    #servicios-detalle .text-[9px].font-sans.font-black.tracking-widest {
+      font-size: 11px !important;
+    }
+    #servicios-detalle .font-display.font-bold.text-xl {
+      font-size: 1.3rem !important;
+    }
+    #servicios-detalle .text-xs.leading-relaxed {
+      font-size: 0.85rem !important;
+    }
+    #servicios-detalle .text-[11px] {
+      font-size: 0.9rem !important;
+    }
+    #servicios-detalle .text-sm.font-black {
+      font-size: 1.1rem !important;
+    }
+    #servicios-detalle .text-[10px] {
+      font-size: 0.85rem !important;
+    }
+
+    /* ===== CARD TRABAJEMOS JUNTOS - OCUPA 2 ESPACIOS ===== */
+    .card-trabajemos {
+      grid-column: span 1;
+    }
+    @media (min-width: 768px) {
+      .card-trabajemos {
+        grid-column: span 2;
+      }
+    }
+    @media (min-width: 1024px) {
+      .card-trabajemos {
+        grid-column: span 2;
+      }
+    }
+
     /* === Media Queries para Responsive === */
 
-    /* Tablets y pantallas medianas */
     @media (max-width: 1024px) {
       .plans-filter-container {
         gap: 4px;
@@ -608,7 +630,6 @@
       }
     }
 
-    /* Móviles */
     @media (max-width: 767px) {
       #navbar {
         bottom: 10px;
@@ -647,7 +668,6 @@
         height: 9px;
       }
 
-      /* Hero - Título KOVE mucho más grande */
       #inicio .font-display.font-black {
         font-size: clamp(72px, 20vw, 120px) !important;
         line-height: 0.85 !important;
@@ -669,7 +689,6 @@
         padding: 0 10px;
       }
 
-      /* Servicios */
       #servicios .grid.grid-cols-1.md\:grid-cols-2.gap-8 {
         gap: 16px;
       }
@@ -681,7 +700,6 @@
         font-size: 17px;
       }
 
-      /* Planes */
       .plans-filter-container {
         padding: 4px;
         gap: 3px;
@@ -732,7 +750,6 @@
         right: 10px;
       }
 
-      /* Edición de Video */
       #edicion-video .grid.grid-cols-1.md\:grid-cols-3.gap-6.lg\:gap-8 {
         gap: 16px;
       }
@@ -751,7 +768,6 @@
         top: -8px;
       }
 
-      /* Paquetes Combinados */
       .grid.grid-cols-1.lg\:grid-cols-3.gap-8.items-stretch {
         gap: 16px;
       }
@@ -763,7 +779,6 @@
         font-size: 24px;
       }
 
-      /* Quien Soy */
       #quien-soy .neo-card-dark.p-8.md\:p-14 {
         padding: 20px;
       }
@@ -782,7 +797,6 @@
         padding: 10px;
       }
 
-      /* Portafolio */
       #portafolio .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-8 {
         gap: 16px;
       }
@@ -797,7 +811,6 @@
         padding: 16px;
       }
 
-      /* Servicios Detallados */
       #servicios-detalle .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-6 {
         gap: 14px;
       }
@@ -812,7 +825,6 @@
         gap: 4px;
       }
 
-      /* Contacto */
       #contacto .neo-card-dark.p-6.sm\:p-10 {
         padding: 16px;
       }
@@ -834,7 +846,6 @@
         font-size: 11px;
       }
 
-      /* Estadísticas */
       .grid.grid-cols-1.lg\:grid-cols-\[1fr_320px\].gap-12 {
         gap: 24px;
       }
@@ -848,7 +859,6 @@
         font-size: 20px;
       }
 
-      /* Proceso KOVE */
       .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-5.gap-6 {
         gap: 12px;
       }
@@ -856,7 +866,6 @@
         padding: 14px;
       }
 
-      /* ¿Por qué KOVE? */
       .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4.gap-6 {
         gap: 12px;
       }
@@ -864,38 +873,30 @@
         padding: 16px;
       }
 
-      /* Footer */
       .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4.gap-10 {
         gap: 24px;
       }
 
-      /* Botones flotantes */
-      .fixed.bottom-6.right-6.w-14.h-14,
-      .fixed.bottom-6.left-6.w-14.h-14 {
+      .fixed.bottom-6.right-6.w-14.h-14 {
         width: 44px;
         height: 44px;
+        bottom: 20px;
+        right: 12px;
       }
-      .fixed.bottom-6.right-6.w-14.h-14 svg,
-      .fixed.bottom-6.left-6.w-14.h-14 svg {
+      .fixed.bottom-6.right-6.w-14.h-14 svg {
         width: 20px;
         height: 20px;
       }
-      .fixed.bottom-6.right-6 {
-        bottom: 80px;
-        right: 12px;
-      }
-      .fixed.bottom-6.left-6 {
-        bottom: 80px;
-        left: 12px;
-      }
 
-      /* Panel de seguridad */
       .panel-box {
         padding: 16px;
       }
+
+      .card-trabajemos {
+        grid-column: span 1 !important;
+      }
     }
 
-    /* Móviles muy pequeños */
     @media (max-width: 400px) {
       .kove-nav-btn {
         padding: 4px 4px;
@@ -921,7 +922,6 @@
         height: 10px;
       }
       
-      /* Hero - aún más grande en pantallas muy pequeñas */
       #inicio .font-display.font-black {
         font-size: clamp(60px, 18vw, 100px) !important;
       }
@@ -940,7 +940,7 @@
 
       <div id="security-login" style="text-align:center;padding:30px 0;">
         <p style="color:#aaa;margin-bottom:16px;">Ingresa la contraseña para acceder al panel</p>
-        <input type="password" id="security-password-input" placeholder="Contraseña" style="max-width:300px;margin:0 auto;text-align:center;background:rgba(255,255,255,0.08);" autocomplete="off" />
+        <input type="password" id="security-password-input" placeholder="Contraseña" style="max-width:300px;margin:0 auto;text-align:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);" autocomplete="off" />
         <br /><br />
         <button onclick="verifySecurityPassword()" style="background:#fff;color:#000;border:none;padding:12px 40px;border-radius:999px;font-weight:700;cursor:pointer;">Acceder</button>
         <p id="security-error" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;">Contraseña incorrecta</p>
@@ -969,10 +969,10 @@
         <hr style="border-color:rgba(255,255,255,0.08);margin:24px 0;" />
         <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">🌐 Personaliza tus Redes Sociales</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div><label style="font-size:11px;color:#aaa;">Instagram</label><input type="url" id="social-instagram" placeholder="https://instagram.com/tu_perfil" /></div>
-          <div><label style="font-size:11px;color:#aaa;">TikTok</label><input type="url" id="social-tiktok" placeholder="https://tiktok.com/@tu_perfil" /></div>
-          <div><label style="font-size:11px;color:#aaa;">Facebook</label><input type="url" id="social-facebook" placeholder="https://facebook.com/tu_perfil" /></div>
-          <div><label style="font-size:11px;color:#aaa;">LinkedIn</label><input type="url" id="social-linkedin" placeholder="https://linkedin.com/in/tu_perfil" /></div>
+          <div><label style="font-size:11px;color:#aaa;">Instagram</label><input type="url" id="social-instagram" placeholder="https://instagram.com/tu_perfil" style="border:1px solid rgba(255,255,255,0.1);" /></div>
+          <div><label style="font-size:11px;color:#aaa;">TikTok</label><input type="url" id="social-tiktok" placeholder="https://tiktok.com/@tu_perfil" style="border:1px solid rgba(255,255,255,0.1);" /></div>
+          <div><label style="font-size:11px;color:#aaa;">Facebook</label><input type="url" id="social-facebook" placeholder="https://facebook.com/tu_perfil" style="border:1px solid rgba(255,255,255,0.1);" /></div>
+          <div><label style="font-size:11px;color:#aaa;">LinkedIn</label><input type="url" id="social-linkedin" placeholder="https://linkedin.com/in/tu_perfil" style="border:1px solid rgba(255,255,255,0.1);" /></div>
         </div>
         <button onclick="saveSocialLinks()" class="btn-panel" style="margin-top:12px;background:#2563eb;color:#fff;">Guardar enlaces</button>
         <p id="social-save-msg" style="font-size:11px;color:#4ade80;margin-top:6px;display:none;">✅ Enlaces guardados correctamente</p>
@@ -1063,26 +1063,7 @@
               </div>
             </div>
             <div class="max-w-[540px] mx-auto mt-6 text-neutral-500 text-sm sm:text-base leading-relaxed font-light">
-              <span class="inline-flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em]" id="hero-words">
-                <span class="word-animate">Diseño</span>
-                <span class="word-animate">gráfico,</span>
-                <span class="word-animate">desarrollo</span>
-                <span class="word-animate">web,</span>
-                <span class="word-animate">edición</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">video,</span>
-                <span class="word-animate">e</span>
-                <span class="word-animate">inteligencia</span>
-                <span class="word-animate">artificial</span>
-                <span class="word-animate">para</span>
-                <span class="word-animate">marcas</span>
-                <span class="word-animate">que</span>
-                <span class="word-animate">quieren</span>
-                <span class="word-animate">crecer</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">vender</span>
-                <span class="word-animate">más.</span>
-              </span>
+              <span>Diseño gráfico, desarrollo web, edición de video, e inteligencia artificial para marcas que quieren crecer y vender más.</span>
             </div>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 kove-reveal">
               <button onclick="handleWhatsAppRedirect('Contacto Hero')" class="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800 text-white rounded-full px-8 py-3.5 text-xs font-bold shadow-[6px_6px_16px_rgba(0,0,0,0.15)] hover:scale-105 active:scale-95 cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 kove-btn">
@@ -1094,7 +1075,7 @@
           </div>
         </section>
 
-        <!-- ===== CTA FINAL (AHORA EN 2DA POSICIÓN) ===== -->
+        <!-- ===== CTA FINAL (2DA POSICIÓN) ===== -->
         <section id="cta-final" class="py-28 bg-[#f4f4f7] relative overflow-hidden">
           <div class="absolute top-[15%] left-[5%] w-96 h-96 bg-neutral-200/50 rounded-full blur-3xl pointer-events-none kove-orb"></div>
           <div class="absolute bottom-[10%] right-[5%] w-80 h-80 bg-neutral-300/30 rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
@@ -1106,27 +1087,7 @@
                 una presencia <span class="highlight-text">profesional.</span>
               </h2>
               <p class="text-neutral-500 text-sm sm:text-base leading-relaxed max-w-[600px] mx-auto mb-12 font-light">
-                <span class="word-animate">Mientras</span>
-                <span class="word-animate">otros</span>
-                <span class="word-animate">negocios</span>
-                <span class="word-animate">siguen</span>
-                <span class="word-animate">usando</span>
-                <span class="word-animate">soluciones</span>
-                <span class="word-animate">antiguas,</span>
-                <span class="word-animate">nosotros</span>
-                <span class="word-animate">creamos</span>
-                <span class="word-animate">experiencias</span>
-                <span class="word-animate">digitales</span>
-                <span class="word-animate">que</span>
-                <span class="word-animate">generan</span>
-                <span class="word-animate">confianza</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">atraen</span>
-                <span class="word-animate">clientes</span>
-                <span class="word-animate">desde</span>
-                <span class="word-animate">el</span>
-                <span class="word-animate">primer</span>
-                <span class="word-animate">segundo.</span>
+                Mientras otros negocios siguen usando soluciones antiguas, nosotros creamos experiencias digitales que generan confianza y atraen clientes desde el primer segundo.
               </p>
             </div>
             <div class="kove-reveal flex flex-col sm:flex-row items-center justify-center gap-4" style="animation-delay:0.2s">
@@ -1152,27 +1113,8 @@
         <section id="servicios" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 section-fade">
-              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 mt-3 tracking-tight">
-                <span class="word-animate">Lo</span>
-                <span class="word-animate">que</span>
-                <span class="word-animate">hacemos</span>
-              </h2>
-              <p class="text-neutral-500 text-sm max-w-[540px] mx-auto mt-4 leading-relaxed">
-                <span class="word-animate">Soluciones</span>
-                <span class="word-animate">digitales</span>
-                <span class="word-animate">integrales</span>
-                <span class="word-animate">para</span>
-                <span class="word-animate">llevar</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">negocio</span>
-                <span class="word-animate">al</span>
-                <span class="word-animate">siguiente</span>
-                <span class="word-animate">nivel</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">conversión</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">prestigio.</span>
-              </p>
+              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 mt-3 tracking-tight">Lo que hacemos</h2>
+              <p class="text-neutral-500 text-sm max-w-[540px] mx-auto mt-4 leading-relaxed">Soluciones digitales integrales para llevar tu negocio al siguiente nivel de conversión y prestigio.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="neo-card-dark p-8 md:p-10 cursor-pointer transition-all duration-500 select-none text-white" onclick="handleWhatsAppRedirect('Desarrollo Web')">
@@ -1203,25 +1145,8 @@
         <section id="planes" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-12 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">
-                <span class="word-animate">Elige</span>
-                <span class="word-animate">la</span>
-                <span class="word-animate">solución</span>
-                <span class="word-animate">ideal</span>
-              </h2>
-              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">
-                <span class="word-animate">Selecciona</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">categoría</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">interés</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">adquiere</span>
-                <span class="word-animate">soporte</span>
-                <span class="word-animate">sin</span>
-                <span class="word-animate">costes</span>
-                <span class="word-animate">ocultos.</span>
-              </p>
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">Elige la solución ideal</h2>
+              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">Selecciona tu categoría de interés y adquiere soporte sin costes ocultos.</p>
             </div>
 
             <div class="flex justify-center mb-12">
@@ -1258,26 +1183,10 @@
                 <span class="font-sans font-bold text-[9px] tracking-[0.15em] uppercase text-neutral-500">KOVE STUDIO</span>
               </div>
               <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-neutral-900 tracking-tight leading-[1.05] mt-2">
-                <span class="word-animate">Edición</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">Video</span><br>
-                <span class="word-animate text-neutral-400">Profesional</span>
+                Edición de Video<br>
+                <span class="text-neutral-400">Profesional</span>
               </h2>
-              <p class="text-neutral-500 text-sm sm:text-base max-w-[540px] mx-auto mt-5 leading-relaxed font-light">
-                <span class="word-animate">Transformamos</span>
-                <span class="word-animate">tus</span>
-                <span class="word-animate">ideas</span>
-                <span class="word-animate">en</span>
-                <span class="word-animate">contenido</span>
-                <span class="word-animate">visual</span>
-                <span class="word-animate">impactante</span>
-                <span class="word-animate">para</span>
-                <span class="word-animate">redes</span>
-                <span class="word-animate">sociales,</span>
-                <span class="word-animate">marcas</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">negocios.</span>
-              </p>
+              <p class="text-neutral-500 text-sm sm:text-base max-w-[540px] mx-auto mt-5 leading-relaxed font-light">Transformamos tus ideas en contenido visual impactante para redes sociales, marcas y negocios.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
@@ -1371,68 +1280,55 @@
                 </button>
               </div>
 
-              <div class="neo-card p-8 flex flex-col justify-between transition-all duration-500 kove-card" style="animation-delay:0.19s">
+              <!-- Plan Premium - GRIS OSCURO -->
+              <div class="neo-card-dark p-8 flex flex-col justify-between transition-all duration-500 kove-card-dark" style="animation-delay:0.19s">
                 <div>
                   <div class="flex items-center justify-between mb-4">
                     <span class="font-sans text-[10px] font-extrabold tracking-[0.15em] uppercase text-neutral-400">Premium</span>
-                    <div class="w-9 h-9 rounded-xl bg-neutral-900/5 flex items-center justify-center text-neutral-600 group-hover:bg-neutral-900 group-hover:text-white transition-all duration-300">
+                    <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white group-hover:scale-110 transition-all duration-300">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><path d="M8 2v20"/><path d="M16 2v20"/><path d="M2 8h20"/><path d="M2 16h20"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6"/></svg>
                     </div>
                   </div>
-                  <h3 class="font-display font-bold text-xl text-neutral-900 mb-1">Plan Premium</h3>
+                  <h3 class="font-display font-bold text-xl text-white mb-1">Plan Premium</h3>
                   <div class="flex items-baseline gap-1 mt-4 mb-5">
-                    <span class="text-3xl font-sans font-black tracking-tight text-neutral-900">$500.000</span>
-                    <span class="text-[10px] font-sans font-bold opacity-60 text-neutral-500 uppercase">COP</span>
+                    <span class="text-3xl font-sans font-black tracking-tight text-white">$500.000</span>
+                    <span class="text-[10px] font-sans font-bold opacity-60 text-white uppercase">COP</span>
                   </div>
                   <ul class="space-y-3 pb-5">
                     <li class="flex gap-3 items-start text-xs leading-relaxed">
-                      <span class="w-4 h-4 rounded-full bg-neutral-900/10 text-neutral-800 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-neutral-900 group-hover:text-white transition-colors duration-300"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                      <span class="text-neutral-700 font-medium">Todo lo del Plan Profesional</span>
+                      <span class="w-4 h-4 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0 mt-0.5"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                      <span class="text-neutral-300 font-medium">Todo lo del Plan Profesional</span>
                     </li>
                     <li class="flex gap-3 items-start text-xs leading-relaxed">
-                      <span class="w-4 h-4 rounded-full bg-neutral-900/10 text-neutral-800 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-neutral-900 group-hover:text-white transition-colors duration-300"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                      <span class="text-neutral-600 font-light">Storytelling cinematográfico</span>
+                      <span class="w-4 h-4 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0 mt-0.5"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                      <span class="text-neutral-400 font-light">Storytelling cinematográfico</span>
                     </li>
                     <li class="flex gap-3 items-start text-xs leading-relaxed">
-                      <span class="w-4 h-4 rounded-full bg-neutral-900/10 text-neutral-800 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-neutral-900 group-hover:text-white transition-colors duration-300"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                      <span class="text-neutral-600 font-light">Motion Graphics avanzados</span>
+                      <span class="w-4 h-4 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0 mt-0.5"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                      <span class="text-neutral-400 font-light">Motion Graphics avanzados</span>
                     </li>
                     <li class="flex gap-3 items-start text-xs leading-relaxed">
-                      <span class="w-4 h-4 rounded-full bg-neutral-900/10 text-neutral-800 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-neutral-900 group-hover:text-white transition-colors duration-300"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                      <span class="text-neutral-600 font-light">Animaciones personalizadas</span>
+                      <span class="w-4 h-4 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0 mt-0.5"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                      <span class="text-neutral-400 font-light">Animaciones personalizadas</span>
                     </li>
                     <li class="flex gap-3 items-start text-xs leading-relaxed">
-                      <span class="w-4 h-4 rounded-full bg-neutral-900/10 text-neutral-800 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-neutral-900 group-hover:text-white transition-colors duration-300"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                      <span class="text-neutral-600 font-light">Edición estilo comercial premium</span>
+                      <span class="w-4 h-4 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0 mt-0.5"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                      <span class="text-neutral-400 font-light">Edición estilo comercial premium</span>
                     </li>
                     <li class="flex gap-3 items-start text-xs leading-relaxed">
-                      <span class="w-4 h-4 rounded-full bg-neutral-900/10 text-neutral-800 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-neutral-900 group-hover:text-white transition-colors duration-300"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                      <span class="text-neutral-600 font-light">Máxima calidad visual</span>
+                      <span class="w-4 h-4 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0 mt-0.5"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                      <span class="text-neutral-400 font-light">Máxima calidad visual</span>
                     </li>
                   </ul>
                 </div>
-                <button onclick="handleWhatsAppRedirect('Plan Premium de Edición de Video')" class="w-full py-3.5 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 bg-neutral-900 hover:bg-neutral-800 text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 kove-btn">
+                <button onclick="handleWhatsAppRedirect('Plan Premium de Edición de Video')" class="w-full py-3.5 rounded-full text-xs font-bold tracking-wide cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 bg-white text-neutral-950 hover:bg-neutral-100 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 kove-btn">
                   Solicitar por WhatsApp <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </button>
               </div>
             </div>
 
             <div class="text-center mt-12 section-fade" style="animation-delay:0.26s">
-              <p class="text-neutral-400 text-xs font-light max-w-[500px] mx-auto leading-relaxed">
-                <span class="word-animate">Cada</span>
-                <span class="word-animate">proyecto</span>
-                <span class="word-animate">se</span>
-                <span class="word-animate">cotiza</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">forma</span>
-                <span class="word-animate">personalizada</span>
-                <span class="word-animate">según</span>
-                <span class="word-animate">duración,</span>
-                <span class="word-animate">complejidad</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">requerimientos</span>
-                <span class="word-animate">específicos.</span>
-              </p>
+              <p class="text-neutral-400 text-xs font-light max-w-[500px] mx-auto leading-relaxed">Cada proyecto se cotiza de forma personalizada según duración, complejidad y requerimientos específicos.</p>
             </div>
           </div>
         </section>
@@ -1443,23 +1339,8 @@
           <div class="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
           <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight leading-[1.1] text-white">
-                <span class="word-animate">Paquetes</span>
-                <span class="word-animate">Combinados</span>
-              </h2>
-              <p class="text-neutral-400 text-sm max-w-[540px] mx-auto mt-4 leading-relaxed font-light">
-                <span class="word-animate">Potencia</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">negocio</span>
-                <span class="word-animate">con</span>
-                <span class="word-animate">un</span>
-                <span class="word-animate">ecosistema</span>
-                <span class="word-animate">completo</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">optimiza</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">inversión.</span>
-              </p>
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight leading-[1.1] text-white">Paquetes Combinados</h2>
+              <p class="text-neutral-400 text-sm max-w-[540px] mx-auto mt-4 leading-relaxed font-light">Potencia tu negocio con un ecosistema completo y optimiza tu inversión.</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
               <div class="neo-card-dark p-8 md:p-10 flex flex-col justify-between transition-all duration-500 kove-card-dark">
@@ -1479,20 +1360,12 @@
         <section id="portafolio" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end pb-8 mb-12 gap-4 section-fade">
-              <div><h2 class="font-display font-black text-4xl sm:text-5xl tracking-tight leading-[1] text-neutral-900">
-                <span class="word-animate">Ecosistema</span><br>
-                <span class="word-animate">de</span>
-                <span class="word-animate">marcas</span>
-              </h2></div>
-              <div><p class="font-sans text-xs text-neutral-400 font-extrabold tracking-wide uppercase">
-                <span class="word-animate">Nuestros</span>
-                <span class="word-animate">trabajos</span>
-                <span class="word-animate">oficiales</span>
-              </p></div>
+              <div><h2 class="font-display font-black text-4xl sm:text-5xl tracking-tight leading-[1] text-neutral-900">Ecosistema de marcas</h2></div>
+              <div><p class="font-sans text-xs text-neutral-400 font-extrabold tracking-wide uppercase">Nuestros trabajos oficiales</p></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <!-- Proyecto 1: IMAC Barber Studio -->
-              <a href="#" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline" onclick="handleWhatsAppRedirect('Portafolio - IMAC Barber Studio')">
+              <!-- IMAC Barber Studio -->
+              <a href="https://imacbarberstudio.vercel.app" target="_blank" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline">
                 <div class="h-[240px] px-6 py-10 bg-gradient-to-br flex flex-col justify-center items-center text-center relative overflow-hidden from-neutral-900 to-neutral-950 text-white">
                   <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block">Desarrollo Web</span>
                   <h3 class="font-display font-black text-2xl sm:text-3xl tracking-tight leading-tight">IMAC BARBER STUDIO</h3>
@@ -1500,8 +1373,8 @@
                 <div class="p-6 md:p-8"><h4 class="font-display font-bold text-base text-neutral-900">IMAC Barbería</h4><p class="text-neutral-500 text-xs mt-2">Sitio web premium con pasarela y gestor de reservas.</p></div>
               </a>
 
-              <!-- Proyecto 2: Tátau Supply -->
-              <a href="#" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline" onclick="handleWhatsAppRedirect('Portafolio - Tátau Supply')">
+              <!-- Tátau Supply -->
+              <a href="https://tatausupply.vercel.app" target="_blank" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline">
                 <div class="h-[240px] px-6 py-10 bg-gradient-to-br flex flex-col justify-center items-center text-center relative overflow-hidden from-zinc-100 to-neutral-200 text-neutral-900">
                   <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block">E-Commerce</span>
                   <h3 class="font-display font-black text-2xl sm:text-3xl tracking-tight leading-tight">TÁTAU SUPPLY</h3>
@@ -1509,8 +1382,8 @@
                 <div class="p-6 md:p-8"><h4 class="font-display font-bold text-base text-neutral-900">Tátau Supply</h4><p class="text-neutral-500 text-xs mt-2">Plataforma de compras con catálogo y checkout.</p></div>
               </a>
 
-              <!-- Proyecto 3: KOVE Agency -->
-              <a href="#" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline" onclick="handleWhatsAppRedirect('Portafolio - KOVE Agency')">
+              <!-- KOVE Agency -->
+              <a href="https://kove-agency.vercel.app" target="_blank" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline">
                 <div class="h-[240px] px-6 py-10 bg-gradient-to-br flex flex-col justify-center items-center text-center relative overflow-hidden from-white to-zinc-50 text-neutral-950">
                   <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block">Ecosistema</span>
                   <h3 class="font-display font-black text-2xl sm:text-3xl tracking-tight leading-tight">KOVE AGENCY</h3>
@@ -1518,7 +1391,7 @@
                 <div class="p-6 md:p-8"><h4 class="font-display font-bold text-base text-neutral-900">KOVE Agency</h4><p class="text-neutral-500 text-xs mt-2">Estructura madre de lanzamientos digitales.</p></div>
               </a>
 
-              <!-- NUEVO: Nails - portafolio de uñas -->
+              <!-- Nails -->
               <a href="https://nails-portafolio.vercel.app" target="_blank" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline">
                 <div class="h-[240px] px-6 py-10 bg-gradient-to-br flex flex-col justify-center items-center text-center relative overflow-hidden from-pink-50 to-rose-100 text-rose-900">
                   <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block">Diseño Web</span>
@@ -1529,7 +1402,7 @@
                 <div class="p-6 md:p-8"><h4 class="font-display font-bold text-base text-neutral-900">Nails Studio</h4><p class="text-neutral-500 text-xs mt-2">Portafolio elegante para servicios de uñas con diseño minimalista y sofisticado.</p></div>
               </a>
 
-              <!-- NUEVO: Barberia3M -->
+              <!-- Barberia3M -->
               <a href="https://barberia3m.vercel.app" target="_blank" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline">
                 <div class="h-[240px] px-6 py-10 bg-gradient-to-br flex flex-col justify-center items-center text-center relative overflow-hidden from-amber-50 to-amber-100 text-amber-900">
                   <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block">Landing Page</span>
@@ -1540,7 +1413,7 @@
                 <div class="p-6 md:p-8"><h4 class="font-display font-bold text-base text-neutral-900">Barbería 3M</h4><p class="text-neutral-500 text-xs mt-2">Landing page moderna para barbería con diseño limpio y enfoque en servicios premium.</p></div>
               </a>
 
-              <!-- NUEVO: Web Motion -->
+              <!-- Web Motion -->
               <a href="https://webmotion-omega.vercel.app" target="_blank" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline">
                 <div class="h-[240px] px-6 py-10 bg-gradient-to-br flex flex-col justify-center items-center text-center relative overflow-hidden from-indigo-50 to-blue-100 text-indigo-900">
                   <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block">Motion Design</span>
@@ -1551,7 +1424,7 @@
                 <div class="p-6 md:p-8"><h4 class="font-display font-bold text-base text-neutral-900">Web Motion</h4><p class="text-neutral-500 text-xs mt-2">Landing page con animaciones fluidas y motion graphics avanzados para impacto visual.</p></div>
               </a>
 
-              <!-- NUEVO: Black Crown -->
+              <!-- Black Crown -->
               <a href="https://blackportafolio.vercel.app" target="_blank" class="neo-card overflow-hidden cursor-pointer flex flex-col justify-between group kove-card no-underline">
                 <div class="h-[240px] px-6 py-10 bg-gradient-to-br flex flex-col justify-center items-center text-center relative overflow-hidden from-neutral-900 to-neutral-950 text-white">
                   <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block">Branding & Web</span>
@@ -1561,6 +1434,20 @@
                 </div>
                 <div class="p-6 md:p-8"><h4 class="font-display font-bold text-base text-neutral-900">Black Crown</h4><p class="text-neutral-500 text-xs mt-2">Web exclusiva para barbería premium con experiencia de firma y diseño elegante.</p></div>
               </a>
+
+              <!-- CARD TRABAJEMOS JUNTOS - OCUPA 2 ESPACIOS -->
+              <div class="card-trabajemos">
+                <div class="neo-card-dark overflow-hidden cursor-pointer flex flex-col justify-between group kove-card-dark p-6 md:p-8 text-white h-full" onclick="handleWhatsAppRedirect('Trabajemos Juntos - Portafolio')">
+                  <div class="flex flex-col justify-center items-center text-center h-[240px] px-6 py-10">
+                    <span class="font-sans text-[9px] tracking-widest uppercase font-extrabold opacity-60 mb-3 block text-white/50">¿Listo para crecer?</span>
+                    <h3 class="font-display font-black text-2xl sm:text-3xl tracking-tight leading-tight text-white">TRABAJEMOS JUNTOS</h3>
+                    <p class="text-neutral-400 text-xs mt-4 leading-relaxed max-w-[300px]">Tu marca merece un ecosistema digital profesional. Hablemos de tu proyecto.</p>
+                    <button onclick="handleWhatsAppRedirect('Trabajemos Juntos - Botón')" class="mt-6 px-8 py-3 rounded-full text-xs font-bold bg-white text-neutral-950 hover:bg-neutral-100 transition-all duration-300 flex items-center gap-2 kove-btn">
+                      Contáctame <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="text-center mt-14 section-fade">
               <button onclick="handleWhatsAppRedirect('Ver portafolio - CTA')" class="inline-flex items-center gap-2 bg-[#1a1a1a] hover:bg-neutral-900 text-white rounded-full px-8 py-4 text-xs font-bold shadow-[6px_6px_16px_rgba(0,0,0,0.18)] hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer kove-btn">¿Tu marca lista para el mundo? Hablemos →</button>
@@ -1568,31 +1455,13 @@
           </div>
         </section>
 
-        <!-- ===== ESTADÍSTICAS / CONEXIONES GLOBALES (AHORA DESPUÉS DEL PORTAFOLIO) ===== -->
+        <!-- ===== ESTADÍSTICAS / CONEXIONES GLOBALES ===== -->
         <section class="py-20 bg-[#f4f4f7] relative overflow-hidden select-none">
           <div class="absolute top-[10%] right-[5%] w-96 h-96 bg-neutral-200/20 rounded-full blur-3xl pointer-events-none kove-orb"></div>
           <div class="max-w-6xl mx-auto px-6 relative">
             <div class="text-center mb-12 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">
-                <span class="word-animate">Negocios</span>
-                <span class="word-animate">construyendo</span>
-                <span class="word-animate">su</span>
-                <span class="word-animate">presencia</span>
-                <span class="word-animate">digital</span>
-                <span class="word-animate">alrededor</span>
-                <span class="word-animate">del</span>
-                <span class="word-animate">mundo.</span>
-              </h2>
-              <p class="text-neutral-500 text-xs sm:text-sm max-w-[500px] mx-auto mt-4 font-light leading-relaxed">
-                <span class="word-animate">Nuestros</span>
-                <span class="word-animate">ecosistemas</span>
-                <span class="word-animate">digitales</span>
-                <span class="word-animate">conectan</span>
-                <span class="word-animate">audiencias</span>
-                <span class="word-animate">con</span>
-                <span class="word-animate">velocidad</span>
-                <span class="word-animate">optimizada.</span>
-              </p>
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">Negocios construyendo su presencia digital alrededor del mundo.</h2>
+              <p class="text-neutral-500 text-xs sm:text-sm max-w-[500px] mx-auto mt-4 font-light leading-relaxed">Nuestros ecosistemas digitales conectan audiencias con velocidad optimizada.</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-center">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -1629,24 +1498,8 @@
         <section id="kove-ai-section" class="py-16 bg-[#f4f4f7] relative overflow-hidden">
           <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-10 section-fade">
-              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 tracking-tight">
-                <span class="word-animate">KOVE</span>
-                <span class="word-animate text-neutral-400">IA</span>
-              </h2>
-              <p class="text-neutral-500 text-sm mt-3 font-light max-w-md mx-auto">
-                <span class="word-animate">Pregúntale</span>
-                <span class="word-animate">a</span>
-                <span class="word-animate">KOVE</span>
-                <span class="word-animate">IA</span>
-                <span class="word-animate">sobre</span>
-                <span class="word-animate">servicios,</span>
-                <span class="word-animate">precios</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">cómo</span>
-                <span class="word-animate">digitalizar</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">negocio.</span>
-              </p>
+              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 tracking-tight">KOVE IA</h2>
+              <p class="text-neutral-500 text-sm mt-3 font-light max-w-md mx-auto">Pregúntale a KOVE IA sobre servicios, precios y cómo digitalizar tu negocio.</p>
             </div>
             <div id="kove-chat-window" style="background:#141414;border-radius:28px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.35);display:flex;flex-direction:column;height:480px;">
               <div style="background:#1e1e1e;padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.06);">
@@ -1671,24 +1524,8 @@
         <section class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight leading-[1] text-neutral-900 mt-2">
-                <span class="word-animate">Proceso</span>
-                <span class="word-animate">KOVE</span>
-              </h2>
-              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">
-                <span class="word-animate">Monitoreo</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">precisión</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">punta</span>
-                <span class="word-animate">a</span>
-                <span class="word-animate">punta,</span>
-                <span class="word-animate">asegurando</span>
-                <span class="word-animate">excelencia</span>
-                <span class="word-animate">en</span>
-                <span class="word-animate">cada</span>
-                <span class="word-animate">entrega.</span>
-              </p>
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight leading-[1] text-neutral-900 mt-2">Proceso KOVE</h2>
+              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">Monitoreo y precisión de punta a punta, asegurando excelencia en cada entrega.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
               <div class="neo-card p-6 kove-card">
@@ -1703,8 +1540,9 @@
               <div class="neo-card p-6 kove-card">
                 <div><div class="flex justify-between items-center mb-6"><span class="font-sans font-black text-xs text-neutral-400">/04</span><div class="w-10 h-10 rounded-xl bg-[#e8e8ed]/60 text-neutral-800 flex items-center justify-center group-hover:bg-[#111111] group-hover:text-white transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div></div><h3 class="font-display font-bold text-base text-neutral-900">Optimización</h3><p class="text-neutral-500 text-[11px] leading-relaxed mt-2.5 font-light">Ajuste fino de SEO, auditoría Lighthouse y cortafuegos.</p></div>
               </div>
-              <div class="neo-card p-6 kove-card">
-                <div><div class="flex justify-between items-center mb-6"><span class="font-sans font-black text-xs text-neutral-400">/05</span><div class="w-10 h-10 rounded-xl bg-[#e8e8ed]/60 text-neutral-800 flex items-center justify-center group-hover:bg-[#111111] group-hover:text-white transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div></div><h3 class="font-display font-bold text-base text-neutral-900">Lanzamiento</h3><p class="text-neutral-500 text-[11px] leading-relaxed mt-2.5 font-light">Puesta en producción segura y monitoreo continuo.</p></div>
+              <!-- Lanzamiento en GRIS OSCURO -->
+              <div class="neo-card-dark p-6 flex flex-col justify-between transition-all duration-500 kove-card-dark text-white">
+                <div><div class="flex justify-between items-center mb-6"><span class="font-sans font-black text-xs text-neutral-400">/05</span><div class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center group-hover:bg-white/20 transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div></div><h3 class="font-display font-bold text-base text-white">Lanzamiento</h3><p class="text-neutral-400 text-[11px] leading-relaxed mt-2.5 font-light">Puesta en producción segura y monitoreo continuo.</p></div>
               </div>
             </div>
           </div>
@@ -1714,24 +1552,8 @@
         <section class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight text-neutral-900 mt-2">
-                <span class="word-animate">¿Por</span>
-                <span class="word-animate">qué</span>
-                <span class="word-animate">KOVE?</span>
-              </h2>
-              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">
-                <span class="word-animate">Nuestros</span>
-                <span class="word-animate">pilares</span>
-                <span class="word-animate">técnicos</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">diseño</span>
-                <span class="word-animate">que</span>
-                <span class="word-animate">unifican</span>
-                <span class="word-animate">arte</span>
-                <span class="word-animate">e</span>
-                <span class="word-animate">ingeniería.</span>
-              </p>
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl tracking-tight text-neutral-900 mt-2">¿Por qué KOVE?</h2>
+              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">Nuestros pilares técnicos y de diseño que unifican arte e ingeniería.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div class="neo-card p-6 kove-card">
@@ -1749,8 +1571,9 @@
               <div class="neo-card p-6 kove-card">
                 <div><div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M5 21v-6"/><path d="M12 21V9"/><path d="M19 21V3"/></svg></div><h3 class="font-display font-bold text-base text-neutral-900">Rendimiento</h3><p class="text-neutral-500 text-xs mt-3 leading-relaxed font-light">Optimización de bundle con tiempos de carga de primer nivel.</p></div>
               </div>
-              <div class="neo-card p-6 kove-card">
-                <div><div class="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg></div><h3 class="font-display font-bold text-base text-neutral-900">Seguridad</h3><p class="text-neutral-500 text-xs mt-3 leading-relaxed font-light">Mitigación de ataques XSS, CSRF, Rate Limit y encriptación.</p></div>
+              <!-- Seguridad en GRIS OSCURO -->
+              <div class="neo-card-dark p-6 flex flex-col justify-between transition-all duration-500 kove-card-dark text-white">
+                <div><div class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center mb-5 group-hover:bg-white/20 transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg></div><h3 class="font-display font-bold text-base text-white">Seguridad</h3><p class="text-neutral-400 text-xs mt-3 leading-relaxed font-light">Mitigación de ataques XSS, CSRF, Rate Limit y encriptación.</p></div>
               </div>
             </div>
           </div>
@@ -1775,55 +1598,8 @@
                   </div>
                 </div>
                 <div class="flex flex-col justify-center text-left">
-                  <h4 class="font-display font-bold text-2xl text-neutral-100 mb-4 flex items-center gap-2">
-                    <span class="word-animate">Hablemos</span>
-                    <span class="word-animate">de</span>
-                    <span class="word-animate">experiencia</span>
-                    <span class="word-animate">digital</span>
-                  </h4>
-                  <p class="text-neutral-300 text-sm sm:text-base leading-relaxed font-light mb-6">
-                    <span class="word-animate">Soy</span>
-                    <span class="word-animate">creador</span>
-                    <span class="word-animate">de</span>
-                    <span class="word-animate">experiencias</span>
-                    <span class="word-animate">digitales</span>
-                    <span class="word-animate">que</span>
-                    <span class="word-animate">combinan</span>
-                    <span class="word-animate">diseño</span>
-                    <span class="word-animate">gráfico,</span>
-                    <span class="word-animate">desarrollo</span>
-                    <span class="word-animate">web,</span>
-                    <span class="word-animate">edición</span>
-                    <span class="word-animate">de</span>
-                    <span class="word-animate">video</span>
-                    <span class="word-animate">y</span>
-                    <span class="word-animate">motion</span>
-                    <span class="word-animate">graphics.</span>
-                    <span class="word-animate">Mi</span>
-                    <span class="word-animate">enfoque</span>
-                    <span class="word-animate">está</span>
-                    <span class="word-animate">en</span>
-                    <span class="word-animate">construir</span>
-                    <span class="word-animate">marcas</span>
-                    <span class="word-animate">con</span>
-                    <span class="word-animate">propósito</span>
-                    <span class="word-animate">y</span>
-                    <span class="word-animate">tecnología</span>
-                    <span class="word-animate">que</span>
-                    <span class="word-animate">realmente</span>
-                    <span class="word-animate">funciona</span>
-                    <span class="word-animate">para</span>
-                    <span class="word-animate">impulsar</span>
-                    <span class="word-animate">la</span>
-                    <span class="word-animate">presencia</span>
-                    <span class="word-animate">en</span>
-                    <span class="word-animate">el</span>
-                    <span class="word-animate">mercado</span>
-                    <span class="word-animate">colombiano</span>
-                    <span class="word-animate">con</span>
-                    <span class="word-animate">estándares</span>
-                    <span class="word-animate">globales.</span>
-                  </p>
+                  <h4 class="font-display font-bold text-2xl text-neutral-100 mb-4">Hablemos de experiencia digital</h4>
+                  <p class="text-neutral-300 text-sm sm:text-base leading-relaxed font-light mb-6">Soy creador de experiencias digitales que combinan diseño gráfico, desarrollo web, edición de video y motion graphics. Mi enfoque está en construir marcas con propósito y tecnología que realmente funciona para impulsar la presencia en el mercado colombiano con estándares globales.</p>
                   <div class="flex flex-wrap gap-2 mb-6">
                     <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">UI/UX Design</span>
                     <span class="bg-white/10 hover:bg-white/15 rounded-full px-4 py-1.5 text-xs font-sans font-semibold text-neutral-100 cursor-pointer transition-colors duration-300">Web Development</span>
@@ -1844,42 +1620,25 @@
         <section id="servicios-detalle" class="py-24 bg-[#f4f4f7] relative overflow-hidden">
           <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="text-center mb-20 section-fade">
-              <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-neutral-900 tracking-tight leading-[1] mt-2">
-                <span class="word-animate">Soluciones</span>
-                <span class="word-animate">digitales</span><br>
-                <span class="word-animate text-neutral-400">para</span>
-                <span class="word-animate text-neutral-400">tu</span>
-                <span class="word-animate text-neutral-400">negocio</span>
-              </h2>
-              <p class="text-neutral-500 text-sm max-w-[480px] mx-auto mt-5 leading-relaxed font-light">
-                <span class="word-animate">Todo</span>
-                <span class="word-animate">lo</span>
-                <span class="word-animate">que</span>
-                <span class="word-animate">necesitas</span>
-                <span class="word-animate">para</span>
-                <span class="word-animate">construir</span>
-                <span class="word-animate">una</span>
-                <span class="word-animate">presencia</span>
-                <span class="word-animate">digital</span>
-                <span class="word-animate">profesional.</span>
-              </p>
+              <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-neutral-900 tracking-tight leading-[1] mt-2">Soluciones digitales para tu negocio</h2>
+              <p class="text-neutral-500 text-base max-w-[480px] mx-auto mt-5 leading-relaxed font-light">Todo lo que necesitas para construir una presencia digital profesional.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div class="neo-card-dark p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card-dark text-white">
-                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><span class="text-[9px] font-sans font-black tracking-widest text-neutral-500 uppercase">01</span></div><h3 class="font-display font-bold text-xl mb-2">Desarrollo Web Profesional</h3><p class="text-neutral-400 text-xs leading-relaxed mb-5 font-light">Creamos sitios web modernos, rápidos y optimizados.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[11px] text-neutral-400"><span class="w-1 h-1 bg-neutral-500 rounded-full shrink-0"></span>Diseño personalizado</li><li class="flex items-center gap-2 text-[11px] text-neutral-400"><span class="w-1 h-1 bg-neutral-500 rounded-full shrink-0"></span>Adaptación móvil</li><li class="flex items-center gap-2 text-[11px] text-neutral-400"><span class="w-1 h-1 bg-neutral-500 rounded-full shrink-0"></span>SEO básico</li></ul></div><div><p class="text-[10px] text-neutral-500 font-bold mb-3">Desde <span class="text-white text-sm font-black">$250.000</span> <span class="text-neutral-500">COP</span></p><button onclick="handleWhatsAppRedirect('Solicitar propuesta — Desarrollo Web')" class="w-full py-3 rounded-full text-[11px] font-bold bg-white text-neutral-950 hover:bg-neutral-100 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Solicitar propuesta →</button></div>
+              <div class="neo-card-dark p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card-dark text-white" onclick="handleWhatsAppRedirect('Desarrollo Web Profesional')">
+                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><span class="text-[11px] font-sans font-black tracking-widest text-neutral-500 uppercase">01</span></div><h3 class="font-display font-bold text-xl mb-2">Desarrollo Web Profesional</h3><p class="text-neutral-400 text-sm leading-relaxed mb-5 font-light">Creamos sitios web modernos, rápidos y optimizados.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[13px] text-neutral-400"><span class="w-1.5 h-1.5 bg-neutral-500 rounded-full shrink-0"></span>Diseño personalizado</li><li class="flex items-center gap-2 text-[13px] text-neutral-400"><span class="w-1.5 h-1.5 bg-neutral-500 rounded-full shrink-0"></span>Adaptación móvil</li><li class="flex items-center gap-2 text-[13px] text-neutral-400"><span class="w-1.5 h-1.5 bg-neutral-500 rounded-full shrink-0"></span>SEO básico</li></ul></div><div><p class="text-[13px] text-neutral-500 font-bold mb-3">Desde <span class="text-white text-base font-black">$250.000</span> <span class="text-neutral-500">COP</span></p><button onclick="handleWhatsAppRedirect('Solicitar propuesta — Desarrollo Web')" class="w-full py-3 rounded-full text-[13px] font-bold bg-white text-neutral-950 hover:bg-neutral-100 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Solicitar propuesta →</button></div>
               </div>
-              <div class="neo-card p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card text-neutral-900">
-                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-900 text-white flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.27 2 2 0 0 1 3.92 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><span class="text-[9px] font-sans font-black tracking-widest text-neutral-400 uppercase">02</span></div><h3 class="font-display font-bold text-xl mb-2">Optimización de WhatsApp Business</h3><p class="text-neutral-500 text-xs leading-relaxed mb-5 font-light">Configuramos tu WhatsApp para que genere más confianza.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Perfil profesional</li><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Mensajes automáticos</li><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Catálogo de productos</li></ul></div><div><p class="text-[10px] text-neutral-400 font-bold mb-3">Desde <span class="text-neutral-900 text-sm font-black">$50.000</span> <span class="text-neutral-400">COP</span></p><button onclick="handleWhatsAppRedirect('WhatsApp Business — Configurar ahora')" class="w-full py-3 rounded-full text-[11px] font-bold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Configurar ahora →</button></div>
+              <div class="neo-card p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card text-neutral-900" onclick="handleWhatsAppRedirect('WhatsApp Business')">
+                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-900 text-white flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.27 2 2 0 0 1 3.92 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><span class="text-[11px] font-sans font-black tracking-widest text-neutral-400 uppercase">02</span></div><h3 class="font-display font-bold text-xl mb-2">Optimización de WhatsApp Business</h3><p class="text-neutral-500 text-sm leading-relaxed mb-5 font-light">Configuramos tu WhatsApp para que genere más confianza.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Perfil profesional</li><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Mensajes automáticos</li><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Catálogo de productos</li></ul></div><div><p class="text-[13px] text-neutral-400 font-bold mb-3">Desde <span class="text-neutral-900 text-base font-black">$50.000</span> <span class="text-neutral-400">COP</span></p><button onclick="handleWhatsAppRedirect('WhatsApp Business — Configurar ahora')" class="w-full py-3 rounded-full text-[13px] font-bold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Configurar ahora →</button></div>
               </div>
-              <div class="neo-card p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card text-neutral-900">
-                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-900 text-white flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg></div><span class="text-[9px] font-sans font-black tracking-widest text-neutral-400 uppercase">03</span></div><h3 class="font-display font-bold text-xl mb-2">Optimización de Google Maps</h3><p class="text-neutral-500 text-xs leading-relaxed mb-5 font-light">Mejoramos tu presencia en Google para que más personas te encuentren.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Optimización de perfil</li><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Información completa</li><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Carga de imágenes</li></ul></div><div><p class="text-[10px] text-neutral-400 font-bold mb-3">Desde <span class="text-neutral-900 text-sm font-black">$80.000</span> <span class="text-neutral-400">COP</span></p><button onclick="handleWhatsAppRedirect('Google Business Profile — Optimización')" class="w-full py-3 rounded-full text-[11px] font-bold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Quiero aparecer mejor →</button></div>
+              <div class="neo-card p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card text-neutral-900" onclick="handleWhatsAppRedirect('Google Maps')">
+                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-900 text-white flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg></div><span class="text-[11px] font-sans font-black tracking-widest text-neutral-400 uppercase">03</span></div><h3 class="font-display font-bold text-xl mb-2">Optimización de Google Maps</h3><p class="text-neutral-500 text-sm leading-relaxed mb-5 font-light">Mejoramos tu presencia en Google para que más personas te encuentren.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Optimización de perfil</li><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Información completa</li><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Carga de imágenes</li></ul></div><div><p class="text-[13px] text-neutral-400 font-bold mb-3">Desde <span class="text-neutral-900 text-base font-black">$80.000</span> <span class="text-neutral-400">COP</span></p><button onclick="handleWhatsAppRedirect('Google Business Profile — Optimización')" class="w-full py-3 rounded-full text-[13px] font-bold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Quiero aparecer mejor →</button></div>
               </div>
-              <div class="neo-card-dark p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card-dark text-white">
-                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h18a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M3 10h11"/><path d="M3 14h7"/><path d="M3 18h7"/><rect x="15" y="10" width="6" height="12" rx="1"/></svg></div><span class="text-[9px] font-sans font-black tracking-widest text-neutral-500 uppercase">04</span></div><h3 class="font-display font-bold text-xl mb-2">Menús Digitales con QR</h3><p class="text-neutral-400 text-xs leading-relaxed mb-5 font-light">Moderniza tu restaurante con menús digitales accesibles desde cualquier celular.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[11px] text-neutral-400"><span class="w-1 h-1 bg-neutral-500 rounded-full shrink-0"></span>Diseño profesional</li><li class="flex items-center gap-2 text-[11px] text-neutral-400"><span class="w-1 h-1 bg-neutral-500 rounded-full shrink-0"></span>Código QR incluido</li><li class="flex items-center gap-2 text-[11px] text-neutral-400"><span class="w-1 h-1 bg-neutral-500 rounded-full shrink-0"></span>Adaptación móvil</li></ul></div><div><p class="text-[10px] text-neutral-500 font-bold mb-3">Desde <span class="text-white text-sm font-black">$70.000</span> <span class="text-neutral-500">COP</span></p><button onclick="handleWhatsAppRedirect('Menú Digital con QR — Ver ejemplo')" class="w-full py-3 rounded-full text-[11px] font-bold bg-white text-neutral-950 hover:bg-neutral-100 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Ver ejemplo →</button></div>
+              <div class="neo-card-dark p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card-dark text-white" onclick="handleWhatsAppRedirect('Menú Digital QR')">
+                <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h18a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M3 10h11"/><path d="M3 14h7"/><path d="M3 18h7"/><rect x="15" y="10" width="6" height="12" rx="1"/></svg></div><span class="text-[11px] font-sans font-black tracking-widest text-neutral-500 uppercase">04</span></div><h3 class="font-display font-bold text-xl mb-2">Menús Digitales con QR</h3><p class="text-neutral-400 text-sm leading-relaxed mb-5 font-light">Moderniza tu restaurante con menús digitales accesibles desde cualquier celular.</p><ul class="space-y-2 mb-6"><li class="flex items-center gap-2 text-[13px] text-neutral-400"><span class="w-1.5 h-1.5 bg-neutral-500 rounded-full shrink-0"></span>Diseño profesional</li><li class="flex items-center gap-2 text-[13px] text-neutral-400"><span class="w-1.5 h-1.5 bg-neutral-500 rounded-full shrink-0"></span>Código QR incluido</li><li class="flex items-center gap-2 text-[13px] text-neutral-400"><span class="w-1.5 h-1.5 bg-neutral-500 rounded-full shrink-0"></span>Adaptación móvil</li></ul></div><div><p class="text-[13px] text-neutral-500 font-bold mb-3">Desde <span class="text-white text-base font-black">$70.000</span> <span class="text-neutral-500">COP</span></p><button onclick="handleWhatsAppRedirect('Menú Digital con QR — Ver ejemplo')" class="w-full py-3 rounded-full text-[13px] font-bold bg-white text-neutral-950 hover:bg-neutral-100 transition-all duration-300 flex items-center justify-center gap-2 kove-btn">Ver ejemplo →</button></div>
               </div>
-              <div class="neo-card p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card text-neutral-900 lg:col-span-2">
+              <div class="neo-card p-8 flex flex-col justify-between cursor-pointer relative overflow-hidden kove-card text-neutral-900 lg:col-span-2" onclick="handleWhatsAppRedirect('Edición Reels y Shorts')">
                 <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-6 items-start">
-                  <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-900 text-white flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div><span class="text-[9px] font-sans font-black tracking-widest text-neutral-400 uppercase">05</span></div><h3 class="font-display font-bold text-xl mb-2">Edición de Reels y Shorts</h3><p class="text-neutral-500 text-xs leading-relaxed mb-5 font-light">Creamos videos dinámicos para captar atención y aumentar el alcance.</p><ul class="grid grid-cols-2 gap-2 mb-6"><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Cortes profesionales</li><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Subtítulos animados</li><li class="flex items-center gap-2 text-[11px] text-neutral-500"><span class="w-1 h-1 bg-neutral-400 rounded-full shrink-0"></span>Música sincronizada</li></ul><div><p class="text-[10px] text-neutral-400 font-bold">Desde <span class="text-neutral-900 text-sm font-black">$30.000</span> <span class="text-neutral-400">COP</span> por video</p><button onclick="handleWhatsAppRedirect('Edición de Reels y Shorts — Solicitar edición')" class="px-7 py-3 rounded-full text-[11px] font-bold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 flex items-center gap-2 whitespace-nowrap kove-btn">Solicitar edición →</button></div></div>
+                  <div><div class="flex items-start justify-between mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-900 text-white flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div><span class="text-[11px] font-sans font-black tracking-widest text-neutral-400 uppercase">05</span></div><h3 class="font-display font-bold text-xl mb-2">Edición de Reels y Shorts</h3><p class="text-neutral-500 text-sm leading-relaxed mb-5 font-light">Creamos videos dinámicos para captar atención y aumentar el alcance.</p><ul class="grid grid-cols-2 gap-2 mb-6"><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Cortes profesionales</li><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Subtítulos animados</li><li class="flex items-center gap-2 text-[13px] text-neutral-500"><span class="w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0"></span>Música sincronizada</li></ul><div><p class="text-[13px] text-neutral-400 font-bold">Desde <span class="text-neutral-900 text-base font-black">$30.000</span> <span class="text-neutral-400">COP</span> por video</p><button onclick="handleWhatsAppRedirect('Edición de Reels y Shorts — Solicitar edición')" class="px-7 py-3 rounded-full text-[13px] font-bold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 flex items-center gap-2 whitespace-nowrap kove-btn">Solicitar edición →</button></div></div>
                 </div>
               </div>
             </div>
@@ -1893,13 +1652,7 @@
           <div class="absolute bottom-[10%] right-[-8%] w-80 h-80 bg-white/[0.02] rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
           <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="text-center mb-20 section-fade">
-              <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1] mt-2">
-                <span class="word-animate">¿Por</span>
-                <span class="word-animate">qué</span>
-                <span class="word-animate">trabajar</span><br>
-                <span class="word-animate text-neutral-400">con</span>
-                <span class="word-animate text-neutral-400">KOVE?</span>
-              </h2>
+              <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1] mt-2">¿Por qué trabajar con KOVE?</h2>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
               <div class="bg-white/[0.04] hover:bg-white/[0.07] rounded-[28px] p-7 transition-all duration-500 group cursor-default kove-card">
@@ -1926,24 +1679,8 @@
         <section id="contacto" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-4xl mx-auto px-6 text-center">
             <div class="mb-12 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">
-                <span class="word-animate">Inicia</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">transformación</span>
-              </h2>
-              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">
-                <span class="word-animate">Cuéntanos</span>
-                <span class="word-animate">tu</span>
-                <span class="word-animate">idea</span>
-                <span class="word-animate">y</span>
-                <span class="word-animate">te</span>
-                <span class="word-animate">responderemos</span>
-                <span class="word-animate">en</span>
-                <span class="word-animate">menos</span>
-                <span class="word-animate">de</span>
-                <span class="word-animate">24</span>
-                <span class="word-animate">horas.</span>
-              </p>
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">Inicia tu transformación</h2>
+              <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">Cuéntanos tu idea y te responderemos en menos de 24 horas.</p>
             </div>
             <div class="neo-card-dark p-6 sm:p-10 shadow-[0_24px_50px_rgba(0,0,0,0.18)] mx-auto max-w-3xl text-white">
               <form id="contact-form" class="space-y-4">
@@ -1987,12 +1724,9 @@
           </div>
         </footer>
 
-        <!-- ===== BOTONES FLOTANTES ===== -->
+        <!-- ===== BOTÓN FLOTANTE WHATSAPP (SOLO UNO) ===== -->
         <button onclick="handleWhatsAppRedirect('Botón flotante WhatsApp')" class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-neutral-900 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer group kove-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 group-hover:rotate-6 transition-transform duration-300"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
-        </button>
-        <button onclick="document.getElementById('kove-ai-section').scrollIntoView({behavior:'smooth'})" class="fixed bottom-6 left-6 z-40 w-14 h-14 bg-gradient-to-br from-neutral-800 to-neutral-950 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer kove-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-white stroke-[2.2] animate-pulse"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
         </button>
 
       </main>
@@ -2000,7 +1734,7 @@
   </div>
 
   <!-- ================================================================ -->
-  <!-- ===== SCRIPTS (sin cambios) ===== -->
+  <!-- ===== SCRIPTS ===== -->
   <!-- ================================================================ -->
 
   <!-- EmailJS SDK -->
@@ -2305,7 +2039,7 @@
     })();
 
     // ──────────────────────────────────────────────
-    // 9. PLANES ENGINE - NUEVO CON ESTILOS MEJORADOS
+    // 9. PLANES ENGINE
     // ──────────────────────────────────────────────
     const plansDB = {
       web: [
@@ -2392,7 +2126,6 @@
       }, 200);
     };
 
-    // Inicializar con Web activo
     renderPlansGrid('web');
 
     // ──────────────────────────────────────────────
@@ -2443,39 +2176,8 @@
     }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.section-fade').forEach(el => sectionObserver.observe(el));
 
-    const wordObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const words = entry.target.querySelectorAll('.word-animate');
-          words.forEach((word, i) => {
-            setTimeout(() => {
-              word.classList.add('revealed');
-            }, i * 40);
-          });
-          wordObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
-
-    document.querySelectorAll('.word-animate').forEach(el => {
-      const parent = el.closest('p, h1, h2, h3, h4, .section-fade, .kove-reveal');
-      if (parent) {
-        const container = parent.closest('.word-animate') ? parent.parentElement : parent;
-        if (container && !container.dataset.wordObserved) {
-          container.dataset.wordObserved = 'true';
-          wordObserver.observe(container);
-        }
-      } else {
-        const container = el.parentElement;
-        if (container && !container.dataset.wordObserved) {
-          container.dataset.wordObserved = 'true';
-          wordObserver.observe(container);
-        }
-      }
-    });
-
     // ──────────────────────────────────────────────
-    // 12. KOVE IA CHAT - SOLO INFORMACIÓN PÚBLICA
+    // 12. KOVE IA CHAT - MEJORADA CON RESPUESTAS COMPLETAS
     // ──────────────────────────────────────────────
     (function() {
       function appendMsg(text, isUser) {
@@ -2508,31 +2210,105 @@
       }
 
       function getKoveAIReply(msg) {
-        const m = msg.toLowerCase();
+        const m = msg.toLowerCase().trim();
         
+        // Seguridad - NEGAR
         if (m.match(/contraseña|password|seguridad|panel|admin|dashboard|clave|pin|acceso|privado|confidencial|secreto|protegido|sensible|datos personales|información privada/)) {
           return '🔒 Lo siento, no tengo acceso a información de seguridad, contraseñas o datos privados. Soy un asistente para información pública sobre servicios de KOVE. ¿Te puedo ayudar con información sobre nuestros servicios o precios?';
         }
         
+        // Código fuente - NEGAR
         if (m.match(/código|code|fuente|source|backend|base de datos|database|firebase|estructura|archivo|html|javascript|script|programación/)) {
           return '🔒 No puedo proporcionar información sobre el código fuente, la estructura interna o la arquitectura técnica de la web. Soy un asistente de atención al cliente. ¿Te puedo ayudar con información sobre nuestros servicios?';
         }
 
-        if (m.match(/hola|buenas|hey|saludo/)) return '¡Hola! 👋 Bienvenido a KOVE Studio. Soy tu asistente digital. ¿Te ayudo con información sobre alguno de nuestros servicios o precios?';
-        if (m.match(/precio|costo|cuanto|valor|cuánto/)) return '💰 Nuestros precios:\n• Web desde $250.000 COP\n• Diseño Gráfico desde $500.000 COP\n• Edición de Video desde $100.000 COP\n• Automatización desde $1.000.000 COP\n• WhatsApp Business desde $50.000 COP\n• Google Maps desde $80.000 COP\n• Menú QR desde $70.000 COP\n• Reels/Shorts desde $30.000 COP\n\n¿Te interesa alguno en particular?';
-        if (m.match(/web|página|pagina|sitio/)) return '🌐 Desarrollo Web Profesional:\n• Landing page: $250.000 COP\n• Sitio 5 páginas: $600.000 COP\n• Enterprise: $1.200.000 COP\n\nIncluye diseño adaptativo, SEO básico y WhatsApp integrado.';
-        if (m.match(/diseño|logo|branding|gráfico|grafico|identidad/)) return '🎨 Diseño Gráfico:\n• Básico: $500.000 COP\n• Medio: $1.000.000 COP\n• Profesional: $2.000.000 COP\n\nCreamos identidades visuales que generan confianza y diferenciación.';
-        if (m.match(/video|edición|edicion|reel|short|tiktok/)) return '🎬 Edición de Video Profesional:\n• Esencial: $100.000 COP\n• Profesional: $250.000 COP (Más solicitado)\n• Premium: $500.000 COP\n\nIncluye cortes dinámicos, motion graphics, corrección de color y más. ¿Te interesa algún plan?';
-        if (m.match(/automati|bot|crm|flujo|whatsapp business/)) return '⚡ Automatización:\n• Básica: $1.000.000 COP\n• Media: $2.000.000 COP\n• Profesional: $3.000.000 COP\n\nConectamos tus canales y automatizamos respuestas.';
-        if (m.match(/reel|video|short|tiktok|edición|edicion/)) return '🎬 Edición de Reels y Shorts desde $30.000 COP por video. Incluye subtítulos, música y efectos modernos.';
-        if (m.match(/google|maps|mapa|local|ubicacion/)) return '📍 Optimización Google Maps desde $80.000 COP. Mejoramos tu visibilidad local.';
-        if (m.match(/menú|menu|restaurante|qr/)) return '🍽️ Menú Digital con QR desde $70.000 COP. Diseño profesional, código QR y fácil actualización.';
-        if (m.match(/contact|whatsapp|hablar|llamar|humano|persona/)) return '📱 ¡Claro! Puedes contactar directamente con el equipo KOVE:\n\n• WhatsApp: 3152507850\n• Respuesta en menos de 24h\n• Sin costos ocultos\n\n¡Te esperamos! 🚀';
-        if (m.match(/tiempo|demora|entrega|días|cuándo/)) return '⏱️ Los tiempos de entrega varían por servicio:\n• Landing page: 5 días\n• Sitio completo: 7-14 días\n• Diseño gráfico: 5-10 días\n• Edición de video: 3-7 días\n• Automatización: 10-20 días';
-        if (m.match(/portafolio|trabajo|ejemplo|proyecto/)) return '💼 Puedes ver nuestro portafolio en la sección "Portafolio" de esta misma web.';
-        if (m.match(/gracias|genial|perfecto|excelente/)) return '¡Con gusto! 😊 Si necesitas algo más, escríbenos al WhatsApp 3152507850.';
-        
-        return 'Entiendo tu consulta. Para darte una respuesta personalizada, te recomiendo contactarnos directamente:\n\n📱 WhatsApp: 3152507850\n\nNuestro equipo te atiende en menos de 24 horas.';
+        // SALUDOS
+        if (m.match(/^hola|^buenas|^hey|^saludo|^buen día|^buenas tardes|^buenas noches|^qué tal|^como estas/i)) {
+          return '¡Hola! 👋 Bienvenido a KOVE Studio. Soy tu asistente digital KOVE IA. ¿Cómo puedo ayudarte hoy? Puedo contarte sobre servicios, precios, portafolio o lo que necesites saber.';
+        }
+
+        // DESPEDIDAS
+        if (m.match(/adiós|chao|bye|hasta luego|nos vemos|gracias por todo|me voy|hasta pronto/i)) {
+          return '¡Ha sido un placer ayudarte! 😊 Recuerda que puedes contactarnos directamente al WhatsApp 3152507850 para cualquier consulta adicional. ¡Éxito con tu proyecto! 🚀';
+        }
+
+        // QUIÉN SOY / SOBRE MÍ
+        if (m.match(/quién eres|quien eres|qué eres|quien soy|soy quien|que eres|presentate|preséntate|tu eres|eres un bot|que haces|qué haces|quien te creo|quién te creó|de donde vienes|origen|creador|desarrollador|fundador/i)) {
+          return '🤖 Soy KOVE IA, el asistente digital de KOVE Studio. Fui creado para ayudarte a entender mejor nuestros servicios, precios y cómo podemos impulsar tu negocio digitalmente. KOVE Studio es un ecosistema digital colombiano fundado por un diseñador y desarrollador apasionado por crear experiencias que conectan marcas con audiencias. ¿Te gustaría saber más sobre algún servicio en específico?';
+        }
+
+        // PRECIOS / COSTOS
+        if (m.match(/precio|costo|cuanto|valor|cuánto|cuesta|tarifa|presupuesto|inversión|precios|costos|valores|tarifas|presupuestos/i)) {
+          return '💰 Nuestros precios (COP):\n\n• Desarrollo Web: desde $250.000\n• Diseño Gráfico: desde $500.000\n• Edición de Video: desde $100.000\n• Automatización IA: desde $1.000.000\n• WhatsApp Business: desde $50.000\n• Google Maps: desde $80.000\n• Menú Digital QR: desde $70.000\n• Reels/Shorts: desde $30.000\n\n📦 Paquetes Combinados:\n• Paquete Web: $800.000\n• Paquete Diseño: $700.000\n• KOVE PRO: $1.350.000\n\n¿Te interesa alguno en particular? ¡Todos incluyen soporte y sin costos ocultos!';
+        }
+
+        // DESARROLLO WEB
+        if (m.match(/web|página|pagina|sitio|landing|desarrollo web|programación|frontend|backend|hosting|dominio|diseño web|crear web|hacer página/i)) {
+          return '🌐 Desarrollo Web Profesional:\n\nPlanes:\n• Starter: $250.000 - Landing page optimizada, Mobile-First, formulario de contacto, WhatsApp directo.\n• Profesional: $600.000 - Sitio 5 páginas, Blog/Tienda básica, SEO técnico, Diseño UI/UX a medida.\n• Enterprise: $1.200.000 - Web corporativa ilimitada, E-commerce avanzado, Panel administración, Seguridad premium.\n\nIncluye diseño adaptativo, SEO básico, integración WhatsApp. ¿Cuál se adapta mejor a tu negocio?';
+        }
+
+        // DISEÑO GRÁFICO / BRANDING
+        if (m.match(/diseño|logo|branding|gráfico|grafico|identidad|marca|imagen|visual|creativo|banner|post|flyer|tarjeta|presentación|manual de marca|identidad visual|rediseño/i)) {
+          return '🎨 Diseño Gráfico & Branding:\n\nPlanes:\n• Básico: $500.000 - 5 diseños HD, Logotipo básico, Manual de colores, 3 rondas de ajustes.\n• Medio: $1.000.000 - 12 diseños premium, Rediseño identidad visual, Manual extendido, 8 correcciones.\n• Profesional: $2.000.000 - Recursos ilimitados, Branding editorial, Packaging, Ajustes ilimitados.\n\nCreamos identidades visuales que generan confianza y diferenciación en el mercado. ¿Qué tipo de diseño necesitas?';
+        }
+
+        // EDICIÓN DE VIDEO
+        if (m.match(/video|edición|edicion|reel|short|tiktok|youtube|contenido visual|cortometraje|film|producción audiovisual|motion graphics|animación|postproducción|color grading|efectos|sonido|storytelling/i)) {
+          return '🎬 Edición de Video Profesional:\n\nPlanes:\n• Esencial: $100.000 - Videos cortos, Cortes dinámicos, Música libre, Transiciones profesionales.\n• Profesional: $250.000 ⭐ - Todo lo esencial + Motion Graphics, Animaciones de texto, Corrección de color, Efectos de sonido, Optimizado para redes.\n• Premium: $500.000 - Todo lo profesional + Storytelling cinematográfico, Motion avanzado, Animaciones personalizadas, Estilo comercial premium.\n\nCada proyecto se cotiza según duración y complejidad. ¿Qué tipo de contenido quieres producir?';
+        }
+
+        // AUTOMATIZACIÓN / IA
+        if (m.match(/automatización|automatizacion|bot|crm|flujo|whatsapp business|respuestas automáticas|chatbot|ia|inteligencia artificial|ai|machine learning|procesos|workflow|integración|api|conexión|canales|omnicanal/i)) {
+          return '⚡ Automatización con IA:\n\nPlanes:\n• Básica: $1.000.000 - 3 flujos automatizados, Conexión con canal de ventas, IA incluida, Inducción al equipo.\n• Media: $2.000.000 - 10 flujos avanzados, Integración WhatsApp + Instagram, Conexión con CRM, Redistribución de leads.\n• Profesional: $3.000.000 - Automatizaciones ilimitadas, Ecosistema omnicanal, IA conversacional personalizada, Integraciones externas.\n\nConectamos tus canales y automatizamos respuestas para que tu negocio funcione 24/7. ¿Listo para optimizar tus procesos?';
+        }
+
+        // GOOGLE MAPS
+        if (m.match(/google|maps|mapa|local|ubicacion|ubicación|negocio local|aparecer en google|posicionamiento local|reseñas|fotos|horarios|dirección|perfil de google/i)) {
+          return '📍 Optimización Google Maps: $80.000\n\nIncluye:\n• Optimización completa de perfil\n• Información empresarial verificada\n• Carga de imágenes profesionales\n• Gestión de reseñas\n• Horarios y contacto actualizados\n\nMejoramos tu visibilidad local para que más personas te encuentren. ¿Quieres aparecer mejor en Google?';
+        }
+
+        // WHATSAPP BUSINESS
+        if (m.match(/whatsapp|wa|wp|whatsapp business|mensajes automáticos|catálogo|perfil profesional|etiquetas|respuestas rápidas|lista de difusión/i)) {
+          return '📱 Optimización WhatsApp Business: $50.000\n\nIncluye:\n• Perfil profesional configurado\n• Mensajes automáticos de bienvenida y ausencia\n• Catálogo de productos/servicios\n• Etiquetas de organización\n• Respuestas rápidas personalizadas\n• Enlace directo optimizado\n\nConfiguramos tu WhatsApp para que genere más confianza y ventas. ¿Quieres optimizar tu canal principal de comunicación?';
+        }
+
+        // MENÚ DIGITAL QR
+        if (m.match(/menú|menu|restaurante|qr|código qr|digital|comida|carta|pedidos|mesa|delivery|take away|comensales|comensal|negocio gastronómico/i)) {
+          return '🍽️ Menú Digital con QR: $70.000\n\nIncluye:\n• Diseño profesional adaptado a tu marca\n• Código QR generado para descarga\n• Adaptación móvil responsive\n• Fácil actualización en tiempo real\n• Sin necesidad de app\n\nModerniza tu restaurante con menús digitales accesibles desde cualquier celular. ¿Quieres ver un ejemplo?';
+        }
+
+        // REELS / SHORTS
+        if (m.match(/reel|short|tiktok|video corto|contenido rápido|redes sociales|instagram reel|youtube short|clip|edición rápida|viral|trend/i)) {
+          return '🎬 Edición de Reels y Shorts: desde $30.000 por video\n\nIncluye:\n• Cortes profesionales dinámicos\n• Subtítulos animados\n• Música sincronizada\n• Efectos modernos\n• Optimizado para plataformas\n\nCreamos videos que captan atención y aumentan tu alcance. ¿Cuántos videos necesitas editar?';
+        }
+
+        // CONTACTO / ATENCIÓN
+        if (m.match(/contact|whatsapp|hablar|llamar|humano|persona|asesor|vender|comprar|contratar|trabajar|colaborar|reunión|llamada|video llamada|mejor hablar|quiero contactar|comunicarme/i)) {
+          return '📱 ¡Claro! Puedes contactar directamente con el equipo KOVE:\n\n• WhatsApp: 3152507850\n• Correo: contacto@kove.com.co\n• Respuesta en menos de 24h\n• Sin costos ocultos\n• Atención personalizada\n\n¡Te esperamos para hacer realidad tu proyecto! 🚀';
+        }
+
+        // TIEMPOS DE ENTREGA
+        if (m.match(/tiempo|demora|entrega|días|cuándo|plazo|fecha|entrega rápida|lo necesito urgente|urgente|tiempo de entrega|plazo de entrega|cuanto demora|cuánto demora/i)) {
+          return '⏱️ Tiempos de entrega aproximados:\n\n• Landing page: 5 días hábiles\n• Sitio web completo: 7-14 días hábiles\n• Diseño gráfico: 5-10 días hábiles\n• Edición de video: 3-7 días hábiles\n• Automatización: 10-20 días hábiles\n• WhatsApp Business: 2-3 días hábiles\n• Google Maps: 3-5 días hábiles\n• Menú QR: 3-5 días hábiles\n\n¿Necesitas algo con urgencia? Escríbenos para cotizar tiempos express.';
+        }
+
+        // PORTAFOLIO / TRABAJOS
+        if (m.match(/portafolio|trabajo|ejemplo|proyecto|clientes|casos de éxito|referencias|muestra|trabajos realizados|proyectos anteriores|casos|resultados|logros/i)) {
+          return '💼 Puedes ver nuestro portafolio en la sección "Portafolio" de esta misma web. Tenemos proyectos destacados como:\n\n• IMAC Barber Studio - Sitio web premium\n• Tátau Supply - E-commerce\n• KOVE Agency - Ecosistema digital\n• Nails Studio - Diseño web elegante\n• Barbería 3M - Landing page\n• Web Motion - Motion design\n• Black Crown - Branding & Web\n\n¿Quieres que hablemos de cómo podemos trabajar juntos?';
+        }
+
+        // AGRADECIMIENTOS
+        if (m.match(/gracias|genial|perfecto|excelente|bueno|ok|vale|de acuerdo|excelente información|muy útil|me ayudaste|buena info|información clara|entendido|claro/i)) {
+          return '¡Con gusto! 😊 Me alegra poder ayudarte. Si tienes más preguntas, aquí estoy. Recuerda que también puedes contactarnos directamente al WhatsApp 3152507850 para atención más personalizada. ¡Éxito con tu proyecto! 🚀';
+        }
+
+        // PREGUNTAS SOBRE SERVICIOS EN GENERAL
+        if (m.match(/servicio|ofreces|ofrecen|hacen|tienen|disponible|catálogo|producto|solución|ayuda|soporte|apoyo|acompañamiento|consultoría|estrategia|marketing|publicidad|promoción/i)) {
+          return '🚀 KOVE Studio ofrece soluciones digitales integrales:\n\n• Desarrollo Web - Sitios modernos y optimizados\n• Diseño Gráfico - Identidad visual profesional\n• Branding - Construcción de marcas con propósito\n• Edición de Video - Contenido impactante para redes\n• Automatización IA - Procesos inteligentes\n• WhatsApp Business - Optimización de comunicación\n• Google Maps - Visibilidad local\n• Menú Digital QR - Modernización gastronómica\n• Reels/Shorts - Contenido viral\n\n¿Qué servicio te interesa más? ¡Cuéntame!';
+        }
+
+        // RESPUESTA POR DEFECTO
+        return 'Entiendo tu consulta. Para darte una respuesta precisa y personalizada, te recomiendo contactarnos directamente:\n\n📱 WhatsApp: 3152507850\n📧 contacto@kove.com.co\n\nNuestro equipo te atiende en menos de 24 horas. También puedes explorar las secciones de Servicios, Planes y Portafolio en esta web. ¿Te puedo ayudar con algo más específico?';
       }
 
       window.sendKoveMsg = function() {
@@ -2551,7 +2327,7 @@
     })();
 
     // ──────────────────────────────────────────────
-    // 13. ESTADÍSTICAS (contadores animados)
+    // 13. ESTADÍSTICAS
     // ──────────────────────────────────────────────
     const animateCounter = (id, target, suffix, isFloat) => {
       const el = document.getElementById(id);
@@ -2777,7 +2553,7 @@
     });
 
     console.log('🛡️ KOVE Security: Protección activa contra inspección y copiado');
-    console.log('🤖 KOVE IA: Solo responde con información pública de servicios');
+    console.log('🤖 KOVE IA: Respuestas inteligentes para todo tipo de preguntas');
   </script>
 
 </body>
