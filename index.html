@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://db.onlinewebfonts.com/c/a5566127ffe96fca6f008a1f3e57cf5e?family=Relationship" rel="stylesheet">
   
   
   <!-- Tailwind CSS -->
@@ -52,11 +53,25 @@
       font-family: 'Minecraft Ten', 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
       font-weight: 400 !important;
     }
-    /* Palabras de acento dentro de títulos: Poppins gruesa (como antes) */
+    /* Palabras de acento dentro de títulos: Relationship of Mélodrame */
+    @font-face {
+      font-family: "Relationship";
+      src: url("https://db.onlinewebfonts.com/t/a5566127ffe96fca6f008a1f3e57cf5e.eot");
+      src: url("https://db.onlinewebfonts.com/t/a5566127ffe96fca6f008a1f3e57cf5e.eot?#iefix") format("embedded-opentype"),
+           url("https://db.onlinewebfonts.com/t/a5566127ffe96fca6f008a1f3e57cf5e.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/a5566127ffe96fca6f008a1f3e57cf5e.woff") format("woff"),
+           url("https://db.onlinewebfonts.com/t/a5566127ffe96fca6f008a1f3e57cf5e.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
     .font-display .kove-word-accent {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-      font-weight: 800 !important;
+      font-weight: 900 !important;
+      color: #a3a3a3 !important;
     }
+    .font-display .kove-word-accent.kove-word-plain { color: inherit !important; }
+    .kove-word-accent.kove-word-plain { color: inherit !important; }
 
     html { scroll-behavior: smooth; background-color: #f4f4f7; }
     body { background-color: #f4f4f7; color: #1a1a1a; overflow-x: hidden; margin: 0; padding: 0; padding-bottom: 100px; }
@@ -1286,7 +1301,7 @@
             <div class="kove-reveal">
               <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-neutral-900 tracking-tight leading-[1.05] mb-6">
                 Tu <span class="kove-word-accent">negocio</span> merece<br>
-                una <span class="kove-word-accent">presencia</span> <span class="highlight-text">profesional.</span>
+                una <span class="kove-word-accent kove-word-plain">presencia</span> <span class="highlight-text">profesional.</span>
               </h2>
               <p class="text-neutral-500 text-sm sm:text-base leading-relaxed max-w-[600px] mx-auto mb-12 font-light">
                 Mientras otros negocios siguen usando soluciones antiguas, nosotros creamos experiencias digitales que generan confianza y atraen clientes desde el primer segundo.
