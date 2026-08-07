@@ -9,9 +9,22 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+  
   
   <!-- Tailwind CSS -->
+  <!-- Tailwind vía CDN: proyecto de un solo archivo sin pipeline de build (Node/PostCSS).
+       El aviso "should not be used in production" es esperado e inofensivo en este
+       contexto; se silencia solo ESE mensaje para no ensuciar la consola. -->
+  <script>
+    (function(){
+      const rawWarn = console.warn.bind(console);
+      console.warn = function(...args){
+        if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com should not be used in production')) return;
+        rawWarn(...args);
+      };
+    })();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -19,19 +32,30 @@
         extend: {
           fontFamily: {
             sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-            display: ["Poppins", "sans-serif"],
+            display: ["'Minecraft Ten'", "Poppins", "sans-serif"],
+            graffiti: ["'Permanent Marker'", "cursive"],
           }
         }
       }
     }
   </script>
+
+  <!-- GSAP: motion premium para scroll cinematográfico -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   
   <style>
     *, body, p, li, span, input, select, textarea, button {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     h1, h2, h3, h4, h5, h6, .font-display, .font-display * {
+      font-family: 'Minecraft Ten', 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-weight: 400 !important;
+    }
+    /* Palabras de acento dentro de títulos: Poppins gruesa (como antes) */
+    .font-display .kove-word-accent {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-weight: 800 !important;
     }
 
     html { scroll-behavior: smooth; background-color: #f4f4f7; }
@@ -179,11 +203,11 @@
       will-change: transform, box-shadow;
     }
     .kove-card:hover {
-      transform: translateY(-8px) scale(1.02) !important;
+      transform: translateY(-8px) scale(1.02) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) !important;
       box-shadow: 0 20px 50px rgba(0,0,0,0.06) !important;
     }
     .kove-card-dark:hover {
-      transform: translateY(-8px) scale(1.02) !important;
+      transform: translateY(-8px) scale(1.02) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) !important;
       box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important;
     }
 
@@ -195,7 +219,7 @@
     }
     .neo-card:hover {
       box-shadow: 4px 4px 12px #e0e0e5, -4px -4px 12px #ffffff, 0 8px 30px rgba(0,0,0,0.03);
-      transform: translateY(-6px) scale(1.01);
+      transform: translateY(-6px) scale(1.01) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
     }
     .neo-card-dark {
       background: #1a1a1a;
@@ -205,7 +229,7 @@
     }
     .neo-card-dark:hover {
       box-shadow: 4px 4px 12px rgba(0,0,0,0.4), -4px -4px 12px rgba(255,255,255,0.03);
-      transform: translateY(-6px) scale(1.01);
+      transform: translateY(-6px) scale(1.01) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
     }
 
     .highlight-text {
@@ -267,12 +291,13 @@
       will-change: transform;
       position: relative;
       overflow: hidden;
+      transform: translate(var(--mx,0px), var(--my,0px));
     }
     .kove-btn:hover {
-      transform: translateY(-2px) scale(1.03) !important;
+      transform: translate(var(--mx,0px), var(--my,0px)) translateY(-2px) scale(1.03) !important;
     }
     .kove-btn:active {
-      transform: scale(0.97) !important;
+      transform: translate(var(--mx,0px), var(--my,0px)) scale(0.97) !important;
       transition-duration: 0.1s !important;
     }
 
@@ -311,6 +336,161 @@
     /* ===== LAZY LOADING PARA IMÁGENES ===== */
     img {
       loading: lazy;
+    }
+
+    /* ══════════════════ KOVE MOTION LAYER — ESTILOS ══════════════════ */
+
+    /* Tagline "Make It Real" bajo el isotipo — Blow Brush (hero) */
+    .kove-tagline {
+      font-family: 'BlowBrush', 'Permanent Marker', cursive !important;
+      display: inline-block;
+      position: relative;
+      color: #1a1a1a;
+      letter-spacing: 0.01em;
+      transform: rotate(-2deg);
+    }
+    /* Fuente Blow Brush (brocha graffiti) — @font-face directo, más confiable que CDN externo */
+    @font-face {
+      font-family: "BlowBrush";
+      src: url("https://db.onlinewebfonts.com/t/2713f2ab86d4f07d1df79747abe2b0fc.eot");
+      src: url("https://db.onlinewebfonts.com/t/2713f2ab86d4f07d1df79747abe2b0fc.eot?#iefix") format("embedded-opentype"),
+           url("https://db.onlinewebfonts.com/t/2713f2ab86d4f07d1df79747abe2b0fc.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/2713f2ab86d4f07d1df79747abe2b0fc.woff") format("woff"),
+           url("https://db.onlinewebfonts.com/t/2713f2ab86d4f07d1df79747abe2b0fc.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* Footer: "Make it real." con Blow Brush (brocha graffiti) */
+    .kove-footer-tagline {
+      font-family: 'BlowBrush', 'Permanent Marker', cursive !important;
+      font-style: normal !important;
+      font-size: 20px !important;
+      line-height: 1 !important;
+      opacity: 0.9;
+      letter-spacing: 0.01em;
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+    /* Título "KOVE" del hero — Minecraft Ten (pixel) */
+    @font-face {
+      font-family: "Minecraft Ten";
+      src: url("https://db.onlinewebfonts.com/t/a7fcb1becc12274d5b761b1d895f8aa9.eot");
+      src: url("https://db.onlinewebfonts.com/t/a7fcb1becc12274d5b761b1d895f8aa9.eot?#iefix") format("embedded-opentype"),
+           url("https://db.onlinewebfonts.com/t/a7fcb1becc12274d5b761b1d895f8aa9.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/a7fcb1becc12274d5b761b1d895f8aa9.woff") format("woff"),
+           url("https://db.onlinewebfonts.com/t/a7fcb1becc12274d5b761b1d895f8aa9.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    .kove-hero-title {
+      font-family: "Minecraft Ten", "Poppins", sans-serif !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.04em !important;
+      image-rendering: pixelated;
+    }
+    /* Todos los títulos del sitio (font-display = Minecraft Ten): forzar peso
+       normal para que se vea el pixel real y no un "bold" sintético que lo tapa. */
+    .font-display {
+      font-weight: 400 !important;
+      letter-spacing: 0.015em;
+    }
+    .kove-tagline .swipe {
+      position: absolute;
+      left: -4%;
+      right: -4%;
+      bottom: -0.12em;
+      height: 0.16em;
+      background: #e11d2e;
+      border-radius: 999px;
+      transform: rotate(-1.2deg) scaleX(0);
+      transform-origin: left center;
+      z-index: -1;
+    }
+    .kove-tagline.tagline-in .swipe {
+      animation: tagSwipe 0.7s cubic-bezier(0.65,0,0.35,1) 0.5s forwards;
+    }
+    @keyframes tagSwipe { to { transform: rotate(-1.2deg) scaleX(1); } }
+
+    /* Cursor glow flotante (solo desktop) */
+    #kove-cursor-glow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 420px; height: 420px;
+      margin-left: -210px; margin-top: -210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,26,26,0.05) 0%, rgba(26,26,26,0) 70%);
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+    }
+
+    /* Doodles decorativos tipo graffiti urbano organizado */
+    .kove-doodle { position: absolute; pointer-events: none; opacity: 0.55; color: #1a1a1a; will-change: transform; }
+    .kove-doodle.dim { opacity: 0.16; }
+    .kove-doodle-float { animation: doodleFloat 6s ease-in-out infinite; }
+    .kove-doodle-float-slow { animation: doodleFloat 9s ease-in-out infinite; }
+    @keyframes doodleFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(6deg); }
+    }
+
+    /* Navbar: estado comprimido/brillante al hacer scroll */
+    #navbar { will-change: transform, box-shadow; }
+    #navbar.kove-nav-scrolled {
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+      transform: translateX(-50%) translateY(-2px) scale(0.98);
+    }
+
+    /* Glow ambiental reutilizable para secciones oscuras */
+    .kove-glow-red { position:absolute; border-radius:9999px; filter: blur(90px); background: radial-gradient(circle, rgba(225,29,46,0.18), transparent 70%); pointer-events:none; }
+    .kove-glow-blue { position:absolute; border-radius:9999px; filter: blur(90px); background: radial-gradient(circle, rgba(37,99,235,0.14), transparent 70%); pointer-events:none; }
+
+    @media (max-width: 640px) {
+      #kove-cursor-glow { display: none; }
+    }
+
+    /* ══════════ REVELADO DE TEXTO PALABRA POR PALABRA (subida + desenfoque + rebote) ══════════ */
+    .kove-split-words .kw {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(9px);
+      transform: translateY(22px);
+      transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1),
+                  filter 0.5s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.7s cubic-bezier(0.34,1.56,0.64,1); /* easeOutBack: rebote suave */
+      will-change: transform, opacity, filter;
+    }
+    .kove-split-words.kove-words-in .kw {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .kove-split-words .kw { opacity: 1 !important; filter: blur(0) !important; transform: none !important; transition: none !important; }
+    }
+
+    /* ══════════ GLOWS Y SOMBRAS MÍNIMAS (mantienen el minimalismo) ══════════ */
+    #inicio h1.font-display {
+      position: relative;
+    }
+    #inicio .flex.flex-col.items-center.kove-reveal::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 480px; height: 240px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(20px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .kove-card:hover, .kove-card-dark:hover, .neo-card:hover, .plan-card:hover {
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.035), 0 20px 50px rgba(0,0,0,0.07) !important;
+    }
+    .kove-card-dark:hover, .neo-card-dark:hover, .plan-card-dark:hover {
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 20px 50px rgba(0,0,0,0.2) !important;
     }
 
     /* ===== NAVBAR NEGRA MEJORADA ===== */
@@ -434,6 +614,20 @@
       background: #1a1a1a;
       color: #fff;
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .plan-card-dark::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0) 40%, rgba(225,29,46,0.18) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
 
     .plan-card-dark .plan-price {
@@ -445,7 +639,7 @@
     }
 
     .plan-card:hover {
-      transform: translateY(-8px) scale(1.01);
+      transform: translateY(-8px) scale(1.01) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
     }
 
     .plan-card-dark:hover {
@@ -1047,22 +1241,28 @@
           <div class="absolute inset-0 background-grid opacity-100 pointer-events-none"></div>
           <div class="absolute top-[25%] left-[20%] w-72 h-72 bg-neutral-200/40 rounded-full blur-3xl pointer-events-none kove-orb"></div>
           <div class="absolute bottom-[25%] right-[20%] w-80 h-80 bg-neutral-300/30 rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
-          <div class="relative z-10 text-center max-w-[820px] w-full">
+          <!-- Doodles graffiti organizados -->
+          <svg class="kove-doodle dim kove-doodle-float" style="top:18%;left:10%;width:26px;height:26px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          <svg class="kove-doodle dim kove-doodle-float-slow" style="top:14%;right:14%;width:20px;height:20px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.6L20 10l-6.2 1.4L12 18l-1.8-6.6L4 10l6.2-1.4z"/></svg>
+          <svg class="kove-doodle dim kove-doodle-float" style="bottom:20%;left:16%;width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg class="kove-doodle dim kove-doodle-float-slow" style="bottom:16%;right:10%;width:18px;height:18px;" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/></svg>
+          <div class="relative z-10 text-center max-w-[980px] w-full">
             <div class="inline-flex items-center gap-2 px-5 py-2 bg-[#f4f4f7] shadow-[4px_4px_10px_rgba(0,0,0,0.05),-4px_-4px_10px_rgba(255,255,255,0.9)] rounded-full mb-8 kove-reveal">
               <span class="w-2 h-2 bg-white border border-neutral-400 rounded-full animate-pulse"></span>
               <span class="font-sans font-bold text-[10px] tracking-wide text-neutral-800">ECOSISTEMA DIGITAL · COLOMBIA</span>
             </div>
             <div class="flex flex-col items-center kove-reveal">
-              <h1 class="font-display font-black text-[clamp(72px,12vw,124px)] tracking-tight leading-[0.9] text-neutral-900 select-none">KOVE</h1>
+              <h1 class="font-display font-black kove-hero-title text-[clamp(96px,16vw,168px)] tracking-tight leading-[0.88] text-neutral-900 select-none">KOVE</h1>
+              <span class="kove-tagline tagline-in text-[clamp(34px,6vw,64px)] mt-2 -mb-2">Make It Real</span>
             </div>
-            <div class="mt-8 flex items-center justify-center gap-2 flex-wrap min-h-[40px] kove-reveal">
+            <div class="mt-10 flex items-center justify-center gap-2 flex-wrap min-h-[40px] kove-reveal">
               <span class="text-neutral-400 font-medium text-lg sm:text-xl">Soy</span>
               <div class="relative inline-flex items-center bg-[#f4f4f7] rounded-xl px-4 py-2 shadow-[inset_2px_2px_6px_rgba(0,0,0,0.04),inset_-2px_-2px_6px_rgba(255,255,255,0.8)] min-w-[200px] justify-center">
                 <span id="hero-typewriter-text" class="font-sans font-extrabold text-xs sm:text-sm tracking-wide bg-gradient-to-r from-neutral-900 to-neutral-600 bg-clip-text text-transparent"></span>
                 <span class="inline-block w-[3px] h-4 bg-neutral-900 ml-1 animate-pulse"></span>
               </div>
             </div>
-            <div class="max-w-[540px] mx-auto mt-6 text-neutral-500 text-sm sm:text-base leading-relaxed font-light">
+            <div class="max-w-[560px] mx-auto mt-6 text-neutral-600 text-[15px] sm:text-lg leading-relaxed font-normal tracking-[-0.01em]">
               <span>Diseño gráfico, desarrollo web, edición de video, e inteligencia artificial para marcas que quieren crecer y vender más.</span>
             </div>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 kove-reveal">
@@ -1080,11 +1280,13 @@
           <div class="absolute top-[15%] left-[5%] w-96 h-96 bg-neutral-200/50 rounded-full blur-3xl pointer-events-none kove-orb"></div>
           <div class="absolute bottom-[10%] right-[5%] w-80 h-80 bg-neutral-300/30 rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
           <div class="absolute inset-0 background-grid opacity-60 pointer-events-none"></div>
+          <svg class="kove-doodle dim kove-doodle-float" style="top:10%;left:8%;width:22px;height:22px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.6L20 10l-6.2 1.4L12 18l-1.8-6.6L4 10l6.2-1.4z"/></svg>
+          <svg class="kove-doodle dim kove-doodle-float-slow" style="bottom:12%;right:8%;width:24px;height:24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
           <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
             <div class="kove-reveal">
               <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-neutral-900 tracking-tight leading-[1.05] mb-6">
-                Tu negocio merece<br>
-                una presencia <span class="highlight-text">profesional.</span>
+                Tu <span class="kove-word-accent">negocio</span> merece<br>
+                una <span class="kove-word-accent">presencia</span> <span class="highlight-text">profesional.</span>
               </h2>
               <p class="text-neutral-500 text-sm sm:text-base leading-relaxed max-w-[600px] mx-auto mb-12 font-light">
                 Mientras otros negocios siguen usando soluciones antiguas, nosotros creamos experiencias digitales que generan confianza y atraen clientes desde el primer segundo.
@@ -1113,7 +1315,7 @@
         <section id="servicios" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 section-fade">
-              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 mt-3 tracking-tight">Lo que hacemos</h2>
+              <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 mt-3 tracking-tight"><span class="kove-word-accent">Lo que</span> hacemos</h2>
               <p class="text-neutral-500 text-sm max-w-[540px] mx-auto mt-4 leading-relaxed">Soluciones digitales integrales para llevar tu negocio al siguiente nivel de conversión y prestigio.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1145,7 +1347,7 @@
         <section id="planes" class="py-20 bg-[#f4f4f7] relative">
           <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-12 section-fade">
-              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">Elige la solución ideal</h2>
+              <h2 class="font-display font-black text-3.5xl sm:text-5xl text-neutral-900 mt-2 tracking-tight">Elige la <span class="kove-word-accent">solución</span> ideal</h2>
               <p class="text-neutral-500 text-sm max-w-[500px] mx-auto mt-4 font-light">Selecciona tu categoría de interés y adquiere soporte sin costes ocultos.</p>
             </div>
 
@@ -1647,6 +1849,8 @@
 
         <!-- ===== ¿POR QUÉ KOVE? (oscura) ===== -->
         <section id="porque-kove" class="py-24 bg-[#1a1a1a] text-white relative overflow-hidden">
+          <div class="kove-glow-red" style="top:-10%;left:-8%;width:420px;height:420px;"></div>
+          <div class="kove-glow-blue" style="bottom:-15%;right:-10%;width:460px;height:460px;"></div>
           <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
           <div class="absolute top-[20%] left-[-8%] w-96 h-96 bg-white/[0.02] rounded-full blur-3xl pointer-events-none kove-orb"></div>
           <div class="absolute bottom-[10%] right-[-8%] w-80 h-80 bg-white/[0.02] rounded-full blur-3xl pointer-events-none kove-orb-2"></div>
@@ -1715,7 +1919,7 @@
         <footer class="bg-[#111111] text-white pt-16 pb-8 px-6">
           <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-              <div><div class="font-display font-black text-2xl tracking-tight text-white mb-2">KOVE</div><p class="italic text-xs text-neutral-400 mb-4">Make it real.</p><p class="text-neutral-500 text-[11px] leading-relaxed font-light">Ecosistema inteligente para la creación y automatización de marcas de alto valor en Colombia.</p></div>
+              <div><div class="font-display font-black text-2xl tracking-tight text-white mb-2">KOVE</div><p class="kove-footer-tagline text-neutral-400 mb-4">Make it real.</p><p class="text-neutral-500 text-[11px] leading-relaxed font-light">Ecosistema inteligente para la creación y automatización de marcas de alto valor en Colombia.</p></div>
               <div><h4 class="text-xs font-sans font-extrabold tracking-widest text-[#aaa] uppercase mb-4">Servicios</h4><ul class="space-y-2.5"><li><button onclick="handleWhatsAppRedirect('Desarrollo Web')" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Desarrollo Web</button></li><li><button onclick="handleWhatsAppRedirect('Diseño Gráfico')" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Diseño Gráfico</button></li><li><button onclick="handleWhatsAppRedirect('Branding')" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Branding</button></li><li><button onclick="handleWhatsAppRedirect('Edición de Video')" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Edición de Video</button></li><li><button onclick="handleWhatsAppRedirect('Automatización')" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Automatización</button></li></ul></div>
               <div><h4 class="text-xs font-sans font-extrabold tracking-widest text-[#aaa] uppercase mb-4">Sitio</h4><ul class="space-y-2.5"><li><button onclick="document.getElementById('portafolio').scrollIntoView({behavior:'smooth'})" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Portafolio</button></li><li><button onclick="document.getElementById('planes').scrollIntoView({behavior:'smooth'})" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Planes</button></li><li><button onclick="document.getElementById('edicion-video').scrollIntoView({behavior:'smooth'})" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Edición Video</button></li><li><button onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" class="text-xs text-neutral-500 hover:text-white transition duration-200 cursor-pointer text-left">Contacto</button></li><li><button onclick="handleWhatsAppRedirect('Agendar Asesoría')" class="text-xs text-[#ffffff] hover:text-[#aaa] font-bold transition duration-200 cursor-pointer text-left">Agendar Asesoría</button></li></ul></div>
               <div><h4 class="text-xs font-sans font-extrabold tracking-widest text-[#aaa] uppercase mb-4">Ecosistema</h4><p class="text-xs text-neutral-500 leading-relaxed font-light">contacto@kove.com.co</p><p class="text-xs text-neutral-500 leading-relaxed font-light mt-1">Colombia, América Latina</p></div>
@@ -1774,6 +1978,8 @@
     window.update = update;
     window.push = push;
     window.onValue = onValue;
+    window.__koveFirebaseReady = true;
+    window.dispatchEvent(new Event('kove-firebase-ready'));
 
     console.log("🔥 Firebase inicializado correctamente");
   </script>
@@ -2017,26 +2223,32 @@
     // ──────────────────────────────────────────────
     // 8. REGISTRAR VISITA
     // ──────────────────────────────────────────────
-    (async function registerVisit() {
-      try {
-        const db = window.db;
-        const ref = window.ref;
-        const get = window.get;
-        const update = window.update;
-        const visitsRef = ref(db, 'stats/visits');
-        const snapshot = await get(visitsRef);
-        const data = snapshot.val() || { total: 0, today: 0, history: {} };
+    function registerVisit() {
+      (async function(){
+        try {
+          const db = window.db;
+          const ref = window.ref;
+          const get = window.get;
+          const update = window.update;
+          const visitsRef = ref(db, 'stats/visits');
+          const snapshot = await get(visitsRef);
+          const data = snapshot.val() || { total: 0, today: 0, history: {} };
 
-        const todayKey = new Date().toISOString().split('T')[0];
-        const newTotal = (data.total || 0) + 1;
-        const newToday = (data.today || 0) + 1;
-        const history = data.history || {};
-        history[todayKey] = (history[todayKey] || 0) + 1;
+          const todayKey = new Date().toISOString().split('T')[0];
+          const newTotal = (data.total || 0) + 1;
+          const newToday = (data.today || 0) + 1;
+          const history = data.history || {};
+          history[todayKey] = (history[todayKey] || 0) + 1;
 
-        await update(visitsRef, { total: newTotal, today: newToday, history: history });
-        console.log('📊 Visita registrada');
-      } catch(e) { console.warn('Error registrando visita:', e); }
-    })();
+          await update(visitsRef, { total: newTotal, today: newToday, history: history });
+          console.log('📊 Visita registrada');
+        } catch(e) { console.warn('Error registrando visita:', e); }
+      })();
+    }
+    // El script Firebase es type="module" (carga diferida) y puede terminar
+    // después de este script clásico: esperamos su señal antes de usar window.ref.
+    if (window.__koveFirebaseReady) registerVisit();
+    else window.addEventListener('kove-firebase-ready', registerVisit, { once: true });
 
     // ──────────────────────────────────────────────
     // 9. PLANES ENGINE
@@ -2554,6 +2766,223 @@
 
     console.log('🛡️ KOVE Security: Protección activa contra inspección y copiado');
     console.log('🤖 KOVE IA: Respuestas inteligentes para todo tipo de preguntas');
+  </script>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       17. KOVE MOTION LAYER — GSAP · Parallax · Cursor · Tilt · Doodles
+       Capa 100% aditiva: no toca funciones, formularios, enlaces ni
+       estructura existentes. Solo añade movimiento y profundidad.
+  ══════════════════════════════════════════════════════════════ -->
+  <script>
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    const isDesktop = window.innerWidth >= 1024;
+
+    function boot(){
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      // ── 17.1 Cursor glow premium (solo desktop, sin tocar cursores nativos) ──
+      if (!reduceMotion && !isTouch && isDesktop) {
+        const glow = document.createElement('div');
+        glow.id = 'kove-cursor-glow';
+        document.body.appendChild(glow);
+        let gx = window.innerWidth/2, gy = window.innerHeight/2, cx = gx, cy = gy;
+        window.addEventListener('mousemove', e => { gx = e.clientX; gy = e.clientY; }, {passive:true});
+        (function loop(){
+          cx += (gx-cx)*0.12; cy += (gy-cy)*0.12;
+          glow.style.transform = `translate(${cx}px, ${cy}px)`;
+          requestAnimationFrame(loop);
+        })();
+      }
+
+      // ── 17.2 Botones "magnéticos": mueven --mx/--my (variables CSS),
+      // consumidas por .kove-btn en el CSS. Así conviven con el hover !important.
+      if (!reduceMotion && !isTouch) {
+        document.querySelectorAll('.kove-btn').forEach(el=>{
+          const state = { mx:{cur:0}, my:{cur:0} };
+          let targetMx = 0, targetMy = 0, active = false, raf = null;
+          function tick(){
+            state.mx.cur += (targetMx - state.mx.cur) * 0.18;
+            state.my.cur += (targetMy - state.my.cur) * 0.18;
+            el.style.setProperty('--mx', state.mx.cur.toFixed(2)+'px');
+            el.style.setProperty('--my', state.my.cur.toFixed(2)+'px');
+            if (active || Math.abs(targetMx-state.mx.cur) > 0.1 || Math.abs(targetMy-state.my.cur) > 0.1) {
+              raf = requestAnimationFrame(tick);
+            } else { raf = null; }
+          }
+          el.addEventListener('mousemove', e=>{
+            const r = el.getBoundingClientRect();
+            targetMx = (e.clientX - r.left - r.width/2) * 0.18;
+            targetMy = (e.clientY - r.top - r.height/2) * 0.28;
+            active = true;
+            if (!raf) raf = requestAnimationFrame(tick);
+          });
+          el.addEventListener('mouseleave', ()=>{
+            targetMx = 0; targetMy = 0; active = false;
+            if (!raf) raf = requestAnimationFrame(tick);
+          });
+        });
+      }
+
+      // ── 17.3 Tilt 3D en tarjetas (portafolio / servicios / bento), vía
+      // --rx/--ry consumidas por :hover en el CSS (mismo patrón que arriba).
+      if (!reduceMotion && !isTouch) {
+        document.querySelectorAll('.kove-card, .kove-card-dark, .neo-card, .neo-card-dark, .plan-card').forEach(el=>{
+          el.style.transformStyle = 'preserve-3d';
+          let targetRx = 0, targetRy = 0, curRx = 0, curRy = 0, raf = null, active = false;
+          function tick(){
+            curRx += (targetRx - curRx) * 0.15;
+            curRy += (targetRy - curRy) * 0.15;
+            el.style.setProperty('--rx', curRx.toFixed(2)+'deg');
+            el.style.setProperty('--ry', curRy.toFixed(2)+'deg');
+            if (active || Math.abs(targetRx-curRx) > 0.05 || Math.abs(targetRy-curRy) > 0.05) {
+              raf = requestAnimationFrame(tick);
+            } else { raf = null; }
+          }
+          el.addEventListener('mousemove', e=>{
+            const r = el.getBoundingClientRect();
+            const px = (e.clientX - r.left)/r.width - 0.5;
+            const py = (e.clientY - r.top)/r.height - 0.5;
+            targetRx = -py*6; targetRy = px*6; active = true;
+            if (!raf) raf = requestAnimationFrame(tick);
+          });
+          el.addEventListener('mouseleave', ()=>{
+            targetRx = 0; targetRy = 0; active = false;
+            if (!raf) raf = requestAnimationFrame(tick);
+          });
+        });
+      }
+
+      // ── 17.4 Parallax de orbes y grid en scroll (profundidad cinematográfica) ──
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reduceMotion) {
+        document.querySelectorAll('section').forEach(sec=>{
+          const orbs = sec.querySelectorAll('.kove-orb, .kove-orb-2');
+          orbs.forEach((orb,i)=>{
+            gsap.to(orb, {
+              yPercent: i%2===0 ? -22 : 26,
+              xPercent: i%2===0 ? 8 : -6,
+              ease: 'none',
+              scrollTrigger: { trigger: sec, start:'top bottom', end:'bottom top', scrub: 1.2 }
+            });
+          });
+          const grid = sec.querySelector('.background-grid');
+          if (grid) {
+            gsap.to(grid, { yPercent: 10, ease:'none', scrollTrigger:{ trigger:sec, start:'top bottom', end:'bottom top', scrub:1.4 } });
+          }
+          const doodles = sec.querySelectorAll('.kove-doodle');
+          doodles.forEach((d,i)=>{
+            gsap.to(d, {
+              yPercent: (i%2===0? -1:1) * (14 + i*4),
+              rotate: (i%2===0? -1:1) * (8 + i*2),
+              ease:'none',
+              scrollTrigger:{ trigger:sec, start:'top bottom', end:'bottom top', scrub:1 }
+            });
+          });
+        });
+
+        // Hero: KOVE se escala y desvanece levemente al hacer scroll (efecto cinematográfico)
+        const heroTitle = document.querySelector('#inicio h1');
+        if (heroTitle) {
+          gsap.to(heroTitle, {
+            scale: 0.92, yPercent: -8, opacity: 0.85, ease:'none',
+            scrollTrigger: { trigger:'#inicio', start:'top top', end:'bottom top', scrub: 0.6 }
+          });
+        }
+
+        // Portafolio: aparición escalonada con leve rotación al entrar
+        gsap.utils.toArray('#portafolio .kove-card').forEach((card, i)=>{
+          gsap.fromTo(card,
+            { rotate: i%2===0? -1.2:1.2 },
+            { rotate: 0, duration: 0.8, ease:'power3.out', clearProps:'rotate',
+              scrollTrigger:{ trigger: card, start:'top 92%' } }
+          );
+        });
+      }
+
+      // ── 17.5 Navbar reactiva al scroll: se comprime y brilla ──
+      const navbar = document.getElementById('navbar');
+      if (navbar) {
+        let ticking = false;
+        window.addEventListener('scroll', ()=>{
+          if (ticking) return; ticking = true;
+          requestAnimationFrame(()=>{
+            const y = window.scrollY;
+            if (y > 80) navbar.classList.add('kove-nav-scrolled'); else navbar.classList.remove('kove-nav-scrolled');
+            ticking = false;
+          });
+        }, {passive:true});
+      }
+
+      // ── 17.6 Revelado de texto PALABRA POR PALABRA (subida + desenfoque + rebote) ──
+      // Cubre TODOS los textos (grandes, medianos, pequeños): h1-h6, p, span, li, a,
+      // button, div. Solo se procesan nodos "hoja" (sin hijos complejos, solo <br>/<svg>
+      // de paso) para no romper íconos, gradientes ni contenido dinámico.
+      (function wordReveal(){
+        if (reduceMotion) return;
+
+        function isEligible(el){
+          if (el.dataset.kwDone) return false;
+          if (el.closest('.kove-reveal, .kove-reveal-left, .kove-reveal-right, .kove-reveal-scale, .kove-reveal-fade, .kove-tagline, .kove-footer-tagline')) return false;
+          if (el.closest('#security-panel, #kove-chat-messages, #navbar, .fixed.inset-y-0, #hero-typewriter-text')) return false;
+          for (const child of el.children) {
+            const tag = child.tagName;
+            if (tag !== 'BR' && tag !== 'svg' && tag !== 'SVG') return false; // solo texto plano + <br>/ícono
+          }
+          const text = el.textContent.trim();
+          if (text.length < 2) return false;
+          return true;
+        }
+
+        function splitWords(el){
+          el.dataset.kwDone = '1';
+          el.classList.add('kove-split-words');
+          const nodes = Array.from(el.childNodes);
+          el.innerHTML = '';
+          let wi = 0;
+          nodes.forEach(node=>{
+            if (node.nodeType === Node.TEXT_NODE) {
+              node.textContent.split(/(\s+)/).forEach(w=>{
+                if (w === '') return;
+                if (/^\s+$/.test(w)) { el.appendChild(document.createTextNode(w)); return; }
+                const span = document.createElement('span');
+                span.className = 'kw';
+                span.textContent = w;
+                span.style.transitionDelay = Math.min(wi*0.045, 0.9).toFixed(3)+'s';
+                el.appendChild(span);
+                wi++;
+              });
+            } else {
+              el.appendChild(node); // <br> o ícono: se conserva tal cual
+            }
+          });
+        }
+
+        const wordObserver = new IntersectionObserver((entries)=>{
+          entries.forEach(entry=>{
+            if (entry.isIntersecting) {
+              entry.target.classList.add('kove-words-in');
+              wordObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+        document.querySelectorAll(
+          'main h1, main h2, main h3, main h4, main h5, main h6, main p, main span, main li, main a, main button, main div, ' +
+          'footer h1, footer h2, footer h3, footer h4, footer p, footer span, footer li, footer a, footer div'
+        ).forEach(el=>{
+          if (!isEligible(el)) return;
+          splitWords(el);
+          wordObserver.observe(el);
+        });
+      })();
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') setTimeout(boot, 0);
+    else document.addEventListener('DOMContentLoaded', boot);
+  })();
   </script>
 
 </body>
