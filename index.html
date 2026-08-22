@@ -11,7 +11,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=League+Spartan:wght@300;400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <!-- Anti-flash de tema: aplica dark ANTES del primer paint si el usuario ya lo eligió -->
+  <script>(function(){try{if(localStorage.getItem('kove-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
   <link href="https://db.onlinewebfonts.com/c/a5566127ffe96fca6f008a1f3e57cf5e?family=Relationship" rel="stylesheet">
   
   
@@ -75,16 +77,34 @@
     .font-display .kove-word-accent.kove-word-plain { color: inherit !important; }
     .kove-word-accent.kove-word-plain { color: inherit !important; }
 
-    html { scroll-behavior: smooth; background-color: #f4f4f7; }
-    body { background-color: #f4f4f7; color: #1a1a1a; overflow-x: hidden; margin: 0; padding: 0; padding-bottom: 100px; }
+    /* ── Sistema de tema (claro/oscuro), neomorphism invertido ── */
+    :root {
+      --kove-bg:#f4f4f7; --kove-surface:#f4f4f7; --kove-surface-2:#1a1a1a;
+      --kove-text:#1a1a1a; --kove-text-soft:#555555;
+      --kove-sh-d:#e0e0e5; --kove-sh-l:#ffffff; --kove-sh-deep:#dbdbe1;
+      --kove-sh-d2:rgba(0,0,0,.3); --kove-sh-l2:rgba(255,255,255,.02);
+    }
+    html.dark {
+      --kove-bg:#131313; --kove-surface:#131313; --kove-surface-2:#1e1e1e;
+      --kove-text:#eae8e5; --kove-text-soft:#9a9a97;
+      --kove-sh-d:#0a0a0a; --kove-sh-l:rgba(255,255,255,.04); --kove-sh-deep:#000000;
+      --kove-sh-d2:rgba(0,0,0,.55); --kove-sh-l2:rgba(255,255,255,.05);
+    }
+    .font-spartan { font-family: 'League Spartan', sans-serif !important; }
+    .font-condensed { font-family: 'Times New Roman MT Condensed', 'Times New Roman', Georgia, serif !important; }
+
+    html { scroll-behavior: smooth; background-color: var(--kove-bg); }
+    body { background-color: var(--kove-bg); color: var(--kove-text); overflow-x: hidden; margin: 0; padding: 0; padding-bottom: 100px; transition: background-color .5s ease, color .5s ease; }
     
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: rgba(240, 240, 245, 0.5); }
     ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 99px; }
+    html.dark ::-webkit-scrollbar-track { background: rgba(20,20,20,.6); }
+    html.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); }
 
-    .soft-flat { background: #f4f4f7; box-shadow: 10px 10px 24px #e0e0e5, -10px -10px 24px #ffffff; }
-    .soft-flat-deep { background: #f4f4f7; box-shadow: 16px 16px 36px #dbdbe1, -16px -16px 36px #ffffff; }
-    .soft-dark-flat { background: #1a1a1a; box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3), -10px -10px 30px rgba(255, 255, 255, 0.02); }
+    .soft-flat { background: var(--kove-surface); box-shadow: 10px 10px 24px var(--kove-sh-d), -10px -10px 24px var(--kove-sh-l); transition: background .5s ease, box-shadow .5s ease; }
+    .soft-flat-deep { background: var(--kove-surface); box-shadow: 16px 16px 36px var(--kove-sh-deep), -16px -16px 36px var(--kove-sh-l); transition: background .5s ease, box-shadow .5s ease; }
+    .soft-dark-flat { background: var(--kove-surface-2); box-shadow: 10px 10px 30px var(--kove-sh-d2), -10px -10px 30px var(--kove-sh-l2); transition: background .5s ease, box-shadow .5s ease; }
     
     .background-grid {
       background-size: 50px 50px;
@@ -229,24 +249,35 @@
     }
 
     .neo-card {
-      background: #f4f4f7;
-      box-shadow: 8px 8px 20px #e0e0e5, -8px -8px 20px #ffffff;
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      background: var(--kove-surface);
+      box-shadow: 8px 8px 20px var(--kove-sh-d), -8px -8px 20px var(--kove-sh-l);
+      transition: background .5s ease, box-shadow 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1);
       border-radius: 32px;
     }
     .neo-card:hover {
-      box-shadow: 4px 4px 12px #e0e0e5, -4px -4px 12px #ffffff, 0 8px 30px rgba(0,0,0,0.03);
+      box-shadow: 4px 4px 12px var(--kove-sh-d), -4px -4px 12px var(--kove-sh-l), 0 8px 30px rgba(0,0,0,0.03);
       transform: translateY(-6px) scale(1.01) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
     }
     .neo-card-dark {
-      background: #1a1a1a;
-      box-shadow: 8px 8px 20px rgba(0,0,0,0.3), -8px -8px 20px rgba(255,255,255,0.02);
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      background: var(--kove-surface-2);
+      box-shadow: 8px 8px 20px var(--kove-sh-d2), -8px -8px 20px var(--kove-sh-l2);
+      transition: background .5s ease, box-shadow 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1);
       border-radius: 32px;
     }
     .neo-card-dark:hover {
-      box-shadow: 4px 4px 12px rgba(0,0,0,0.4), -4px -4px 12px rgba(255,255,255,0.03);
+      box-shadow: 4px 4px 12px var(--kove-sh-d2), -4px -4px 12px var(--kove-sh-l2);
       transform: translateY(-6px) scale(1.01) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+    }
+
+    /* Secciones/textos Tailwind con hex directo → se invierten en dark */
+    html.dark .bg-\[\#f4f4f7\] { background-color: var(--kove-bg) !important; }
+    html.dark .bg-\[\#f4f4f6\] { background-color: #101010 !important; }
+    html.dark .bg-\[\#e8e8ed\] { background-color: #181818 !important; }
+    html.dark .text-\[\#1a1a1a\] { color: var(--kove-text) !important; }
+    html.dark .text-\[\#aaa\] { color: #8a8a87 !important; }
+    html.dark .background-grid {
+      background-image: linear-gradient(to right, rgba(255,255,255,.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,.02) 1px, transparent 1px);
     }
 
     .highlight-text {
@@ -1137,6 +1168,131 @@
         font-size: clamp(60px, 18vw, 100px) !important;
       }
     }
+    /* ═══════════════════ MODO OSCURO — COBERTURA TOTAL ═══════════════════ */
+
+    /* Clases propias: glows, doodles, tagline, cursor */
+    html.dark .highlight-text { color: var(--kove-text-soft) !important; }
+    html.dark .highlight-text::before { background: #232323; }
+    html.dark .highlight-text:hover::before { background: #2c2c2c; }
+    html.dark .kove-tagline, html.dark .kove-doodle { color: var(--kove-text); }
+    html.dark #kove-cursor-glow {
+      background: radial-gradient(circle, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 70%) !important;
+    }
+    html.dark #inicio .flex.flex-col.items-center.kove-reveal::before {
+      background: radial-gradient(ellipse, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 70%) !important;
+    }
+    html.dark .kove-card:hover, html.dark .kove-card-dark:hover,
+    html.dark .neo-card:hover, html.dark .plan-card:hover {
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.4), 0 20px 50px rgba(0,0,0,0.5) !important;
+    }
+    html.dark ::selection { background: rgba(234,232,229,0.15); color: var(--kove-text); }
+    /* Orbes decorativos: sombras oscuras tenues, sin glow blanco */
+    html.dark .kove-orb, html.dark .kove-orb-2 { background-color: rgba(0,0,0,0.3) !important; }
+
+    /* Barra de filtro de Planes (neomórfico hundido) */
+    html.dark .plans-filter-container {
+      background: var(--kove-bg) !important;
+      box-shadow: inset 4px 4px 12px rgba(0,0,0,0.5), inset -4px -4px 12px rgba(255,255,255,0.04),
+                  2px 2px 6px rgba(0,0,0,0.15), -2px -2px 6px rgba(255,255,255,0.02) !important;
+    }
+    html.dark .plans-cat-btn { color: #7d7d7a; }
+    html.dark .plans-cat-btn:hover { color: #b8b6b2; }
+    html.dark .plans-cat-btn:not(.active) svg { stroke: #6b6b6b; }
+    html.dark .plans-cat-btn.active {
+      background: var(--kove-text) !important; color: var(--kove-bg) !important;
+      box-shadow: 4px 4px 14px rgba(0,0,0,0.4), -2px -2px 8px rgba(255,255,255,0.03);
+    }
+    html.dark .plans-cat-btn.active svg { stroke: var(--kove-bg); }
+
+    /* Tarjetas de Planes: la card "clara" se hunde, la card "acento oscuro" se invierte a clara */
+    html.dark .plan-card-light {
+      background: var(--kove-surface-2) !important; color: var(--kove-text) !important;
+      box-shadow: 8px 8px 20px var(--kove-sh-d2), -8px -8px 20px var(--kove-sh-l2) !important;
+    }
+    html.dark .plan-card-light:hover {
+      box-shadow: 4px 4px 12px var(--kove-sh-d2), -4px -4px 12px var(--kove-sh-l2), 0 8px 30px rgba(0,0,0,0.3) !important;
+    }
+    html.dark .plan-card-light .plan-price { color: var(--kove-text) !important; }
+    html.dark .plan-features-light li { color: #b0aeab; }
+    html.dark .plan-btn-light { background: var(--kove-text) !important; color: var(--kove-bg) !important; }
+
+    /* Fondos/textos Tailwind con hex directo (secciones principales) */
+    html.dark .bg-\[\#f4f4f7\] { background-color: var(--kove-bg) !important; }
+    html.dark .bg-\[\#f4f4f6\] { background-color: #101010 !important; }
+    html.dark .bg-\[\#e8e8ed\] { background-color: #181818 !important; }
+    html.dark .text-\[\#1a1a1a\] { color: var(--kove-text) !important; }
+    html.dark .text-\[\#aaa\] { color: #8a8a87 !important; }
+
+    /* Escala neutral de Tailwind: solo se invierten los tonos que son texto/superficie
+       "principal" del contenido; los tonos que son acentos oscuros (botones, badges,
+       secciones ya oscuras) se conservan oscuros para no perder su función. */
+    html.dark .text-neutral-900 { color: var(--kove-text) !important; }
+    html.dark .text-neutral-800 { color: #dcdcdc !important; }
+    html.dark .text-neutral-700 { color: #c7c7c7 !important; }
+    html.dark .text-neutral-600 { color: #b0b0b0 !important; }
+    html.dark .hover\:text-black:hover { color: #f5f5f5 !important; }
+    html.dark .bg-neutral-900 { background-color: #202020 !important; }
+    html.dark .hover\:bg-neutral-800:hover { background-color: #2b2b2b !important; }
+    /* Botón secundario claro sobre el fondo principal: mismo trato que el fondo, no el blanco puro */
+    html.dark .bg-\[\#f4f4f7\].text-neutral-950 { color: var(--kove-text) !important; }
+    html.dark .bg-\[\#f4f4f7\].hover\:bg-white:hover { background-color: #202020 !important; }
+    /* Título con gradiente de texto (bg-clip-text) */
+    html.dark .from-neutral-900.to-neutral-600 {
+      --tw-gradient-from: #f5f5f5 var(--tw-gradient-from-position) !important;
+      --tw-gradient-to: #a3a3a3 var(--tw-gradient-to-position) !important;
+    }
+    /* Menú lateral móvil: se queda SIEMPRE blanco (isla clara), aunque el resto esté en oscuro */
+    html.dark div.fixed.inset-y-0.left-0.z-40.bg-white\/98 { background-color: #ffffff !important; }
+    html.dark div.fixed.inset-y-0.left-0.z-40.bg-white\/98 .text-neutral-900,
+    html.dark div.fixed.inset-y-0.left-0.z-40.bg-white\/98 .text-neutral-800,
+    html.dark div.fixed.inset-y-0.left-0.z-40.bg-white\/98 .text-neutral-400,
+    html.dark div.fixed.inset-y-0.left-0.z-40.bg-white\/98 .text-neutral-500 { color: #141414 !important; }
+    html.dark div.fixed.inset-y-0.left-0.z-40.bg-white\/98 .hover\:text-black:hover { color: #000 !important; }
+
+    /* Píldoras/cajas con shadow arbitrario de Tailwind (highlight blanco fuerte) →
+       en oscuro se ven como "hueco" con sombras oscuras, sin glow blanco */
+    html.dark .shadow-\[4px_4px_10px_rgba\(0\,0\,0\,0\.05\)\,-4px_-4px_10px_rgba\(255\,255\,255\,0\.9\)\] {
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.5), -4px -4px 10px rgba(0,0,0,0.15) !important;
+    }
+    html.dark .shadow-\[inset_2px_2px_6px_rgba\(0\,0\,0\,0\.04\)\,inset_-2px_-2px_6px_rgba\(255\,255\,255\,0\.8\)\] {
+      box-shadow: inset 2px 2px 6px rgba(0,0,0,0.6), inset -2px -2px 6px rgba(0,0,0,0.15) !important;
+    }
+    html.dark .shadow-\[4px_4px_14px_rgba\(0\,0\,0\,0\.06\)\,-4px_-4px_14px_rgba\(255\,255\,255\,0\.9\)\] {
+      box-shadow: 4px 4px 14px rgba(0,0,0,0.5), -4px -4px 14px rgba(0,0,0,0.15) !important;
+    }
+    html.dark .shadow-\[3px_3px_8px_rgba\(0\,0\,0\,0\.04\)\,-3px_-3px_8px_rgba\(255\,255\,255\,0\.9\)\] {
+      box-shadow: 3px 3px 8px rgba(0,0,0,0.5), -3px -3px 8px rgba(0,0,0,0.15) !important;
+    }
+    html.dark .shadow-\[0_25px_60px_rgba\(255\,255\,255\,0\.12\)\] {
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5) !important;
+    }
+    /* Cursor parpadeante del typewriter, visible en oscuro */
+    html.dark .bg-neutral-900.animate-pulse { background-color: var(--kove-text) !important; }
+    html.dark .kove-btn.bg-neutral-900,
+    html.dark .kove-btn.bg-\[\#111111\],
+    html.dark .kove-btn.bg-\[\#1a1a1a\] {
+      background-color: var(--kove-text) !important;
+      color: var(--kove-bg) !important;
+    }
+    html.dark .kove-btn.bg-neutral-900:hover,
+    html.dark .kove-btn.bg-\[\#111111\]:hover,
+    html.dark .kove-btn.bg-\[\#1a1a1a\]:hover,
+    html.dark .kove-btn.hover\:bg-neutral-800:hover,
+    html.dark .kove-btn.hover\:bg-neutral-900:hover {
+      background-color: #d8d6d2 !important;
+      color: var(--kove-bg) !important;
+    }
+    html.dark .kove-btn.bg-neutral-900 svg,
+    html.dark .kove-btn.bg-\[\#111111\] svg,
+    html.dark .kove-btn.bg-\[\#1a1a1a\] svg { stroke: var(--kove-bg) !important; }
+
+    /* Scrollbar e imagen de puntos de fondo */
+    html.dark ::-webkit-scrollbar-track { background: rgba(20,20,20,.6); }
+    html.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); }
+    html.dark .background-grid {
+      background-image: linear-gradient(to right, rgba(255,255,255,.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,.02) 1px, transparent 1px) !important;
+    }
   </style>
 </head>
 <body class="background-grid no-context">
@@ -1227,6 +1383,12 @@
           <span>Contacto</span>
         </button>
 
+        <button onclick="kToggleTheme()" class="kove-nav-btn" id="theme-toggle-btn" title="Cambiar tema" aria-label="Cambiar modo claro/oscuro">
+          <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <span id="theme-toggle-label">Oscuro</span>
+        </button>
+
         <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);margin:0 2px;flex-shrink:0;"></div>
 
         <button onclick="handleWhatsAppRedirect('Asesoría gratuita')" class="kove-nav-cta">
@@ -1235,6 +1397,28 @@
         </button>
 
       </nav>
+
+      <script>
+        (function(){
+          function syncThemeUI(){
+            var isDark = document.documentElement.classList.contains('dark');
+            var sun = document.getElementById('theme-icon-sun');
+            var moon = document.getElementById('theme-icon-moon');
+            var label = document.getElementById('theme-toggle-label');
+            if (sun) sun.style.display = isDark ? 'none' : '';
+            if (moon) moon.style.display = isDark ? '' : 'none';
+            if (label) label.textContent = isDark ? 'Claro' : 'Oscuro';
+          }
+          window.kToggleTheme = function(){
+            var html = document.documentElement;
+            html.classList.toggle('dark');
+            try { localStorage.setItem('kove-theme', html.classList.contains('dark') ? 'dark' : 'light'); } catch(e){}
+            syncThemeUI();
+          };
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncThemeUI);
+          else syncThemeUI();
+        })();
+      </script>
 
       <!-- MENÚ LATERAL -->
       <div class="fixed inset-y-0 left-0 z-40 w-[280px] bg-white/98 backdrop-blur-2xl px-8 py-24 shadow-2xl flex flex-col gap-8 transform transition-transform duration-300 -translate-x-full">
