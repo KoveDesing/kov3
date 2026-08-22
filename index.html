@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=League+Spartan:wght@300;400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
   <!-- Anti-flash de tema: aplica dark ANTES del primer paint si el usuario ya lo eligió -->
-  <script>(function(){try{if(localStorage.getItem('kove-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem('kove-theme')!=='light')document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();</script>
   <link href="https://db.onlinewebfonts.com/c/a5566127ffe96fca6f008a1f3e57cf5e?family=Relationship" rel="stylesheet">
   
   
@@ -1266,8 +1266,23 @@
     html.dark .shadow-\[0_25px_60px_rgba\(255\,255\,255\,0\.12\)\] {
       box-shadow: 0 25px 60px rgba(0,0,0,0.5) !important;
     }
+    html.dark .shadow-\[4px_4px_12px_rgba\(0\,0\,0\,0\.06\)\,-4px_-4px_12px_\#ffffff\] {
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.5), -4px -4px 12px rgba(0,0,0,0.15) !important;
+    }
     /* Cursor parpadeante del typewriter, visible en oscuro */
     html.dark .bg-neutral-900.animate-pulse { background-color: var(--kove-text) !important; }
+
+    /* Card "PAQUETE KOVE PRO" (la clara entre las 2 oscuras): su texto heredado/​propio en negro se aclara */
+    html.dark .neo-card.text-neutral-950,
+    html.dark .neo-card .text-neutral-950:not(.kove-btn) { color: var(--kove-text) !important; }
+
+    /* Miniatura de portafolio "Tátau Supply": su fondo claro (zinc) NO se invierte (es branding
+       propio del proyecto), así que su texto debe quedarse oscuro siempre */
+    html.dark .from-zinc-100.to-neutral-200.text-neutral-900 { color: #171717 !important; }
+
+    /* Iconos de "Proceso KOVE": la caja se aclara (blanca) y el ícono adentro se oscurece */
+    html.dark .bg-\[\#e8e8ed\]\/60 { background-color: rgba(234,232,229,0.92) !important; }
+    html.dark .bg-\[\#e8e8ed\]\/60.text-neutral-800 { color: #141414 !important; }
     html.dark .kove-btn.bg-neutral-900,
     html.dark .kove-btn.bg-\[\#111111\],
     html.dark .kove-btn.bg-\[\#1a1a1a\] {
@@ -2456,19 +2471,19 @@
     // ──────────────────────────────────────────────
     const plansDB = {
       web: [
-        { name:'Starter', price:'$250.000', featured:false, features:['Landing page de 1 página optimizada','Diseño adaptativo Mobile-First','Formulario de contacto funcional','Enlace de WhatsApp directo','Google Analytics integrado','Entrega en 5 días hábiles'] },
+        { name:'Starter', price:'$249.900', featured:false, features:['Landing page de 1 página optimizada','Diseño adaptativo Mobile-First','Formulario de contacto funcional','Enlace de WhatsApp directo','Google Analytics integrado','Entrega en 5 días hábiles'] },
         { name:'Profesional', price:'$600.000', featured:true, badge:'MÁS POPULAR', features:['Sitio web de hasta 5 páginas','Blog o tienda básica','SEO técnico completo','Diseño UI/UX a medida','Integración redes sociales','Soporte 30 días incluido'] },
-        { name:'Enterprise', price:'$1.200.000', featured:false, features:['Web corporativa ilimitada','E-commerce avanzado','Panel de administración','Rendimiento y seguridad premium','Integraciones API a medida','Soporte prioritario continuo'] }
+        { name:'Enterprise', price:'$1.199.000', featured:false, features:['Web corporativa ilimitada','E-commerce avanzado','Panel de administración','Rendimiento y seguridad premium','Integraciones API a medida','Soporte prioritario continuo'] }
       ],
       grafico: [
-        { name:'Básico', price:'$500.000', featured:false, features:['5 diseños publicitarios HD','Logotipo básico de marca','Manual de colores y tipografía','3 rondas de ajustes','Archivos PDF imprimibles','Entrega en 5 días hábiles'] },
-        { name:'Medio', price:'$1.000.000', featured:true, badge:'POPULAR', features:['12 diseños premium para redes','Rediseño de identidad visual','Manual extendido de branding','8 rondas de correcciones','Archivos fuente editables','Entrega en 10 días hábiles'] },
-        { name:'Profesional', price:'$2.000.000', featured:false, features:['Recursos visuales ilimitados','Branding e identidad editorial','Packaging y mockups físicos','Ajustes ilimitados','Diseñador senior dedicado','Soporte continuo prioritario'] }
+        { name:'Básico', price:'$499.000', featured:false, features:['5 diseños publicitarios HD','Logotipo básico de marca','Manual de colores y tipografía','3 rondas de ajustes','Archivos PDF imprimibles','Entrega en 5 días hábiles'] },
+        { name:'Medio', price:'$990.000', featured:true, badge:'POPULAR', features:['12 diseños premium para redes','Rediseño de identidad visual','Manual extendido de branding','8 rondas de correcciones','Archivos fuente editables','Entrega en 10 días hábiles'] },
+        { name:'Profesional', price:'$2.010.000', featured:false, features:['Recursos visuales ilimitados','Branding e identidad editorial','Packaging y mockups físicos','Ajustes ilimitados','Diseñador senior dedicado','Soporte continuo prioritario'] }
       ],
       auto: [
-        { name:'Básica', price:'$1.000.000', featured:false, features:['3 flujos automatizados','Conexión con canal de ventas','Configuración con IA incluida','Inducción al equipo','Soporte técnico 15 días'] },
-        { name:'Media', price:'$2.000.000', featured:true, badge:'RECOMENDADO', features:['10 flujos avanzados','Integración WhatsApp + Instagram','Conexión con CRM activo','Redistribución inteligente de leads','Soporte prioritario 30 días'] },
-        { name:'Profesional', price:'$3.000.000', featured:false, features:['Automatizaciones ilimitadas','Ecosistema omnicanal completo','IA conversacional personalizada','Integraciones con APIs externas','Soporte dedicado permanente'] }
+        { name:'Básica', price:'$990.000', featured:false, features:['3 flujos automatizados','Conexión con canal de ventas','Configuración con IA incluida','Inducción al equipo','Soporte técnico 15 días'] },
+        { name:'Media', price:'$1.990.000', featured:true, badge:'RECOMENDADO', features:['10 flujos avanzados','Integración WhatsApp + Instagram','Conexión con CRM activo','Redistribución inteligente de leads','Soporte prioritario 30 días'] },
+        { name:'Profesional', price:'$3.010.000', featured:false, features:['Automatizaciones ilimitadas','Ecosistema omnicanal completo','IA conversacional personalizada','Integraciones con APIs externas','Soporte dedicado permanente'] }
       ]
     };
 
@@ -2652,12 +2667,12 @@
 
         // PRECIOS / COSTOS
         if (m.match(/precio|costo|cuanto|valor|cuánto|cuesta|tarifa|presupuesto|inversión|precios|costos|valores|tarifas|presupuestos/i)) {
-          return '💰 Nuestros precios (COP):\n\n• Desarrollo Web: desde $250.000\n• Diseño Gráfico: desde $500.000\n• Edición de Video: desde $100.000\n• Automatización IA: desde $1.000.000\n• WhatsApp Business: desde $50.000\n• Google Maps: desde $80.000\n• Menú Digital QR: desde $70.000\n• Reels/Shorts: desde $30.000\n\n📦 Paquetes Combinados:\n• Paquete Web: $800.000\n• Paquete Diseño: $700.000\n• KOVE PRO: $1.350.000\n\n¿Te interesa alguno en particular? ¡Todos incluyen soporte y sin costos ocultos!';
+          return '💰 Nuestros precios (COP):\n\n• Desarrollo Web: desde $249.900\n• Diseño Gráfico: desde $499.000\n• Edición de Video: desde $100.000\n• Automatización IA: desde $990.000\n• WhatsApp Business: desde $50.000\n• Google Maps: desde $80.000\n• Menú Digital QR: desde $70.000\n• Reels/Shorts: desde $30.000\n\n📦 Paquetes Combinados:\n• Paquete Web: $800.000\n• Paquete Diseño: $700.000\n• KOVE PRO: $1.350.000\n\n¿Te interesa alguno en particular? ¡Todos incluyen soporte y sin costos ocultos!';
         }
 
         // DESARROLLO WEB
         if (m.match(/web|página|pagina|sitio|landing|desarrollo web|programación|frontend|backend|hosting|dominio|diseño web|crear web|hacer página/i)) {
-          return '🌐 Desarrollo Web Profesional:\n\nPlanes:\n• Starter: $250.000 - Landing page optimizada, Mobile-First, formulario de contacto, WhatsApp directo.\n• Profesional: $600.000 - Sitio 5 páginas, Blog/Tienda básica, SEO técnico, Diseño UI/UX a medida.\n• Enterprise: $1.200.000 - Web corporativa ilimitada, E-commerce avanzado, Panel administración, Seguridad premium.\n\nIncluye diseño adaptativo, SEO básico, integración WhatsApp. ¿Cuál se adapta mejor a tu negocio?';
+          return '🌐 Desarrollo Web Profesional:\n\nPlanes:\n• Starter: $249.900 - Landing page optimizada, Mobile-First, formulario de contacto, WhatsApp directo.\n• Profesional: $600.000 - Sitio 5 páginas, Blog/Tienda básica, SEO técnico, Diseño UI/UX a medida.\n• Enterprise: $1.199.000 - Web corporativa ilimitada, E-commerce avanzado, Panel administración, Seguridad premium.\n\nIncluye diseño adaptativo, SEO básico, integración WhatsApp. ¿Cuál se adapta mejor a tu negocio?';
         }
 
         // DISEÑO GRÁFICO / BRANDING
@@ -2672,7 +2687,7 @@
 
         // AUTOMATIZACIÓN / IA
         if (m.match(/automatización|automatizacion|bot|crm|flujo|whatsapp business|respuestas automáticas|chatbot|ia|inteligencia artificial|ai|machine learning|procesos|workflow|integración|api|conexión|canales|omnicanal/i)) {
-          return '⚡ Automatización con IA:\n\nPlanes:\n• Básica: $1.000.000 - 3 flujos automatizados, Conexión con canal de ventas, IA incluida, Inducción al equipo.\n• Media: $2.000.000 - 10 flujos avanzados, Integración WhatsApp + Instagram, Conexión con CRM, Redistribución de leads.\n• Profesional: $3.000.000 - Automatizaciones ilimitadas, Ecosistema omnicanal, IA conversacional personalizada, Integraciones externas.\n\nConectamos tus canales y automatizamos respuestas para que tu negocio funcione 24/7. ¿Listo para optimizar tus procesos?';
+          return '⚡ Automatización con IA:\n\nPlanes:\n• Básica: $990.000 - 3 flujos automatizados, Conexión con canal de ventas, IA incluida, Inducción al equipo.\n• Media: $1.990.000 - 10 flujos avanzados, Integración WhatsApp + Instagram, Conexión con CRM, Redistribución de leads.\n• Profesional: $3.010.000 - Automatizaciones ilimitadas, Ecosistema omnicanal, IA conversacional personalizada, Integraciones externas.\n\nConectamos tus canales y automatizamos respuestas para que tu negocio funcione 24/7. ¿Listo para optimizar tus procesos?';
         }
 
         // GOOGLE MAPS
