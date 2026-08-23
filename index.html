@@ -186,6 +186,71 @@
     .panel-box::-webkit-scrollbar { width: 4px; }
     .panel-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
 
+    /* ═══════ KOVE MENSAJES: panel flotante público (no fullscreen) ═══════ */
+    #kove-msg-panel {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 99998;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    #kove-msg-panel.active { display: flex; }
+    .kove-msg-box {
+      background: #161616;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 26px;
+      width: calc(100% - 24px);
+      max-width: 480px;
+      height: calc(100dvh - 24px);
+      max-height: 720px;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+      opacity: 0;
+      transform: scale(0.96) translateY(16px);
+      transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1);
+      overflow: hidden;
+    }
+    #kove-msg-panel.active .kove-msg-box { opacity: 1; transform: scale(1) translateY(0); }
+    .kove-msg-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0;
+    }
+    .kove-msg-header h3 { font-family:'Poppins',sans-serif; font-weight: 800; font-size: 15px; display:flex; align-items:center; gap:8px; }
+    .kove-msg-close { background: rgba(255,255,255,0.08); border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 16px; display:flex; align-items:center; justify-content:center; }
+    .kove-msg-close:hover { background: rgba(255,255,255,0.16); }
+    .kove-msg-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .kove-msg-body::-webkit-scrollbar { width: 4px; }
+    .kove-msg-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+    .kove-msg-welcome h2 { font-size: 21px; font-weight: 800; margin-bottom: 6px; }
+    .kove-msg-welcome p { font-size: 13px; color: #999; line-height: 1.5; }
+    .kove-bubble { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 13.5px; line-height: 1.45; }
+    .kove-bubble.from-kove { align-self: flex-start; background: rgba(255,255,255,0.08); color: #eee; border-bottom-left-radius: 4px; }
+    .kove-bubble.from-user { align-self: flex-end; background: #fff; color: #111; border-bottom-right-radius: 4px; }
+    .kove-bubble img { max-width: 100%; border-radius: 10px; margin-top: 6px; display: block; }
+    .kove-msg-row { display: flex; align-items: flex-end; gap: 8px; }
+    .kove-msg-row.from-user { flex-direction: row-reverse; }
+    .kove-msg-avatar { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
+    .kove-msg-avatar.kove { background: #fff; color: #111; }
+    .kove-msg-avatar.user { background: rgba(255,255,255,0.15); color: #fff; }
+    .kove-msg-footer { padding: 14px; border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+    .kove-msg-input-row { display: flex; align-items: flex-end; gap: 8px; background: rgba(255,255,255,0.06); border-radius: 20px; padding: 8px 8px 8px 16px; }
+    .kove-msg-input-row textarea { flex: 1; background: transparent; border: none; color: #fff; font-size: 13.5px; resize: none; max-height: 100px; padding: 6px 0; }
+    .kove-msg-input-row textarea:focus { outline: none; }
+    .kove-msg-icon-btn { background: rgba(255,255,255,0.08); border: none; color: #fff; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s; }
+    .kove-msg-icon-btn:hover { background: rgba(255,255,255,0.16); }
+    .kove-msg-send-btn { background: #fff; color: #111; }
+    .kove-msg-send-btn:hover { background: #e5e5e5; }
+    .kove-msg-preview { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 8px; margin-bottom: 8px; }
+    .kove-msg-preview img { width: 42px; height: 42px; object-fit: cover; border-radius: 8px; }
+    .kove-msg-preview button { margin-left: auto; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; }
+
     .stat-card { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; text-align: center; }
     .stat-card .number { font-size: 28px; font-weight: 800; color: #fff; }
     .stat-card .label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -196,6 +261,24 @@
 
     .btn-panel { background: rgba(255,255,255,0.1); border: none; color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
     .btn-panel:hover { background: rgba(255,255,255,0.2); }
+
+    .inbox-filter-btn { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #999; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .inbox-filter-btn:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .inbox-filter-btn.active { background: #fff; color: #000; border-color: #fff; }
+
+    .inbox-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.03); cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+    .inbox-item:hover { background: rgba(255,255,255,0.07); }
+    .inbox-item.unread { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+    .inbox-item.unread .inbox-item-name { font-weight: 800; color: #fff; }
+    .inbox-item .inbox-dot { width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; margin-top: 6px; flex-shrink: 0; }
+    .inbox-item.archived { opacity: 0.55; }
+    .inbox-item-name { font-size: 13px; font-weight: 600; color: #ddd; }
+    .inbox-item-service { font-size: 11px; color: #888; margin: 2px 0; }
+    .inbox-item-preview { font-size: 12px; color: #777; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+    .inbox-item-time { font-size: 10px; color: #666; white-space: nowrap; flex-shrink: 0; }
+    .inbox-detail-field { margin-bottom: 14px; }
+    .inbox-detail-field label { display: block; font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+    .inbox-detail-field div { font-size: 13px; color: #eee; }
 
     input, select { background: rgba(255,255,255,0.05); border: none; border-radius: 12px; padding: 10px 14px; color: #fff; font-size: 13px; width: 100%; outline: none; transition: 0.2s; }
     input:focus, select:focus { background: rgba(255,255,255,0.08); }
@@ -1286,14 +1369,14 @@
     /* Cursor parpadeante del typewriter, visible en oscuro */
     html.dark .bg-neutral-900.animate-pulse { background-color: var(--kove-text) !important; }
 
-    /* Ícono de WhatsApp del navbar: blanco con glow suave, en cualquier tema */
+    /* Ícono de Mensajes del navbar: blanco con glow suave, en cualquier tema */
     #nav-wa-btn svg {
-      fill: rgba(255,255,255,0.92);
+      stroke: rgba(255,255,255,0.92);
       filter: drop-shadow(0 0 4px rgba(255,255,255,0.35));
-      transition: filter 0.3s ease, fill 0.3s ease;
+      transition: filter 0.3s ease, stroke 0.3s ease;
     }
     #nav-wa-btn:hover svg {
-      fill: #ffffff;
+      stroke: #ffffff;
       filter: drop-shadow(0 0 7px rgba(255,255,255,0.55));
     }
 
@@ -1355,15 +1438,22 @@
       </div>
 
       <div id="security-dashboard" style="display:none;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+          <div style="display:flex;gap:8px;">
+            <button id="panel-tab-btn-dash" onclick="showPanelTab('dashboard')" class="btn-panel" style="background:rgba(255,255,255,0.18);">📊 Dashboard</button>
+            <button id="panel-tab-btn-inbox" onclick="showPanelTab('inbox')" class="btn-panel" style="position:relative;">✉ Leads<span id="inbox-badge" style="display:none;background:#ef4444;color:#fff;font-size:10px;font-weight:800;padding:1px 6px;border-radius:999px;margin-left:6px;">0</span></button>
+            <button id="panel-tab-btn-messages" onclick="showPanelTab('messages')" class="btn-panel" style="position:relative;">💬 Mensajes de usuarios<span id="msg-badge" style="display:none;background:#ef4444;color:#fff;font-size:10px;font-weight:800;padding:1px 6px;border-radius:999px;margin-left:6px;">0</span></button>
+          </div>
           <button onclick="kovLogout()" style="background:rgba(255,255,255,0.08);color:#aaa;border:none;padding:6px 16px;border-radius:999px;font-size:11px;cursor:pointer;">Cerrar sesión</button>
         </div>
+
+        <div id="panel-tab-dashboard">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;">
-          <div class="stat-card"><div class="number" id="stat-visits-total">0</div><div class="label">Visitas Totales</div></div>
-          <div class="stat-card"><div class="number" id="stat-leads-total">0</div><div class="label">Leads Recibidos</div></div>
-          <div class="stat-card"><div class="number" id="stat-today-visits">0</div><div class="label">Visitas Hoy</div></div>
-          <div class="stat-card"><div class="number" id="stat-unique-visitors">0</div><div class="label">Visitantes Únicos</div></div>
-          <div class="stat-card"><div class="number" id="stat-conversion">0%</div><div class="label">Conversión</div></div>
+          <div class="stat-card" style="border-top:3px solid #3b82f6;"><div class="number" id="stat-visits-total" style="color:#60a5fa;">0</div><div class="label">Visitas Totales</div></div>
+          <div class="stat-card" style="border-top:3px solid #ec4899;"><div class="number" id="stat-leads-total" style="color:#f472b6;">0</div><div class="label">Leads Recibidos</div></div>
+          <div class="stat-card" style="border-top:3px solid #22c55e;"><div class="number" id="stat-today-visits" style="color:#4ade80;">0</div><div class="label">Visitas Hoy</div></div>
+          <div class="stat-card" style="border-top:3px solid #a855f7;"><div class="number" id="stat-unique-visitors" style="color:#c084fc;">0</div><div class="label">Visitantes Únicos</div></div>
+          <div class="stat-card" style="border-top:3px solid #f59e0b;"><div class="number" id="stat-conversion" style="color:#fbbf24;">0%</div><div class="label">Conversión</div></div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
@@ -1393,6 +1483,103 @@
         </div>
         <button onclick="saveSocialLinks()" class="btn-panel" style="margin-top:12px;background:#2563eb;color:#fff;">Guardar enlaces</button>
         <p id="social-save-msg" style="font-size:11px;color:#4ade80;margin-top:6px;display:none;">✅ Enlaces guardados correctamente</p>
+        </div>
+
+        <!-- ═══════ BANDEJA DE MENSAJES ═══════ -->
+        <div id="panel-tab-inbox" style="display:none;">
+          <div id="inbox-list-view">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+              <h3 style="font-size:15px;font-weight:700;margin:0;">✉ Leads <span id="inbox-count-label" style="color:#888;font-weight:400;font-size:12px;"></span></h3>
+              <input type="text" id="inbox-search" oninput="renderInbox()" placeholder="🔍 Buscar mensajes..." style="max-width:220px;font-size:12px;" />
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+              <button class="inbox-filter-btn active" data-filter="nuevo" onclick="setInboxFilter('nuevo',this)">Nuevos</button>
+              <button class="inbox-filter-btn" data-filter="todos" onclick="setInboxFilter('todos',this)">Todos</button>
+              <button class="inbox-filter-btn" data-filter="leido" onclick="setInboxFilter('leido',this)">Leídos</button>
+              <button class="inbox-filter-btn" data-filter="archivado" onclick="setInboxFilter('archivado',this)">Archivados</button>
+            </div>
+            <select id="inbox-service-filter" onchange="renderInbox()" style="margin-bottom:12px;font-size:12px;">
+              <option value="">Todos los servicios</option>
+              <option value="Diseño Gráfico">Diseño Gráfico</option>
+              <option value="Desarrollo Web">Desarrollo Web</option>
+              <option value="Branding">Branding</option>
+              <option value="Automatización">Automatización</option>
+              <option value="Otro">Otros</option>
+            </select>
+            <div id="inbox-list" style="display:flex;flex-direction:column;gap:6px;max-height:400px;overflow-y:auto;"></div>
+            <p id="inbox-empty" style="display:none;color:#888;text-align:center;padding:30px 0;font-size:13px;">No hay mensajes en esta bandeja.</p>
+          </div>
+
+          <div id="inbox-detail-view" style="display:none;">
+            <button onclick="closeLeadDetail()" class="btn-panel" style="margin-bottom:16px;">← Mensajes</button>
+            <div id="inbox-detail-content"></div>
+          </div>
+        </div>
+
+        <!-- ═══════ MENSAJES DE USUARIOS (KOVE Mensajes, admin) ═══════ -->
+        <div id="panel-tab-messages" style="display:none;">
+          <div id="msg-list-view">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+              <h3 style="font-size:15px;font-weight:700;margin:0;">💬 Mensajes de usuarios <span id="msg-count-label" style="color:#888;font-weight:400;font-size:12px;"></span></h3>
+              <input type="text" id="msg-search" oninput="renderConvList()" placeholder="🔍 Buscar mensajes..." style="max-width:220px;font-size:12px;" />
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+              <button class="inbox-filter-btn active" data-filter="new" onclick="setConvFilter('new',this)">Nuevos</button>
+              <button class="inbox-filter-btn" data-filter="todos" onclick="setConvFilter('todos',this)">Todos</button>
+              <button class="inbox-filter-btn" data-filter="read" onclick="setConvFilter('read',this)">Leídos</button>
+              <button class="inbox-filter-btn" data-filter="replied" onclick="setConvFilter('replied',this)">Respondidos</button>
+              <button class="inbox-filter-btn" data-filter="archived" onclick="setConvFilter('archived',this)">Archivados</button>
+            </div>
+            <div id="conv-list" style="display:flex;flex-direction:column;gap:6px;max-height:420px;overflow-y:auto;"></div>
+            <p id="conv-empty" style="display:none;color:#888;text-align:center;padding:30px 0;font-size:13px;">No hay conversaciones en esta bandeja.</p>
+          </div>
+
+          <div id="conv-detail-view" style="display:none;">
+            <button onclick="closeConvDetail()" class="btn-panel" style="margin-bottom:16px;">← Mensajes de usuarios</button>
+            <div id="conv-messages" style="display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;padding:4px 4px 12px;"></div>
+            <div id="conv-tech-info" style="font-size:11px;color:#777;background:rgba(255,255,255,0.03);border-radius:12px;padding:10px 14px;margin:10px 0;display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;"></div>
+            <div style="display:flex;gap:8px;align-items:flex-end;background:rgba(255,255,255,0.06);border-radius:16px;padding:8px 8px 8px 14px;">
+              <textarea id="conv-reply-input" rows="1" placeholder="Escribe una respuesta..." style="flex:1;background:transparent;border:none;color:#fff;font-size:13px;resize:none;outline:none;"></textarea>
+              <button class="btn-panel" style="background:#fff;color:#000;" onclick="sendAdminReply()">Enviar</button>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:10px;">
+              <button class="btn-panel" id="conv-archive-btn" onclick="toggleConvArchive()">Archivar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="inbox-toast" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#1a1a1a;color:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 20px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);max-width:280px;transform:translateY(20px);opacity:0;pointer-events:none;transition:all 0.35s ease;"></div>
+
+  <!-- ═══════ KOVE MENSAJES: panel público flotante ═══════ -->
+  <div id="kove-msg-panel" onclick="if(event.target===this) closeKoveMessages()">
+    <div class="kove-msg-box">
+      <div class="kove-msg-header">
+        <h3>💬 KOVE Mensajes</h3>
+        <button class="kove-msg-close" onclick="closeKoveMessages()">✕</button>
+      </div>
+      <div class="kove-msg-body" id="kove-msg-body">
+        <div class="kove-msg-welcome" id="kove-msg-precontact">
+          <h2>¡Hola! Bienvenido a KOVE Mensajes 👋</h2>
+          <p>Antes de comenzar, cuéntanos quién eres para poder responderte mejor.</p>
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px;">
+            <input type="text" id="kove-msg-name-input" placeholder="Tu nombre" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:11px 14px;border-radius:12px;font-size:13px;" />
+            <input type="tel" id="kove-msg-phone-input" placeholder="Tu WhatsApp (ej: 3001234567)" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:11px 14px;border-radius:12px;font-size:13px;" />
+            <p id="kove-msg-precontact-error" style="display:none;color:#f87171;font-size:11px;"></p>
+            <button class="btn-panel" style="background:#fff;color:#000;margin-top:4px;" onclick="koveSubmitPrecontact()">Continuar</button>
+          </div>
+        </div>
+        <div id="kove-msg-list" style="display:none;flex-direction:column;gap:10px;"></div>
+      </div>
+      <div class="kove-msg-footer" id="kove-msg-footer" style="display:none;">
+        <div class="kove-msg-input-row">
+          <textarea id="kove-msg-input" rows="1" placeholder="Escribe cualquier cosa..." onkeydown="koveMsgKeydown(event)"></textarea>
+          <button class="kove-msg-icon-btn kove-msg-send-btn" onclick="sendKoveUserMessage()" title="Enviar">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 14-7-7 14-2-7-5-2z"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1441,10 +1628,11 @@
 
         <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);margin:0 2px;flex-shrink:0;"></div>
 
-        <button onclick="handleWhatsAppRedirect('Navbar WhatsApp')" class="kove-nav-btn" id="nav-wa-btn" title="Escríbenos por WhatsApp">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.35-.49.05-1.11.07-1.79-.11-.41-.11-.94-.29-1.62-.57-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.41.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.69-.8.87-1.08.19-.28.37-.23.63-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.66-.17 1.34z"/></svg>
-          <span>WA</span>
+        <button onclick="openKoveMessages()" class="kove-nav-btn" id="nav-wa-btn" title="Escríbenos por KOVE Mensajes">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>Mensaje</span>
         </button>
+
 
       </nav>
 
@@ -2197,7 +2385,7 @@
   <script type="text/javascript">
     (function() {
       emailjs.init({
-        publicKey: 'qRwao0_19KK6Vzau1',
+        publicKey: 'E8wVWsuPvDzCoBpyP',
       });
       console.log('✅ EmailJS inicializado correctamente');
     })();
@@ -2208,7 +2396,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
     import { getDatabase, ref, set, get, update, push, onValue, increment, runTransaction } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { getAnalytics, logEvent as gaLogEvent } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBS4ZUd0a91WNbLtXc0Z6kPROR6st7eeaw",
@@ -2240,6 +2428,7 @@
     window.signInWithEmailAndPassword = signInWithEmailAndPassword;
     window.onAuthStateChanged = onAuthStateChanged;
     window.signOut = signOut;
+    window.signInAnonymously = signInAnonymously;
     window.gaLogEvent = function(name, params) { try { if (analytics) gaLogEvent(analytics, name, params || {}); } catch(e){} };
     window.__koveFirebaseReady = true;
     window.dispatchEvent(new Event('kove-firebase-ready'));
@@ -2389,12 +2578,13 @@
       const panel = document.getElementById('security-panel');
       if (panel.classList.contains('active')) {
         panel.classList.remove('active');
+        if (window.__koveLeadsUnsub) { window.__koveLeadsUnsub(); window.__koveLeadsUnsub = null; }
         return;
       }
       panel.classList.add('active');
       document.getElementById('security-error').style.display = 'none';
-      // Si ya hay sesión de Firebase activa, entra directo al dashboard
-      if (window.auth && window.auth.currentUser) {
+      // Si ya hay sesión de ADMIN activa (no anónima) entra directo al dashboard
+      if (window.auth && window.auth.currentUser && !window.auth.currentUser.isAnonymous) {
         document.getElementById('security-login').style.display = 'none';
         document.getElementById('security-dashboard').style.display = 'block';
         loadSecurityData();
@@ -2439,6 +2629,7 @@
       if (window.auth && window.signOut) {
         window.signOut(window.auth).then(function(){
           document.getElementById('security-panel').classList.remove('active');
+          if (window.__koveLeadsUnsub) { window.__koveLeadsUnsub(); window.__koveLeadsUnsub = null; }
         });
       }
     };
@@ -2448,7 +2639,7 @@
       window.onAuthStateChanged(window.auth, function(user) {
         const panel = document.getElementById('security-panel');
         const isPanelOpen = panel && panel.classList.contains('active');
-        if (user) {
+        if (user && !user.isAnonymous) {
           if (isPanelOpen) {
             document.getElementById('security-login').style.display = 'none';
             document.getElementById('security-dashboard').style.display = 'block';
@@ -2476,6 +2667,7 @@
         const ref = window.ref;
         const get = window.get;
         const onValue = window.onValue;
+        window.startAdminMessagesListener && window.startAdminMessagesListener();
 
         const visitsRef = ref(db, 'stats/visits');
         const snapshotVisits = await get(visitsRef);
@@ -2517,7 +2709,7 @@
 
         renderCharts(visitsData.history || {}, leadsArray, Object.values(visitorsData), eventsArray);
 
-        onValue(leadsRef, (snap) => {
+        window.__koveLeadsUnsub = onValue(leadsRef, (snap) => {
           const data = snap.val() || {};
           const arr = Object.values(data).reverse();
           document.getElementById('stat-leads-total').textContent = arr.length;
@@ -2525,12 +2717,533 @@
           tbody2.innerHTML = arr.slice(0, 20).map(l => `
             <tr><td>${l.fecha || '-'}</td><td>${l.nombre || '-'}</td><td>${l.whatsapp || '-'}</td><td>${l.email || '-'}</td><td>${l.servicio || '-'}</td></tr>
           `).join('');
+
+          // Bandeja de mensajes: detecta leads nuevos frente al cache anterior (para el toast)
+          const prevIds = new Set(window.__koveLeadsCache.map(l => l.id));
+          const list = Object.entries(data).map(([id, l]) => ({ id, ...l, estado: l.estado || 'nuevo' }));
+          list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+          const isFirstLoad = !window.__koveInboxLoaded;
+          window.__koveInboxLoaded = true;
+          list.forEach(l => {
+            if (!prevIds.has(l.id) && !isFirstLoad) {
+              showInboxToast(l);
+            }
+          });
+          window.__koveLeadsCache = list;
+          updateInboxBadge();
+          renderInbox();
+          if (window.__koveOpenLeadId) {
+            const stillOpen = list.find(l => l.id === window.__koveOpenLeadId);
+            if (stillOpen) renderLeadDetail(stillOpen);
+          }
         });
 
       } catch (e) {
         console.warn('Error cargando datos de seguridad:', e);
       }
     }
+
+    // ──────────────────────────────────────────────
+    // BANDEJA DE MENSAJES (usa el mismo leads/ de Firebase)
+    // ──────────────────────────────────────────────
+    window.__koveLeadsCache = [];
+    window.__koveInboxFilter = 'nuevo';
+    window.__koveOpenLeadId = null;
+
+    window.showPanelTab = function(tab) {
+      document.getElementById('panel-tab-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
+      document.getElementById('panel-tab-inbox').style.display = tab === 'inbox' ? 'block' : 'none';
+      document.getElementById('panel-tab-messages').style.display = tab === 'messages' ? 'block' : 'none';
+      document.getElementById('panel-tab-btn-dash').style.background = tab === 'dashboard' ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.1)';
+      document.getElementById('panel-tab-btn-inbox').style.background = tab === 'inbox' ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.1)';
+      document.getElementById('panel-tab-btn-messages').style.background = tab === 'messages' ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.1)';
+      if (tab === 'inbox') { document.getElementById('inbox-list-view').style.display = 'block'; document.getElementById('inbox-detail-view').style.display = 'none'; }
+      if (tab === 'messages') { document.getElementById('msg-list-view').style.display = 'block'; document.getElementById('conv-detail-view').style.display = 'none'; }
+    };
+
+    window.setInboxFilter = function(filter, btn) {
+      window.__koveInboxFilter = filter;
+      document.querySelectorAll('.inbox-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderInbox();
+    };
+
+    function timeAgo(ts) {
+      if (!ts) return '';
+      const diff = Math.floor((Date.now() - ts) / 1000);
+      if (diff < 60) return 'hace un momento';
+      if (diff < 3600) return `hace ${Math.floor(diff/60)} min`;
+      if (diff < 86400) return `hace ${Math.floor(diff/3600)} h`;
+      return `hace ${Math.floor(diff/86400)} d`;
+    }
+
+    function updateInboxBadge() {
+      const nuevos = window.__koveLeadsCache.filter(l => l.estado === 'nuevo').length;
+      const badge = document.getElementById('inbox-badge');
+      if (nuevos > 0) { badge.textContent = nuevos; badge.style.display = 'inline-block'; }
+      else { badge.style.display = 'none'; }
+    }
+
+    window.renderInbox = function() {
+      const filter = window.__koveInboxFilter;
+      const serviceFilter = document.getElementById('inbox-service-filter')?.value || '';
+      const search = (document.getElementById('inbox-search')?.value || '').toLowerCase().trim();
+      let list = window.__koveLeadsCache.slice();
+
+      if (filter !== 'todos') list = list.filter(l => l.estado === filter);
+      if (serviceFilter) list = list.filter(l => l.servicio === serviceFilter);
+      if (search) {
+        list = list.filter(l => [l.nombre, l.email, l.whatsapp, l.servicio, l.asunto, l.mensaje]
+          .some(f => (f || '').toString().toLowerCase().includes(search)));
+      }
+
+      const countTotal = window.__koveLeadsCache.length;
+      const countNuevos = window.__koveLeadsCache.filter(l => l.estado === 'nuevo').length;
+      const countArch = window.__koveLeadsCache.filter(l => l.estado === 'archivado').length;
+      document.getElementById('inbox-count-label').textContent = `Nuevos ${countNuevos} · Todos ${countTotal} · Archivados ${countArch}`;
+
+      const container = document.getElementById('inbox-list');
+      const empty = document.getElementById('inbox-empty');
+      if (list.length === 0) {
+        container.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
+      container.innerHTML = list.map(l => `
+        <div class="inbox-item ${l.estado === 'nuevo' ? 'unread' : ''} ${l.estado === 'archivado' ? 'archived' : ''}" onclick="openLeadDetail('${l.id}')">
+          ${l.estado === 'nuevo' ? '<div class="inbox-dot"></div>' : '<div style="width:8px;flex-shrink:0;"></div>'}
+          <div style="flex:1;min-width:0;">
+            <div class="inbox-item-name">${l.nombre || 'Sin nombre'}</div>
+            <div class="inbox-item-service">${l.servicio || 'Servicio no indicado'}${l.asunto ? ' · ' + l.asunto : ''}</div>
+            <div class="inbox-item-preview">${(l.mensaje || 'Sin mensaje').slice(0, 70)}</div>
+          </div>
+          <div class="inbox-item-time">${timeAgo(l.timestamp)}</div>
+        </div>
+      `).join('');
+    };
+
+    window.openLeadDetail = function(id) {
+      const lead = window.__koveLeadsCache.find(l => l.id === id);
+      if (!lead) return;
+      window.__koveOpenLeadId = id;
+      document.getElementById('inbox-list-view').style.display = 'none';
+      document.getElementById('inbox-detail-view').style.display = 'block';
+      renderLeadDetail(lead);
+      if (lead.estado === 'nuevo') markLeadState(id, 'leido');
+    };
+
+    window.closeLeadDetail = function() {
+      window.__koveOpenLeadId = null;
+      document.getElementById('inbox-list-view').style.display = 'block';
+      document.getElementById('inbox-detail-view').style.display = 'none';
+    };
+
+    function field(label, value) {
+      return `<div class="inbox-detail-field"><label>${label}</label><div>${(value !== undefined && value !== null && value !== '') ? value : 'No proporcionado'}</div></div>`;
+    }
+
+    function renderLeadDetail(lead) {
+      const wa = (lead.whatsapp || '').replace(/\D/g, '');
+      const waMsg = encodeURIComponent(`Hola ${lead.nombre || ''}, soy Erick de KOVE. Vi tu mensaje sobre ${lead.servicio || 'tu proyecto'}...`);
+      const mailSubject = encodeURIComponent(`Re: ${lead.asunto || lead.servicio || 'Tu mensaje a KOVE'}`);
+      const estadoLabel = { nuevo: 'Nuevo', leido: 'Leído', archivado: 'Archivado' }[lead.estado] || 'Nuevo';
+      document.getElementById('inbox-detail-content').innerHTML = `
+        <h3 style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">${lead.servicio || 'Sin servicio'}</h3>
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:18px;">${lead.nombre || 'Sin nombre'}</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:10px;">
+          ${field('Empresa', lead.empresa)}
+          ${field('Teléfono / WhatsApp', lead.whatsapp)}
+          ${field('Correo electrónico', lead.email)}
+          ${field('Servicio', lead.servicio)}
+        </div>
+        ${field('Asunto', lead.asunto)}
+        ${field('Mensaje', lead.mensaje)}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin:16px 0;">
+          ${field('Fecha', lead.fecha ? new Date(lead.fecha).toLocaleString('es-CO') : null)}
+          ${field('Origen', lead.source)}
+          ${field('Página de entrada', lead.landingPage)}
+          ${field('Campaña', lead.campaign)}
+        </div>
+        ${field('Estado', estadoLabel)}
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
+          ${wa ? `<button class="btn-panel" style="background:#22c55e;color:#fff;" onclick="window.open('https://wa.me/${wa}?text=${waMsg}','_blank')">Responder por WhatsApp</button>` : ''}
+          ${lead.email ? `<button class="btn-panel" style="background:#2563eb;color:#fff;" onclick="window.location.href='mailto:${lead.email}?subject=${mailSubject}'">Responder por correo</button>` : ''}
+          ${lead.estado !== 'leido' ? `<button class="btn-panel" onclick="markLeadState('${lead.id}','leido')">Marcar leído</button>` : `<button class="btn-panel" onclick="markLeadState('${lead.id}','nuevo')">Marcar no leído</button>`}
+          ${lead.estado !== 'archivado' ? `<button class="btn-panel" onclick="markLeadState('${lead.id}','archivado')">Archivar</button>` : `<button class="btn-panel" onclick="markLeadState('${lead.id}','nuevo')">Desarchivar</button>`}
+          <button class="btn-panel" style="background:rgba(239,68,68,0.25);color:#fca5a5;" onclick="deleteLead('${lead.id}')">Eliminar</button>
+        </div>
+      `;
+    }
+
+    window.markLeadState = async function(id, estado) {
+      try {
+        const db = window.db, ref = window.ref, update = window.update;
+        await update(ref(db, 'leads/' + id), { estado });
+        // El listener onValue ya refresca cache/badge/lista automáticamente
+      } catch(e) { console.warn('Error actualizando estado del lead:', e); }
+    };
+
+    window.deleteLead = async function(id) {
+      if (!confirm('¿Eliminar este mensaje? Esta acción no se puede deshacer.')) return;
+      try {
+        const db = window.db, ref = window.ref, set = window.set;
+        await set(ref(db, 'leads/' + id), null);
+        closeLeadDetail();
+      } catch(e) { console.warn('Error eliminando lead:', e); }
+    };
+
+    function showInboxToast(lead) {
+      // Solo mostrar el aviso si el panel de administrador está abierto (nunca en la web pública)
+      const panel = document.getElementById('security-panel');
+      if (!panel || !panel.classList.contains('active')) return;
+      const toast = document.getElementById('inbox-toast');
+      toast.innerHTML = `<div style="font-weight:700;margin-bottom:4px;">✉ Nuevo mensaje</div><div style="font-size:13px;color:#ddd;">${lead.nombre || 'Alguien'}</div><div style="font-size:11px;color:#888;">${lead.servicio || ''}</div>`;
+      toast.style.transform = 'translateY(0)';
+      toast.style.opacity = '1';
+      clearTimeout(window.__koveToastTimer);
+      window.__koveToastTimer = setTimeout(() => {
+        toast.style.transform = 'translateY(20px)';
+        toast.style.opacity = '0';
+      }, 5000);
+    }
+
+    // ══════════════════════════════════════════════════════
+    // KOVE MENSAJES — chat público flotante + bandeja admin
+    // ══════════════════════════════════════════════════════
+    window.__koveMsgUnsub = null;
+    window.__koveConvCache = {};
+    window.__koveConvFilter = 'new';
+    window.__koveOpenConvId = null;
+    window.__koveMsgListenersStarted = false;
+
+    // Autenticación anónima: le da a cada visitante un auth.uid real y estable
+    // (mismo Firebase Authentication que ya existe, no es un sistema nuevo)
+    // para que las reglas de seguridad puedan limitar cada quien a SU propia conversación.
+    function ensureKoveConversation() {
+      return new Promise((resolve) => {
+        function go() {
+          if (window.auth.currentUser) {
+            window.koveConversationId = window.auth.currentUser.uid;
+            resolve(window.koveConversationId);
+            return;
+          }
+          window.signInAnonymously(window.auth).then(function(cred) {
+            window.koveConversationId = cred.user.uid;
+            resolve(window.koveConversationId);
+          }).catch(function(e) {
+            console.warn('No se pudo iniciar sesión anónima para el chat:', e);
+            resolve(null);
+          });
+        }
+        if (window.__koveFirebaseReady) go();
+        else window.addEventListener('kove-firebase-ready', go, { once: true });
+      });
+    }
+
+    window.openKoveMessages = async function() {
+      const panel = document.getElementById('kove-msg-panel');
+      panel.classList.add('active');
+      window.logKoveEvent && window.logKoveEvent('message_panel_open');
+      const convId = await ensureKoveConversation();
+      if (!convId) return;
+
+      // Si ya nos dio su nombre/WhatsApp antes (en este navegador), saltamos el formulario
+      const savedName = localStorage.getItem('kove_msg_name');
+      const savedPhone = localStorage.getItem('kove_msg_phone');
+      if (savedName && savedPhone) {
+        window.koveUserName = savedName;
+        window.koveUserPhone = savedPhone;
+        document.getElementById('kove-msg-precontact').style.display = 'none';
+        document.getElementById('kove-msg-list').style.display = 'flex';
+        document.getElementById('kove-msg-footer').style.display = 'block';
+      } else {
+        document.getElementById('kove-msg-precontact').style.display = 'block';
+        document.getElementById('kove-msg-list').style.display = 'none';
+        document.getElementById('kove-msg-footer').style.display = 'none';
+      }
+      listenKoveUserMessages(convId);
+    };
+
+    window.koveSubmitPrecontact = async function() {
+      const nameInput = document.getElementById('kove-msg-name-input');
+      const phoneInput = document.getElementById('kove-msg-phone-input');
+      const errorEl = document.getElementById('kove-msg-precontact-error');
+      const nombre = nameInput.value.trim();
+      const whatsapp = phoneInput.value.trim();
+      if (!nombre || !whatsapp) {
+        errorEl.textContent = 'Escribe tu nombre y tu WhatsApp para continuar.';
+        errorEl.style.display = 'block';
+        return;
+      }
+      if (whatsapp.replace(/\D/g, '').length < 7) {
+        errorEl.textContent = 'Ese número de WhatsApp no parece válido.';
+        errorEl.style.display = 'block';
+        return;
+      }
+      errorEl.style.display = 'none';
+      localStorage.setItem('kove_msg_name', nombre);
+      localStorage.setItem('kove_msg_phone', whatsapp);
+      window.koveUserName = nombre;
+      window.koveUserPhone = whatsapp;
+
+      const convId = window.koveConversationId || await ensureKoveConversation();
+      if (convId) {
+        try {
+          await window.update(window.ref(window.db, 'messages/' + convId + '/_meta'), { nombre, whatsapp });
+        } catch(e) { console.warn('Error guardando datos de contacto:', e); }
+      }
+
+      document.getElementById('kove-msg-precontact').style.display = 'none';
+      document.getElementById('kove-msg-list').style.display = 'flex';
+      document.getElementById('kove-msg-footer').style.display = 'block';
+      document.getElementById('kove-msg-input').focus();
+    };
+
+    window.closeKoveMessages = function() {
+      document.getElementById('kove-msg-panel').classList.remove('active');
+    };
+
+    window.koveMsgKeydown = function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendKoveUserMessage();
+      }
+    };
+
+    function koveInitials(name) {
+      if (!name) return '?';
+      return name.trim().split(/\s+/).slice(0, 2).map(w => w[0].toUpperCase()).join('');
+    }
+
+    function koveBubbleHtml(m, userName) {
+      const isUser = m.sender !== 'kove';
+      const cls = isUser ? 'from-user' : 'from-kove';
+      const img = m.imageUrl ? `<img src="${m.imageUrl}" />` : '';
+      const text = m.text ? m.text.replace(/</g, '&lt;') : '';
+      const avatar = isUser
+        ? `<div class="kove-msg-avatar user">${koveInitials(userName || window.koveUserName)}</div>`
+        : `<div class="kove-msg-avatar kove">K</div>`;
+      return `<div class="kove-msg-row ${cls}">${avatar}<div class="kove-bubble ${cls}">${text}${img}</div></div>`;
+    }
+
+    function listenKoveUserMessages(convId) {
+      if (window.__koveMsgUnsub) window.__koveMsgUnsub();
+      const db = window.db, ref = window.ref, onValue = window.onValue;
+      window.__koveMsgUnsub = onValue(ref(db, 'messages/' + convId), (snap) => {
+        const data = snap.val() || {};
+        if (data._meta && data._meta.nombre) window.koveUserName = data._meta.nombre;
+        const listEl = document.getElementById('kove-msg-list');
+        const list = Object.entries(data)
+          .filter(([k]) => k !== '_meta')
+          .map(([id, m]) => ({ id, ...m }))
+          .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+        listEl.innerHTML = list.map(koveBubbleHtml).join('');
+        const body = document.getElementById('kove-msg-body');
+        body.scrollTop = body.scrollHeight;
+      });
+    }
+
+    window.sendKoveUserMessage = async function() {
+      const input = document.getElementById('kove-msg-input');
+      const text = input.value.trim();
+      if (!text) return;
+      const convId = window.koveConversationId || await ensureKoveConversation();
+      if (!convId) { alert('No se pudo conectar con el chat, intenta de nuevo.'); return; }
+
+      input.value = '';
+
+      try {
+        const db = window.db, ref = window.ref, push = window.push, update = window.update;
+
+        const msg = {
+          sender: 'user',
+          text: text,
+          imageUrl: null,
+          timestamp: Date.now(),
+          date: new Date().toISOString().split('T')[0],
+          visitorId: window.koveVisitorId,
+          sessionId: window.koveSessionId,
+          conversationId: convId,
+          device: window.koveDevice?.type || 'desktop',
+          source: window.koveTraffic?.source || 'direct',
+          referrer: document.referrer || null,
+          page: location.pathname,
+          status: 'new'
+        };
+        await push(ref(db, 'messages/' + convId), msg);
+        await update(ref(db, 'messages/' + convId + '/_meta'), {
+          estado: 'new',
+          lastMessage: text,
+          lastTimestamp: Date.now(),
+          nombre: window.koveUserName || null,
+          whatsapp: window.koveUserPhone || null,
+          visitorId: window.koveVisitorId,
+          sessionId: window.koveSessionId,
+          device: window.koveDevice?.type || 'desktop',
+          source: window.koveTraffic?.source || 'direct',
+          referrer: document.referrer || null,
+          page: location.pathname
+        });
+
+        window.logKoveEvent && window.logKoveEvent('message_sent');
+        if (!window.__koveMsgStarted) { window.__koveMsgStarted = true; window.logKoveEvent && window.logKoveEvent('message_started'); }
+      } catch (e) {
+        console.warn('Error enviando mensaje:', e);
+        alert('No se pudo enviar el mensaje. Intenta de nuevo.');
+      }
+    };
+
+    // ── Bandeja de conversaciones (panel admin) ──
+    window.setConvFilter = function(filter, btn) {
+      window.__koveConvFilter = filter;
+      document.querySelectorAll('#msg-list-view .inbox-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderConvList();
+    };
+
+    function updateMsgBadge() {
+      const nuevos = Object.values(window.__koveConvCache).filter(c => (c._meta?.estado || 'new') === 'new').length;
+      const badge = document.getElementById('msg-badge');
+      if (nuevos > 0) { badge.textContent = nuevos; badge.style.display = 'inline-block'; }
+      else { badge.style.display = 'none'; }
+    }
+
+    window.renderConvList = function() {
+      const filter = window.__koveConvFilter;
+      const search = (document.getElementById('msg-search')?.value || '').toLowerCase().trim();
+      let convs = Object.entries(window.__koveConvCache).map(([id, c]) => ({ id, ...c }));
+      convs.sort((a, b) => (b._meta?.lastTimestamp || 0) - (a._meta?.lastTimestamp || 0));
+
+      if (filter !== 'todos') convs = convs.filter(c => (c._meta?.estado || 'new') === filter);
+      if (search) {
+        convs = convs.filter(c => {
+          const lastMsg = (c._meta?.lastMessage || '').toLowerCase();
+          return lastMsg.includes(search) || c.id.toLowerCase().includes(search) ||
+                 (c._meta?.visitorId || '').toLowerCase().includes(search);
+        });
+      }
+
+      const total = Object.keys(window.__koveConvCache).length;
+      const nuevos = Object.values(window.__koveConvCache).filter(c => (c._meta?.estado || 'new') === 'new').length;
+      document.getElementById('msg-count-label').textContent = total ? `Nuevos ${nuevos} · Todos ${total}` : '';
+
+      const container = document.getElementById('conv-list');
+      const empty = document.getElementById('conv-empty');
+      if (convs.length === 0) { container.innerHTML = ''; empty.style.display = 'block'; return; }
+      empty.style.display = 'none';
+      container.innerHTML = convs.map(c => {
+        const estado = c._meta?.estado || 'new';
+        const nombre = c._meta?.nombre || 'Usuario sin nombre';
+        return `
+        <div class="inbox-item ${estado === 'new' ? 'unread' : ''} ${estado === 'archived' ? 'archived' : ''}" onclick="openConvDetail('${c.id}')">
+          <div class="kove-msg-avatar user" style="flex-shrink:0;">${koveInitials(c._meta?.nombre)}</div>
+          <div style="flex:1;min-width:0;">
+            <div class="inbox-item-name">${nombre}</div>
+            <div class="inbox-item-service">${c._meta?.whatsapp || ''}</div>
+            <div class="inbox-item-preview">${c._meta?.lastMessage || 'Sin mensaje'}</div>
+          </div>
+          <div class="inbox-item-time">${timeAgo(c._meta?.lastTimestamp)}</div>
+        </div>`;
+      }).join('');
+    };
+
+    window.openConvDetail = function(id) {
+      window.__koveOpenConvId = id;
+      document.getElementById('msg-list-view').style.display = 'none';
+      document.getElementById('conv-detail-view').style.display = 'block';
+      renderConvDetail(id);
+      const c = window.__koveConvCache[id];
+      if (c && (c._meta?.estado || 'new') === 'new') {
+        window.update(window.ref(window.db, 'messages/' + id + '/_meta'), { estado: 'read' });
+      }
+    };
+
+    window.closeConvDetail = function() {
+      window.__koveOpenConvId = null;
+      document.getElementById('msg-list-view').style.display = 'block';
+      document.getElementById('conv-detail-view').style.display = 'none';
+    };
+
+    function renderConvDetail(id) {
+      const c = window.__koveConvCache[id];
+      if (!c) return;
+      const meta = c._meta || {};
+      const list = Object.entries(c).filter(([k]) => k !== '_meta').map(([mid, m]) => ({ mid, ...m }))
+        .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+      document.getElementById('conv-messages').innerHTML = list.map(m => koveBubbleHtml(m, meta.nombre)).join('');
+      document.getElementById('conv-tech-info').innerHTML = `
+        <div><b>Nombre:</b> ${meta.nombre || 'No proporcionado'}</div>
+        <div><b>WhatsApp:</b> ${meta.whatsapp || 'No proporcionado'}</div>
+        <div><b>Visitor ID:</b> ${meta.visitorId || 'No proporcionado'}</div>
+        <div><b>Dispositivo:</b> ${meta.device || 'No proporcionado'}</div>
+        <div><b>Fuente:</b> ${meta.source || 'No proporcionado'}</div>
+        <div><b>Página:</b> ${meta.page || 'No proporcionado'}</div>
+        <div><b>Referrer:</b> ${meta.referrer || 'No proporcionado'}</div>
+        <div><b>Estado:</b> ${({new:'Nuevo',read:'Leído',replied:'Respondido',archived:'Archivado'})[meta.estado] || 'Nuevo'}</div>
+      `;
+      document.getElementById('conv-archive-btn').textContent = meta.estado === 'archived' ? 'Desarchivar' : 'Archivar';
+    }
+
+    window.sendAdminReply = async function() {
+      const id = window.__koveOpenConvId;
+      if (!id) return;
+      const input = document.getElementById('conv-reply-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      try {
+        const db = window.db, ref = window.ref, push = window.push, update = window.update;
+        await push(ref(db, 'messages/' + id), {
+          sender: 'kove', text, imageUrl: null, timestamp: Date.now(),
+          date: new Date().toISOString().split('T')[0], status: 'read'
+        });
+        await update(ref(db, 'messages/' + id + '/_meta'), { estado: 'replied' });
+        window.logKoveEvent && window.logKoveEvent('message_reply_sent');
+      } catch(e) { console.warn('Error enviando respuesta:', e); }
+    };
+
+    window.toggleConvArchive = async function() {
+      const id = window.__koveOpenConvId;
+      if (!id) return;
+      const c = window.__koveConvCache[id];
+      const newEstado = (c._meta?.estado === 'archived') ? 'read' : 'archived';
+      try {
+        await window.update(window.ref(window.db, 'messages/' + id + '/_meta'), { estado: newEstado });
+      } catch(e) { console.warn('Error archivando conversación:', e); }
+    };
+
+    function showMsgToast(conv) {
+      const panel = document.getElementById('security-panel');
+      if (!panel || !panel.classList.contains('active')) return;
+      const toast = document.getElementById('inbox-toast');
+      const preview = conv._meta?.lastMessage || '';
+      toast.innerHTML = `<div style="font-weight:700;margin-bottom:4px;">💬 Nuevo mensaje</div><div style="font-size:12px;color:#999;">Un usuario acaba de escribirte.</div>${preview ? `<div style="font-size:12px;color:#ddd;margin-top:4px;">"${preview}"</div>` : ''}`;
+      toast.style.transform = 'translateY(0)';
+      toast.style.opacity = '1';
+      clearTimeout(window.__koveMsgToastTimer);
+      window.__koveMsgToastTimer = setTimeout(() => { toast.style.transform = 'translateY(20px)'; toast.style.opacity = '0'; }, 5000);
+    }
+
+    // Escucha TODAS las conversaciones (solo el admin autenticado tiene permiso por las reglas)
+    window.startAdminMessagesListener = function() {
+      if (window.__koveMsgListenersStarted) return;
+      window.__koveMsgListenersStarted = true;
+      const db = window.db, ref = window.ref, onValue = window.onValue;
+      onValue(ref(db, 'messages'), (snap) => {
+        const data = snap.val() || {};
+        const prevIds = new Set(Object.keys(window.__koveConvCache));
+        Object.entries(data).forEach(([id, conv]) => {
+          if (!prevIds.has(id) && window.__koveConvCache[id] === undefined && Object.keys(window.__koveConvCache).length > 0) {
+            showMsgToast(conv);
+          }
+        });
+        window.__koveConvCache = data;
+        updateMsgBadge();
+        renderConvList();
+        if (window.__koveOpenConvId && data[window.__koveOpenConvId]) renderConvDetail(window.__koveOpenConvId);
+      }, (err) => console.warn('Error escuchando mensajes (revisa las reglas de messages/):', err));
+    };
 
     // ──────────────────────────────────────────────
     // 5. GRÁFICAS
@@ -2540,6 +3253,23 @@
 
     let trafficChartInstance = null;
     let deviceChartInstance = null;
+
+    // Paletas de color por categoría (estilo Vercel: cada fuente/servicio/dispositivo con su propio color)
+    const KOVE_SOURCE_COLORS = {
+      google: '#22c55e', instagram: '#ec4899', tiktok: '#f43f5e', facebook: '#3b82f6',
+      whatsapp: '#25d366', direct: '#94a3b8', referral: '#a855f7', other: '#f59e0b'
+    };
+    function sourceColor(s) {
+      const k = (s || '').toLowerCase();
+      return KOVE_SOURCE_COLORS[k] || KOVE_SOURCE_COLORS.other;
+    }
+    const KOVE_SERVICE_COLORS = {
+      'Diseño Gráfico': '#ec4899', 'Desarrollo Web': '#3b82f6', 'Branding': '#a855f7',
+      'Automatización': '#22c55e', 'Otro': '#f59e0b'
+    };
+    function serviceColor(s) { return KOVE_SERVICE_COLORS[s] || '#f59e0b'; }
+    const KOVE_DEVICE_COLORS = { mobile: '#3b82f6', desktop: '#a855f7', tablet: '#ec4899' };
+    function deviceColor(d) { return KOVE_DEVICE_COLORS[d] || '#94a3b8'; }
 
     function renderCharts(visitsHistory, leadsArray, visitorsArray, eventsArray) {
       visitorsArray = visitorsArray || [];
@@ -2557,9 +3287,11 @@
 
       const ctx1 = document.getElementById('visitsChart').getContext('2d');
       if (visitsChartInstance) visitsChartInstance.destroy();
+      const gradVisits = ctx1.createLinearGradient(0, 0, 0, 200);
+      gradVisits.addColorStop(0, '#60a5fa'); gradVisits.addColorStop(1, '#3b82f6');
       visitsChartInstance = new Chart(ctx1, {
         type: 'bar',
-        data: { labels: days, datasets: [{ label: 'Visitas', data: counts, backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0.7)', borderWidth: 1, borderRadius: 4 }] },
+        data: { labels: days, datasets: [{ label: 'Visitas', data: counts, backgroundColor: gradVisits, borderRadius: 6, maxBarThickness: 28 }] },
         options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#aaa', font: { size: 10 } } } }, scales: { y: { ticks: { color: '#888', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' } }, x: { ticks: { color: '#888' }, grid: { display: false } } } }
       });
 
@@ -2572,29 +3304,31 @@
       if (leadsChartInstance) leadsChartInstance.destroy();
       leadsChartInstance = new Chart(ctx2, {
         type: 'doughnut',
-        data: { labels: labels2, datasets: [{ data: data2, backgroundColor: ['rgba(255,255,255,0.3)','rgba(255,255,255,0.5)','rgba(255,255,255,0.7)','rgba(255,255,255,0.2)','rgba(255,255,255,0.4)'], borderColor: '#1a1a1a', borderWidth: 2 }] },
+        data: { labels: labels2, datasets: [{ data: data2, backgroundColor: labels2.map(serviceColor), borderColor: '#1a1a1a', borderWidth: 2 }] },
         options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'right', labels: { color: '#aaa', font: { size: 10 } } } } }
       });
 
-      // Fuentes de tráfico (de visitors/)
+      // Fuentes de tráfico (de visitors/) — cada fuente con su color propio
       const sourceMap = {};
       visitorsArray.forEach(v => { const s = (v && v.source) || 'direct'; sourceMap[s] = (sourceMap[s] || 0) + 1; });
+      const sourceLabels = Object.keys(sourceMap);
       const ctx3 = document.getElementById('trafficChart').getContext('2d');
       if (trafficChartInstance) trafficChartInstance.destroy();
       trafficChartInstance = new Chart(ctx3, {
         type: 'bar',
-        data: { labels: Object.keys(sourceMap), datasets: [{ label: 'Fuentes', data: Object.values(sourceMap), backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0.7)', borderWidth: 1, borderRadius: 4 }] },
+        data: { labels: sourceLabels, datasets: [{ label: 'Fuentes', data: Object.values(sourceMap), backgroundColor: sourceLabels.map(sourceColor), borderRadius: 6, maxBarThickness: 22 }] },
         options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#888', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' } }, y: { ticks: { color: '#888' }, grid: { display: false } } } }
       });
 
-      // Dispositivos (de visitors/)
+      // Dispositivos (de visitors/) — mobile/desktop/tablet con colores distintos
       const deviceMap = {};
       visitorsArray.forEach(v => { const d = (v && v.device) || 'desktop'; deviceMap[d] = (deviceMap[d] || 0) + 1; });
+      const deviceLabels = Object.keys(deviceMap);
       const ctx4 = document.getElementById('deviceChart').getContext('2d');
       if (deviceChartInstance) deviceChartInstance.destroy();
       deviceChartInstance = new Chart(ctx4, {
         type: 'doughnut',
-        data: { labels: Object.keys(deviceMap), datasets: [{ data: Object.values(deviceMap), backgroundColor: ['rgba(255,255,255,0.3)','rgba(255,255,255,0.5)','rgba(255,255,255,0.7)'], borderColor: '#1a1a1a', borderWidth: 2 }] },
+        data: { labels: deviceLabels, datasets: [{ data: Object.values(deviceMap), backgroundColor: deviceLabels.map(deviceColor), borderColor: '#1a1a1a', borderWidth: 2 }] },
         options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'right', labels: { color: '#aaa', font: { size: 10 } } } } }
       });
     }
@@ -2625,6 +3359,7 @@
         nombre, empresa, whatsapp, email, servicio, asunto, mensaje,
         fecha: new Date().toISOString(),
         timestamp: Date.now(),
+        estado: 'nuevo',
         source: window.koveTraffic?.source || 'direct',
         medium: window.koveTraffic?.medium || 'none',
         campaign: window.koveTraffic?.campaign || null,
@@ -2646,30 +3381,33 @@
         try {
           const templateParams = {
             name: nombre,
-            email: email,
+            empresa: empresa,
             phone: whatsapp,
-            message: mensaje
+            email: email,
+            servicio: servicio,
+            asunto: asunto,
+            message: mensaje,
+            fecha: leadData.fecha,
+            source: leadData.source,
+            medium: leadData.medium,
+            campaign: leadData.campaign,
+            referrer: leadData.referrer,
+            landingPage: leadData.landingPage,
+            device: leadData.device
           };
 
-          const response = await emailjs.send('service_jeg43u6', 'template_5ui242o', templateParams);
-          console.log('✅ Correo enviado a kovedesign2026@gmail.com', response);
+          const response = await emailjs.send('service_s05ep7a', 'template_xe999dj', templateParams);
+          console.log('✅ Correo enviado vía EmailJS', response);
         } catch (emailError) {
-          console.error('❌ Error enviando correo:', emailError);
+          console.error('❌ Error enviando correo (el lead ya quedó guardado en Firebase):', emailError);
         }
-
-        const phone = '573152507850';
-        const waMsg = `Hola KOVE! Soy ${nombre}. Me interesa: ${servicio}. ${mensaje}`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(waMsg)}`, '_blank');
 
         this.reset();
         alert('✅ Mensaje enviado correctamente. Te contactaremos pronto.');
 
       } catch (e) {
         console.error('Error guardando lead:', e);
-        const phone = '573152507850';
-        const waMsg = `Hola KOVE! Soy ${nombre}. Me interesa: ${servicio}. ${mensaje}`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(waMsg)}`, '_blank');
-        alert('Hubo un error, pero te redirigimos a WhatsApp.');
+        alert('Hubo un error al enviar tu mensaje. Por favor intenta de nuevo o escríbenos por WhatsApp.');
       }
     });
 
