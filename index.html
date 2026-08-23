@@ -887,17 +887,20 @@
         transform: translateX(-50%);
       }
       .kove-nav-btn {
-        padding: 5px 6px;
-        min-width: 36px;
-        gap: 1px;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 12px;
+        flex-shrink: 0;
       }
-      .kove-nav-btn span {
-        font-size: 6.5px;
-      }
+      .kove-nav-btn span { display: none; }
       .kove-nav-btn svg {
-        width: 14px;
-        height: 14px;
+        width: 18px;
+        height: 18px;
       }
       .kove-nav-cta {
         padding: 5px 10px;
@@ -936,7 +939,7 @@
       }
       #servicios .neo-card-dark.p-8.md\:p-10,
       #servicios .neo-card.p-8.md\:p-10 {
-        padding: 20px;
+        padding: 26px 20px;
       }
       #servicios .font-display.font-bold.text-xl {
         font-size: 17px;
@@ -944,28 +947,36 @@
 
       .plans-filter-container {
         padding: 4px;
-        gap: 3px;
+        gap: 4px;
         border-radius: 999px;
         width: 100%;
         max-width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        scrollbar-width: none;
       }
+      .plans-filter-container::-webkit-scrollbar { display: none; }
       .plans-cat-btn {
-        padding: 6px 10px;
-        font-size: 8.5px;
-        gap: 3px;
+        padding: 9px 14px;
+        font-size: 10.5px;
+        gap: 5px;
         border-radius: 999px;
+        flex-shrink: 0;
+        white-space: nowrap;
       }
       .plans-cat-btn svg {
-        width: 11px;
-        height: 11px;
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
       }
       .planes-grid-container {
         gap: 16px;
         padding: 0 4px;
       }
       .plan-card {
-        padding: 20px;
-        min-height: 300px;
+        padding: 26px;
+        min-height: 320px;
         border-radius: 24px;
       }
       .plan-name {
@@ -1015,17 +1026,17 @@
       }
       .neo-card-dark.p-8.md\:p-10,
       .neo-card.p-8.md\:p-10 {
-        padding: 20px;
+        padding: 26px;
       }
       .text-3xl.sm\:text-4xl.font-sans.font-black {
         font-size: 24px;
       }
 
       #quien-soy .neo-card-dark.p-8.md\:p-14 {
-        padding: 20px;
+        padding: 28px 22px;
       }
       #quien-soy .grid.grid-cols-1.md\:grid-cols-\[240px_1fr\].gap-12 {
-        gap: 24px;
+        gap: 28px;
       }
       #quien-soy .w-36.h-36 {
         width: 80px;
@@ -1043,22 +1054,22 @@
         gap: 16px;
       }
       #portafolio .h-\[240px\] {
-        height: 160px;
-        padding: 16px 12px;
+        height: 180px;
+        padding: 18px 14px;
       }
       #portafolio .font-display.font-black.text-2xl.sm\:text-3xl {
         font-size: 18px;
       }
       #portafolio .p-6.md\:p-8 {
-        padding: 16px;
+        padding: 22px 18px;
       }
 
       #servicios-detalle .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-6 {
-        gap: 14px;
+        gap: 18px;
       }
       #servicios-detalle .neo-card-dark.p-8,
       #servicios-detalle .neo-card.p-8 {
-        padding: 18px;
+        padding: 24px 20px;
       }
       #servicios-detalle .font-display.font-bold.text-xl {
         font-size: 16px;
@@ -1068,10 +1079,10 @@
       }
 
       #contacto .neo-card-dark.p-6.sm\:p-10 {
-        padding: 16px;
+        padding: 22px 18px;
       }
       #contacto .grid.grid-cols-1.sm\:grid-cols-2.gap-4 {
-        gap: 10px;
+        gap: 14px;
       }
       #contacto input,
       #contacto select,
@@ -1095,7 +1106,7 @@
         gap: 12px;
       }
       .neo-card.p-6 {
-        padding: 14px;
+        padding: 20px;
       }
       .neo-card.p-6 .text-2xl.sm\:text-3xl {
         font-size: 20px;
@@ -1112,7 +1123,7 @@
         gap: 12px;
       }
       .bg-white\/\[0\.04\].rounded-\[28px\].p-7 {
-        padding: 16px;
+        padding: 20px;
       }
 
       .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4.gap-10 {
@@ -1137,23 +1148,26 @@
       .card-trabajemos {
         grid-column: span 1 !important;
       }
+
+      /* Más aire entre secciones y contenido en mobile: la queja era que se sentía apretado */
+      section[id] { padding-top: 44px !important; padding-bottom: 44px !important; }
+      section[id] .max-w-6xl.mx-auto.px-6,
+      section[id] .max-w-4xl.mx-auto.px-6,
+      section[id] .max-w-5xl.mx-auto.px-6 { padding-left: 18px !important; padding-right: 18px !important; }
+      section[id] h2.font-display { margin-bottom: 6px; }
+      body { padding-bottom: 120px !important; }
     }
 
     @media (max-width: 400px) {
       .kove-nav-btn {
-        padding: 4px 4px;
-        min-width: 30px;
-      }
-      .kove-nav-btn span {
-        font-size: 5.5px;
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        padding: 0;
       }
       .kove-nav-btn svg {
-        width: 12px;
-        height: 12px;
-      }
-      .kove-nav-cta {
-        padding: 4px 8px;
-        font-size: 7px;
+        width: 16px;
+        height: 16px;
       }
       .plans-cat-btn {
         padding: 4px 8px;
@@ -1271,6 +1285,17 @@
     }
     /* Cursor parpadeante del typewriter, visible en oscuro */
     html.dark .bg-neutral-900.animate-pulse { background-color: var(--kove-text) !important; }
+
+    /* Ícono de WhatsApp del navbar: blanco con glow suave, en cualquier tema */
+    #nav-wa-btn svg {
+      fill: rgba(255,255,255,0.92);
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.35));
+      transition: filter 0.3s ease, fill 0.3s ease;
+    }
+    #nav-wa-btn:hover svg {
+      fill: #ffffff;
+      filter: drop-shadow(0 0 7px rgba(255,255,255,0.55));
+    }
 
     /* Card "PAQUETE KOVE PRO" (la clara entre las 2 oscuras): su texto heredado/​propio en negro se aclara */
     html.dark .neo-card.text-neutral-950,
@@ -1406,9 +1431,9 @@
 
         <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);margin:0 2px;flex-shrink:0;"></div>
 
-        <button onclick="handleWhatsAppRedirect('Asesoría gratuita')" class="kove-nav-cta">
-          Asesoría
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <button onclick="handleWhatsAppRedirect('Navbar WhatsApp')" class="kove-nav-btn" id="nav-wa-btn" title="Escríbenos por WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.35-.49.05-1.11.07-1.79-.11-.41-.11-.94-.29-1.62-.57-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.41.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.69-.8.87-1.08.19-.28.37-.23.63-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.66-.17 1.34z"/></svg>
+          <span>WA</span>
         </button>
 
       </nav>
