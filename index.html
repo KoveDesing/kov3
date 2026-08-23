@@ -1346,23 +1346,33 @@
       </div>
 
       <div id="security-login" style="text-align:center;padding:30px 0;">
-        <p style="color:#aaa;margin-bottom:16px;">Ingresa la contraseña para acceder al panel</p>
-        <input type="password" id="security-password-input" placeholder="Contraseña" style="max-width:300px;margin:0 auto;text-align:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);" autocomplete="off" />
+        <p style="color:#aaa;margin-bottom:16px;">Inicia sesión de administrador</p>
+        <input type="email" id="security-email-input" placeholder="Correo" style="max-width:300px;width:100%;margin:0 auto 10px;display:block;text-align:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:10px;border-radius:10px;" autocomplete="off" />
+        <input type="password" id="security-password-input" placeholder="Contraseña" style="max-width:300px;width:100%;margin:0 auto;display:block;text-align:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:10px;border-radius:10px;" autocomplete="off" />
         <br /><br />
-        <button onclick="verifySecurityPassword()" style="background:#fff;color:#000;border:none;padding:12px 40px;border-radius:999px;font-weight:700;cursor:pointer;">Acceder</button>
+        <button id="security-login-btn" onclick="verifySecurityPassword()" style="background:#fff;color:#000;border:none;padding:12px 40px;border-radius:999px;font-weight:700;cursor:pointer;">Acceder</button>
         <p id="security-error" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;">Contraseña incorrecta</p>
       </div>
 
       <div id="security-dashboard" style="display:none;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+          <button onclick="kovLogout()" style="background:rgba(255,255,255,0.08);color:#aaa;border:none;padding:6px 16px;border-radius:999px;font-size:11px;cursor:pointer;">Cerrar sesión</button>
+        </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;">
           <div class="stat-card"><div class="number" id="stat-visits-total">0</div><div class="label">Visitas Totales</div></div>
           <div class="stat-card"><div class="number" id="stat-leads-total">0</div><div class="label">Leads Recibidos</div></div>
           <div class="stat-card"><div class="number" id="stat-today-visits">0</div><div class="label">Visitas Hoy</div></div>
+          <div class="stat-card"><div class="number" id="stat-unique-visitors">0</div><div class="label">Visitantes Únicos</div></div>
+          <div class="stat-card"><div class="number" id="stat-conversion">0%</div><div class="label">Conversión</div></div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
           <div style="background:rgba(255,255,255,0.03);border-radius:16px;padding:16px;"><canvas id="visitsChart"></canvas></div>
           <div style="background:rgba(255,255,255,0.03);border-radius:16px;padding:16px;"><canvas id="leadsChart"></canvas></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+          <div style="background:rgba(255,255,255,0.03);border-radius:16px;padding:16px;"><canvas id="trafficChart"></canvas></div>
+          <div style="background:rgba(255,255,255,0.03);border-radius:16px;padding:16px;"><canvas id="deviceChart"></canvas></div>
         </div>
 
         <h3 style="font-size:15px;font-weight:700;margin:16px 0 8px;">📋 Últimos Leads</h3>
@@ -2196,21 +2206,26 @@
   <!-- Firebase Config (CDN) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-    import { getDatabase, ref, set, get, update, push, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
-    
+    import { getDatabase, ref, set, get, update, push, onValue, increment, runTransaction } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    import { getAnalytics, logEvent as gaLogEvent } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
     const firebaseConfig = {
-      apiKey: "AIzaSyCEY2yUIwqaUHK27-U8XIBbZUGEjqsBS7o",
-      authDomain: "kov3-e484b.firebaseapp.com",
-      databaseURL: "https://kov3-e484b-default-rtdb.firebaseio.com",
-      projectId: "kov3-e484b",
-      storageBucket: "kov3-e484b.firebasestorage.app",
-      messagingSenderId: "329464241745",
-      appId: "1:329464241745:web:95f0bd0be49d1e87f32270",
-      measurementId: "G-9CDK8GKP6P"
+      apiKey: "AIzaSyBS4ZUd0a91WNbLtXc0Z6kPROR6st7eeaw",
+      authDomain: "koveweb-5083f.firebaseapp.com",
+      databaseURL: "https://koveweb-5083f-default-rtdb.firebaseio.com",
+      projectId: "koveweb-5083f",
+      storageBucket: "koveweb-5083f.firebasestorage.app",
+      messagingSenderId: "838534760417",
+      appId: "1:838534760417:web:e4ed9c0d7bbb28596ef4a0",
+      measurementId: "G-9PD5QKX8X4"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const auth = getAuth(app);
+    let analytics = null;
+    try { analytics = getAnalytics(app); } catch(e) { console.warn('Analytics no disponible:', e); }
 
     window.db = db;
     window.ref = ref;
@@ -2219,10 +2234,17 @@
     window.update = update;
     window.push = push;
     window.onValue = onValue;
+    window.increment = increment;
+    window.runTransaction = runTransaction;
+    window.auth = auth;
+    window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+    window.onAuthStateChanged = onAuthStateChanged;
+    window.signOut = signOut;
+    window.gaLogEvent = function(name, params) { try { if (analytics) gaLogEvent(analytics, name, params || {}); } catch(e){} };
     window.__koveFirebaseReady = true;
     window.dispatchEvent(new Event('kove-firebase-ready'));
 
-    console.log("🔥 Firebase inicializado correctamente");
+    console.log("🔥 Firebase inicializado correctamente (koveweb-5083f)");
   </script>
 
   <!-- Chart.js -->
@@ -2230,9 +2252,129 @@
 
   <script>
     // ──────────────────────────────────────────────
+    // 0. IDENTIDAD DE VISITANTE / SESIÓN + TRACKING
+    // ──────────────────────────────────────────────
+    function koveUuid() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    function getVisitorId() {
+      try {
+        let id = localStorage.getItem('kove_visitor_id');
+        if (!id) { id = koveUuid(); localStorage.setItem('kove_visitor_id', id); }
+        return id;
+      } catch(e) { return koveUuid(); }
+    }
+    function getSessionId() {
+      try {
+        let id = sessionStorage.getItem('kove_session_id');
+        if (!id) { id = koveUuid(); sessionStorage.setItem('kove_session_id', id); }
+        return id;
+      } catch(e) { return koveUuid(); }
+    }
+    function detectDevice() {
+      const ua = navigator.userAgent;
+      let type = 'desktop';
+      if (/tablet|ipad/i.test(ua)) type = 'tablet';
+      else if (/mobile|android|iphone/i.test(ua)) type = 'mobile';
+      let browser = 'other';
+      if (ua.includes('Edg')) browser = 'edge';
+      else if (ua.includes('Chrome')) browser = 'chrome';
+      else if (ua.includes('Firefox')) browser = 'firefox';
+      else if (ua.includes('Safari')) browser = 'safari';
+      let os = 'other';
+      if (/Windows/i.test(ua)) os = 'windows';
+      else if (/Android/i.test(ua)) os = 'android';
+      else if (/iPhone|iPad|iOS/i.test(ua)) os = 'ios';
+      else if (/Mac/i.test(ua)) os = 'macos';
+      else if (/Linux/i.test(ua)) os = 'linux';
+      return { type, browser, os, width: window.screen.width, height: window.screen.height, language: navigator.language || 'es' };
+    }
+    function detectTrafficSource() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const utmSource = params.get('utm_source');
+        const utmMedium = params.get('utm_medium');
+        const utmCampaign = params.get('utm_campaign');
+        if (utmSource) return { source: utmSource.toLowerCase(), medium: utmMedium || 'campaign', campaign: utmCampaign || null };
+        const ref = document.referrer;
+        if (!ref) return { source: 'direct', medium: 'none', campaign: null };
+        const host = new URL(ref).hostname.toLowerCase();
+        if (host.includes('google')) return { source: 'google', medium: 'organic', campaign: null };
+        if (host.includes('instagram')) return { source: 'instagram', medium: 'social', campaign: null };
+        if (host.includes('tiktok')) return { source: 'tiktok', medium: 'social', campaign: null };
+        if (host.includes('facebook') || host.includes('fb.com')) return { source: 'facebook', medium: 'social', campaign: null };
+        if (host.includes('whatsapp') || host.includes('wa.me')) return { source: 'whatsapp', medium: 'social', campaign: null };
+        if (host === window.location.hostname) return { source: 'direct', medium: 'none', campaign: null };
+        return { source: host, medium: 'referral', campaign: null };
+      } catch(e) { return { source: 'direct', medium: 'none', campaign: null }; }
+    }
+    window.koveVisitorId = getVisitorId();
+    window.koveSessionId = getSessionId();
+    window.koveDevice = detectDevice();
+    window.koveTraffic = detectTrafficSource();
+
+    // Log de eventos: guarda en Realtime Database (events/) + Firebase Analytics
+    window.logKoveEvent = function(eventName, context) {
+      try {
+        if (!window.__koveFirebaseReady) return;
+        const db = window.db, ref = window.ref, push = window.push;
+        push(ref(db, 'events'), {
+          event: eventName,
+          context: context || null,
+          timestamp: Date.now(),
+          date: new Date().toISOString().split('T')[0],
+          visitorId: window.koveVisitorId,
+          sessionId: window.koveSessionId,
+          page: location.pathname
+        }).catch(function(e){ console.warn('Error guardando evento:', e); });
+        if (window.gaLogEvent) window.gaLogEvent(eventName, { context: context || '' });
+      } catch(e) { console.warn('Error en logKoveEvent:', e); }
+    };
+
+    // Vistas de sección (una sola vez por sección por sesión)
+    (function(){
+      const sectionEvents = {
+        'servicios': 'services_view', 'planes': 'plans_view', 'portafolio': 'portfolio_view',
+        'contacto': 'contact_view', 'edicion-video': 'video_editing_view', 'quien-soy': 'about_view'
+      };
+      const seen = new Set();
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !seen.has(entry.target.id)) {
+              seen.add(entry.target.id);
+              window.logKoveEvent(sectionEvents[entry.target.id], entry.target.id);
+            }
+          });
+        }, { threshold: 0.4 });
+        window.addEventListener('DOMContentLoaded', function(){
+          Object.keys(sectionEvents).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) obs.observe(el);
+          });
+        });
+      }
+    })();
+
+    // Scroll 50% / 90%
+    (function(){
+      let s50 = false, s90 = false;
+      window.addEventListener('scroll', function() {
+        const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        if (!s50 && scrolled >= 50) { s50 = true; window.logKoveEvent('scroll_50'); }
+        if (!s90 && scrolled >= 90) { s90 = true; window.logKoveEvent('scroll_90'); }
+      }, { passive: true });
+    })();
+
+
+    // ──────────────────────────────────────────────
     // 1. WHATSAPP REDIRECT
     // ──────────────────────────────────────────────
     window.handleWhatsAppRedirect = function(contexto = '') {
+      window.logKoveEvent('whatsapp_click', contexto);
       const phone = '573152507850';
       let msg = 'Hola KOVE! ';
       if (contexto) msg += `Me interesa: ${contexto}. `;
@@ -2250,39 +2392,76 @@
         return;
       }
       panel.classList.add('active');
-      document.getElementById('security-login').style.display = 'block';
-      document.getElementById('security-dashboard').style.display = 'none';
-      document.getElementById('security-password-input').value = '';
       document.getElementById('security-error').style.display = 'none';
-    };
-
-    // ──────────────────────────────────────────────
-    // 3. VERIFICACIÓN DE CONTRASEÑA
-    // ──────────────────────────────────────────────
-    function hashPwd(pwd) {
-      let h = 0;
-      for (let i = 0; i < pwd.length; i++) {
-        h = (h << 5) - h + pwd.charCodeAt(i);
-        h = h & h;
-      }
-      return h.toString();
-    }
-    const PWD_HASH = hashPwd('KOVE2026');
-
-    window.verifySecurityPassword = function() {
-      const input = document.getElementById('security-password-input');
-      const error = document.getElementById('security-error');
-      if (hashPwd(input.value) === PWD_HASH) {
+      // Si ya hay sesión de Firebase activa, entra directo al dashboard
+      if (window.auth && window.auth.currentUser) {
         document.getElementById('security-login').style.display = 'none';
         document.getElementById('security-dashboard').style.display = 'block';
-        error.style.display = 'none';
         loadSecurityData();
       } else {
-        error.style.display = 'block';
-        input.value = '';
-        input.focus();
+        document.getElementById('security-login').style.display = 'block';
+        document.getElementById('security-dashboard').style.display = 'none';
+        document.getElementById('security-password-input').value = '';
       }
     };
+
+    // ──────────────────────────────────────────────
+    // 3. AUTENTICACIÓN REAL (Firebase Authentication)
+    // ──────────────────────────────────────────────
+    window.verifySecurityPassword = function() {
+      const emailInput = document.getElementById('security-email-input');
+      const passInput = document.getElementById('security-password-input');
+      const error = document.getElementById('security-error');
+      const btn = document.getElementById('security-login-btn');
+      if (!window.auth) { error.textContent = 'Firebase no está disponible todavía, intenta de nuevo.'; error.style.display = 'block'; return; }
+      if (btn) { btn.disabled = true; btn.textContent = 'Verificando...'; }
+      window.signInWithEmailAndPassword(window.auth, emailInput.value.trim(), passInput.value)
+        .then(function() {
+          error.style.display = 'none';
+          // onAuthStateChanged se encarga de mostrar el dashboard
+        })
+        .catch(function(err) {
+          console.warn('Error de autenticación:', err.code);
+          let msg = 'Correo o contraseña incorrectos.';
+          if (err.code === 'auth/too-many-requests') msg = 'Demasiados intentos. Espera un momento.';
+          if (err.code === 'auth/invalid-email') msg = 'Correo inválido.';
+          error.textContent = msg;
+          error.style.display = 'block';
+          passInput.value = '';
+          passInput.focus();
+        })
+        .finally(function() {
+          if (btn) { btn.disabled = false; btn.textContent = 'Acceder'; }
+        });
+    };
+
+    window.kovLogout = function() {
+      if (window.auth && window.signOut) {
+        window.signOut(window.auth).then(function(){
+          document.getElementById('security-panel').classList.remove('active');
+        });
+      }
+    };
+
+    // Protege el dashboard: solo se muestra si Firebase confirma que hay un admin autenticado
+    window.addEventListener('kove-firebase-ready', function() {
+      window.onAuthStateChanged(window.auth, function(user) {
+        const panel = document.getElementById('security-panel');
+        const isPanelOpen = panel && panel.classList.contains('active');
+        if (user) {
+          if (isPanelOpen) {
+            document.getElementById('security-login').style.display = 'none';
+            document.getElementById('security-dashboard').style.display = 'block';
+            loadSecurityData();
+          }
+        } else {
+          if (isPanelOpen) {
+            document.getElementById('security-login').style.display = 'block';
+            document.getElementById('security-dashboard').style.display = 'none';
+          }
+        }
+      });
+    }, { once: true });
 
     document.getElementById('security-password-input')?.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') verifySecurityPassword();
@@ -2310,6 +2489,19 @@
         const leadsArray = Object.values(leadsData).reverse();
         document.getElementById('stat-leads-total').textContent = leadsArray.length;
 
+        const visitorsRef = ref(db, 'visitors');
+        const snapshotVisitors = await get(visitorsRef);
+        const visitorsData = snapshotVisitors.val() || {};
+        const uniqueCount = Object.keys(visitorsData).length;
+        document.getElementById('stat-unique-visitors').textContent = uniqueCount;
+        const conversion = uniqueCount > 0 ? ((leadsArray.length / uniqueCount) * 100).toFixed(1) : '0';
+        document.getElementById('stat-conversion').textContent = conversion + '%';
+
+        const eventsRef = ref(db, 'events');
+        const snapshotEvents = await get(eventsRef);
+        const eventsData = snapshotEvents.val() || {};
+        const eventsArray = Object.values(eventsData);
+
         const tbody = document.getElementById('leads-table-body');
         tbody.innerHTML = leadsArray.slice(0, 20).map(l => `
           <tr><td>${l.fecha || '-'}</td><td>${l.nombre || '-'}</td><td>${l.whatsapp || '-'}</td><td>${l.email || '-'}</td><td>${l.servicio || '-'}</td></tr>
@@ -2323,7 +2515,7 @@
         if (socialData.facebook) document.getElementById('social-facebook').value = socialData.facebook;
         if (socialData.linkedin) document.getElementById('social-linkedin').value = socialData.linkedin;
 
-        renderCharts(visitsData.history || {}, leadsArray);
+        renderCharts(visitsData.history || {}, leadsArray, Object.values(visitorsData), eventsArray);
 
         onValue(leadsRef, (snap) => {
           const data = snap.val() || {};
@@ -2346,7 +2538,12 @@
     let visitsChartInstance = null;
     let leadsChartInstance = null;
 
-    function renderCharts(visitsHistory, leadsArray) {
+    let trafficChartInstance = null;
+    let deviceChartInstance = null;
+
+    function renderCharts(visitsHistory, leadsArray, visitorsArray, eventsArray) {
+      visitorsArray = visitorsArray || [];
+      eventsArray = eventsArray || [];
       const days = [];
       const counts = [];
       const today = new Date();
@@ -2378,11 +2575,37 @@
         data: { labels: labels2, datasets: [{ data: data2, backgroundColor: ['rgba(255,255,255,0.3)','rgba(255,255,255,0.5)','rgba(255,255,255,0.7)','rgba(255,255,255,0.2)','rgba(255,255,255,0.4)'], borderColor: '#1a1a1a', borderWidth: 2 }] },
         options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'right', labels: { color: '#aaa', font: { size: 10 } } } } }
       });
+
+      // Fuentes de tráfico (de visitors/)
+      const sourceMap = {};
+      visitorsArray.forEach(v => { const s = (v && v.source) || 'direct'; sourceMap[s] = (sourceMap[s] || 0) + 1; });
+      const ctx3 = document.getElementById('trafficChart').getContext('2d');
+      if (trafficChartInstance) trafficChartInstance.destroy();
+      trafficChartInstance = new Chart(ctx3, {
+        type: 'bar',
+        data: { labels: Object.keys(sourceMap), datasets: [{ label: 'Fuentes', data: Object.values(sourceMap), backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0.7)', borderWidth: 1, borderRadius: 4 }] },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#888', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' } }, y: { ticks: { color: '#888' }, grid: { display: false } } } }
+      });
+
+      // Dispositivos (de visitors/)
+      const deviceMap = {};
+      visitorsArray.forEach(v => { const d = (v && v.device) || 'desktop'; deviceMap[d] = (deviceMap[d] || 0) + 1; });
+      const ctx4 = document.getElementById('deviceChart').getContext('2d');
+      if (deviceChartInstance) deviceChartInstance.destroy();
+      deviceChartInstance = new Chart(ctx4, {
+        type: 'doughnut',
+        data: { labels: Object.keys(deviceMap), datasets: [{ data: Object.values(deviceMap), backgroundColor: ['rgba(255,255,255,0.3)','rgba(255,255,255,0.5)','rgba(255,255,255,0.7)'], borderColor: '#1a1a1a', borderWidth: 2 }] },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'right', labels: { color: '#aaa', font: { size: 10 } } } } }
+      });
     }
 
     // ──────────────────────────────────────────────
     // 6. GUARDAR LEAD DESDE FORMULARIO + EMAIL
     // ──────────────────────────────────────────────
+    let __contactFormStarted = false;
+    document.getElementById('contact-form')?.addEventListener('focusin', function() {
+      if (!__contactFormStarted) { __contactFormStarted = true; window.logKoveEvent && window.logKoveEvent('contact_form_start'); }
+    });
     document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
       e.preventDefault();
       const nombre = document.getElementById('form-nombre').value.trim();
@@ -2401,7 +2624,15 @@
       const leadData = {
         nombre, empresa, whatsapp, email, servicio, asunto, mensaje,
         fecha: new Date().toISOString(),
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        source: window.koveTraffic?.source || 'direct',
+        medium: window.koveTraffic?.medium || 'none',
+        campaign: window.koveTraffic?.campaign || null,
+        referrer: document.referrer || null,
+        landingPage: location.pathname,
+        device: window.koveDevice?.type || 'desktop',
+        visitorId: window.koveVisitorId,
+        sessionId: window.koveSessionId
       };
 
       try {
@@ -2409,6 +2640,7 @@
         const ref = window.ref;
         const push = window.push;
         await push(ref(db, 'leads'), leadData);
+        window.logKoveEvent && window.logKoveEvent('contact_form_submit', servicio);
         console.log('✅ Lead guardado en Firebase');
 
         try {
@@ -2462,26 +2694,71 @@
     };
 
     // ──────────────────────────────────────────────
-    // 8. REGISTRAR VISITA
+    // 8. REGISTRAR VISITA (contador atómico + visitante único + sesión)
     // ──────────────────────────────────────────────
     function registerVisit() {
       (async function(){
         try {
           const db = window.db;
           const ref = window.ref;
-          const get = window.get;
           const update = window.update;
-          const visitsRef = ref(db, 'stats/visits');
-          const snapshot = await get(visitsRef);
-          const data = snapshot.val() || { total: 0, today: 0, history: {} };
+          const increment = window.increment;
+          const set = window.set;
+          const get = window.get;
 
           const todayKey = new Date().toISOString().split('T')[0];
-          const newTotal = (data.total || 0) + 1;
-          const newToday = (data.today || 0) + 1;
-          const history = data.history || {};
-          history[todayKey] = (history[todayKey] || 0) + 1;
+          const visitsRef = ref(db, 'stats/visits');
 
-          await update(visitsRef, { total: newTotal, today: newToday, history: history });
+          // "today" se resetea cuando cambia el día, comparado contra un marcador guardado
+          const lastDaySnap = await get(ref(db, 'stats/lastDay'));
+          const lastDay = lastDaySnap.val();
+          const isNewDay = lastDay !== todayKey;
+          if (isNewDay) await set(ref(db, 'stats/lastDay'), todayKey);
+
+          // Contadores atómicos (increment evita condiciones de carrera con visitas simultáneas)
+          await update(visitsRef, {
+            total: increment(1),
+            [`history/${todayKey}`]: increment(1)
+          });
+          if (isNewDay) {
+            await set(ref(db, 'stats/visits/today'), 1);
+          } else {
+            await update(visitsRef, { today: increment(1) });
+          }
+
+          // Visitante único: solo se crea el registro la primera vez que se ve ese visitorId
+          const visitorId = window.koveVisitorId;
+          const visitorRef = ref(db, 'visitors/' + visitorId);
+          const visitorSnap = await get(visitorRef);
+          if (!visitorSnap.exists()) {
+            await set(visitorRef, {
+              firstSeen: Date.now(),
+              firstDate: todayKey,
+              source: window.koveTraffic.source,
+              medium: window.koveTraffic.medium,
+              campaign: window.koveTraffic.campaign,
+              device: window.koveDevice.type,
+              browser: window.koveDevice.browser,
+              os: window.koveDevice.os,
+              language: window.koveDevice.language
+            });
+          }
+
+          // Sesión: un registro por sessionId
+          const sessionRef = ref(db, 'sessions/' + window.koveSessionId);
+          const sessionSnap = await get(sessionRef);
+          if (!sessionSnap.exists()) {
+            await set(sessionRef, {
+              visitorId: visitorId,
+              start: Date.now(),
+              date: todayKey,
+              landingPage: location.pathname,
+              source: window.koveTraffic.source
+            });
+            window.logKoveEvent('session_start');
+          }
+
+          window.logKoveEvent('page_view');
           console.log('📊 Visita registrada');
         } catch(e) { console.warn('Error registrando visita:', e); }
       })();
@@ -2551,6 +2828,7 @@
     }
 
     window.selectPlanCat = function(btn, cat) {
+      window.logKoveEvent && window.logKoveEvent('plan_click', cat);
       document.querySelectorAll('.plans-cat-btn').forEach(b => {
         b.classList.remove('active');
         b.style.background = 'transparent';
@@ -2768,6 +3046,7 @@
         const input = document.getElementById('kove-chat-input');
         const text = (input.value || '').trim();
         if (!text) return;
+        window.logKoveEvent && window.logKoveEvent('chat_message');
         input.value = '';
         appendMsg(text, true);
         appendTyping();
