@@ -175,9 +175,9 @@
     .panel-box {
       background: #1a1a1a;
       border-radius: 32px;
-      max-width: 900px;
-      width: 100%;
-      max-height: 90vh;
+      max-width: 1100px;
+      width: calc(100% - 40px);
+      max-height: 92vh;
       overflow-y: auto;
       padding: 30px;
       color: #fff;
@@ -218,6 +218,8 @@
       overflow: hidden;
     }
     #kove-msg-panel.active .kove-msg-box { opacity: 1; transform: scale(1) translateY(0); }
+    /* El panel de "Personaliza tu proyecto" reusa .kove-msg-box pero se abre con display directo, no con .active */
+    #kove-custom-panel .kove-msg-box { opacity: 1; transform: none; }
     .kove-msg-header {
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0;
@@ -239,6 +241,14 @@
     .kove-msg-avatar { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
     .kove-msg-avatar.kove { background: #fff; color: #111; }
     .kove-msg-avatar.user { background: rgba(255,255,255,0.15); color: #fff; }
+    .kove-msg-avatar.admin { background: #22c55e; color: #fff; }
+    .kove-typing-dots { display: inline-flex; gap: 3px; align-items: center; padding: 4px 0; }
+    .kove-typing-dots span { width: 5px; height: 5px; border-radius: 50%; background: #999; animation: koveTypingBlink 1.2s infinite ease-in-out; }
+    .kove-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .kove-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes koveTypingBlink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+    .kove-msg-welcome-chat h3 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+    .kove-msg-welcome-chat p { font-size: 12.5px; color: #999; }
     .kove-msg-footer { padding: 14px; border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
     .kove-msg-input-row { display: flex; align-items: flex-end; gap: 8px; background: rgba(255,255,255,0.06); border-radius: 20px; padding: 8px 8px 8px 16px; }
     .kove-msg-input-row textarea { flex: 1; background: transparent; border: none; color: #fff; font-size: 13.5px; resize: none; max-height: 100px; padding: 6px 0; }
@@ -849,6 +859,43 @@
       color: #555;
     }
 
+    /* Toggle pago único / cuotas dentro de cada plan */
+    .plan-payment-toggle { display: flex; gap: 6px; margin: 14px 0 8px; background: rgba(128,128,128,0.12); border-radius: 999px; padding: 3px; }
+    .plan-pay-btn { flex: 1; background: transparent; border: none; padding: 7px 4px; border-radius: 999px; font-size: 10.5px; font-weight: 700; cursor: pointer; color: #888; transition: all 0.2s; }
+    .plan-pay-btn.active { background: #fff; color: #111; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .plan-card-dark .plan-pay-btn.active { background: #fff; color: #111; }
+    .plan-months-row { display: flex; gap: 5px; margin-bottom: 6px; }
+    .plan-month-btn { flex: 1; background: rgba(128,128,128,0.1); border: 1px solid transparent; padding: 6px 2px; border-radius: 10px; font-size: 10.5px; font-weight: 600; cursor: pointer; color: inherit; opacity: 0.7; }
+    .plan-month-btn.active { opacity: 1; border-color: currentColor; background: rgba(128,128,128,0.2); }
+    .plan-financed-note { font-size: 10px; color: #888; margin-bottom: 10px; line-height: 1.4; }
+    .plan-add-cart { display: flex; align-items: center; gap: 8px; font-size: 11.5px; margin: 12px 0 16px; cursor: pointer; opacity: 0.85; }
+    .plan-add-cart input { width: 15px; height: 15px; accent-color: #22c55e; cursor: pointer; }
+
+    /* Resumen flotante "Tu proyecto" */
+    #kove-cart-bar {
+      position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%) translateY(140%);
+      background: #161616; color: #fff; border-radius: 22px; padding: 16px 20px;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5); z-index: 9998; width: calc(100% - 32px); max-width: 420px;
+      max-height: min(70dvh, 480px); overflow-y: auto; -webkit-overflow-scrolling: touch;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    #kove-cart-bar.active { transform: translateX(-50%) translateY(0); }
+    @media (max-width: 480px) {
+      #kove-cart-bar { bottom: 86px; width: calc(100% - 20px); }
+    }
+    #kove-cart-bar h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 8px; }
+    #kove-cart-items { font-size: 12.5px; color: #ddd; margin-bottom: 10px; max-height: 90px; overflow-y: auto; }
+    #kove-cart-items div { display: flex; justify-content: space-between; padding: 3px 0; }
+    #kove-cart-total { font-size: 19px; font-weight: 800; margin-bottom: 10px; }
+    .kove-cart-pay-toggle { display: flex; gap: 6px; background: rgba(255,255,255,0.08); border-radius: 999px; padding: 3px; margin-bottom: 8px; }
+    .kove-cart-pay-toggle button { flex: 1; background: transparent; border: none; padding: 7px 4px; border-radius: 999px; font-size: 11px; font-weight: 700; cursor: pointer; color: #999; }
+    .kove-cart-pay-toggle button.active { background: #fff; color: #111; }
+    #kove-cart-months { display: none; gap: 5px; margin-bottom: 8px; }
+    #kove-cart-months button { flex: 1; background: rgba(255,255,255,0.08); border: 1px solid transparent; padding: 6px 2px; border-radius: 10px; font-size: 10.5px; color: #ccc; cursor: pointer; }
+    #kove-cart-months button.active { border-color: #fff; background: rgba(255,255,255,0.16); color: #fff; }
+    #kove-cart-note { font-size: 10px; color: #888; margin-bottom: 10px; display: none; }
+
     .plan-btn {
       display: block;
       width: 100%;
@@ -1366,19 +1413,44 @@
     html.dark .shadow-\[4px_4px_12px_rgba\(0\,0\,0\,0\.06\)\,-4px_-4px_12px_\#ffffff\] {
       box-shadow: 4px 4px 12px rgba(0,0,0,0.5), -4px -4px 12px rgba(0,0,0,0.15) !important;
     }
-    /* Cursor parpadeante del typewriter, visible en oscuro */
+    /* Asistente "Personaliza tu proyecto" — mismo lenguaje visual que KOVE Mensajes */
+    .kove-custom-step { display: none; flex-direction: column; gap: 14px; }
+    .kove-custom-step.active { display: flex; }
+    .kove-custom-step h2 { font-size: 20px; font-weight: 800; }
+    .kove-custom-step p.sub { font-size: 12.5px; color: #999; margin-top: -8px; }
+    .kove-custom-step input[type="text"], .kove-custom-step input[type="tel"], .kove-custom-step textarea {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff;
+      padding: 12px 14px; border-radius: 12px; font-size: 13px; width: 100%;
+    }
+    .kove-custom-chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .kove-custom-chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ddd; padding: 10px 16px; border-radius: 999px; font-size: 12.5px; cursor: pointer; transition: all 0.2s; }
+    .kove-custom-chip.selected { background: #fff; color: #111; border-color: #fff; }
+    .kove-cuotas-selector { display: flex; gap: 8px; margin: 6px 0 10px; }
+    .kove-cuota-num { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #ddd; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s cubic-bezier(0.16,1,0.3,1); }
+    .kove-cuota-num:hover { background: rgba(255,255,255,0.12); }
+    .kove-cuota-num.selected { background: #fff; color: #111; border-color: #fff; transform: scale(1.12); }
+    .checkout-method-btn { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #ccc; padding: 12px 8px; border-radius: 12px; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .checkout-method-btn.selected { background: #fff; color: #111; border-color: #fff; }
+    #checkout-card-fields input { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 11px 14px; border-radius: 12px; font-size: 13px; width: 100%; }
+    @keyframes koveSpin { to { transform: rotate(360deg); } }
+    .kove-custom-nav { display: flex; justify-content: space-between; margin-top: auto; padding-top: 10px; }
+    .kove-custom-progress { display: flex; gap: 4px; margin-bottom: 6px; }
+    .kove-custom-progress span { height: 3px; flex: 1; background: rgba(255,255,255,0.1); border-radius: 3px; }
+    .kove-custom-progress span.done { background: #fff; }
     html.dark .bg-neutral-900.animate-pulse { background-color: var(--kove-text) !important; }
 
-    /* Ícono de Mensajes del navbar: blanco con glow suave, en cualquier tema */
-    #nav-wa-btn svg {
-      stroke: rgba(255,255,255,0.92);
-      filter: drop-shadow(0 0 4px rgba(255,255,255,0.35));
-      transition: filter 0.3s ease, stroke 0.3s ease;
+    /* Botón de Mensajes: fondo blanco, ícono y texto en negro, con glow sutil en el blanco */
+    #nav-wa-btn {
+      background: #fff !important;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.45));
+      transition: filter 0.3s ease, transform 0.2s ease;
     }
-    #nav-wa-btn:hover svg {
-      stroke: #ffffff;
-      filter: drop-shadow(0 0 7px rgba(255,255,255,0.55));
+    #nav-wa-btn:hover {
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.65));
+      transform: translateY(-1px);
     }
+    #nav-wa-btn svg { stroke: #111 !important; }
+    #nav-wa-btn span { color: #111 !important; }
 
     /* Card "PAQUETE KOVE PRO" (la clara entre las 2 oscuras): su texto heredado/​propio en negro se aclara */
     html.dark .neo-card.text-neutral-950,
@@ -1456,6 +1528,14 @@
           <div class="stat-card" style="border-top:3px solid #f59e0b;"><div class="number" id="stat-conversion" style="color:#fbbf24;">0%</div><div class="label">Conversión</div></div>
         </div>
 
+        <h3 style="font-size:15px;font-weight:700;margin:0 0 10px;">💰 Pipeline comercial</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;">
+          <div class="stat-card" style="border-top:3px solid #22c55e;"><div class="number" id="stat-pipeline-total" style="color:#4ade80;font-size:20px;">$0</div><div class="label">En negociación</div></div>
+          <div class="stat-card" style="border-top:3px solid #3b82f6;"><div class="number" id="stat-cerrado-mes" style="color:#60a5fa;font-size:20px;">$0</div><div class="label">Cerrado este mes</div></div>
+          <div class="stat-card" style="border-top:3px solid #f59e0b;"><div class="number" id="stat-talvez-count" style="color:#fbbf24;">0</div><div class="label">En "Tal vez"</div></div>
+          <div class="stat-card" style="border-top:3px solid #ec4899;"><div class="number" id="stat-tasa-cierre" style="color:#f472b6;">0%</div><div class="label">Tasa de cierre</div></div>
+        </div>
+
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
           <div style="background:rgba(255,255,255,0.03);border-radius:16px;padding:16px;"><canvas id="visitsChart"></canvas></div>
           <div style="background:rgba(255,255,255,0.03);border-radius:16px;padding:16px;"><canvas id="leadsChart"></canvas></div>
@@ -1488,6 +1568,9 @@
         <!-- ═══════ BANDEJA DE MENSAJES ═══════ -->
         <div id="panel-tab-inbox" style="display:none;">
           <div id="inbox-list-view">
+            <button class="btn-panel" style="margin-bottom:14px;" onclick="toggleClientsList()">👥 Ver clientes registrados</button>
+            <div id="admin-clients-list" style="display:none;background:rgba(255,255,255,0.03);border-radius:14px;padding:12px;margin-bottom:16px;max-height:200px;overflow-y:auto;"></div>
+
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
               <h3 style="font-size:15px;font-weight:700;margin:0;">✉ Leads <span id="inbox-count-label" style="color:#888;font-weight:400;font-size:12px;"></span></h3>
               <input type="text" id="inbox-search" oninput="renderInbox()" placeholder="🔍 Buscar mensajes..." style="max-width:220px;font-size:12px;" />
@@ -1543,6 +1626,7 @@
               <button class="btn-panel" style="background:#fff;color:#000;" onclick="sendAdminReply()">Enviar</button>
             </div>
             <div style="display:flex;gap:8px;margin-top:10px;">
+              <button class="btn-panel" id="conv-takeover-btn" onclick="toggleConvTakeover()">Tomar conversación</button>
               <button class="btn-panel" id="conv-archive-btn" onclick="toggleConvArchive()">Archivar</button>
             </div>
           </div>
@@ -1554,11 +1638,251 @@
   <div id="inbox-toast" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#1a1a1a;color:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 20px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);max-width:280px;transform:translateY(20px);opacity:0;pointer-events:none;transition:all 0.35s ease;"></div>
 
   <!-- ═══════ KOVE MENSAJES: panel público flotante ═══════ -->
+  <div id="kove-cart-bar">
+    <h4>Tu proyecto</h4>
+    <div id="kove-cart-items"></div>
+    <div class="kove-cart-pay-toggle">
+      <button type="button" class="active" data-mode="unico" onclick="koveCartSetMode('unico',this)">Pago único</button>
+      <button type="button" data-mode="cuotas" onclick="koveCartSetMode('cuotas',this)">Cuotas</button>
+    </div>
+    <div id="kove-cart-months"></div>
+    <div id="kove-cart-total">$0 COP</div>
+    <p id="kove-cart-note"></p>
+    <button class="btn-panel" style="width:100%;background:#fff;color:#000;padding:12px;" onclick="koveSubmitCart()">Enviar solicitud →</button>
+  </div>
+
+  <div id="kove-checkout-panel" onclick="if(event.target===this) closeCheckout()" style="display:none;position:fixed;inset:0;background:rgba(10,10,10,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:99999;align-items:center;justify-content:center;padding:12px;">
+    <div class="kove-msg-box" style="max-width:420px;height:auto;max-height:88vh;opacity:1;transform:none;">
+      <div class="kove-msg-header">
+        <h3>💳 Pagar cuota</h3>
+        <button class="kove-msg-close" onclick="closeCheckout()">✕</button>
+      </div>
+      <div class="kove-msg-body" style="padding:24px 22px;">
+
+        <div style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);color:#fbbf24;font-size:10.5px;font-weight:700;padding:8px 12px;border-radius:10px;text-align:center;margin-bottom:16px;">
+          ⚠ MODO DEMO — ningún cobro real se procesa
+        </div>
+
+        <div id="checkout-step-form">
+          <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:16px;margin-bottom:16px;">
+            <div style="font-size:11px;color:#888;text-transform:uppercase;" id="checkout-servicio"></div>
+            <div style="font-size:12px;color:#ccc;margin:4px 0;" id="checkout-cuota-label"></div>
+            <div style="font-size:24px;font-weight:800;margin-top:6px;" id="checkout-monto"></div>
+          </div>
+
+          <h4 style="font-size:12px;color:#888;text-transform:uppercase;margin-bottom:8px;">Método de pago</h4>
+          <div style="display:flex;gap:8px;margin-bottom:18px;">
+            <button type="button" class="checkout-method-btn selected" data-method="tarjeta" onclick="checkoutSelectMethod('tarjeta',this)">💳 Tarjeta</button>
+            <button type="button" class="checkout-method-btn" data-method="transferencia" onclick="checkoutSelectMethod('transferencia',this)">🏦 Transferencia</button>
+          </div>
+
+          <div id="checkout-card-fields">
+            <input type="text" placeholder="Número de tarjeta (demo, no se guarda)" maxlength="19" style="margin-bottom:8px;" oninput="this.value=this.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim()" />
+            <div style="display:flex;gap:8px;">
+              <input type="text" placeholder="MM/AA" maxlength="5" style="flex:1;" />
+              <input type="text" placeholder="CVC" maxlength="3" style="width:80px;" />
+            </div>
+          </div>
+
+          <button class="btn-panel" style="width:100%;background:#fff;color:#111;padding:13px;margin-top:18px;" onclick="processCheckout()">Confirmar pago</button>
+        </div>
+
+        <div id="checkout-step-processing" style="display:none;text-align:center;padding:40px 10px;">
+          <div style="width:36px;height:36px;border:3px solid rgba(255,255,255,0.15);border-top-color:#fff;border-radius:50%;margin:0 auto 16px;animation:koveSpin 0.8s linear infinite;"></div>
+          <p style="font-size:13px;color:#ccc;">Procesando pago...</p>
+        </div>
+
+        <div id="checkout-step-result" style="display:none;text-align:center;padding:30px 10px;">
+          <div id="checkout-result-icon" style="font-size:40px;margin-bottom:12px;"></div>
+          <h3 id="checkout-result-title" style="font-size:18px;font-weight:800;margin-bottom:6px;"></h3>
+          <p id="checkout-result-msg" style="font-size:12.5px;color:#999;margin-bottom:20px;"></p>
+          <button class="btn-panel" style="background:#fff;color:#111;padding:10px 24px;" onclick="closeCheckout()">Volver a mi proyecto</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="kove-client-panel" onclick="if(event.target===this) closeClientPortal()" style="display:none;position:fixed;inset:0;background:rgba(10,10,10,0.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:99998;align-items:center;justify-content:center;padding:12px;">
+    <div class="kove-msg-box" style="max-width:460px;height:auto;max-height:88vh;opacity:1;transform:none;">
+      <div class="kove-msg-header">
+        <h3>👤 Mi Proyecto</h3>
+        <button class="kove-msg-close" onclick="closeClientPortal()">✕</button>
+      </div>
+      <div class="kove-msg-body" style="padding:26px 22px;">
+
+        <!-- LOGIN / REGISTRO -->
+        <div id="kc-auth-view">
+          <h2 style="font-size:19px;font-weight:800;margin-bottom:4px;">Bienvenido a KOVE</h2>
+          <p style="font-size:12.5px;color:#999;margin-bottom:18px;">Entra para ver el estado de tu proyecto y tus pagos.</p>
+
+          <button onclick="clientGoogleLogin()" class="btn-panel" style="width:100%;background:#fff;color:#111;padding:12px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Continuar con Google
+          </button>
+
+          <div style="text-align:center;font-size:10px;color:#666;margin:10px 0;">— o con tu correo —</div>
+
+          <input type="email" id="kc-auth-email" placeholder="Correo" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:11px 14px;border-radius:12px;font-size:13px;width:100%;margin-bottom:8px;" />
+          <input type="password" id="kc-auth-pass" placeholder="Contraseña" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:11px 14px;border-radius:12px;font-size:13px;width:100%;margin-bottom:8px;" />
+          <p id="kc-auth-error" style="display:none;color:#f87171;font-size:11px;margin-bottom:8px;"></p>
+
+          <button onclick="clientEmailLogin()" class="btn-panel" style="width:100%;background:#fff;color:#111;padding:11px;margin-bottom:8px;">Iniciar sesión</button>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#888;">
+            <span style="cursor:pointer;text-decoration:underline;" onclick="clientRegister()">Crear cuenta</span>
+            <span style="cursor:pointer;text-decoration:underline;" onclick="clientForgotPassword()">¿Olvidaste tu contraseña?</span>
+          </div>
+        </div>
+
+        <!-- VISTA DE PROYECTO -->
+        <div id="kc-project-view" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h2 style="font-size:17px;font-weight:800;" id="kc-client-greeting">Hola</h2>
+            <div style="display:flex;gap:6px;">
+              <button onclick="toggleClientProfileEdit()" class="btn-panel" style="font-size:10px;padding:6px 12px;">Mi perfil</button>
+              <button onclick="clientLogout()" class="btn-panel" style="font-size:10px;padding:6px 12px;">Cerrar sesión</button>
+            </div>
+          </div>
+
+          <div id="kc-profile-edit" style="display:none;background:rgba(255,255,255,0.04);border-radius:14px;padding:16px;margin-bottom:16px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+              <input type="tel" id="kc-profile-phone" placeholder="WhatsApp" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:9px 12px;border-radius:10px;font-size:12px;" />
+              <select id="kc-profile-idioma" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:9px 12px;border-radius:10px;font-size:12px;">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+              </select>
+              <input type="text" id="kc-profile-pais" placeholder="País" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:9px 12px;border-radius:10px;font-size:12px;" />
+              <input type="text" id="kc-profile-ciudad" placeholder="Ciudad" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:9px 12px;border-radius:10px;font-size:12px;" />
+            </div>
+            <textarea id="kc-profile-bio" placeholder="Cuéntanos sobre tu marca o negocio..." rows="2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:9px 12px;border-radius:10px;font-size:12px;width:100%;margin-bottom:8px;"></textarea>
+            <button class="btn-panel" style="background:#fff;color:#111;width:100%;padding:9px;" onclick="saveClientProfile()">Guardar perfil</button>
+            <p id="kc-profile-saved" style="display:none;color:#4ade80;font-size:11px;margin-top:6px;text-align:center;">✓ Perfil actualizado</p>
+          </div>
+
+          <div id="kc-no-project" style="display:none;text-align:center;padding:30px 10px;color:#999;font-size:13px;">
+            Aún no tienes un proyecto activo con nosotros. Escríbenos por <span style="text-decoration:underline;cursor:pointer;" onclick="closeClientPortal();openKoveMessages();">KOVE Mensajes</span> para arrancar uno.
+          </div>
+          <div id="kc-has-project" style="display:none;">
+            <div style="background:rgba(255,255,255,0.04);border-radius:16px;padding:16px;margin-bottom:14px;">
+              <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.05em;" id="kc-proj-servicio"></div>
+              <div style="font-size:12px;color:#ccc;margin-top:4px;" id="kc-proj-estado"></div>
+            </div>
+            <h3 style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Mis pagos</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+              <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;"><div style="font-size:9px;color:#888;">TOTAL</div><div style="font-size:16px;font-weight:800;" id="kc-total">$0</div></div>
+              <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;"><div style="font-size:9px;color:#888;">PAGADO</div><div style="font-size:16px;font-weight:800;color:#4ade80;" id="kc-pagado">$0</div></div>
+            </div>
+            <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;margin-bottom:16px;">
+              <div id="kc-progress-bar" style="height:100%;background:#4ade80;width:0%;transition:width 0.4s;"></div>
+            </div>
+            <h3 style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Mis cuotas</h3>
+            <div id="kc-cuotas-list" style="display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="kove-custom-panel" onclick="if(event.target===this) closeKoveCustom()" style="display:none;position:fixed;inset:0;background:rgba(10,10,10,0.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:99998;align-items:center;justify-content:center;padding:12px;">
+    <div class="kove-msg-box" style="max-width:520px;height:auto;max-height:88vh;">
+      <div class="kove-msg-header">
+        <h3>✨ Personaliza tu proyecto</h3>
+        <button class="kove-msg-close" onclick="closeKoveCustom()">✕</button>
+      </div>
+      <div class="kove-msg-body" style="padding:24px 22px;">
+        <div class="kove-custom-progress" id="kove-custom-progress"></div>
+        <form id="kove-custom-form" style="display:flex;flex-direction:column;min-height:320px;" onsubmit="return false;">
+
+          <div class="kove-custom-step active" data-step="0">
+            <h2>Hola. Personalicemos tu proyecto.</h2>
+            <p class="sub">¿Cómo te llamas?</p>
+            <input type="text" id="kc-nombre" placeholder="Tu nombre" />
+          </div>
+
+          <div class="kove-custom-step" data-step="1">
+            <h2>¿Cuál es tu WhatsApp?</h2>
+            <p class="sub">Para enviarte la propuesta directamente.</p>
+            <input type="tel" id="kc-whatsapp" placeholder="Ej: 3001234567" />
+          </div>
+
+          <div class="kove-custom-step" data-step="2">
+            <h2 id="kc-nombre-saludo">¿Qué quieres crear?</h2>
+            <p class="sub">Elige el tipo de proyecto.</p>
+            <div class="kove-custom-chip-grid" data-field="tipoProyecto">
+              
+            </div>
+          </div>
+
+          <div class="kove-custom-step" data-step="3">
+            <h2>¿Qué servicios necesitas?</h2>
+            <p class="sub">Puedes elegir varios.</p>
+            <div class="kove-custom-chip-grid" data-field="servicios" data-multi="true">
+              
+            </div>
+          </div>
+
+          <div class="kove-custom-step" data-step="4">
+            <h2>¿Alguna funcionalidad específica?</h2>
+            <p class="sub">Opcional — cuéntanos qué necesitas que tenga.</p>
+            <textarea id="kc-funcionalidades" rows="3" placeholder="Ej: carrito de compras, reservas, blog..."></textarea>
+          </div>
+
+          <div class="kove-custom-step" data-step="5">
+            <h2>¿Presupuesto aproximado?</h2>
+            <p class="sub">Así ajustamos la propuesta a lo que manejas.</p>
+            <div class="kove-custom-chip-grid" data-field="presupuesto">
+              
+            </div>
+          </div>
+
+          <div class="kove-custom-step" data-step="6">
+            <h2>¿Para cuándo lo necesitas?</h2>
+            <div class="kove-custom-chip-grid" data-field="tiempo">
+              
+            </div>
+          </div>
+
+          <div class="kove-custom-step" data-step="7">
+            <h2>¿En cuántas cuotas quieres pagar?</h2>
+            <p class="sub">Máximo 6 cuotas.</p>
+            <div class="kove-cuotas-selector" id="kc-cuotas-selector">
+              ${[1,2,3,4,5,6].map(n => `<button type="button" class="kove-cuota-num${n===1?' selected':''}" data-value="${n}" onclick="koveCustomSelectCuota(${n},this)">${n}</button>`).join('')}
+            </div>
+            <p style="font-size:12px;color:#ccc;margin-top:4px;" id="kc-cuota-desc">Pago único — se abona el 100% de una sola vez.</p>
+            <p style="font-size:11px;color:#666;">Máximo 6 cuotas.</p>
+          </div>
+
+          <div class="kove-custom-step" data-step="8">
+            <h2>¿Algo más que debamos saber?</h2>
+            <p class="sub">Opcional.</p>
+            <textarea id="kc-comentarios" rows="3" placeholder="Comentarios adicionales..."></textarea>
+          </div>
+
+          <div class="kove-custom-step" data-step="9" id="kc-final-step">
+            <h2>Tenemos una idea para tu proyecto.</h2>
+            <div id="kc-resumen" style="font-size:12.5px;color:#ccc;line-height:1.7;background:rgba(255,255,255,0.04);border-radius:14px;padding:14px 16px;"></div>
+            <div id="kc-presupuesto" style="font-size:22px;font-weight:800;margin-top:6px;"></div>
+            <p id="kc-financiado-note" style="font-size:11px;color:#888;"></p>
+          </div>
+
+          <div class="kove-custom-nav">
+            <button type="button" class="btn-panel" id="kc-back-btn" onclick="koveCustomBack()">← Atrás</button>
+            <button type="button" class="btn-panel" style="background:#fff;color:#111;" id="kc-next-btn" onclick="koveCustomNext()">Continuar →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div id="kove-msg-panel" onclick="if(event.target===this) closeKoveMessages()">
     <div class="kove-msg-box">
       <div class="kove-msg-header">
         <h3>💬 KOVE Mensajes</h3>
-        <button class="kove-msg-close" onclick="closeKoveMessages()">✕</button>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button id="kove-msg-logout-btn" onclick="koveMsgLogout()" title="Cerrar sesión / cambiar número" style="display:none;background:transparent;border:none;color:#888;font-size:10.5px;text-decoration:underline;cursor:pointer;">Cerrar sesión</button>
+          <button class="kove-msg-close" onclick="closeKoveMessages()">✕</button>
+        </div>
       </div>
       <div class="kove-msg-body" id="kove-msg-body">
         <div class="kove-msg-welcome" id="kove-msg-precontact">
@@ -1588,6 +1912,24 @@
     <div class="bg-[#f4f4f6] text-neutral-900 overflow-x-hidden w-full relative">
 
       <!-- ===== NAVBAR INFERIOR NEGRA ===== -->
+      <div id="kove-auth-header" style="position:fixed;top:18px;right:18px;z-index:9998;display:flex;align-items:center;gap:8px;">
+        <button id="kove-auth-login-btn" onclick="openClientPortal()" class="kove-btn" style="background:#1a1a1a;color:#fff;border-radius:999px;padding:9px 18px;font-size:11.5px;font-weight:700;transition:all 0.25s ease;box-shadow:0 6px 20px rgba(0,0,0,0.15);">Iniciar sesión</button>
+        <button id="kove-auth-register-btn" onclick="openClientPortal()" class="kove-btn" style="background:#fff;color:#1a1a1a;border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:9px 18px;font-size:11.5px;font-weight:700;transition:all 0.25s ease;box-shadow:0 6px 20px rgba(0,0,0,0.08);">Registrarse</button>
+        <button id="kove-auth-account-btn" onclick="openClientPortal()" class="kove-btn" style="display:none;background:#1a1a1a;color:#fff;border-radius:999px;padding:7px 16px 7px 7px;font-size:12px;font-weight:700;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(0,0,0,0.15);">
+          <span id="kove-auth-avatar" style="width:26px;height:26px;border-radius:50%;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;overflow:hidden;"></span>
+          <span id="kove-auth-name"></span>
+        </button>
+      </div>
+      <style>
+        #kove-auth-login-btn:hover { background:#000; transform:translateY(-1px); }
+        #kove-auth-register-btn:hover { background:#f4f4f4; transform:translateY(-1px); }
+        #kove-auth-account-btn:hover { transform:translateY(-1px); }
+        @media (max-width:480px){
+          #kove-auth-header { top:14px; right:14px; gap:6px; }
+          #kove-auth-login-btn, #kove-auth-register-btn { padding:8px 13px; font-size:10.5px; }
+        }
+      </style>
+
       <nav id="navbar" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:28px;background:#1a1a1a;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 8px 32px rgba(0,0,0,0.4),0 2px 8px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.06);">
 
         <button onclick="document.getElementById('inicio')?.scrollIntoView({behavior:'smooth'})" class="kove-nav-btn" id="nav-inicio" ondblclick="toggleSecurityPanel()">
@@ -1628,11 +1970,10 @@
 
         <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);margin:0 2px;flex-shrink:0;"></div>
 
-        <button onclick="openKoveMessages()" class="kove-nav-btn" id="nav-wa-btn" title="Escríbenos por KOVE Mensajes">
+        <button onclick="openKoveMessages()" class="kove-nav-btn" id="nav-wa-btn" title="Escríbenos por KOVE Mensajes" style="margin-left:10px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           <span>Mensaje</span>
         </button>
-
 
       </nav>
 
@@ -1808,6 +2149,17 @@
             </div>
 
             <div id="planes-grid" class="planes-grid-container" style="opacity:1;"></div>
+          </div>
+        </section>
+
+        <!-- ===== PERSONALIZA TU PROYECTO ===== -->
+        <section id="personaliza" class="py-24 bg-[#f4f4f7] relative overflow-hidden">
+          <div class="max-w-3xl mx-auto px-6 text-center section-fade">
+            <h2 class="font-display font-black text-4xl sm:text-5xl text-neutral-900 tracking-tight">¿Tienes algo <span class="kove-word-accent">diferente</span> en mente?</h2>
+            <p class="text-neutral-600 text-base sm:text-lg max-w-[560px] mx-auto mt-5 font-light">Cuéntanos qué quieres crear y construyamos una propuesta que se adapte a lo que realmente necesitas.</p>
+            <button onclick="openKoveCustom()" class="kove-btn bg-neutral-900 text-white rounded-2xl px-12 py-6 text-base font-bold mt-10 hover:scale-105 active:scale-95 transition-all duration-300 inline-flex items-center gap-2">
+              Personalizar mi proyecto →
+            </button>
           </div>
         </section>
 
@@ -2396,7 +2748,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
     import { getDatabase, ref, set, get, update, push, onValue, increment, runTransaction } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { getAnalytics, logEvent as gaLogEvent } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBS4ZUd0a91WNbLtXc0Z6kPROR6st7eeaw",
@@ -2429,6 +2781,11 @@
     window.onAuthStateChanged = onAuthStateChanged;
     window.signOut = signOut;
     window.signInAnonymously = signInAnonymously;
+    window.googleProvider = new GoogleAuthProvider();
+    window.signInWithPopup = signInWithPopup;
+    window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+    window.sendPasswordResetEmail = sendPasswordResetEmail;
+    window.KOVE_ADMIN_EMAIL = 'lunaerick2024@gmail.com';
     window.gaLogEvent = function(name, params) { try { if (analytics) gaLogEvent(analytics, name, params || {}); } catch(e){} };
     window.__koveFirebaseReady = true;
     window.dispatchEvent(new Event('kove-firebase-ready'));
@@ -2584,7 +2941,7 @@
       panel.classList.add('active');
       document.getElementById('security-error').style.display = 'none';
       // Si ya hay sesión de ADMIN activa (no anónima) entra directo al dashboard
-      if (window.auth && window.auth.currentUser && !window.auth.currentUser.isAnonymous) {
+      if (window.auth && window.auth.currentUser && !window.auth.currentUser.isAnonymous && window.auth.currentUser.email === window.KOVE_ADMIN_EMAIL) {
         document.getElementById('security-login').style.display = 'none';
         document.getElementById('security-dashboard').style.display = 'block';
         loadSecurityData();
@@ -2639,7 +2996,7 @@
       window.onAuthStateChanged(window.auth, function(user) {
         const panel = document.getElementById('security-panel');
         const isPanelOpen = panel && panel.classList.contains('active');
-        if (user && !user.isAnonymous) {
+        if (user && !user.isAnonymous && user.email === window.KOVE_ADMIN_EMAIL) {
           if (isPanelOpen) {
             document.getElementById('security-login').style.display = 'none';
             document.getElementById('security-dashboard').style.display = 'block';
@@ -2661,6 +3018,33 @@
     // ──────────────────────────────────────────────
     // 4. CARGAR DATOS DE SEGURIDAD
     // ──────────────────────────────────────────────
+    function formatCOP(n) {
+      return '$' + Math.round(n || 0).toLocaleString('es-CO');
+    }
+
+    function updatePipelineStats(leadsArray) {
+      const enJuego = leadsArray.filter(l => ['nuevo','conversacion','talvez'].includes(l.etapaComercial || 'nuevo'));
+      const totalPipeline = enJuego.reduce((sum, l) => sum + (Number(l.valorNegocio) || 0), 0);
+
+      const now = new Date();
+      const cerrados = leadsArray.filter(l => l.etapaComercial === 'cerrado');
+      const cerradosMes = cerrados.filter(l => {
+        const d = l.fecha ? new Date(l.fecha) : null;
+        return d && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+      });
+      const totalCerradoMes = cerradosMes.reduce((sum, l) => sum + (Number(l.valorNegocio) || 0), 0);
+
+      const talvezCount = leadsArray.filter(l => l.etapaComercial === 'talvez').length;
+      const perdidos = leadsArray.filter(l => l.etapaComercial === 'perdido').length;
+      const decididos = cerrados.length + perdidos;
+      const tasaCierre = decididos > 0 ? ((cerrados.length / decididos) * 100).toFixed(0) : '0';
+
+      document.getElementById('stat-pipeline-total').textContent = formatCOP(totalPipeline);
+      document.getElementById('stat-cerrado-mes').textContent = formatCOP(totalCerradoMes);
+      document.getElementById('stat-talvez-count').textContent = talvezCount;
+      document.getElementById('stat-tasa-cierre').textContent = tasaCierre + '%';
+    }
+
     async function loadSecurityData() {
       try {
         const db = window.db;
@@ -2680,6 +3064,7 @@
         const leadsData = snapshotLeads.val() || {};
         const leadsArray = Object.values(leadsData).reverse();
         document.getElementById('stat-leads-total').textContent = leadsArray.length;
+        updatePipelineStats(leadsArray);
 
         const visitorsRef = ref(db, 'visitors');
         const snapshotVisitors = await get(visitorsRef);
@@ -2713,6 +3098,7 @@
           const data = snap.val() || {};
           const arr = Object.values(data).reverse();
           document.getElementById('stat-leads-total').textContent = arr.length;
+          updatePipelineStats(arr);
           const tbody2 = document.getElementById('leads-table-body');
           tbody2.innerHTML = arr.slice(0, 20).map(l => `
             <tr><td>${l.fecha || '-'}</td><td>${l.nombre || '-'}</td><td>${l.whatsapp || '-'}</td><td>${l.email || '-'}</td><td>${l.servicio || '-'}</td></tr>
@@ -2810,17 +3196,23 @@
         return;
       }
       empty.style.display = 'none';
-      container.innerHTML = list.map(l => `
+      const etapaTag = { nuevo:['#888','Nuevo'], conversacion:['#3b82f6','En conversación'], talvez:['#f59e0b','Tal vez'], cerrado:['#22c55e','Cerrado'], perdido:['#ef4444','Perdido'] };
+      container.innerHTML = list.map(l => {
+        const et = etapaTag[l.etapaComercial || 'nuevo'];
+        return `
         <div class="inbox-item ${l.estado === 'nuevo' ? 'unread' : ''} ${l.estado === 'archivado' ? 'archived' : ''}" onclick="openLeadDetail('${l.id}')">
           ${l.estado === 'nuevo' ? '<div class="inbox-dot"></div>' : '<div style="width:8px;flex-shrink:0;"></div>'}
           <div style="flex:1;min-width:0;">
-            <div class="inbox-item-name">${l.nombre || 'Sin nombre'}</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="inbox-item-name">${l.nombre || 'Sin nombre'}</div>
+              <span style="font-size:9px;font-weight:700;padding:1px 7px;border-radius:999px;background:${et[0]}22;color:${et[0]};">${et[1]}</span>
+            </div>
             <div class="inbox-item-service">${l.servicio || 'Servicio no indicado'}${l.asunto ? ' · ' + l.asunto : ''}</div>
             <div class="inbox-item-preview">${(l.mensaje || 'Sin mensaje').slice(0, 70)}</div>
           </div>
           <div class="inbox-item-time">${timeAgo(l.timestamp)}</div>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
     };
 
     window.openLeadDetail = function(id) {
@@ -2848,6 +3240,8 @@
       const waMsg = encodeURIComponent(`Hola ${lead.nombre || ''}, soy Erick de KOVE. Vi tu mensaje sobre ${lead.servicio || 'tu proyecto'}...`);
       const mailSubject = encodeURIComponent(`Re: ${lead.asunto || lead.servicio || 'Tu mensaje a KOVE'}`);
       const estadoLabel = { nuevo: 'Nuevo', leido: 'Leído', archivado: 'Archivado' }[lead.estado] || 'Nuevo';
+      const etapa = lead.etapaComercial || 'nuevo';
+      const etapas = [['nuevo','Nuevo'],['conversacion','En conversación'],['talvez','Tal vez'],['cerrado','Cerrado ✅'],['perdido','Perdido ❌']];
       document.getElementById('inbox-detail-content').innerHTML = `
         <h3 style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">${lead.servicio || 'Sin servicio'}</h3>
         <h2 style="font-size:20px;font-weight:800;margin-bottom:18px;">${lead.nombre || 'Sin nombre'}</h2>
@@ -2866,6 +3260,52 @@
           ${field('Campaña', lead.campaign)}
         </div>
         ${field('Estado', estadoLabel)}
+
+        <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:14px 16px;margin:16px 0;">
+          <h4 style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">💰 Negociación</h4>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label style="font-size:10px;color:#888;display:block;margin-bottom:4px;">Etapa</label>
+              <select id="lead-etapa-select" style="font-size:12px;padding:8px 10px;">
+                ${etapas.map(([v,l]) => `<option value="${v}" ${etapa===v?'selected':''}>${l}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label style="font-size:10px;color:#888;display:block;margin-bottom:4px;">Valor del negocio (COP)</label>
+              <input type="number" id="lead-valor-input" value="${lead.valorNegocio || ''}" placeholder="Ej: 600000" style="font-size:12px;padding:8px 10px;" />
+            </div>
+          </div>
+          <button class="btn-panel" style="margin-top:10px;background:#22c55e;color:#fff;" onclick="saveLeadPipeline('${lead.id}')">Guardar</button>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:14px 16px;margin:16px 0;">
+          <h4 style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">👤 Cliente vinculado</h4>
+          ${lead.clienteUid
+            ? `<p style="font-size:12px;color:#4ade80;margin-bottom:8px;">✓ Vinculado (UID: ${lead.clienteUid.slice(0,10)}...)</p>
+               <button class="btn-panel" onclick="unlinkLeadClient('${lead.id}')">Desvincular cliente</button>`
+            : `<p style="font-size:11px;color:#888;margin-bottom:8px;">Copia el UID del cliente desde "👥 Ver clientes registrados" arriba en la lista, y pégalo aquí para que pueda ver este proyecto en su portal.</p>
+               <div style="display:flex;gap:8px;">
+                 <input type="text" id="lead-cliente-uid" placeholder="UID del cliente" style="font-size:11px;padding:8px 10px;flex:1;" />
+                 <button class="btn-panel" style="background:#2563eb;color:#fff;" onclick="linkLeadClient('${lead.id}')">Vincular</button>
+               </div>`
+          }
+        </div>
+
+        <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:14px 16px;margin:16px 0;">
+          <h4 style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">📅 Plan de cuotas</h4>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+            ${[1,2,3,4,5,6].map(n => `<button class="btn-panel" style="font-size:10px;padding:6px 12px;" onclick="generateCuotas('${lead.id}',${n},${lead.valorNegocio || 0})">${n === 1 ? 'Contado' : n + ' cuotas'}</button>`).join('')}
+          </div>
+          <div id="lead-cuotas-list" style="display:flex;flex-direction:column;gap:6px;">
+            ${(lead.cuotas || []).map((c, i) => `
+              <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 12px;">
+                <span style="font-size:11.5px;">Cuota ${c.numero} — ${formatCOP(c.monto)}</span>
+                <button class="btn-panel" style="font-size:9.5px;padding:4px 10px;background:${c.estado==='pagada'?'rgba(74,222,128,0.2)':'rgba(255,255,255,0.08)'};color:${c.estado==='pagada'?'#4ade80':'#ccc'};" onclick="toggleCuotaPagada('${lead.id}',${i})">${c.estado === 'pagada' ? '✓ Pagada' : 'Marcar pagada'}</button>
+              </div>
+            `).join('') || '<p style="font-size:11px;color:#888;">Sin plan de cuotas generado aún.</p>'}
+          </div>
+        </div>
+
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
           ${wa ? `<button class="btn-panel" style="background:#22c55e;color:#fff;" onclick="window.open('https://wa.me/${wa}?text=${waMsg}','_blank')">Responder por WhatsApp</button>` : ''}
           ${lead.email ? `<button class="btn-panel" style="background:#2563eb;color:#fff;" onclick="window.location.href='mailto:${lead.email}?subject=${mailSubject}'">Responder por correo</button>` : ''}
@@ -2875,6 +3315,85 @@
         </div>
       `;
     }
+
+    window.saveLeadPipeline = async function(id) {
+      try {
+        const etapaComercial = document.getElementById('lead-etapa-select').value;
+        const valorNegocio = Number(document.getElementById('lead-valor-input').value) || 0;
+        await window.update(window.ref(window.db, 'leads/' + id), { etapaComercial, valorNegocio });
+      } catch(e) { console.warn('Error guardando pipeline del lead:', e); }
+    };
+
+    window.toggleClientsList = async function() {
+      const box = document.getElementById('admin-clients-list');
+      if (box.style.display === 'block') { box.style.display = 'none'; return; }
+      box.style.display = 'block';
+      box.innerHTML = '<p style="font-size:11px;color:#888;">Cargando...</p>';
+      try {
+        const snap = await window.get(window.ref(window.db, 'clients'));
+        const data = snap.val() || {};
+        const entries = Object.entries(data);
+        if (entries.length === 0) { box.innerHTML = '<p style="font-size:11px;color:#888;">Aún no hay clientes registrados.</p>'; return; }
+        box.innerHTML = entries.map(([uid, c]) => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 4px;border-bottom:1px solid rgba(255,255,255,0.06);gap:8px;">
+            <div style="min-width:0;">
+              <div style="font-size:12px;font-weight:600;">${c.name || c.email || 'Sin nombre'}</div>
+              <div style="font-size:10px;color:#777;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${uid}</div>
+            </div>
+            <button class="btn-panel" style="font-size:9.5px;padding:5px 10px;flex-shrink:0;" onclick="navigator.clipboard.writeText('${uid}');this.textContent='Copiado ✓';setTimeout(()=>this.textContent='Copiar UID',1500);">Copiar UID</button>
+          </div>
+        `).join('');
+      } catch(e) { box.innerHTML = '<p style="font-size:11px;color:#f87171;">Error cargando clientes.</p>'; console.warn(e); }
+    };
+
+    window.linkLeadClient = async function(leadId) {
+      const uid = document.getElementById('lead-cliente-uid').value.trim();
+      if (!uid) { alert('Pega el UID del cliente.'); return; }
+      try {
+        await window.update(window.ref(window.db, 'leads/' + leadId), { clienteUid: uid });
+        await window.update(window.ref(window.db, 'clients/' + uid), { proyectoId: leadId });
+      } catch(e) { console.warn('Error vinculando cliente:', e); alert('No se pudo vincular — revisa que el UID sea correcto.'); }
+    };
+
+    window.unlinkLeadClient = async function(leadId) {
+      try {
+        const lead = window.__koveLeadsCache.find(l => l.id === leadId);
+        if (lead && lead.clienteUid) {
+          await window.update(window.ref(window.db, 'clients/' + lead.clienteUid), { proyectoId: null });
+        }
+        await window.update(window.ref(window.db, 'leads/' + leadId), { clienteUid: null });
+      } catch(e) { console.warn('Error desvinculando cliente:', e); }
+    };
+
+    window.generateCuotas = async function(leadId, numCuotas, valorNegocio) {
+      numCuotas = Math.round(Number(numCuotas));
+      if (!Number.isInteger(numCuotas) || numCuotas < 1 || numCuotas > KOVE_MAX_CUOTAS) {
+        alert('El número de cuotas debe estar entre 1 y ' + KOVE_MAX_CUOTAS + '.');
+        return;
+      }
+      if (!valorNegocio || valorNegocio <= 0) { alert('Primero guarda un "Valor del negocio" mayor a 0 en Negociación.'); return; }
+      let cuotas;
+      if (numCuotas === 1) {
+        cuotas = [{ numero: 1, monto: valorNegocio, estado: 'pendiente', fechaPago: null }];
+      } else {
+        const { monthly } = koveCalcFinancing(valorNegocio, numCuotas);
+        cuotas = Array.from({ length: numCuotas }, (_, i) => ({ numero: i + 1, monto: monthly, estado: 'pendiente', fechaPago: null }));
+      }
+      try {
+        await window.update(window.ref(window.db, 'leads/' + leadId), { cuotas });
+      } catch(e) { console.warn('Error generando plan de cuotas:', e); }
+    };
+
+    window.toggleCuotaPagada = async function(leadId, index) {
+      try {
+        const lead = window.__koveLeadsCache.find(l => l.id === leadId);
+        if (!lead || !lead.cuotas) return;
+        const cuotas = [...lead.cuotas];
+        const nuevoEstado = cuotas[index].estado === 'pagada' ? 'pendiente' : 'pagada';
+        cuotas[index] = { ...cuotas[index], estado: nuevoEstado, fechaPago: nuevoEstado === 'pagada' ? new Date().toISOString() : null };
+        await window.update(window.ref(window.db, 'leads/' + leadId), { cuotas });
+      } catch(e) { console.warn('Error actualizando cuota:', e); }
+    };
 
     window.markLeadState = async function(id, estado) {
       try {
@@ -2957,12 +3476,35 @@
         document.getElementById('kove-msg-precontact').style.display = 'none';
         document.getElementById('kove-msg-list').style.display = 'flex';
         document.getElementById('kove-msg-footer').style.display = 'block';
+        document.getElementById('kove-msg-logout-btn').style.display = 'block';
+        window.logKoveEvent && window.logKoveEvent('message_conversation_restored');
       } else {
         document.getElementById('kove-msg-precontact').style.display = 'block';
         document.getElementById('kove-msg-list').style.display = 'none';
         document.getElementById('kove-msg-footer').style.display = 'none';
+        document.getElementById('kove-msg-logout-btn').style.display = 'none';
+        window.logKoveEvent && window.logKoveEvent('message_conversation_created');
       }
       listenKoveUserMessages(convId);
+    };
+
+    // Cierra la "sesión" de contacto del chat público (borra nombre/WhatsApp guardados
+    // en este navegador) SIN borrar los mensajes — si vuelve con el mismo número más
+    // adelante, su conversación sigue intacta en Firebase.
+    window.koveMsgLogout = function() {
+      localStorage.removeItem('kove_msg_name');
+      localStorage.removeItem('kove_msg_phone');
+      window.koveUserName = null;
+      window.koveUserPhone = null;
+      document.getElementById('kc-nombre').value = '';
+      document.getElementById('kc-whatsapp').value = '';
+      document.getElementById('kove-msg-list').innerHTML = '';
+      document.getElementById('kove-msg-precontact').style.display = 'block';
+      document.getElementById('kove-msg-list').style.display = 'none';
+      document.getElementById('kove-msg-footer').style.display = 'none';
+      document.getElementById('kove-msg-logout-btn').style.display = 'none';
+      if (window.__koveMsgUnsub) { window.__koveMsgUnsub(); window.__koveMsgUnsub = null; }
+      window.logKoveEvent && window.logKoveEvent('message_logout');
     };
 
     window.koveSubmitPrecontact = async function() {
@@ -2990,7 +3532,7 @@
       const convId = window.koveConversationId || await ensureKoveConversation();
       if (convId) {
         try {
-          await window.update(window.ref(window.db, 'messages/' + convId + '/_meta'), { nombre, whatsapp });
+          await window.update(window.ref(window.db, 'messages/' + convId + '/_meta'), { nombre, whatsapp, state: 'ai_active' });
         } catch(e) { console.warn('Error guardando datos de contacto:', e); }
       }
 
@@ -3017,14 +3559,23 @@
     }
 
     function koveBubbleHtml(m, userName) {
-      const isUser = m.sender !== 'kove';
+      const isUser = m.sender === 'user';
+      const isAdmin = m.sender === 'admin';
       const cls = isUser ? 'from-user' : 'from-kove';
       const img = m.imageUrl ? `<img src="${m.imageUrl}" />` : '';
       const text = m.text ? m.text.replace(/</g, '&lt;') : '';
-      const avatar = isUser
-        ? `<div class="kove-msg-avatar user">${koveInitials(userName || window.koveUserName)}</div>`
-        : `<div class="kove-msg-avatar kove">K</div>`;
+      let avatar;
+      if (isUser) avatar = `<div class="kove-msg-avatar user">${koveInitials(userName || window.koveUserName)}</div>`;
+      else if (isAdmin) avatar = `<div class="kove-msg-avatar admin">🧑</div>`;
+      else avatar = `<div class="kove-msg-avatar kove">🤖</div>`;
       return `<div class="kove-msg-row ${cls}">${avatar}<div class="kove-bubble ${cls}">${text}${img}</div></div>`;
+    }
+
+    function koveWelcomeHtml() {
+      return `<div class="kove-msg-row"><div class="kove-msg-avatar kove">🤖</div><div class="kove-bubble from-kove kove-msg-welcome-chat">
+        <h3>¡Hola! ¿Qué necesitas? 👋</h3>
+        <p>Estoy aquí para orientarte sobre nuestros servicios, precios o cualquier idea que tengas.</p>
+      </div></div>`;
     }
 
     function listenKoveUserMessages(convId) {
@@ -3033,16 +3584,135 @@
       window.__koveMsgUnsub = onValue(ref(db, 'messages/' + convId), (snap) => {
         const data = snap.val() || {};
         if (data._meta && data._meta.nombre) window.koveUserName = data._meta.nombre;
+        window.__koveConvState = (data._meta && data._meta.state) || 'ai_active';
         const listEl = document.getElementById('kove-msg-list');
         const list = Object.entries(data)
           .filter(([k]) => k !== '_meta')
           .map(([id, m]) => ({ id, ...m }))
           .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
-        listEl.innerHTML = list.map(koveBubbleHtml).join('');
+        listEl.innerHTML = list.length === 0 ? koveWelcomeHtml() : list.map(m => koveBubbleHtml(m)).join('');
         const body = document.getElementById('kove-msg-body');
         body.scrollTop = body.scrollHeight;
       });
     }
+
+    function koveShowTyping() {
+      const listEl = document.getElementById('kove-msg-list');
+      const el = document.createElement('div');
+      el.className = 'kove-msg-row';
+      el.id = 'kove-typing-row';
+      el.innerHTML = `<div class="kove-msg-avatar kove">🤖</div><div class="kove-bubble from-kove"><div class="kove-typing-dots"><span></span><span></span><span></span></div></div>`;
+      listEl.appendChild(el);
+      document.getElementById('kove-msg-body').scrollTop = document.getElementById('kove-msg-body').scrollHeight;
+    }
+    function koveHideTyping() {
+      document.getElementById('kove-typing-row')?.remove();
+    }
+
+    // ══════════════════════════════════════════════════════
+    // BASE DE CONOCIMIENTO KOVE (respuestas por intención, con datos reales de plansDB)
+    // Esto es un sistema de reglas/intents, NO un modelo de IA generativo real.
+    // Para IA real (modelo entrenado tipo Claude/GPT) se necesita backend — ver explicación al final.
+    // ══════════════════════════════════════════════════════
+    const KOVE_ESCALATION_PATTERNS = [
+      'hablar con alguien','hablar con erick','quiero cotizar','quiero una cotizacion','quiero una cotización',
+      'quiero contratar','necesito algo personalizado','enviar informacion','enviar información',
+      'hablar con un humano','asesor','asesoria personal','quiero comprar','contratar ya'
+    ];
+    function priceRange(cat) {
+      const plans = plansDB[cat];
+      if (!plans) return null;
+      return `desde ${plans[0].price} hasta ${plans[plans.length - 1].price}, según el alcance`;
+    }
+    const KOVE_INTENTS = [
+      { intent: 'pricing_web', kws: ['cuanto cuesta una web','cuanto vale una pagina','cuanto sale una pagina','precio pagina','precio web','me hacen una pagina','pagina web precio','cuanto cobran por una web'],
+        reply: () => `Una web en KOVE va ${priceRange('web')}. Depende de cuántas páginas necesites y si llevas tienda online o no.\n\n¿Es para una empresa, tienda o proyecto personal?` },
+      { intent: 'pricing_grafico', kws: ['cuanto cuesta un logo','cuanto cuesta el diseño','precio diseño grafico','cuanto vale branding','precio de un logo','cuanto cuesta branding'],
+        reply: () => `Diseño gráfico va ${priceRange('grafico')}, y branding completo (logo + manual de marca) entra en ese mismo rango según lo que incluya.\n\nCuéntame qué necesitas exactamente y te oriento mejor.` },
+      { intent: 'pricing_auto', kws: ['cuanto cuesta automatizar','precio automatizacion','cuanto vale un bot','automatizacion precio','cuanto cuesta un crm'],
+        reply: () => `Automatización va ${priceRange('auto')}, según cuántos flujos necesites y con qué canales se conecte (WhatsApp, Instagram, CRM, etc).` },
+      { intent: 'ecommerce', kws: ['ecommerce','tienda online','vender por internet','pueden hacer tienda'],
+        reply: () => `Sí, hacemos e-commerce completo — carrito, pagos, catálogo, todo integrado. Entra dentro del plan Enterprise de desarrollo web (${plansDB.web[2].price}).\n\n¿Qué vas a vender?` },
+      { intent: 'payment', kws: ['puedo pagar por partes','pago por fases','anticipo','forma de pago','como se paga','pagos'],
+        reply: () => `Sí, trabajamos con anticipo para arrancar y el resto contra entrega o por fases, según el tamaño del proyecto. Lo cuadramos directo contigo antes de empezar.` },
+      { intent: 'timing', kws: ['cuanto se demoran','cuanto tarda','tiempo de entrega','en cuanto tiempo','cuando estaria lista'],
+        reply: () => `Depende del proyecto: una landing puede estar en 5 días hábiles, una web más grande o un branding completo toma más — te doy el tiempo exacto cuando sepamos el alcance.` },
+      { intent: 'process', kws: ['como trabajan','como es el proceso','que necesitan de mi','como empieza un proyecto','revisiones','cambios incluidos'],
+        reply: () => `El proceso es simple: nos cuentas tu idea → te armamos una propuesta con alcance y precio → arrancamos con anticipo → vas viendo avances y das feedback → entregamos y ajustamos lo necesario.` },
+      { intent: 'company', kws: ['que es kove','quien es kove','quienes son','donde estan ubicados','en que pais','trabajan con colombia','atienden otros paises'],
+        reply: () => `KOVE es una agencia de diseño, branding, desarrollo web y automatización — "Make it real". Trabajamos con negocios locales y marcas personales en Colombia y también remoto para otros países.` },
+      { intent: 'contact', kws: ['whatsapp','correo','como los contacto','numero de contacto','horario de atencion'],
+        reply: () => `Me tienes aquí mismo en KOVE Mensajes, o si prefieres directo por WhatsApp dale al botón de WhatsApp en la web. Te respondemos lo antes posible.` },
+      { intent: 'branding_explain', kws: ['que incluye branding','que es branding','necesito branding','identidad visual que es'],
+        reply: () => `Branding en KOVE incluye logo, paleta de colores, tipografía y manual de marca — la base visual completa de tu negocio. Va ${priceRange('grafico')}.\n\n¿Ya tienes marca o estás empezando de cero?` },
+      { intent: 'video', kws: ['edicion de video','motion graphics','editan videos','reels','contenido para redes'],
+        reply: () => `Sí, hacemos edición de video y motion graphics para redes — reels, piezas animadas, contenido de marca. Cuéntame qué tipo de contenido necesitas y te oriento.` },
+      { intent: 'greeting', kws: ['hola','buenas','que hace','buenos dias','buenas tardes','ola','q mas','holaa','hla','hls','holis','ey','klk','buenass'],
+        reply: () => `¡Hola! ¿Qué necesitas? Puedo contarte de diseño, web, branding, automatización o precios — dime qué tienes en mente.` },
+      { intent: 'what_do_you_do', kws: ['que hacen ustedes','que servicios tienen','en que me pueden ayudar','servicios kove'],
+        reply: () => `En KOVE hacemos diseño gráfico, branding, desarrollo web, automatización con IA y edición de video/motion. ¿Cuál de esos te interesa?` },
+      { intent: 'hosting_dominio', kws: ['necesito hosting','tienen hosting','que es el dominio','me consiguen el dominio','donde queda alojada la web','servidor web'],
+        reply: () => `Sí, te ayudamos a conseguir el dominio y el hosting, y dejamos todo configurado y funcionando — no tienes que preocuparte por la parte técnica.` },
+      { intent: 'mantenimiento', kws: ['tienen mantenimiento','mantenimiento web','y si necesito cambios despues','soporte despues de entregar','garantia'],
+        reply: () => `Sí, ofrecemos mantenimiento después de la entrega para cambios, actualizaciones o soporte técnico. Lo cuadramos según qué tan seguido necesites ajustes.` },
+      { intent: 'seo', kws: ['hacen seo','posicionamiento en google','aparecer en google','optimizacion para buscadores'],
+        reply: () => `Sí, nuestras webs incluyen SEO técnico de base (velocidad, estructura, metadatos) para que arranques bien posicionado en Google desde el día uno.` },
+      { intent: 'redes_sociales', kws: ['manejan redes sociales','community manager','pauta','publicidad en redes','instagram ads','facebook ads'],
+        reply: () => `Diseñamos piezas y contenido para redes como parte de Diseño Gráfico. Cuéntame si buscas solo piezas visuales o también manejo/pauta de las cuentas.` },
+      { intent: 'mockups_papeleria', kws: ['hacen mockups','papeleria corporativa','tarjetas de presentacion','packaging'],
+        reply: () => `Sí, dentro de branding hacemos mockups, papelería corporativa (tarjetas, sobres) y packaging cuando el proyecto lo necesita.` },
+      { intent: 'sistemas_internos', kws: ['panel administrativo','dashboard','sistema para mi negocio','crm interno','base de datos para mi empresa'],
+        reply: () => `Sí, armamos paneles administrativos, dashboards y sistemas a la medida (como el que tiene esta misma web) para que controles tu negocio desde un solo lugar.` },
+      { intent: 'portfolio', kws: ['tienen portafolio','puedo ver trabajos anteriores','ejemplos de trabajo','proyectos que hayan hecho'],
+        reply: () => `Claro, tienes la sección "Portafolio" aquí mismo en la web con proyectos reales que hemos hecho. Échale un vistazo y me dices qué estilo te gusta.` },
+      { intent: 'redisenio', kws: ['ya tengo marca pero quiero cambiarla','rediseño de logo','renovar mi marca','actualizar mi identidad'],
+        reply: () => `Sí, hacemos rediseño de marca completo — actualizamos logo, colores y todo el manual manteniendo lo que ya funciona de tu identidad actual.` }
+    ];
+    function normalizeKoveText(t) {
+      return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    }
+    // Distancia de edición (Levenshtein) para tolerar errores de ortografía
+    function koveLevenshtein(a, b) {
+      const m = a.length, n = b.length;
+      if (!m) return n; if (!n) return m;
+      const dp = Array.from({ length: m + 1 }, (_, i) => [i, ...Array(n).fill(0)]);
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+        }
+      }
+      return dp[m][n];
+    }
+    const KOVE_STOPWORDS = new Set(['la','el','una','un','de','del','los','las','y','en','me','se','que','es','por','para']);
+    function koveWordFuzzyMatch(word, target) {
+      if (word === target) return true;
+      const maxDist = target.length <= 4 ? 1 : (target.length <= 7 ? 2 : 3);
+      return koveLevenshtein(word, target) <= maxDist;
+    }
+    function koveFuzzyPhraseMatch(textWords, phrase) {
+      const phraseWords = normalizeKoveText(phrase).split(/\s+/).filter(w => w && !KOVE_STOPWORDS.has(w));
+      if (phraseWords.length === 0) return false;
+      return phraseWords.every(pw => textWords.some(tw => koveWordFuzzyMatch(tw, pw)));
+    }
+    function detectKoveEscalation(text) {
+      const t = normalizeKoveText(text);
+      return KOVE_ESCALATION_PATTERNS.some(p => t.includes(normalizeKoveText(p)));
+    }
+    function getKoveKnowledgeReply(text) {
+      const t = normalizeKoveText(text);
+      // 1) Coincidencia exacta (rápida)
+      for (const it of KOVE_INTENTS) {
+        if (it.kws.some(kw => t.includes(normalizeKoveText(kw)))) return it.reply();
+      }
+      // 2) Si no hubo coincidencia exacta, tolera errores de ortografía palabra por palabra
+      const textWords = t.split(/\s+/).filter(Boolean);
+      for (const it of KOVE_INTENTS) {
+        if (it.kws.some(kw => koveFuzzyPhraseMatch(textWords, kw))) return it.reply();
+      }
+      return `No quiero darte una información incorrecta con eso. Para ese caso específico podemos revisarlo directamente contigo — sigue escribiéndome aquí o pásate por WhatsApp cuando quieras.`;
+    }
+
 
     window.sendKoveUserMessage = async function() {
       const input = document.getElementById('kove-msg-input');
@@ -3088,6 +3758,29 @@
 
         window.logKoveEvent && window.logKoveEvent('message_sent');
         if (!window.__koveMsgStarted) { window.__koveMsgStarted = true; window.logKoveEvent && window.logKoveEvent('message_started'); }
+
+        // Responde la IA solo si nadie (admin) tomó la conversación
+        const state = window.__koveConvState || 'ai_active';
+        if (state === 'ai_active') {
+          const escalate = detectKoveEscalation(text);
+          koveShowTyping();
+          setTimeout(async () => {
+            koveHideTyping();
+            const replyText = escalate
+              ? 'Claro, te conecto con Erick directamente para revisar tu caso. Puedes seguir escribiendo aquí o por WhatsApp — te responde lo antes posible.'
+              : getKoveKnowledgeReply(text);
+            try {
+              await push(ref(db, 'messages/' + convId), {
+                sender: 'ai', text: replyText, imageUrl: null, timestamp: Date.now(),
+                date: new Date().toISOString().split('T')[0], status: 'read'
+              });
+              await update(ref(db, 'messages/' + convId + '/_meta'), {
+                state: escalate ? 'human_requested' : 'ai_active'
+              });
+              window.logKoveEvent && window.logKoveEvent(escalate ? 'message_human_requested' : 'message_ai_response');
+            } catch(e) { console.warn('Error guardando respuesta de KOVE IA:', e); }
+          }, 700 + Math.random() * 700);
+        }
       } catch (e) {
         console.warn('Error enviando mensaje:', e);
         alert('No se pudo enviar el mensaje. Intenta de nuevo.');
@@ -3135,11 +3828,15 @@
       container.innerHTML = convs.map(c => {
         const estado = c._meta?.estado || 'new';
         const nombre = c._meta?.nombre || 'Usuario sin nombre';
+        const stateIcon = { ai_active:'🤖', human_requested:'🙋', human_active:'🧑', closed:'✔' }[c._meta?.state || 'ai_active'];
         return `
         <div class="inbox-item ${estado === 'new' ? 'unread' : ''} ${estado === 'archived' ? 'archived' : ''}" onclick="openConvDetail('${c.id}')">
           <div class="kove-msg-avatar user" style="flex-shrink:0;">${koveInitials(c._meta?.nombre)}</div>
           <div style="flex:1;min-width:0;">
-            <div class="inbox-item-name">${nombre}</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="inbox-item-name">${nombre}</div>
+              <span style="font-size:11px;">${stateIcon}</span>
+            </div>
             <div class="inbox-item-service">${c._meta?.whatsapp || ''}</div>
             <div class="inbox-item-preview">${c._meta?.lastMessage || 'Sin mensaje'}</div>
           </div>
@@ -3172,6 +3869,7 @@
       const list = Object.entries(c).filter(([k]) => k !== '_meta').map(([mid, m]) => ({ mid, ...m }))
         .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
       document.getElementById('conv-messages').innerHTML = list.map(m => koveBubbleHtml(m, meta.nombre)).join('');
+      const stateLabel = { ai_active: '🤖 IA respondiendo', human_requested: '🙋 Pidió hablar con alguien', human_active: '🧑 Tú estás respondiendo', closed: 'Cerrada' }[meta.state || 'ai_active'];
       document.getElementById('conv-tech-info').innerHTML = `
         <div><b>Nombre:</b> ${meta.nombre || 'No proporcionado'}</div>
         <div><b>WhatsApp:</b> ${meta.whatsapp || 'No proporcionado'}</div>
@@ -3180,9 +3878,11 @@
         <div><b>Fuente:</b> ${meta.source || 'No proporcionado'}</div>
         <div><b>Página:</b> ${meta.page || 'No proporcionado'}</div>
         <div><b>Referrer:</b> ${meta.referrer || 'No proporcionado'}</div>
+        <div><b>Modo:</b> ${stateLabel}</div>
         <div><b>Estado:</b> ${({new:'Nuevo',read:'Leído',replied:'Respondido',archived:'Archivado'})[meta.estado] || 'Nuevo'}</div>
       `;
       document.getElementById('conv-archive-btn').textContent = meta.estado === 'archived' ? 'Desarchivar' : 'Archivar';
+      document.getElementById('conv-takeover-btn').textContent = meta.state === 'human_active' ? 'Devolver a IA' : 'Tomar conversación';
     }
 
     window.sendAdminReply = async function() {
@@ -3195,12 +3895,23 @@
       try {
         const db = window.db, ref = window.ref, push = window.push, update = window.update;
         await push(ref(db, 'messages/' + id), {
-          sender: 'kove', text, imageUrl: null, timestamp: Date.now(),
+          sender: 'admin', text, imageUrl: null, timestamp: Date.now(),
           date: new Date().toISOString().split('T')[0], status: 'read'
         });
-        await update(ref(db, 'messages/' + id + '/_meta'), { estado: 'replied' });
+        await update(ref(db, 'messages/' + id + '/_meta'), { estado: 'replied', state: 'human_active' });
         window.logKoveEvent && window.logKoveEvent('message_reply_sent');
       } catch(e) { console.warn('Error enviando respuesta:', e); }
+    };
+
+    window.toggleConvTakeover = async function() {
+      const id = window.__koveOpenConvId;
+      if (!id) return;
+      const c = window.__koveConvCache[id];
+      const newState = (c._meta?.state === 'human_active') ? 'ai_active' : 'human_active';
+      try {
+        await window.update(window.ref(window.db, 'messages/' + id + '/_meta'), { state: newState });
+        window.logKoveEvent && window.logKoveEvent('message_human_takeover');
+      } catch(e) { console.warn('Error tomando conversación:', e); }
     };
 
     window.toggleConvArchive = async function() {
@@ -3244,6 +3955,350 @@
         if (window.__koveOpenConvId && data[window.__koveOpenConvId]) renderConvDetail(window.__koveOpenConvId);
       }, (err) => console.warn('Error escuchando mensajes (revisa las reglas de messages/):', err));
     };
+
+    // ══════════════════════════════════════════════════════
+    // PORTAL DEL CLIENTE — "Mi Proyecto"
+    // ══════════════════════════════════════════════════════
+    window.__koveClientUser = null;
+    window.__koveClientProjectUnsub = null;
+
+    window.addEventListener('kove-firebase-ready', function() {
+      window.onAuthStateChanged(window.auth, function(user) {
+        window.__koveClientUser = (user && !user.isAnonymous && user.email !== window.KOVE_ADMIN_EMAIL) ? user : null;
+        updateAccountNavButton();
+        const panel = document.getElementById('kove-client-panel');
+        if (panel && panel.style.display === 'flex') renderClientPortalState();
+      });
+    });
+
+    function updateAccountNavButton() {
+      const loginBtn = document.getElementById('kove-auth-login-btn');
+      const registerBtn = document.getElementById('kove-auth-register-btn');
+      const accountBtn = document.getElementById('kove-auth-account-btn');
+      if (!loginBtn) return;
+      if (window.__koveClientUser) {
+        const u = window.__koveClientUser;
+        const firstName = (u.displayName || u.email || 'Cuenta').split(' ')[0];
+        const initial = firstName[0].toUpperCase();
+        loginBtn.style.display = 'none';
+        registerBtn.style.display = 'none';
+        accountBtn.style.display = 'inline-flex';
+        document.getElementById('kove-auth-avatar').innerHTML = u.photoURL ? `<img src="${u.photoURL}" style="width:100%;height:100%;object-fit:cover;" />` : initial;
+        document.getElementById('kove-auth-name').textContent = firstName;
+      } else {
+        loginBtn.style.display = 'inline-flex';
+        registerBtn.style.display = 'inline-flex';
+        accountBtn.style.display = 'none';
+      }
+    }
+
+    window.openClientPortal = function() {
+      document.getElementById('kove-client-panel').style.display = 'flex';
+      document.getElementById('kc-auth-error').style.display = 'none';
+      renderClientPortalState();
+    };
+
+    window.closeClientPortal = function() {
+      document.getElementById('kove-client-panel').style.display = 'none';
+      if (window.__koveClientProjectUnsub) { window.__koveClientProjectUnsub(); window.__koveClientProjectUnsub = null; }
+    };
+
+    function renderClientPortalState() {
+      const authView = document.getElementById('kc-auth-view');
+      const projectView = document.getElementById('kc-project-view');
+      if (window.__koveClientUser) {
+        authView.style.display = 'none';
+        projectView.style.display = 'block';
+        loadClientProject(window.__koveClientUser);
+      } else {
+        authView.style.display = 'block';
+        projectView.style.display = 'none';
+      }
+    }
+
+    function showClientAuthErrorText(msg, ok) {
+      const el = document.getElementById('kc-auth-error');
+      el.textContent = msg;
+      el.style.color = ok ? '#4ade80' : '#f87171';
+      el.style.display = 'block';
+    }
+    function showClientAuthError(e) {
+      const code = e && e.code ? e.code : 'unknown';
+      console.error('[KOVE Auth] Error código:', code, '| mensaje técnico:', e && e.message);
+      const map = {
+        'auth/popup-blocked': 'Tu navegador bloqueó la ventana de Google. Permite ventanas emergentes para este sitio e intenta de nuevo.',
+        'auth/popup-closed-by-user': 'Cerraste la ventana de Google antes de terminar. Intenta de nuevo.',
+        'auth/unauthorized-domain': 'Este dominio no está autorizado en Firebase todavía (Authentication → Settings → Authorized domains).',
+        'auth/operation-not-allowed': 'El acceso con Google no está activado en Firebase (Authentication → Sign-in method → Google).',
+        'auth/account-exists-with-different-credential': 'Ese correo ya está registrado con otro método de acceso (por ejemplo, correo y contraseña).',
+        'auth/network-request-failed': 'Falla de red — revisa tu conexión a internet e intenta de nuevo.',
+        'auth/internal-error': 'Error interno de Firebase. Intenta de nuevo en un momento.',
+        'auth/invalid-api-key': 'La configuración de Firebase de esta web tiene una clave inválida.',
+        'auth/app-not-authorized': 'Esta app no está autorizada para usar Firebase Authentication con esta configuración.',
+        'auth/wrong-password': 'Correo o contraseña incorrectos.',
+        'auth/invalid-credential': 'Correo o contraseña incorrectos.',
+        'auth/email-already-in-use': 'Ese correo ya tiene una cuenta, mejor inicia sesión.',
+        'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres.',
+        'auth/invalid-email': 'Correo inválido.',
+        'kove/not-ready': 'Firebase todavía se está cargando, espera un segundo e intenta de nuevo.'
+      };
+      showClientAuthErrorText((map[code] || 'Ocurrió un error, intenta de nuevo.') + ` (${code})`);
+    }
+
+    // Espera a que window.auth / window.googleProvider / etc ya existan antes de usarlos.
+    // Sin esto, si el usuario da clic muy rápido (antes de que cargue el script de Firebase),
+    // signInWithPopup fallaba en silencio con un TypeError disfrazado de "error genérico".
+    function koveWaitForFirebase() {
+      return new Promise((resolve) => {
+        if (window.__koveFirebaseReady) resolve(true);
+        else window.addEventListener('kove-firebase-ready', () => resolve(true), { once: true });
+      });
+    }
+
+    window.toggleClientProfileEdit = function() {
+      const box = document.getElementById('kc-profile-edit');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    };
+
+    window.saveClientProfile = async function() {
+      const user = window.__koveClientUser;
+      if (!user) return;
+      try {
+        await window.update(window.ref(window.db, 'clients/' + user.uid), {
+          whatsapp: document.getElementById('kc-profile-phone').value.trim(),
+          pais: document.getElementById('kc-profile-pais').value.trim(),
+          ciudad: document.getElementById('kc-profile-ciudad').value.trim(),
+          bio: document.getElementById('kc-profile-bio').value.trim(),
+          idioma: document.getElementById('kc-profile-idioma').value
+        });
+        window.logKoveEvent && window.logKoveEvent('profile_updated');
+        const msg = document.getElementById('kc-profile-saved');
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 2500);
+      } catch(e) { console.warn('Error guardando perfil:', e); }
+    };
+
+    async function ensureClientProfile(user) {
+      try {
+        const clientRef = window.ref(window.db, 'clients/' + user.uid);
+        const snap = await window.get(clientRef);
+        const provider = user.providerData?.[0]?.providerId === 'google.com' ? 'google' : 'password';
+        if (!snap.exists()) {
+          await window.set(clientRef, {
+            name: user.displayName || null, email: user.email || null, photoURL: user.photoURL || null,
+            whatsapp: null, provider, createdAt: Date.now(), lastLoginAt: Date.now(), role: 'client'
+          });
+        } else {
+          // Ya existe: solo actualiza último acceso y datos que pudieron cambiar en Google, sin duplicar el registro
+          await window.update(clientRef, {
+            name: user.displayName || snap.val().name || null,
+            photoURL: user.photoURL || snap.val().photoURL || null,
+            provider, lastLoginAt: Date.now()
+          });
+        }
+      } catch(e) { console.warn('Error creando/actualizando perfil de cliente:', e); }
+    }
+
+    window.clientGoogleLogin = async function() {
+      await koveWaitForFirebase();
+      try {
+        console.log('[KOVE Auth] Abriendo popup de Google...');
+        const result = await window.signInWithPopup(window.auth, window.googleProvider);
+        console.log('[KOVE Auth] Google devolvió usuario:', result.user.uid, result.user.email);
+        await ensureClientProfile(result.user);
+        console.log('[KOVE Auth] Perfil de cliente asegurado en clients/' + result.user.uid);
+      } catch(e) { showClientAuthError(e); }
+    };
+
+    window.clientEmailLogin = async function() {
+      const email = document.getElementById('kc-auth-email').value.trim();
+      const pass = document.getElementById('kc-auth-pass').value;
+      if (!email || !pass) { showClientAuthErrorText('Escribe tu correo y contraseña.'); return; }
+      await koveWaitForFirebase();
+      try {
+        const cred = await window.signInWithEmailAndPassword(window.auth, email, pass);
+        await ensureClientProfile(cred.user);
+      } catch(e) { showClientAuthError(e); }
+    };
+
+    window.clientRegister = async function() {
+      const email = document.getElementById('kc-auth-email').value.trim();
+      const pass = document.getElementById('kc-auth-pass').value;
+      if (!email || pass.length < 6) { showClientAuthErrorText('Escribe un correo válido y una contraseña de mínimo 6 caracteres.'); return; }
+      await koveWaitForFirebase();
+      try {
+        const cred = await window.createUserWithEmailAndPassword(window.auth, email, pass);
+        await ensureClientProfile(cred.user);
+      } catch(e) { showClientAuthError(e); }
+    };
+
+    window.clientForgotPassword = async function() {
+      const email = document.getElementById('kc-auth-email').value.trim();
+      if (!email) { showClientAuthErrorText('Escribe tu correo arriba primero.'); return; }
+      await koveWaitForFirebase();
+      try {
+        await window.sendPasswordResetEmail(window.auth, email);
+        showClientAuthErrorText('Te enviamos un correo para restablecer tu contraseña.', true);
+      } catch(e) { showClientAuthError(e); }
+    };
+
+    window.clientLogout = function() {
+      window.signOut(window.auth);
+      closeClientPortal();
+    };
+
+    async function loadClientProject(user) {
+      document.getElementById('kc-client-greeting').textContent = 'Hola, ' + (user.displayName || user.email || '');
+      try {
+        const clientSnap = await window.get(window.ref(window.db, 'clients/' + user.uid));
+        const clientData = clientSnap.val() || {};
+        document.getElementById('kc-profile-phone').value = clientData.whatsapp || '';
+        document.getElementById('kc-profile-pais').value = clientData.pais || '';
+        document.getElementById('kc-profile-ciudad').value = clientData.ciudad || '';
+        document.getElementById('kc-profile-bio').value = clientData.bio || '';
+        document.getElementById('kc-profile-idioma').value = clientData.idioma || 'es';
+        const proyectoId = clientData.proyectoId;
+        window.__koveClientProjectId = proyectoId;
+        if (window.__koveClientProjectUnsub) { window.__koveClientProjectUnsub(); window.__koveClientProjectUnsub = null; }
+        if (!proyectoId) {
+          document.getElementById('kc-no-project').style.display = 'block';
+          document.getElementById('kc-has-project').style.display = 'none';
+          return;
+        }
+        window.__koveClientProjectUnsub = window.onValue(window.ref(window.db, 'leads/' + proyectoId), (snap) => {
+          const lead = snap.val();
+          if (!lead) {
+            document.getElementById('kc-no-project').style.display = 'block';
+            document.getElementById('kc-has-project').style.display = 'none';
+            return;
+          }
+          document.getElementById('kc-no-project').style.display = 'none';
+          document.getElementById('kc-has-project').style.display = 'block';
+          renderClientProject(lead);
+        });
+      } catch(e) {
+        console.warn('Error cargando proyecto del cliente:', e);
+        document.getElementById('kc-no-project').style.display = 'block';
+        document.getElementById('kc-has-project').style.display = 'none';
+      }
+    }
+
+    // ══════════════════════════════════════════════════════
+    // CHECKOUT DEMO — simulación de pago (sin pasarela real)
+    // ══════════════════════════════════════════════════════
+    window.__koveCheckoutCuotaIndex = null;
+    window.__koveCheckoutMethod = 'tarjeta';
+
+    window.openCheckout = function(cuotaIndex) {
+      const lead = window.__koveClientCurrentLead;
+      if (!lead || !lead.cuotas || !lead.cuotas[cuotaIndex]) return;
+      window.__koveCheckoutCuotaIndex = cuotaIndex;
+      const cuota = lead.cuotas[cuotaIndex];
+
+      document.getElementById('checkout-servicio').textContent = lead.servicio || 'Proyecto KOVE';
+      document.getElementById('checkout-cuota-label').textContent = `Cuota ${cuota.numero} de ${lead.cuotas.length}`;
+      document.getElementById('checkout-monto').textContent = formatCOPNum(cuota.monto) + ' COP';
+
+      document.getElementById('checkout-step-form').style.display = 'block';
+      document.getElementById('checkout-step-processing').style.display = 'none';
+      document.getElementById('checkout-step-result').style.display = 'none';
+      document.getElementById('kove-checkout-panel').style.display = 'flex';
+      window.logKoveEvent && window.logKoveEvent('payment_started', lead.servicio);
+    };
+
+    window.closeCheckout = function() {
+      document.getElementById('kove-checkout-panel').style.display = 'none';
+    };
+
+    window.checkoutSelectMethod = function(method, btn) {
+      window.__koveCheckoutMethod = method;
+      btn.parentElement.querySelectorAll('.checkout-method-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('checkout-card-fields').style.display = method === 'tarjeta' ? 'block' : 'none';
+    };
+
+    // Motor de pago DEMO — soporta los 3 estados; la UI del cliente siempre confirma
+    // el flujo feliz (APPROVED) para no confundir a un cliente real con un rechazo simulado.
+    // Los otros estados quedan listos para pruebas internas: simulatePaymentDemo(..., 'DECLINED' | 'PENDING').
+    async function simulatePaymentDemo(leadId, cuotaIndex, forcedStatus) {
+      const status = forcedStatus || 'APPROVED';
+      const lead = window.__koveClientCurrentLead;
+      const cuota = lead.cuotas[cuotaIndex];
+      const transactionId = 'DEMO-' + Date.now() + '-' + Math.floor(Math.random() * 9999);
+
+      const paymentRecord = {
+        userId: window.__koveClientUser?.uid || null,
+        projectId: leadId,
+        amount: cuota.monto,
+        currency: 'COP',
+        installmentNumber: cuota.numero,
+        installmentCount: lead.cuotas.length,
+        status, paymentMethod: window.__koveCheckoutMethod,
+        transactionId, createdAt: Date.now(), demo: true
+      };
+
+      try {
+        await window.push(window.ref(window.db, 'transactions'), paymentRecord);
+        if (status === 'APPROVED') {
+          const cuotas = [...lead.cuotas];
+          cuotas[cuotaIndex] = { ...cuotas[cuotaIndex], estado: 'pagada', fechaPago: new Date().toISOString() };
+          await window.update(window.ref(window.db, 'leads/' + leadId), { cuotas });
+        }
+        window.logKoveEvent && window.logKoveEvent(status === 'APPROVED' ? 'payment_completed' : 'payment_' + status.toLowerCase());
+      } catch(e) { console.warn('Error guardando transacción demo:', e); }
+
+      return { status, transactionId };
+    }
+
+    window.processCheckout = async function() {
+      document.getElementById('checkout-step-form').style.display = 'none';
+      document.getElementById('checkout-step-processing').style.display = 'block';
+
+      const leadId = window.__koveClientProjectId;
+      const cuotaIndex = window.__koveCheckoutCuotaIndex;
+
+      setTimeout(async () => {
+        const result = await simulatePaymentDemo(leadId, cuotaIndex, 'APPROVED');
+        document.getElementById('checkout-step-processing').style.display = 'none';
+        document.getElementById('checkout-step-result').style.display = 'block';
+        document.getElementById('checkout-result-icon').textContent = '✓';
+        document.getElementById('checkout-result-title').textContent = 'Pago aprobado';
+        document.getElementById('checkout-result-msg').textContent = `Transacción ${result.transactionId} registrada (demo). Tu cuota ya quedó marcada como pagada.`;
+      }, 1600);
+    };
+
+    function renderClientProject(lead) {
+      window.__koveClientCurrentLead = lead;
+      document.getElementById('kc-proj-servicio').textContent = lead.servicio || 'Proyecto KOVE';
+      const estadoLabel = { nuevo:'Nuevo', conversacion:'En conversación', talvez:'En revisión', cerrado:'Activo', perdido:'Cerrado' }[lead.etapaComercial] || 'En proceso';
+      document.getElementById('kc-proj-estado').textContent = 'Estado: ' + estadoLabel;
+
+      const cuotas = lead.cuotas || [];
+      const total = lead.valorNegocio || 0;
+      const pagado = cuotas.filter(c => c.estado === 'pagada').reduce((s,c) => s + (c.monto || 0), 0);
+      document.getElementById('kc-total').textContent = formatCOPNum(total);
+      document.getElementById('kc-pagado').textContent = formatCOPNum(pagado);
+      const pct = total > 0 ? Math.min(100, Math.round((pagado/total)*100)) : 0;
+      document.getElementById('kc-progress-bar').style.width = pct + '%';
+
+      const list = document.getElementById('kc-cuotas-list');
+      if (cuotas.length === 0) {
+        list.innerHTML = `<p style="font-size:12px;color:#888;">Aún no se ha generado un plan de pago para tu proyecto.</p>`;
+      } else {
+        list.innerHTML = cuotas.map((c, i) => `
+          <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.04);border-radius:10px;padding:10px 12px;">
+            <div>
+              <div style="font-size:12.5px;font-weight:700;">Cuota ${c.numero}</div>
+              <div style="font-size:10.5px;color:#888;">${formatCOPNum(c.monto)}</div>
+            </div>
+            ${c.estado === 'pagada'
+              ? `<div style="font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(74,222,128,0.15);color:#4ade80;">✓ Pagada</div>`
+              : `<button class="btn-panel" style="font-size:10px;padding:6px 14px;background:#fff;color:#111;" onclick="openCheckout(${i})">Pagar</button>`
+            }
+          </div>
+        `).join('');
+      }
+    }
 
     // ──────────────────────────────────────────────
     // 5. GRÁFICAS
@@ -3509,23 +4564,38 @@
     // ──────────────────────────────────────────────
     // 9. PLANES ENGINE
     // ──────────────────────────────────────────────
+    // REGLA DEFINITIVA: KOVE solo permite pago de contado o hasta 6 cuotas. Nunca 9 ni 12.
+    const KOVE_FINANCING_RATES = { 1: 0, 2: 0.0275, 3: 0.055, 4: 0.065, 5: 0.075, 6: 0.085 };
+    const KOVE_MAX_CUOTAS = 6;
+    function koveCalcFinancing(baseAmount, months) {
+      const rate = KOVE_FINANCING_RATES[months] ?? 0;
+      const totalFinanced = Math.round(baseAmount * (1 + rate) / 5000) * 5000;
+      const monthly = Math.round(totalFinanced / months / 5000) * 5000;
+      return { totalFinanced, monthly };
+    }
+    function formatCOPNum(n) { return '$' + Math.round(n || 0).toLocaleString('es-CO'); }
+
     const plansDB = {
       web: [
-        { name:'Starter', price:'$249.900', featured:false, features:['Landing page de 1 página optimizada','Diseño adaptativo Mobile-First','Formulario de contacto funcional','Enlace de WhatsApp directo','Google Analytics integrado','Entrega en 5 días hábiles'] },
-        { name:'Profesional', price:'$600.000', featured:true, badge:'MÁS POPULAR', features:['Sitio web de hasta 5 páginas','Blog o tienda básica','SEO técnico completo','Diseño UI/UX a medida','Integración redes sociales','Soporte 30 días incluido'] },
-        { name:'Enterprise', price:'$1.199.000', featured:false, features:['Web corporativa ilimitada','E-commerce avanzado','Panel de administración','Rendimiento y seguridad premium','Integraciones API a medida','Soporte prioritario continuo'] }
+        { name:'Esencial', price:'$495.000', priceNum:495000, featured:false, features:['Landing page de 1 página optimizada','Diseño adaptativo Mobile-First','Formulario de contacto funcional','Enlace de WhatsApp directo','Google Analytics integrado','Entrega en 5 días hábiles'] },
+        { name:'Profesional', price:'$995.000', priceNum:995000, featured:true, badge:'MÁS ELEGIDO', features:['Sitio web de hasta 5 páginas','Blog o tienda básica','SEO técnico completo','Diseño UI/UX a medida','Integración redes sociales','Soporte 30 días incluido'] },
+        { name:'Experiencia', price:'$1.995.000', priceNum:1995000, featured:false, features:['Web corporativa ilimitada','E-commerce avanzado','Panel de administración','Rendimiento y seguridad premium','Integraciones API a medida','Soporte prioritario continuo'] }
       ],
       grafico: [
-        { name:'Básico', price:'$499.000', featured:false, features:['5 diseños publicitarios HD','Logotipo básico de marca','Manual de colores y tipografía','3 rondas de ajustes','Archivos PDF imprimibles','Entrega en 5 días hábiles'] },
-        { name:'Medio', price:'$990.000', featured:true, badge:'POPULAR', features:['12 diseños premium para redes','Rediseño de identidad visual','Manual extendido de branding','8 rondas de correcciones','Archivos fuente editables','Entrega en 10 días hábiles'] },
-        { name:'Profesional', price:'$2.010.000', featured:false, features:['Recursos visuales ilimitados','Branding e identidad editorial','Packaging y mockups físicos','Ajustes ilimitados','Diseñador senior dedicado','Soporte continuo prioritario'] }
+        { name:'Básico', price:'$495.000', priceNum:495000, featured:false, features:['5 diseños publicitarios HD','Logotipo básico de marca','Manual de colores y tipografía','3 rondas de ajustes','Archivos PDF imprimibles','Entrega en 5 días hábiles'] },
+        { name:'Medio', price:'$995.000', priceNum:995000, featured:true, badge:'POPULAR', features:['12 diseños premium para redes','Rediseño de identidad visual','Manual extendido de branding','8 rondas de correcciones','Archivos fuente editables','Entrega en 10 días hábiles'] },
+        { name:'Profesional', price:'$1.995.000', priceNum:1995000, featured:false, features:['Recursos visuales ilimitados','Branding e identidad editorial','Packaging y mockups físicos','Ajustes ilimitados','Diseñador senior dedicado','Soporte continuo prioritario'] }
       ],
       auto: [
-        { name:'Básica', price:'$990.000', featured:false, features:['3 flujos automatizados','Conexión con canal de ventas','Configuración con IA incluida','Inducción al equipo','Soporte técnico 15 días'] },
-        { name:'Media', price:'$1.990.000', featured:true, badge:'RECOMENDADO', features:['10 flujos avanzados','Integración WhatsApp + Instagram','Conexión con CRM activo','Redistribución inteligente de leads','Soporte prioritario 30 días'] },
-        { name:'Profesional', price:'$3.010.000', featured:false, features:['Automatizaciones ilimitadas','Ecosistema omnicanal completo','IA conversacional personalizada','Integraciones con APIs externas','Soporte dedicado permanente'] }
+        { name:'Básica', price:'$995.000', priceNum:995000, featured:false, features:['3 flujos automatizados','Conexión con canal de ventas','Configuración con IA incluida','Inducción al equipo','Soporte técnico 15 días'] },
+        { name:'Media', price:'$1.995.000', priceNum:1995000, featured:true, badge:'RECOMENDADO', features:['10 flujos avanzados','Integración WhatsApp + Instagram','Conexión con CRM activo','Redistribución inteligente de leads','Soporte prioritario 30 días'] },
+        { name:'Profesional', price:'$2.995.000', priceNum:2995000, featured:false, features:['Automatizaciones ilimitadas','Ecosistema omnicanal completo','IA conversacional personalizada','Integraciones con APIs externas','Soporte dedicado permanente'] }
       ]
     };
+
+    window.koveCart = []; // { key, cat, name, priceNum }
+
+    function planKey(cat, index) { return cat + '-' + index; }
 
     function renderPlansGrid(cat) {
       const grid = document.getElementById('planes-grid');
@@ -3539,7 +4609,8 @@
         const badgeClass = isDark ? 'plan-badge' : 'plan-badge plan-badge-light';
         const featClass = isDark ? 'plan-features plan-features-dark' : 'plan-features plan-features-light';
         const btnClass = isDark ? 'plan-btn plan-btn-dark' : 'plan-btn plan-btn-light';
-        const priceClass = isDark ? 'plan-price' : 'plan-price';
+        const key = planKey(cat, index);
+        const inCart = window.koveCart.some(i => i.key === key);
 
         const badge = p.badge ? `<div class="${badgeClass}">${p.badge}</div>` : '';
         const featsHTML = p.features.map(f => `<li><span class="check">✓</span>${f}</li>`).join('');
@@ -3550,12 +4621,27 @@
             ${badge}
             <div>
               <h3 class="plan-name">${p.name}</h3>
-              <div class="${priceClass}">
+              <div class="plan-price" id="price-${key}">
                 ${p.price} <small>COP</small>
               </div>
+
+              <div class="plan-payment-toggle" data-key="${key}">
+                <button type="button" class="plan-pay-btn active" data-mode="unico" onclick="koveSetPayMode('${key}',${p.priceNum},'unico',this)">Pago único</button>
+                <button type="button" class="plan-pay-btn" data-mode="cuotas" onclick="koveSetPayMode('${key}',${p.priceNum},'cuotas',this)">Cuotas</button>
+              </div>
+              <div class="plan-months-row" id="months-${key}" style="display:none;">
+                ${[2,3,4,5,6].map(m => `<button type="button" class="plan-month-btn${m===3?' active':''}" data-months="${m}" onclick="koveSetMonths('${key}',${p.priceNum},${m},this)">${m}m</button>`).join('')}
+              </div>
+              <p class="plan-financed-note" id="note-${key}" style="display:none;"></p>
+
               <ul class="${featClass}">
                 ${featsHTML}
               </ul>
+
+              <label class="plan-add-cart">
+                <input type="checkbox" ${inCart ? 'checked' : ''} onchange="koveToggleCart('${key}','${cat}','${p.name.replace(/'/g,"")}',${p.priceNum},this)" />
+                Agregar a mi proyecto
+              </label>
             </div>
             <a href="https://wa.me/573152507850?text=${waMsg}" target="_blank" class="${btnClass}">
               Adquirir ${p.name} →
@@ -3563,6 +4649,373 @@
           </div>
         `;
       }).join('');
+    }
+
+    window.koveSetPayMode = function(key, priceNum, mode, btn) {
+      btn.parentElement.querySelectorAll('.plan-pay-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const monthsRow = document.getElementById('months-' + key);
+      const note = document.getElementById('note-' + key);
+      const priceEl = document.getElementById('price-' + key);
+      if (mode === 'unico') {
+        monthsRow.style.display = 'none';
+        note.style.display = 'none';
+        priceEl.innerHTML = formatCOPNum(priceNum) + ' <small>COP</small>';
+        window.koveCartUpdatePrice(key, priceNum);
+      } else {
+        monthsRow.style.display = 'flex';
+        const activeMonthBtn = monthsRow.querySelector('.plan-month-btn.active') || monthsRow.querySelector('.plan-month-btn');
+        koveSetMonths(key, priceNum, Number(activeMonthBtn.dataset.months), activeMonthBtn);
+      }
+    };
+
+    window.koveSetMonths = function(key, priceNum, months, btn) {
+      btn.parentElement.querySelectorAll('.plan-month-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const { totalFinanced, monthly } = koveCalcFinancing(priceNum, months);
+      document.getElementById('price-' + key).innerHTML = formatCOPNum(monthly) + ' <small>COP/mes</small>';
+      const note = document.getElementById('note-' + key);
+      note.style.display = 'block';
+      note.textContent = `Total financiado: ${formatCOPNum(totalFinanced)}. Incluye el costo de financiación.`;
+      window.koveCartUpdatePrice(key, priceNum, months);
+    };
+
+    window.koveCartUpdatePrice = function(key, priceNum, months) {
+      const item = window.koveCart.find(i => i.key === key);
+      if (item) { item.priceNum = priceNum; item.months = months || null; koveRenderCartBar(); }
+    };
+
+    window.koveToggleCart = function(key, cat, name, priceNum, checkbox) {
+      if (checkbox.checked) {
+        window.koveCart.push({ key, cat, name, priceNum, months: null });
+      } else {
+        window.koveCart = window.koveCart.filter(i => i.key !== key);
+      }
+      koveRenderCartBar();
+    };
+
+    window.__koveCartMode = 'unico';
+    window.__koveCartMonths = 3;
+
+    function koveRenderCartBar() {
+      const bar = document.getElementById('kove-cart-bar');
+      const cart = window.koveCart;
+      if (cart.length === 0) { bar.classList.remove('active'); return; }
+      bar.classList.add('active');
+      document.getElementById('kove-cart-items').innerHTML = cart.map(i =>
+        `<div><span>${i.name}</span><span>${formatCOPNum(i.priceNum)}</span></div>`
+      ).join('');
+      koveUpdateCartTotal();
+    }
+
+    window.koveCartSetMode = function(mode, btn) {
+      window.__koveCartMode = mode;
+      btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const monthsWrap = document.getElementById('kove-cart-months');
+      if (mode === 'cuotas') {
+        monthsWrap.style.display = 'flex';
+        monthsWrap.innerHTML = [2,3,4,5,6].map(m => `<button type="button" class="${m===3?'active':''}" onclick="koveCartSetMonths(${m},this)">${m}m</button>`).join('');
+        window.__koveCartMonths = 3;
+      } else {
+        monthsWrap.style.display = 'none';
+      }
+      koveUpdateCartTotal();
+    };
+
+    window.koveCartSetMonths = function(months, btn) {
+      window.__koveCartMonths = months;
+      btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      koveUpdateCartTotal();
+    };
+
+    function koveUpdateCartTotal() {
+      const base = window.koveCart.reduce((sum, i) => sum + i.priceNum, 0);
+      const totalEl = document.getElementById('kove-cart-total');
+      const note = document.getElementById('kove-cart-note');
+      if (window.__koveCartMode === 'unico') {
+        totalEl.textContent = formatCOPNum(base) + ' COP';
+        note.style.display = 'none';
+      } else {
+        const { totalFinanced, monthly } = koveCalcFinancing(base, window.__koveCartMonths);
+        totalEl.textContent = formatCOPNum(monthly) + ' COP/mes';
+        note.style.display = 'block';
+        note.textContent = `Total financiado: ${formatCOPNum(totalFinanced)}. Incluye el costo de financiación.`;
+      }
+    }
+
+    // ══════════════════════════════════════════════════════
+    // GUARDAR INTENCIÓN DEL USUARIO (selección antes de login → se retoma después)
+    // ══════════════════════════════════════════════════════
+    function koveSavePendingIntent(type, data) {
+      try { localStorage.setItem('kove_pending_intent', JSON.stringify({ type, data, ts: Date.now() })); } catch(e) {}
+    }
+    function koveGetPendingIntent() {
+      try { return JSON.parse(localStorage.getItem('kove_pending_intent') || 'null'); } catch(e) { return null; }
+    }
+    function koveClearPendingIntent() { try { localStorage.removeItem('kove_pending_intent'); } catch(e) {} }
+
+    // Guarda un lead y, si hay un cliente logueado, lo vincula automáticamente a su cuenta
+    // (así no toca vincularlo a mano desde el admin cuando el propio cliente lo generó).
+    async function koveSubmitLeadData(leadData, uid) {
+      const leadRef = await window.push(window.ref(window.db, 'leads'), leadData);
+      const leadId = leadRef.key;
+      if (uid) {
+        await window.update(window.ref(window.db, 'leads/' + leadId), { clienteUid: uid });
+        await window.update(window.ref(window.db, 'clients/' + uid), { proyectoId: leadId });
+      }
+      return leadId;
+    }
+
+    // Si el usuario acaba de iniciar sesión y tenía una selección pendiente (carrito o
+    // personalizador) de antes de loguearse, la retoma y la envía ya vinculada a su cuenta.
+    async function koveResumePendingIntent(uid) {
+      const intent = koveGetPendingIntent();
+      if (!intent) return false;
+      koveClearPendingIntent();
+      try {
+        if (intent.type === 'cart') {
+          await koveSubmitLeadData(intent.data, uid);
+        } else if (intent.type === 'custom') {
+          const d = intent.data;
+          const pago = d.preferenciaPago;
+          const { totalFinanced } = pago === 'cuotas' ? koveCalcFinancing(d.presupuestoEstimadoBase, d.cuotas) : { totalFinanced: d.presupuestoEstimadoBase };
+          await koveSubmitLeadData({
+            nombre: d.nombre, empresa: null, whatsapp: d.whatsapp, email: window.__koveClientUser?.email || null,
+            servicio: d.servicios, asunto: 'Proyecto personalizado: ' + d.tipoProyecto,
+            mensaje: `Tipo: ${d.tipoProyecto}. Servicios: ${d.servicios}. Funcionalidades: ${d.funcionalidades || 'No especificadas'}. Comentarios: ${d.comentarios || 'Ninguno'}.`,
+            fecha: new Date().toISOString(), timestamp: Date.now(), estado: 'nuevo',
+            etapaComercial: 'nuevo', valorNegocio: totalFinanced, tipoLead: 'personalizado',
+            tipoProyecto: d.tipoProyecto, funcionalidades: d.funcionalidades, presupuestoDeclarado: d.presupuesto,
+            tiempoDeseado: d.tiempo, modalidadPago: pago, cuotas: d.cuotas,
+            source: window.koveTraffic?.source || 'direct', device: window.koveDevice?.type || 'desktop',
+            visitorId: window.koveVisitorId, sessionId: window.koveSessionId
+          }, uid);
+        }
+        window.koveCart = [];
+        koveRenderCartBar();
+        return true;
+      } catch(e) { console.warn('Error retomando la selección pendiente:', e); return false; }
+    }
+
+    window.koveSubmitCart = async function() {
+      const cart = window.koveCart;
+      if (cart.length === 0) return;
+      const base = cart.reduce((sum, i) => sum + i.priceNum, 0);
+      const mode = window.__koveCartMode;
+      const months = mode === 'cuotas' ? window.__koveCartMonths : null;
+      const { totalFinanced, monthly } = mode === 'cuotas' ? koveCalcFinancing(base, months) : { totalFinanced: base, monthly: base };
+      const resumen = cart.map(i => `${i.name} ($${i.priceNum.toLocaleString('es-CO')})`).join(', ');
+
+      const leadData = {
+        nombre: window.__koveClientUser?.displayName || null, empresa: null, whatsapp: null,
+        email: window.__koveClientUser?.email || null,
+        servicio: cart.map(i => i.name).join(' + '),
+        asunto: 'Selección de planes desde Planes y Servicios',
+        mensaje: `Servicios seleccionados: ${resumen}. Modalidad: ${mode === 'unico' ? 'Pago único' : months + ' cuotas'}.`,
+        fecha: new Date().toISOString(), timestamp: Date.now(), estado: 'nuevo',
+        etapaComercial: 'nuevo', valorNegocio: totalFinanced,
+        tipoLead: 'planes_seleccionados', serviciosSeleccionados: resumen,
+        modalidadPago: mode, cuotas: months, precioBase: base, totalFinanciado: totalFinanced, cuotaMensual: mode==='cuotas' ? monthly : null,
+        source: window.koveTraffic?.source || 'direct', medium: window.koveTraffic?.medium || 'none',
+        referrer: document.referrer || null, landingPage: location.pathname, device: window.koveDevice?.type || 'desktop',
+        visitorId: window.koveVisitorId, sessionId: window.koveSessionId
+      };
+
+      // Sin sesión: guardamos la selección y le pedimos iniciar sesión antes de enviarla
+      if (!window.__koveClientUser) {
+        koveSavePendingIntent('cart', leadData);
+        openClientPortal();
+        showClientAuthErrorText('Inicia sesión para continuar con tu proyecto — no perdimos tu selección.', true);
+        return;
+      }
+
+      try {
+        await koveSubmitLeadData(leadData, window.__koveClientUser.uid);
+        window.logKoveEvent && window.logKoveEvent('plan_click', 'cart_submit');
+        window.koveCart = [];
+        koveRenderCartBar();
+        alert('✅ Solicitud enviada. Ya puedes verla en "Mi Proyecto".');
+      } catch(e) { console.warn('Error guardando selección de planes:', e); }
+
+      const waMsg = encodeURIComponent(`Hola KOVE! Armé mi proyecto: ${resumen}. Modalidad: ${mode === 'unico' ? 'Pago único ($' + base.toLocaleString('es-CO') + ')' : months + ' cuotas de $' + monthly.toLocaleString('es-CO')}.`);
+      window.open(`https://wa.me/573152507850?text=${waMsg}`, '_blank');
+    };
+
+    // ══════════════════════════════════════════════════════
+    // PERSONALIZA TU PROYECTO — asistente paso a paso
+    // ══════════════════════════════════════════════════════
+    const KOVE_CUSTOM_OPTIONS = {
+      tipoProyecto: ['Empresa','Tienda online','Marca personal','Startup','Proyecto personal','Otro'],
+      servicios: ['Desarrollo web','Diseño gráfico','Branding','Automatización / IA','Edición de video','Otro'],
+      presupuesto: ['Menos de $500.000','$500.000 - $1.500.000','$1.500.000 - $3.000.000','Más de $3.000.000','Aún no sé'],
+      tiempo: ['Lo antes posible','En 2-3 semanas','En 1-2 meses','Sin afán, estoy explorando']
+    };
+    // Estimado base por servicio (usa el precio más bajo de cada categoría, como piso conservador)
+    const KOVE_SERVICE_BASE_ESTIMATE = {
+      'Desarrollo web': plansDB.web[0].priceNum,
+      'Diseño gráfico': plansDB.grafico[0].priceNum,
+      'Branding': plansDB.grafico[0].priceNum,
+      'Automatización / IA': plansDB.auto[0].priceNum,
+      'Edición de video': 350000,
+      'Otro': 400000
+    };
+    window.koveCustomData = {};
+    window.__koveCustomStep = 0;
+    window.__koveCustomCuotas = 1;
+    const KOVE_CUSTOM_TOTAL_STEPS = 10;
+
+    function koveCustomBuildChips() {
+      document.querySelectorAll('.kove-custom-chip-grid[data-field]').forEach(grid => {
+        const field = grid.dataset.field;
+        const opts = KOVE_CUSTOM_OPTIONS[field];
+        if (!opts) return;
+        grid.innerHTML = opts.map(o => `<div class="kove-custom-chip" data-value="${o}">${o}</div>`).join('');
+      });
+      document.querySelectorAll('.kove-custom-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+          const grid = this.parentElement;
+          const multi = grid.dataset.multi === 'true';
+          if (!multi) grid.querySelectorAll('.kove-custom-chip').forEach(c => c.classList.remove('selected'));
+          this.classList.toggle('selected');
+        });
+      });
+    }
+
+    window.koveCustomSelectCuota = function(n, btn) {
+      window.__koveCustomCuotas = n;
+      document.querySelectorAll('.kove-cuota-num').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const desc = document.getElementById('kc-cuota-desc');
+      desc.textContent = n === 1
+        ? 'Pago único — se abona el 100% de una sola vez.'
+        : `${n} cuotas — se calcula un pequeño recargo por financiación.`;
+    };
+
+    window.openKoveCustom = function() {
+      document.getElementById('kove-custom-panel').style.display = 'flex';
+      window.__koveCustomStep = 0;
+      window.__koveCustomCuotas = 1;
+      window.koveCustomData = {};
+      document.querySelectorAll('.kove-custom-chip').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.kove-cuota-num').forEach(b => b.classList.remove('selected'));
+      document.querySelector('.kove-cuota-num[data-value="1"]')?.classList.add('selected');
+      document.getElementById('kc-cuota-desc').textContent = 'Pago único — se abona el 100% de una sola vez.';
+      document.getElementById('kc-nombre').value = '';
+      document.getElementById('kc-whatsapp').value = '';
+      document.getElementById('kc-funcionalidades').value = '';
+      document.getElementById('kc-comentarios').value = '';
+      koveCustomBuildChips();
+      koveCustomShowStep(0);
+      window.logKoveEvent && window.logKoveEvent('message_panel_open', 'personaliza');
+    };
+
+    window.closeKoveCustom = function() {
+      document.getElementById('kove-custom-panel').style.display = 'none';
+    };
+
+    function koveCustomShowStep(n) {
+      document.querySelectorAll('.kove-custom-step').forEach(s => s.classList.toggle('active', Number(s.dataset.step) === n));
+      const progress = document.getElementById('kove-custom-progress');
+      progress.innerHTML = Array.from({ length: KOVE_CUSTOM_TOTAL_STEPS }, (_, i) => `<span class="${i <= n ? 'done' : ''}"></span>`).join('');
+      document.getElementById('kc-back-btn').style.visibility = n === 0 ? 'hidden' : 'visible';
+      document.getElementById('kc-next-btn').textContent = n === KOVE_CUSTOM_TOTAL_STEPS - 1 ? 'Enviar solicitud →' : 'Continuar →';
+      if (n === KOVE_CUSTOM_TOTAL_STEPS - 1) koveCustomBuildResumen();
+    }
+
+    function koveCustomSelectedChips(field) {
+      const grid = document.querySelector(`.kove-custom-chip-grid[data-field="${field}"]`);
+      if (!grid) return [];
+      return Array.from(grid.querySelectorAll('.kove-custom-chip.selected')).map(c => c.dataset.value);
+    }
+
+    window.koveCustomNext = function() {
+      const step = window.__koveCustomStep;
+      // Validaciones mínimas por paso
+      if (step === 0 && !document.getElementById('kc-nombre').value.trim()) { alert('Escribe tu nombre para continuar.'); return; }
+      if (step === 1 && document.getElementById('kc-whatsapp').value.replace(/\D/g,'').length < 7) { alert('Escribe un WhatsApp válido.'); return; }
+      if (step === 2 && koveCustomSelectedChips('tipoProyecto').length === 0) { alert('Elige una opción para continuar.'); return; }
+      if (step === 3 && koveCustomSelectedChips('servicios').length === 0) { alert('Elige al menos un servicio.'); return; }
+      if (step === 5 && koveCustomSelectedChips('presupuesto').length === 0) { alert('Elige una opción para continuar.'); return; }
+      if (step === 6 && koveCustomSelectedChips('tiempo').length === 0) { alert('Elige una opción para continuar.'); return; }
+      if (step === 7 && (window.__koveCustomCuotas < 1 || window.__koveCustomCuotas > KOVE_MAX_CUOTAS)) { alert('Elige cuántas cuotas quieres (máximo ' + KOVE_MAX_CUOTAS + ').'); return; }
+
+      if (step === KOVE_CUSTOM_TOTAL_STEPS - 1) { koveCustomSubmit(); return; }
+      window.__koveCustomStep++;
+      koveCustomShowStep(window.__koveCustomStep);
+    };
+
+    window.koveCustomBack = function() {
+      if (window.__koveCustomStep === 0) return;
+      window.__koveCustomStep--;
+      koveCustomShowStep(window.__koveCustomStep);
+    };
+
+    function koveCustomBuildResumen() {
+      const servicios = koveCustomSelectedChips('servicios');
+      const base = servicios.reduce((sum, s) => sum + (KOVE_SERVICE_BASE_ESTIMATE[s] || 400000), 0);
+      const numCuotas = window.__koveCustomCuotas || 1;
+      const pago = numCuotas === 1 ? 'unico' : 'cuotas';
+      const cuotas = numCuotas === 1 ? null : numCuotas;
+
+      window.koveCustomData = {
+        nombre: document.getElementById('kc-nombre').value.trim(),
+        whatsapp: document.getElementById('kc-whatsapp').value.trim(),
+        tipoProyecto: koveCustomSelectedChips('tipoProyecto')[0] || '',
+        servicios: servicios.join(', '),
+        funcionalidades: document.getElementById('kc-funcionalidades').value.trim(),
+        presupuesto: koveCustomSelectedChips('presupuesto')[0] || '',
+        tiempo: koveCustomSelectedChips('tiempo')[0] || '',
+        preferenciaPago: pago,
+        cuotas: cuotas,
+        comentarios: document.getElementById('kc-comentarios').value.trim(),
+        presupuestoEstimadoBase: base
+      };
+
+      document.getElementById('kc-resumen').innerHTML = `
+        <div><b>Proyecto:</b> ${window.koveCustomData.tipoProyecto}</div>
+        <div><b>Servicios:</b> ${window.koveCustomData.servicios}</div>
+        <div><b>Tiempo:</b> ${window.koveCustomData.tiempo}</div>
+        ${window.koveCustomData.funcionalidades ? `<div><b>Funcionalidades:</b> ${window.koveCustomData.funcionalidades}</div>` : ''}
+      `;
+
+      if (pago === 'unico') {
+        document.getElementById('kc-presupuesto').textContent = 'Desde ' + formatCOPNum(base) + ' COP';
+        document.getElementById('kc-financiado-note').textContent = 'Presupuesto estimado según lo seleccionado — la propuesta final puede variar según el alcance exacto.';
+      } else {
+        const { totalFinanced, monthly } = koveCalcFinancing(base, cuotas);
+        document.getElementById('kc-presupuesto').textContent = 'Desde ' + formatCOPNum(monthly) + ' COP/mes';
+        document.getElementById('kc-financiado-note').textContent = `${cuotas} cuotas · Total financiado estimado: ${formatCOPNum(totalFinanced)}. Incluye el costo de financiación.`;
+      }
+    }
+
+    async function koveCustomSubmit() {
+      const d = window.koveCustomData;
+      const pago = d.preferenciaPago;
+      const { totalFinanced, monthly } = pago === 'cuotas' ? koveCalcFinancing(d.presupuestoEstimadoBase, d.cuotas) : { totalFinanced: d.presupuestoEstimadoBase, monthly: d.presupuestoEstimadoBase };
+
+      try {
+        await window.push(window.ref(window.db, 'leads'), {
+          nombre: d.nombre, empresa: null, whatsapp: d.whatsapp, email: null,
+          servicio: d.servicios, asunto: 'Proyecto personalizado: ' + d.tipoProyecto,
+          mensaje: `Tipo: ${d.tipoProyecto}. Servicios: ${d.servicios}. Funcionalidades: ${d.funcionalidades || 'No especificadas'}. Presupuesto declarado: ${d.presupuesto}. Tiempo: ${d.tiempo}. Comentarios: ${d.comentarios || 'Ninguno'}.`,
+          fecha: new Date().toISOString(), timestamp: Date.now(), estado: 'nuevo',
+          etapaComercial: 'nuevo', valorNegocio: totalFinanced,
+          tipoLead: 'personalizado', tipoProyecto: d.tipoProyecto, funcionalidades: d.funcionalidades,
+          presupuestoDeclarado: d.presupuesto, tiempoDeseado: d.tiempo, modalidadPago: pago, cuotas: d.cuotas,
+          presupuestoEstimadoBase: d.presupuestoEstimadoBase, totalFinanciado: totalFinanced, cuotaMensual: pago==='cuotas' ? monthly : null,
+          comentarios: d.comentarios,
+          source: window.koveTraffic?.source || 'direct', medium: window.koveTraffic?.medium || 'none',
+          referrer: document.referrer || null, landingPage: location.pathname, device: window.koveDevice?.type || 'desktop',
+          visitorId: window.koveVisitorId, sessionId: window.koveSessionId
+        });
+        window.logKoveEvent && window.logKoveEvent('contact_form_submit', 'personaliza_proyecto');
+      } catch(e) { console.warn('Error guardando proyecto personalizado:', e); }
+
+      const waMsg = encodeURIComponent(`Hola KOVE! Soy ${d.nombre}. Quiero un proyecto de tipo "${d.tipoProyecto}" con: ${d.servicios}. Presupuesto estimado: ${pago === 'unico' ? formatCOPNum(totalFinanced) : d.cuotas + ' cuotas de ' + formatCOPNum(monthly)}.`);
+      window.open(`https://wa.me/573152507850?text=${waMsg}`, '_blank');
+      closeKoveCustom();
     }
 
     window.selectPlanCat = function(btn, cat) {
